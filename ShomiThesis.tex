@@ -1,0 +1,96 @@
+%change to one side if you want single sided.  Two side will properly
+%alternate margins and page numbers for two-sided binding.
+\documentclass[a4paper, 11pt, final]{thesis}
+%\documentclass[11pt,one side,final]{Thesis}
+\usepackage[section]{placeins}
+\usepackage{epsfig,bm,epsf,float}
+% \usepackage{graphicx}
+\usepackage{cite}
+%use 'cite' for the bibliography
+%use natbib for the bibliography
+%\usepackage[square,--]{natbib}
+%  \usepackage[numbers,sort&compress]{natbib}
+
+% \usepackage[tbtags]{amsmath}
+\usepackage{layouts}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
+   bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,filecolor=magenta,colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={red},
+   pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
+   
+%hyperref is nice, I find - it turns all your references (to citations, figures, etc) into hyperlinks,
+% so someone reading electronically can jump around your document.  It makes no visible marks on a
+   
+%'makecell' For making newline within a box in a table
+\usepackage{makecell}
+%%%%%%%%%%%%
+\usepackage{amsmath,paralist,amssymb,multirow}
+\usepackage{tgbonum,amsthm,framed,enumitem}
+\usepackage{lineno,hyperref,amssymb,graphicx}
+%%%%%%%%%%%%
+\usepackage{bm}% bold math
+
+ \newcommand{\muo}{ \mu_{\scriptscriptstyle 0}}
+%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgfplots}
+\usepackage{algorithmic}
+\usepackage{subcaption}
+
+\usepackage{xcolor,colortbl,hhline}
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+
+
+% Table of contents max depth listed:
+% 1 = section, 2 = subsection, 3 = subsubsection
+\setcounter{tocdepth}{3}
+\pgfplotsset{compat=1.15}
+\begin{document}
+
+% Single spacing: takes place of `draft' mode, without losing figures.
+%  \ssp
+% makes double-spaced
+ \dsp
+
+\include{FrontMatter}
+
+% Chapters: list all the chapter latex files you want included here, in order
+
+\include{Chapters/Chapter1}
+\thispagestyle{plain}
+\include{Chapters/Chapter2}
+\include{Chapters/Chapter3}
+\include{Chapters/Chapter4}
+\include{Chapters/Chapter5}
+\include{Chapters/Chapter6}
+
+
+%% ----------------------------------------------------------------
+% Now begin the Appendices, including them as separate files
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+%  \input{Appendices/Appendix_A}	% Appendix Title
+%   \input{Appendices/Appendix_B}
+
+
+\addtocontents{toc}{\vspace{2em}}  % Add a gap in the Contents, for aesthetics
+
+
+%% ----------------------------------------------------------------
+\label{Bibliography}
+\lhead{\emph{Bibliography}} 
+\bibliographystyle{unsrt}
+% \bibliographystyle{plain}
+% \bibliographystyle{ieeetr}
+
+\bibliography{Bibliography}
+% \bibliography{Bibliography} \addcontentsline{toc}{chapter}{\bibname}
+
+\end{document}
