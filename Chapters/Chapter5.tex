@@ -11,14 +11,47 @@ In Chapter~\ref{ch:operation}, the magnetic control process and the simulation m
 
 \section{Sampling Frequency and Filtering}\label{sec:freq}
 
-This Section talks about the sampling frequency and the effect of filtering in sampling frequency. It starts with defining the sampling frequency and how we first consider building an analog filter in the first place. Then it shows the effect improving the response time on the prototype. Finally, the Section wraps up with some comparison in current response time for different sampling frequency.
+
+\begin{itemize}
+\item We built some analog filters which were discussed in Chapter 3
+\item Goal of the filter was to remove high-frequency noise (low-pass Butterworth with 10~Hz corner frequency)
+\item This would allow the ADC to operate with less averaging, reducing its effective sampling time (denoted by the ``resolution index'')  (refer to Ch. 3)
+\item We show the effectiveness in this section.
+\end{itemize}
+
+This Section talks about the sampling frequency and the effect of
+filtering in sampling frequency. It starts with defining the sampling
+frequency and how we first consider building an analog filter in the
+first place. Then it shows the effect improving the response time on
+the prototype. Finally, the Section wraps up with some comparison in
+current response time for different sampling frequency.
 
 
 Sampling frequency is the number of samples per second in a signal. For the prototype, by sampling frequency we meant that the number of signals of the fluxgate sensors that are going to the feedback algorithm via analog to digital converter (ADC) per second per measurement. But we are recording the time for a complete iteration which we call it as loop sampling frequency which includes the ADC sampling frequency plus rest of the loop frequency. In the early days of the prototype experiment, we have used the slowest sampling rate which is corresponding to resolution index 12 in Table~\ref{table:t7freq}.  The problem with that was the response time for the current was very slow and so does the compensation of the magnetic field. Then we have decided to use the fastest sampling frequency that the ADC can offer which is corresponding to resolution index 1 in Table~\ref{table:t7freq}. But new problem has arisen in terms of noise especially the 60 Hz electrical noise from the power source which has motivated us to build the 4\textsuperscript{th} order low pass Butterworth filter (see Section~\ref{sec:filter}) to get rid of unwanted high frequency noise. This Section talks about the results that we got to solve those problems by increasing the sampling frequency.
 
 \subsubsection{Effect on Filtering to Use the Fastest Sampling Frequency}
 
-As we have decided to use the fastest sampling frequency that our ADC can offer as discussed above , we have faced problems in terms of noise there. So, we have build a 4\textsuperscript{th} order low pass Butterworth filter (see Section~\ref{sec:filter}) to get rid of unwanted high frequency noise. 
+\begin{itemize}
+\item Fix Fig. 5.1 (scales) -- ideally plot all of them on the same graph.
+\item Noise reduced by factor of {\bf X}
+\item This is resolution index 1
+\item Without filter noise is dominated by 60 Hz and higher.
+\item Compensation is off
+\item Also compared with SCU... it agreed well.  Our filters gave slightly better performance (lower noise) likely due to slight difference in design.
+\item Loop frequency is 100~Hz.  This is larger than 25~kHz$/12\approx 2$~kHz reported in Chapter 3 (ref) because of polling time.  Typ.~1~ms/channel read.  When read in this way, can increase resolution index to 7 (and averaging time) before significant delays are noted.  (when ADC effective sample time approaches 1~ms)
+\item At times we did this alternate way:  increase resolution index.
+\item Another problem:  current drifting during compensation although field would not change.  This is discussed further in Sections~\ref{drifting1} and \ref{drifting2}.
+\item We thought maybe this was due to sequential reads (higher resol index $\sim$ 7) so in general we aimed for resol index 1 which makes the reads distributed in time.  (Explain better... it is leading up to Fig. 5.2 and 5.3.)  In such cases when using lower resol index (1) we did software averaging until the design loop rate was met.  This will be discussed further in the next sections.
+\item Another point:  in Fig. 5.1 is that there is a time lag (slewing?) for the filter... consistent with expectation.
+\item Conclusion:  the filter works and allows us to go to higher effective sample rate.
+\item We would be stuck at resolution index 11 or 12 otherwise.  12 has 6 Hz effective sample rate $\approx$ 10 PLC averaging.  If doing this for 12 channels it it means $<0.5$~Hz.  Impossible to do compensation at 6~Hz this way (fails to meet design goal).
+\end{itemize}
+
+As we have decided to use the fastest sampling frequency that our ADC
+can offer as discussed above , we have faced problems in terms of
+noise there. So, we have build a 4\textsuperscript{th} order low pass
+Butterworth filter (see Section~\ref{sec:filter}) to get rid of
+unwanted high frequency noise.
 
 \fig{Images/filtering}{width = \textwidth}{Filtering effect on the data taken for magnetic field compensation. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '1y' . The left one indicates data measurement using a filter and right one without a filter. They are described more in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:filtering}}{Short}
 
@@ -26,8 +59,17 @@ The Fig.~\ref{fig:filtering} shows the importance of using the filter discussed 
 
 So, for faster sampling it needs to have filter to avoid high frequency noise. Next, after applying filter let's see how the sampling frequency has impact on response time of the magnetic field compensation.
 
-\FloatBarrier
+%\FloatBarrier
 \subsubsection{Effect on Response Time of Magnetic Field Compensation}
+
+\begin{itemize}
+\item Fig. 5.2.  Left: with filter, resol index 1, 50 software averages per point, compensation ON, loop cycle rate (correction rate) 6.57 Hz indicated in the Fig.  Right:  no filter, resolution index 12, no other averaging (other than what the ADC oes), graph is on longer timescale because loop rate is slower (0.45~Hz).  Corrected/uncorrected (projected) values are shown.
+\item Main point:  loop cycle rate is good!  $\sim$ 15x faster.  Even plenty of time for additional averaging to reduce noise further.  Likely the same result if somewhat higher resolution index used, possibly even with reduced software averaging.
+\end{itemize}
+
+
+
+
 So after we have our filter ready to use, now let's see what I meant by increasing the sampling frequency and its effect on the magnetic field  compensation response time.
 
 \fig{Images/samp_freq_iteration}{width = \textwidth}{Active magnetic field compensation by sensor position '1y'. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '1y' with red represents uncompensated $\Delta$B. The left one indicates the compensation by '1y' at the fastest sampling frequency and right one for slowest one. They are described more in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:samp_freq_iteration}}{Short}
@@ -36,8 +78,16 @@ The Fig.~\ref{fig:samp_freq_iteration} shows the comparison between using highes
 
 So the fastest sampling frequency of our ADC can offer 670/45$\approx$15 times faster response time than the slowest one. Next let's reveal the effect of sampling frequency on coil current response time.
 
-\FloatBarrier
+%\FloatBarrier
 \subsubsection{Effect on Coil Current Response Time }
+
+\begin{itemize}
+\item Fig. 5.3.  Always filtered.  Different resolution indices indicated on the figure along with their loop cycle rates.  Always 50 software averages done.
+\item By resolution index 8 or 9, the loop cycle rate for the 50 software averages slows to 1.1 and 0.39 Hz respectively.  The results look similar to resolution index 12 (without filter) but much less noisy, smoother.
+\item 
+\end{itemize}
+
+
 Form above discussion it is found that the more the sampling frequency is the less it takes for the compensation to respond. The effect of the sampling frequency has been revisited here again to show its effect in coil current response time.
 
 \FloatBarrier
