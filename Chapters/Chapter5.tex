@@ -84,13 +84,13 @@ So the fastest sampling frequency of our ADC can offer 670/45$\approx$15 times f
 \begin{itemize}
 \item Fig. 5.3.  Always filtered.  Different resolution indices indicated on the figure along with their loop cycle rates.  Always 50 software averages done.
 \item By resolution index 8 or 9, the loop cycle rate for the 50 software averages slows to 1.1 and 0.39 Hz respectively.  The results look similar to resolution index 12 (without filter) but much less noisy, smoother.
-\item 
+\item Another option is to run with fewer averages than 50 and at higher resolution index, while still achieving the 6 Hz loop rate design goal.  This would likely also work just fine although we didn't try it.  The advantage of resolution index 1 with averaging is that the channels are all sampled at closer to the same time, which we suspected was a problem, as discussed earlier.
 \end{itemize}
 
 
 Form above discussion it is found that the more the sampling frequency is the less it takes for the compensation to respond. The effect of the sampling frequency has been revisited here again to show its effect in coil current response time.
 
-\FloatBarrier
+%\FloatBarrier
 \fig{Images/samp_freq_example}{width = \textwidth}{$C_x^-$ coil current (left) and active magnetic field compensation (right) by sensor position '8x' for different resolution index. The resolution indices are (see Table~\ref{fig: res} and Sec.~\ref{sec:DAQ}) represented by 1, 6, 7, 8 and 9 while loop sampling frequencies are given in the parentheses respectively. They are describe more in the text. Vertical axis of the left one represents $C_x^-$ coil current graph and the right one indicates   $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '8x' with red represents uncompensated $\Delta$B for different resolution index respectively. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:samp_freq_example_multi}}{Short}
 
  The effect in coil current response time has been shown by Fig.~\ref{fig:samp_freq_example_multi}.  The results are again part of the compensation by all the 12 sensors placed just like explained earlier. Only difference here is that, now the different measurements have been taken for a same time frame i.e. 180s in this case compared to earlier where time was independent for different ones. For simplicity only $C_x^-$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' for different loop sampling frequencies have been shown instead of showing all current coils and sensor positions. For a complete list of positions see the color map of $\bm{M}$ in Fig.~\ref{fig:m}. As seen from the $C_x^-$ coil current (left) and $\Delta$B (right) due to '8x' graph that with decrease of loop sampling frequency, the current response time increases. For example, it takes $\sim$ 7s for $C_x^-$ coil current to settle down after the perturbation coil being turned ON when the loop sampling frequency is 6.35 Hz indicated by blue color curve compared to $\sim$ 52s when the loop sampling frequency is 0.39 Hz indicated by magenta color curve. So, the current response time has been faster by 52/7$\approx$7.5 times and we are not even considering the slowest one.
@@ -104,7 +104,20 @@ see Eq.~(\ref{eq:I}) ) which is in short PI tuning has been discussed. After jus
 
 \subsection{Justification of Monte Carlo Simulation to Find r}
 
-In Section~\ref{sec:inv}, we have already talked about how the regularization parameter 'r' came into effect. Then, in Section~\ref{sec:mont}, a Monte Carlo simulation method has been described which has been taken from Ref.~\cite{bea} where a suitable value of 'r' has been found which will give the best compromise between the magnetic field fluctuation and coil current fluctuation. In this Section, we have run the model in experimental setup in order to verify the simulation method.
+
+\begin{itemize}
+\item Basic message of Fig. 5.4 is that experiment and simulation kind of agree.
+\end{itemize}
+
+
+In Section~\ref{sec:inv}, we have already talked about how the
+regularization parameter 'r' came into effect. Then, in
+Section~\ref{sec:mont}, a Monte Carlo simulation method has been
+described which has been taken from Ref.~\cite{bea} where a suitable
+value of 'r' has been found which will give the best compromise
+between the magnetic field fluctuation and coil current
+fluctuation. In this Section, we have run the model in experimental
+setup in order to verify the simulation method.
 
 In Section~\ref{sec:mont}, 30 different sets of random magnetic field ($B_s^{\text{rand}}$) values have been chosen with center of distribution being 0 and standard deviation 5 nT for 12 different fluxgate sensor positions whose labels are given in the horizontal axis of Fig.~\ref{fig:m} and the positions are specified in Fig.~\ref{fig: coil}. Here, we have chosen one out of the 30 different sets of $B_s^{\text{rand}}$ and go through the steps as in Section~\ref{sec:mont} to generate similar figures like in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For the experimental setup, we have done the similar steps to generate those figures except instead of generating $B_s^{\text{rand}}$ randomly, we have applied current in the perturbation coil to generate the required drift ( see Eq.~(\ref{eq:del_B}) ) which will be treated as $B_s^{\text{rand}}$. The results of the simulation as well as experiment are given in Fig.~\ref{fig:mont_comp}, where Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)} and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(c)} are the results found from simulation and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(d)}, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(e)} and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(f)} are the results found from experiment. They are described in detail in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. It is seen that the experimental counterpart of each of the simulation that is Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)} of simulation is comparable to Fig.~\ref{fig:mont_comp}\textcolor{blue}{(d)} of experiment. Similarly, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)} of simulation with Fig.~\ref{fig:mont_comp}\textcolor{blue}{(e)} of experiment and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(c)} of simulation with Fig.~\ref{fig:mont_comp}\textcolor{blue}{(f)} of experiment are comparable and they produce similar results. The similar results of the simulation with experiment justifies the the simulation model described in Section~\ref{sec:mont}.
 
@@ -116,8 +129,18 @@ The above results in Fig.~\ref{fig:mont_comp}, where simulation results are simi
 \subsection{PI Tuning General Behavior}\label{sec:pi_behave}
 Here, the individual effect of P and I term will be discussed first and then concludes with the effect of using PI together.
 
+
+Main points:
+\begin{itemize}
+\item Trying to show that P doesn't do much (5.5) but I has a big effect.  I term gives smaller Delta B in one axis (5.6).  I term can also affect response time in that axis (5.7).  After I term is set, the P term doesn't seem to do too much. (5.8).
+\item Current drifting problem is starting to become apparent.  Does not appear for P only.  Appears much more pronounced for I only, and PI combined.
+\item Do we need all the figures?  Can the data be summarized better (all currents and all fields on two graphs for each setting?)
+\item Should we show data?  I think so.  Need to establish that the simulation agrees with the data.  That could also be a major point of this section.  It would also lead into discussion of the current-drifting problem and that since the simulation and data agree, and we checked the hardware, that it is not a hardware problem.
+\end{itemize}
+
 \subsubsection{Effect of changing only P term}
-Here, the effect of changing proportional gain term (P) or $k_c^p$ of Eq.~(\ref{eq:I}) will be discussed.
+Here, the effect of changing proportional gain term (P) or $k_c^p$ of
+Eq.~(\ref{eq:I}) will be discussed.
 
 P term is proportionally multiplying the error (the difference between setpoint and actual measurement) with a constant gain. For the prototype it is
 
@@ -322,7 +345,28 @@ Here, first the P and I term have been tuned following the discussion on Section
 The above results give us confusion on the effectiveness of the P term and also the tuning method. Instead of looking more deep into tuning method, we moved our focused on the PI control equation explained by Ref.~\cite{bea} and Ref.~\cite{rawlik}.
 
 \section{Style of PI (Old/New)}
-We have talked about the tuning method in Section~\ref{sec:tune} and later in Section~\ref{sec:pi_behave} we have shown the the effect of the P and I term where the effectiveness of the P term and the tuning method arises. Those  were all based on the works from Ref.\cite{bea}. In early 2018, another author on his PhD thesis \cite{rawlik} claimed that there is no need of PI!! As we have done most of our work following the Ref.\cite{bea}, so we wanted to verify that the claim of no PI by Ref.\cite{rawlik} is actually true or not. So, this Section is all about comparing the work from two Ref.\cite{bea} and Ref.\cite{rawlik} and verify the claim. 
+
+\begin{itemize}
+\item We were led astray by M. Rawlik in late 2017 (nEDM2017).  It is also written in his thesis.
+\item The claim is that the PI algorithm is not necessary.  Just use this magic new algorithm and you don't need PI any more.
+\item Describe the algorithm and its difference compared to typical PI (our understanding).  Our implementation included P and I terms also.  The main difference seemed to be that I0 wasn't used but rather In in order to determine In+1.
+\item In our implementation we noticed experimentally that kp=1 in the new system corresponded to ki=1 in the old system.
+\item Eventually we figured out why (derivation).
+\item Main conclusion:  the ``New PID'' is the ``old PID'' but with a very particular choice ki=1 and kp=0.  It is clearly better to allow more freedom in the algorithm than this.  Old PID is therefore more general.  Although indeed ki=1 and kp=0 generally do seem to be close to optimal, we think this is a coincidence rather than physics.  We also note the time delays inserted into Rawlik's algorithm are themselves a form of tuning.
+\item So we use regular PI and treat the parameters as TBD by system tuning.
+\end{itemize}
+
+
+We have talked about the tuning method in Section~\ref{sec:tune} and
+later in Section~\ref{sec:pi_behave} we have shown the the effect of
+the P and I term where the effectiveness of the P term and the tuning
+method arises. Those were all based on the works from
+Ref.\cite{bea}. In early 2018, another author on his PhD
+thesis \cite{rawlik} claimed that there is no need of PI!! As we have
+done most of our work following the Ref.\cite{bea}, so we wanted to
+verify that the claim of no PI by Ref.\cite{rawlik} is actually true
+or not. So, this Section is all about comparing the work from two
+Ref.\cite{bea} and Ref.\cite{rawlik} and verify the claim.
 
 Here, the PI control algorithm as discussed by the Eq.~(\ref{eq:I}) which taken from Ref.~\cite{bea}) is termed as the 'Old PI' control. and no PI claim by Ref.~\cite{rawlik} is termed as 'New PI' control and the new current can be found by -
 \begin{equation}\label{eq:I_raw}
@@ -407,11 +451,20 @@ So the above discussion verifies that 'Old PI' and 'New PI' are just two differe
 
 
 \section{New Studies on Regularization Parameter}\label{sec:new_study_r}
+
+
+
+
 In Section~\ref{sec:inv} we have introduced the regularization parameter 'r' and then discussed a simulation model in Section~\ref{sec:mont} which later has been justified by comparing with experimental setup in Section~\ref{fig:mont_comp}. We have also talked about the PI behaviour in Section~\ref{sec:pi_behave}. Here, we will first show the effect of matrix condition number on PI behaviour and then propose a new method to find 'r' based on condition number of matrix. 
 
 So, first the importance of matrix condition number on PI will be discussed.
 
 \subsection{Importance of Matrix Condition Number on PI}\label{sec:pi_behave_m}
+
+\begin{itemize}
+\item Consider deleting this section in favor of 5.4.2 Effect of r on PI tuning.
+\end{itemize}
+
 Matrix Condition number ( see Eq.~(\ref{eq:cond} ) have been introduced in Section.~\ref{sec:m} while discussing the inversion of the matrix $\bm{M}$ . An ill-conditioned matrix has large condition number and a matrix with small condition number is said to be well-conditioned. Here, the effect of matrix condition number on PI will be discussed in terms of a very large condition number that is 129.
  
 \subsubsection{Condition Number Effect on changing only P term}
@@ -521,9 +574,30 @@ Here, first the P and I term have been tuned following the discussion on Section
 \FloatBarrier
 The above results rather confirm that matrix condition number does not bring any change while using P and  term at a time. But it has got huge impact on I term for which the coil current never settles in case of ill conditioned matrix. Next we will try to improve the current settling problem by changing the regularization parameter.
 
-\subsection{Effect of 'r' on PI Tuning}\label{sec:r_pi}
+\subsection{Effect of $\mathbf{r}$ on PI Tuning}\label{sec:r_pi}
 
-The discussion on Section~\ref{sec:pi_behave_m} suggests that I term is necessary for fast system response due to any drift in the magnetic signal as it takes care of the offset problems which is unsolvable by using only P term. But, in doing so, it also creates problems in terms of the coil currents which never settle in for the duration of the perturbation in case of ill-conditioned matrix. The tuning method described in Section~\ref{sec:tune} should have take care of this but we have realized that having tuned P and I has similar effect like having only I term. So, tuning method doesn't give us the solution. Rather looking for different tuning method , we have focused on the effect of 'r' on PI tuning. This Section will discuss that effect with possible outcome.
+
+\begin{itemize}
+\item We noticed that if we kept P \& I fixed, and changed only $r$, then we'd also get worse current drifting.  But paradoxically, the field would respond quite fast.
+\item It is natural that r should affect PI, because the error function involves $\mathbf{M^{-1}}$ and therefore $r$.  See e.g.~Eq.~(4.10) for r and (4.3) and (4.4) for how Minv enters the PI algorithm.  If $r$ is big then Minv gets small.  So it would be reasonable to expect that if r increases then we need to crank up both kp and ki accordingly see eq. 4.4.
+\item Consider showing a study where you change P\& I to try to compensate?
+\item We tried this but it didn't work.  Data?  Or simulation?
+\item Lower r seems better Fig.~5.13(a), but what I remember is that when we did that it made the B-noise worse.  Seems like an overcorrected system.  Setting P\& I lower to try to compensate the overcorrection I think made the system slower again (?)
+\item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
+\end{itemize}
+
+The discussion on Section~\ref{sec:pi_behave_m} suggests that I term
+is necessary for fast system response due to any drift in the magnetic
+signal as it takes care of the offset problems which is unsolvable by
+using only P term. But, in doing so, it also creates problems in terms
+of the coil currents which never settle in for the duration of the
+perturbation in case of ill-conditioned matrix. The tuning method
+described in Section~\ref{sec:tune} should have take care of this but
+we have realized that having tuned P and I has similar effect like
+having only I term. So, tuning method doesn't give us the
+solution. Rather looking for different tuning method , we have focused
+on the effect of 'r' on PI tuning. This Section will discuss that
+effect with possible outcome.
 
 The experimental setup is same as discussed in Section~\ref{sec:pi_behave_m}. But in this case we have chosen $k_c^p$=0 and $k_c^i$=0.52. Among those $k_c^i$=0.52 has been found due to PI tuning (see Section~\ref{sec:tune}) and instead of choosing  $k_c^p$=0.43 we have made this zero as from the earlier discussion we saw that it barely has any effect while we use the I term. So, these values of $k_c^p$ and $k_c^i$ will be applied on Eq.~\ref{eq:I} to find the currents to be sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B found by Eq.~(\ref{eq:del_B}) in the sensor positions given in the horizontal axis of Fig.~\ref{fig:m}. So, keeping those fixed, we will try to change the value of 'r' which will modify the Eq.~(\ref{eq:minvR}) for each change of 'r' value.
 
@@ -599,6 +673,16 @@ Now the question arises about what if 'r' value is chosen more than the optimize
 The above results confirm that for a matrix with large condition number, the value of 'r' has to be tuned alongside the PI tuning. Next we will talk about a new method to find 'r'.
 
 \subsection{Regularization by Matrix Condition Number Method  }\label{sec:cond}
+
+\begin{itemize}
+\item This previous stuff plus Rawlik made us believe that cond number is important.  It's important to make it small.
+\item We noticed another relationship between condition number and regularization parameter for this system:  the best r determined by MC method gave the smallest cond \#.  Fig. 5.15 shows that when r is varied there is a minimum cond \#.  We tested this for a broad variety of M both theoretical and experimental and found it to be always true that the MC method gave the same best r as if we had just selected the one that gives the smallest cond number.
+\item We suspect this is because Tikhonov regularization minimizes both RMS current as well as field fluctuations.  cite Wikipedia (I mean some Tikhonov thing).  In Wikipedia, it minimizes Gammax2 + Ax2.  L2 reg.
+\item So it's not surprising and could be more useful, not requiring an random number technique to find the best r.
+\item Maybe add example graph somehow comparing to the MC technique?
+\end{itemize}
+
+
 We have talked about the importance of matrix condition number on PI tuning. Matrix Condition number ( see Eq.~(\ref{eq:cond} ) and regularization parameter 'r' ( see Eq.~(\ref{eq:minvR} ) have been introduced in Section.~\ref{sec:m} while discussing the inversion of the matrix $\bm{M}$ . Moreover, in Section~\ref{sec:mont}, a method of regularization by random fluctuation has been discussed. Here, we will propose another method of regularization using the concept of matrix condition number.
  
  Recall from Section~\ref{sec:inv}, regularization is needed in the first place while inverse of the matrix $\bm{M}$ because $\bm{M}$ itself is ill-conditioned matrix. That means the $\bm{M}$ has a large condition number which while inverse would produce large currents in some ill-positioned places that will make the system unstable. So, it is required to have a well-conditioned  $\bm{M^{-1}}$ which implies that the condition number of $\bm{M^{-1}}$ should be small and that's what regularization has been doing. So, we introduce Eq.~\ref{eq:minvR} with various values of 'r' and each time the condition number of $\bm{M^{-1}}$ is stored. Then the optimized 'r'  has been determined by selecting the 'r' for which the condition number of $\bm{M^{-1}}$ is the minimum.
@@ -634,6 +718,14 @@ In the above, different method to find optimize 'r' has been discussed which is 
 
 \section{Fluxgate Placements and Impact of Shields}
 
+
+\begin{itemize}
+\item We still had no clue so we just started changing things randomly.
+\item We changed fluxgate positions to try to make cond number smaller to see if it had an effect.  Could not change the cond number or the problem significantly.
+\item We were confused if the slow current response might be due to magnetic responses that we slow.  So we tried removing the shields.  No change.
+\item consider a graph where there is current drifting but with no shield.
+\item And then we realized this had nothing to do with it.
+\end{itemize}
 
 In earlier section we have shown results using 12 fluxgate sensors placed at positions as given in horizonatal axis of Fig.~\ref{fig:m} and there exact positions are described by the Fig.~\ref{fig: coil}. We were facing serious problem with coil current not being settle properly although the field seems to be compensated on time. So, we have tried different posoitions mainly in corners and center of each of the coil faces. Eeven, we have removed the outermost shields also. In this Section, the results of those studied will be shown and discussed. 
 
@@ -696,11 +788,13 @@ There are four layers of shields have been used for passive shielding in this pr
 
 \section{Coil Configuration}
 
+
 \begin{itemize}
 \item coil cube with matrix calculation in python by Jeff shows the condition number to be infinity.
 \item exploits the diagonal matrix (Section~\ref{sec:m}) and found one of them is giving zero
 \item wire the two coils to work as one and matrix condition number is hugely improved. close to one!!
-\item Reason : Maxwell's equation and current mode in all the six coils.
+\item Reason: Maxwell's equation and current mode in all the six coils.
+\item Yes, fine, but does this actually fix the current drifting problem?
 \end{itemize}
 
 
