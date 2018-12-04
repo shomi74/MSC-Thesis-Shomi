@@ -19,13 +19,8 @@ In Chapter~\ref{ch:operation}, the magnetic control process and the simulation m
 \item We show the effectiveness in this section.
 \end{itemize}
 
-This Section talks about the sampling frequency and the effect of
-filtering in sampling frequency. It starts with defining the sampling
-frequency and how we first consider building an analog filter in the
-first place. Then it shows the effect improving the response time on
-the prototype. Finally, the Section wraps up with some comparison in
+We built some analog filters which were discussed in Chapter~\ref{ch:amcP}. Goal of the filter was to remove high-frequency noise (low-pass Butterworth with 10~Hz corner frequency). This would allow the ADC to operate with less averaging, reducing its effective sampling time (denoted by the 'resolution index' as shown in Table~\ref{table:t7freq}). We show the effectiveness in this section. The section starts with defining the sampling frequency and how we first consider building an analog filter in the first place. Then it shows the effect improving the response time on the prototype. Finally, the Section wraps up with some comparison in
 current response time for different sampling frequency.
-
 
 Sampling frequency is the number of samples per second in a signal. For the prototype, by sampling frequency we meant that the number of signals of the fluxgate sensors that are going to the feedback algorithm via analog to digital converter (ADC) per second per measurement. But we are recording the time for a complete iteration which we call it as loop sampling frequency which includes the ADC sampling frequency plus rest of the loop frequency. In the early days of the prototype experiment, we have used the slowest sampling rate which is corresponding to resolution index 12 in Table~\ref{table:t7freq}.  The problem with that was the response time for the current was very slow and so does the compensation of the magnetic field. Then we have decided to use the fastest sampling frequency that the ADC can offer which is corresponding to resolution index 1 in Table~\ref{table:t7freq}. But new problem has arisen in terms of noise especially the 60 Hz electrical noise from the power source which has motivated us to build the 4\textsuperscript{th} order low pass Butterworth filter (see Section~\ref{sec:filter}) to get rid of unwanted high frequency noise. This Section talks about the results that we got to solve those problems by increasing the sampling frequency.
 
