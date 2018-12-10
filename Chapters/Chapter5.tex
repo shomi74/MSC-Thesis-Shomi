@@ -116,10 +116,25 @@ value of $r$ has been found which will give the best compromise
 between the magnetic field fluctuation and coil current
 fluctuation. In this Section, we have run the model in experimental
 setup in order to verify the simulation method.
+$B_s^{\text{rand}}$ will be replaced by
+\begin{equation}\label{eq:B_coils-exp}
+    \Delta B_s^{\text{exp}}(r) =B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)
+\end{equation}
+
+Here, Eq.~(\ref{eq:B_coils-sim}) replaced by
+\begin{equation}\label{eq:B_coils-exp}
+    B_s^{\text{exp}}(r) =B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)
+\end{equation}
+
+
+\begin{equation}\label{eq:fluc_exp}
+    F(r)=\frac{\sqrt{\sum_s \frac{1}{s}(B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r))^2}}{\sqrt{\sum_s \frac{1}{s}(B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r))^2}}
+\end{equation}
 
 In Section~\ref{sec:mont}, 30 different sets of random magnetic field ($B_s^{\text{rand}}$) values have been chosen with center of distribution being 0 and standard deviation 5 nT for 12 different fluxgate sensor positions whose labels are given in the horizontal axis of Fig.~\ref{fig:m} and the positions are specified in Fig.~\ref{fig: coil}. Here, we have chosen one out of the 30 different sets of $B_s^{\text{rand}}$ and go through the steps as in Section~\ref{sec:mont} to generate similar figures like in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For the experimental setup, we have done the similar steps to generate those figures except instead of generating $B_s^{\text{rand}}$ randomly, we have applied current in the perturbation coil to generate the required drift ( see Eq.~(\ref{eq:del_B}) ) which will be treated as $B_s^{\text{rand}}$. The results of the simulation as well as experiment are given in Fig.~\ref{fig:mont_comp}, where Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)} and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(c)} are the results found from simulation and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(d)}, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(e)} and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(f)} are the results found from experiment. They are described in detail in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. It is seen that the experimental counterpart of each of the simulation that is Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)} of simulation is comparable to Fig.~\ref{fig:mont_comp}\textcolor{blue}{(d)} of experiment. Similarly, Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)} of simulation with Fig.~\ref{fig:mont_comp}\textcolor{blue}{(e)} of experiment and Fig.~\ref{fig:mont_comp}\textcolor{blue}{(c)} of simulation with Fig.~\ref{fig:mont_comp}\textcolor{blue}{(f)} of experiment are comparable and they produce similar results. The similar results of the simulation with experiment justifies the the simulation model described in Section~\ref{sec:mont}.
 
-\fig{Images/mont_comp3}{width = \textwidth,height =10cm}{Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_comp}}{Short}
+% \fig{Images/mont_comp3}{width = \textwidth,height =10cm}{Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_comp}}{Short}
+\fig{Images/mont_exp}{width = \textwidth}{p127, 100mA stimulus,p1,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_comp}}{Short}
 
 \FloatBarrier
 The above results in Fig.~\ref{fig:mont_comp}, where simulation results are similar to experimental one justify the simulation method described in Section~\ref{sec:mont}. The upcoming Section is all about P and I term (see Eq.~(\ref{eq:I}) ) behaviour. 
@@ -150,6 +165,9 @@ where, $k_c^p$ is the proportional gain and $\Delta I_c^n$ is explained in Eq.~(
 Depending on the value $k_c^p$, it tries to minimize the error level between the setpoint and the actual measurement with passage of several measurements. A large value of $k_c^p$ will result large output change for a particular error and eventually it reaches a threshold point above which the system becomes unstable. 
 
 \fig{Images/p25p125}{width = \textwidth,height=14cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for different values of $k_c^p$ with $k_c^i$ in Eq.~(\ref{eq:I}) being zero. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in both $\Delta$B graphs denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement was used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:p_pi}}{Coil currents with drift $\Delta$B for different values of $k_c^p$ only.}
+
+
+\fig{Images/mont_p}{width = \textwidth}{p127, 100mA stimulus,p1,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_p}}{Short}
 
 % \doublefig{Images/p25}{width =\textwidth,height =8cm}{with passive shielding layers. \label{fig:shield_opera2}}{Images/p125}{width = \textwidth,height =8cm}{without outermost passive shielding layer.\label{fig:noShield_opera}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for different values of $k_c^p$ with $k_c^i$ in Eq.~(\ref{eq:I}) being zero. Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}) while the red curve denotes the drift that would have been without the compensation. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. For position of coils and sensors see Fig.~\ref{fig: coil} \label{fig:p_pi}}}{Prototype setup in OPERA simulation software.}
 
@@ -242,6 +260,7 @@ Accumulated error keep tracks of the offsets that should be corrected previously
 %     \caption[short]{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for different values of $k_c^i$ with $k_c^p$ ( see Eq.~(\ref{eq:I}) ) being zero. Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}) while the red curve denotes the drift that would have been without the compensation. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. For position of coils and sensors see Fig.~\ref{fig: coil}.}
 %     \label{fig:i_pi}
 % \end{figure}
+\fig{Images/mont_i}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_i}}{Short}
 
 \FloatBarrier
 The effect of changing $k_c^i$ has been shown in Fig.~\ref{fig:i_pi} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B found by Eq.~(\ref{eq:del_B}) in all 12 sensor postions excluding two control sensors. 
@@ -312,6 +331,12 @@ For simplicity instead of showing all the drift $\Delta$B for all the fluxgate s
 
 \fig{Images/p60i368}{width = \textwidth,height=7cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.6 and $k_c^i$=0.37 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement was used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:tuned_vs_i}}{Coil currents with drift $\Delta$B for $k_c^p$ and $k_c^i$ combinely.}
 
+\FloatBarrier
+\begin{itemize}
+    \item message from the Fig.~\ref{fig:pi_i_mCond30} ?
+\end{itemize}
+
+\fig{Images/pi_i_mCond30}{width = \textwidth,height=14cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for for $k_c^p$=0.6 and $k_c^i$=0.37 (see Eq.~(\ref{eq:I})) in (a) and for $k_c^p$=0.0 and $k_c^i$=0.37 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in both $\Delta$B graphs denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement was used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:pi_i_mCond30}}{Coil currents with drift $\Delta$B for different values of $k_c^p$ only.}
 
 % \doublefig{Images/p43i52_33}{width =\textwidth,height =8cm}{at $k_c^p$=0.43 and $k_c^i$=0.52. \label{fig:pi_tuned}}{Images/i52_33}{width = \textwidth,height =8cm}{at $k_c^p$=0.0 and $k_c^i$=0.52..\label{fig:i52}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ ( see Eq.~(\ref{eq:I}) ). Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. For position of coils and fluxgate sensor see Fig.~\ref{fig: coil}.} \label{fig:tuned_vs_i}}{short}
 
@@ -635,7 +660,7 @@ effect with possible outcome.
 %     \caption[short]{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ ( see Eq.~(\ref{eq:I}) ). Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. For position of coils and fluxgate sensor see Fig.~\ref{fig: coil}.}
 %     \label{fig:r_pi}
 % \end{figure}
-
+\fig{Images/mont_pr}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_pr}}{Short}
 \FloatBarrier
 % Now the question arises about what if $r$ value is chosen more than the optimized $r$. For answering that question, we have also studied the effect for more values of $r$ with same setup which are shown in Fig.~\ref{fig:r_pi_more}. It is seen from Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(a)}, Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(b)}, Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(c)} and Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(d)} which are correspond to $r$ = 3.5, 3.6, 3.7 and 3.9 respectively that the coil current graph seems to be settle in for larger value of $r$ before it starts showing less responsive for example at $r$=3.9.   
 
@@ -733,35 +758,33 @@ In the above, different method to find optimize $r$ has been discussed which is 
 \item And then we realized this had nothing to do with it.
 \end{itemize}
 
-In earlier section we have shown results using 12 fluxgate sensors placed at positions as given in horizonatal axis of Fig.~\ref{fig:m} and there exact positions are described by the Fig.~\ref{fig: coil}. We were facing serious problem with coil current not being settle properly although the field seems to be compensated on time. So, we have tried different posoitions mainly in corners and center of each of the coil faces. Eeven, we have removed the outermost shields also. In this Section, the results of those studied will be shown and discussed. 
+In earlier section we have shown results using 12 fluxgate sensors placed at positions as given in horizontal axis of Fig.~\ref{fig:m} and there exact positions are described by the Fig.~\ref{fig: coil}. We were facing serious problem with coil current not being settle properly although the field seems to be compensated on time. So, we have tried different positions mainly in corners and center of each of the coil faces. Even, we have removed the outermost shields also. In this Section, the results of those studied will be shown and discussed. 
 
 First the study on the fluxgate placement will be discussed.
 
 \subsection{Fluxgate Placements}
-\begin{itemize}
-    \item yet to change the Table~\ref{table:flux-pos}
-\end{itemize}
+
 We have not got clear idea about the placements of the fluxgates from the previous studies and our coil current also did not settle down the way we thought is should. We have started taking data with 3*4=12 sensors at slowest sampling frequency (see Table~\ref{table:index}) in the corners but the coil currents were not properly settle down. Then we thought maybe increasing sensors will eliminate the problems. So, we bought new fluxgate sensors and build another breakout box (see Section~\ref{sec:sensor}) but still the results were not good in the coil currents. Then we thought may be if we place in the center of each of the faces of the coils the results will be better but unlucky us. Then we decided to remove the outermost shield (see Section~\ref{sec:shield}) to see the effect but still no luck. After that we decided to use the fastest sampling frequency of our ADC for which we have to build the filters. But due to time limitations and cost concern we have only build 12 filters to support 12 fluxgate sensors. Now, due to this the current response time has increased but that was not the solution of the current unsettle problem. Finally, we have realized that in addition to fastest response we have to also consider the matrix condition number and if the condition number is large then we have to lower the value of optimized $r$ (see Section~\ref{sec:new_study_r}). Here, we will talk about the the studies we have done on fluxgate placements.
 
 \begin{table} [htb!]
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
-        Positions & \makecell{Matrix \\Condition Number} &\makecell{Max $\Delta I_c^{\text{simRMS}}$\\ (mA)} & Max Compensation\\
+        \makecell{Fluxgates \\Position} & \makecell{$\bm{M}$\\ Condition No.} &\makecell{$\bm{M^{-1}}$\\ Condition No.} & $r$ & $r'$\\
         \hline\hline
-        1, 3, 6 and 8 & 33 & 33 & 70$\%$ \\ 
+        1, 3, 6 and 8 & 33.25 & 2.63 & 2.97 & 2.95\\ 
         \hline
-        2, 4, 5 and 7 & 29 & 21 & 62$\%$ \\ 
+        2, 4, 5 and 7 & 28.55 & 1.98 & 3.04 & 3.06 \\ 
         \hline
-        \makecell{Center \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 36 & 98 & 50$\%$ \\ 
+        \makecell{Center \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 36.24 & 1.8 & 2.47 & 2.49 \\ 
         \hline
-        \makecell{Center-6cm \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 99 & 172 & 58$\%$ \\ 
+        \makecell{Center-6cm \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 98.61 & 3.05 & 2.36 & 2.34 \\ 
         \hline
-        \makecell{Center+6cm \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 81 & 192 & 39$\%$ \\ 
+        \makecell{Center+6cm \\($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)} & 80.74 & 1.49 & \textcolor{red}{2.26} & \textcolor{red}{2.02} \\ 
         \hline
-        \makecell{1, 2, 3, 4, \\5, 6, 7 and 8} & 28 & 13 & 35$\%$ \\ 
+        \makecell{1, 2, 3, 4, \\5, 6, 7 and 8} & 28.30 & 1.94 & 3.17 & 3.19 \\ 
         \hline
-        \makecell{1, 2, 3, 4, \\5, 6, 7, 8 and \\Center ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)}  & 22 & 12 & 15$\%$ \\ 
+        \makecell{1, 2, 3, 4, \\5, 6, 7, 8 and \\Center ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)}  & 21.84 & 1.8 & \textcolor{red}{3.23} & \textcolor{red}{3.37} \\ 
         \hline
 
     \end{tabular}
@@ -769,7 +792,7 @@ We have not got clear idea about the placements of the fluxgates from the previo
     \caption[short]{Properties of different no of fluxgate sensors for different positions. Max $\Delta I_c^{\text{simRMS}}$ column has been taken for each of the positions defined by generating Fig.~\ref{fig:Isim}. Max compensation column has been determined for for each of the positions defined by generating Fig.~\ref{fig:fluc-sim} and the description is given in text. For the positions of the fluxgates see Fig.~\ref{fig: coil} }\label{table:flux-pos}
 \end{table}
 
-Mainly the corner positions and the center of each of the coil faces  have been tested. Also, they have been analyzed by moving slightly in different positions. The results for different no of sensors in different positions are given in Table~\ref{table:flux-pos}. Position of the fluxgates are defined by the numbers while they are in coreners and when they are in the center of each of the coil faces they are termed as 'Center ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)'. Cenetr-6cm means all the senosrs in the center of the coil faces have been brought 6cm towards the origin from the center and center+6cm means they have brught 6cm away outside the center. For, the full picture of the postions see Fig.~\ref{fig: coil}. the It is seen that that matrix condition number is from 22-36 for the fluxgates being placed either in corners or in center. But if they are slightly moved within $\pm$6cm of center then the matrix condition number becomes very large. Only considering the matrix condition number, it seems that having fluxgates in all the corners and the center of each of the coil faces should be the best choice as its giving the lowest condition number which is 22. But that is not the whole story! To quatify more we have taken the help of regenerating Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim}. From Fig.~\ref{fig:Isim}, we have recorded the maximum  $\Delta I_c^{\text{simRMS}}$ (mA) for 30 different sets of $B_s^{\text{rand}}$. For maximum compensation we have generated the Fig.\ref{fig:fluc-sim} for same for 30 different sets of $B_s^{\text{rand}}$ from which we have recorded lowest the remaining fluctuation F. For example- for fluxgate positions 1, 3, 6 and 8, the lowest F goes to 0.3. That means the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is(1-0.3$\times$100$\%$) =70$\%$. For more details see Section~\ref{sec:mont}. It seen that the current goes crazy if the fluxgates are placed in the center of the coil faces and the maximum $\Delta I_c^{\text{simRMS}}$ ranges from 98 to 192 mA. But the maximum $\Delta I_c^{\text{simRMS}}$ is 12 mA when the center fluxgates are used with the corners one. But on that time the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is only 15$\%$. So, anything with center seems to give crazy results. Then by looking at the all the three parameters e.g. matrix condition number, maximum $\Delta I_c^{\text{simRMS}}$ and maximum compensation for the 3 different sets of corner positions only, it is seen that the results are more balanced and surprisingly the compensation with 4*3-axis sensors are better than 8*3-axis sensors in exchange of more maximum $\Delta I_c^{\text{simRMS}}$.
+Mainly the corner positions and the center of each of the coil faces  have been tested. Also, they have been analyzed by moving slightly in different positions. The results for different no of sensors in different positions are given in Table~\ref{table:flux-pos}. Position of the fluxgates are defined by the numbers while they are in corners and when they are in the center of each of the coil faces they are termed as 'Center ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)'. Center-6cm means all the sensors in the center of the coil faces have been brought 6cm towards the origin from the center and center+6cm means they have brught 6cm away outside the center. For, the full picture of the positions see Fig.~\ref{fig: coil}. the It is seen that that matrix condition number is from 22-36 for the fluxgates being placed either in corners or in center. But if they are slightly moved within $\pm$6cm of center then the matrix condition number becomes very large. Only considering the matrix condition number, it seems that having fluxgates in all the corners and the center of each of the coil faces should be the best choice as its giving the lowest condition number which is 22. But that is not the whole story! To quantify more we have taken the help of regenerating Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim}. From Fig.~\ref{fig:Isim}, we have recorded the maximum  $\Delta I_c^{\text{simRMS}}$ (mA) for 30 different sets of $B_s^{\text{rand}}$. For maximum compensation we have generated the Fig.\ref{fig:fluc-sim} for same for 30 different sets of $B_s^{\text{rand}}$ from which we have recorded lowest the remaining fluctuation F. For example- for fluxgate positions 1, 3, 6 and 8, the lowest F goes to 0.3. That means the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is(1-0.3$\times$100$\%$) =70$\%$. For more details see Section~\ref{sec:mont}. It seen that the current goes crazy if the fluxgates are placed in the center of the coil faces and the maximum $\Delta I_c^{\text{simRMS}}$ ranges from 98 to 192 mA. But the maximum $\Delta I_c^{\text{simRMS}}$ is 12 mA when the center fluxgates are used with the corners one. But on that time the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is only 15$\%$. So, anything with center seems to give crazy results. Then by looking at the all the three parameters e.g. matrix condition number, maximum $\Delta I_c^{\text{simRMS}}$ and maximum compensation for the 3 different sets of corner positions only, it is seen that the results are more balanced and surprisingly the compensation with 4*3-axis sensors are better than 8*3-axis sensors in exchange of more maximum $\Delta I_c^{\text{simRMS}}$.
 
 
 \FloatBarrier
@@ -787,7 +810,7 @@ The above discussion of the Table~\ref{table:flux-pos} shows that current goes c
 \FloatBarrier
 \subsection{Different Shields}
 
-There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen using outermost shield and no shields. Both of the configurations produce similar resultts.
+There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen using outermost shield and no shields. Both of the configurations produce similar results.
 
 \begin{itemize}
      \item message from Fig.~\ref{fig:shield_noShield}??
@@ -836,14 +859,17 @@ For the prototype, two different configuration of compensation coils have been e
      \item message from Fig.~\ref{fig:coil_reg}??
  \end{itemize}
 
-\fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
+% \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
 
 \FloatBarrier
 \begin{itemize}
      \item message from Fig.~\ref{fig:coil_pseudo}??
  \end{itemize}
 \FloatBarrier
-\fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
+% \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
+
+\fig{Images/coil_pseudo2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
  \FloatBarrier
 %  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
@@ -873,5 +899,43 @@ For the prototype, two different configuration of compensation coils have been e
 \end{figure}
 
 %
+\begin{table} [htb!]
+    \centering
+    \begin{tabular} { |c|c|c|c|c|c|} 
+        \hline
+        Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter, $r$}\\
+        \hline\hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
+        \hline
+        \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.2 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$+$C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 2.97 & 1.14 & 3.6 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$,$C_y^-$,\\ $C_y^+$+$C_z^-$ and $C_z^+$ } & 2.8 & 1.14 & 3.62 \\
+        \hline
+        \makecell{$C_x^-$+$C_y^-$, $C_x^+$,\\ $C_y^+$,$C_z^-$ and $C_z^+$ } & 25 & 1.69 & 3.06 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$+$C_y^+$,\\ $C_y^-$, $C_z^-$ and $C_z^+$ } & 25 & 1.70 & 3.05 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^+$,\\ $C_y^-$+$C_z^-$ and $C_z^+$ } & 26.14 & 1.65 & 3.06 \\
+        \hline
+        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\$C_z^-$ and $C_z^+$ } & 440.57 & 1.79 & 2.54 \\
+        \hline
+        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\ and $C_z^-$+$C_z^+$ } & 1.27 & 1.0 & 3.73 \\
+        \hline
 
+    \end{tabular}
+    % \vspace{4mm}
+    \caption[short]{Properties of different no of fluxgate sensors for different positions. Max $\Delta I_c^{\text{simRMS}}$ column has been taken for each of the positions defined by generating Fig.~\ref{fig:Isim}. Max compensation column has been determined for for each of the positions defined by generating Fig.~\ref{fig:fluc-sim} and the description is given in text. For the positions of the fluxgates see Fig.~\ref{fig: coil} }\label{table:mcond_coil}
+\end{table}
 
+\section{Future Section ??}
+
+% \fig{Images/sf6p}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:adev}}{Short}
+\fig{Images/sf6sr}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:adev}}{Short}
+
+\fig{Images/center}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:center}}{Short}
