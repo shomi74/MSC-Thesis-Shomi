@@ -99,11 +99,15 @@ where, $M_{sc}$ are the elements of the matrix $\bm{M}$ and $I_c^n$ is the curre
 \FloatBarrier
 
 
-The matrix defined in this way is easy to measure using the system.  Each coil $c$ is set to a current, with all other currents set to zero.  The change in the sensor reading $s$ then gives the matrix element $M_{sc}$. The color map of a matrix $\bm{M}$ measured in this fashion is shown in Fig.~\ref{fig:m}.  The results are reasonable considering the design of the system.  The system was designed to compensate magnetic field of order 100~nT for currents of 200~mA, which would imply the matrix elements should be of scale 500~nT/A.  Generally this agrees with the color scale seen in Fig.~\ref{fig:m}.  Furthermore, the strongest matrix elements are those where the coil is closest to the sensor in question.  For example, 8y is closest to coils Y- and X+.  It also makes sense that 8y would have strong matrix elements here because it is near the corner of the magnetic shield which causes {\it e.g.} the X+ coil to be converted into a strong y component.  The red and blue colors are a result of the definitions of positive/negative current in relation to coil in question's orientation and the sensor axis definition.
+The matrix defined in this way is easy to measure using the system.  Each coil $c$ is set to a current, with all other currents set to zero.  The change in the sensor reading $s$ then gives the matrix element $M_{sc}$. 
+
 
 \fig{Images/m}{width = \textwidth}{Color map of $\bm{M}$ measured using the scheme indicated in the text.  Horizontal axis indicates the various sensors, which are counted using the index $s$.  Vertical axis indicates the various coils, which are counted using the index $c$.  The color axis ($z$-axis) indicates the value of the matrix element.  Red elements indicate positive values while blue elements indicate negative values.  Elements that appear white are near zero in the matrix element.\label{fig:m}}{Color map of $\bm{M}$}
 
 \FloatBarrier
+The color map of a matrix $\bm{M}$ measured in this fashion is shown in Fig.~\ref{fig:m}.  The results are reasonable considering the design of the system.  The system was designed to compensate magnetic field of order 100~nT for currents of 200~mA, which would imply the matrix elements should be of scale 500~nT/A.  Generally this agrees with the color scale seen in Fig.~\ref{fig:m}.  Furthermore, the strongest matrix elements are those where the coil is closest to the sensor in question.  For example, 8y is closest to coils Y- and X+.  It also makes sense that 8y would have strong matrix elements here because it is near the corner of the magnetic shield which causes {\it e.g.} the X+ coil to be converted into a strong y component.  The red and blue colors are a result of the definitions of positive/negative current in relation to coil in question's orientation and the sensor axis definition.
+
+
 
 \section{Implementation of PI Control Algorithm}\label{sec:pi}
  In my algorithm, the magnetic field is measured using the fluxgates and used to define the setpoints. As will be shown, when the field changes, the error in the field can be translated into an error in current based on inverting Eq.~(\ref{eq:B_coils}). New current values are then calculated that must be fed to the coils completing the PI control loop. 
@@ -153,7 +157,7 @@ where, $I^0_c$ indicates the initial value of current for the set of the coils w
 
 \section{Inversion of Matrix}\label{sec:inv}
 
-This Section details the inversion process of the non-square matrix $\bm{M}$ and issues encountered. It also discusses the solution to inversion which uses regularization by random fluctuations, a strategy pursued previously by other groups. 
+This Section describes in detail the inversion process of the non-square matrix $\bm{M}$ and issues encountered. It also discusses the solution to inversion which uses regularization by random fluctuations, a strategy pursued previously by other groups. 
 
 
 \fig{Images/1s1c3zc1}{width = \textwidth}{The compensation effect on sensor position 3z due to coil $C_x^-$. Vertical axis shows the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the green color indicates $\Delta$ B due to compensation and the red indicates $\Delta$ B without compensation. The red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensor and coils see the Fig.~\ref{fig: coil}.\label{fig:1s1c3zc1} }{The compensation effect on single sensor due to single coil.}
@@ -220,7 +224,7 @@ We have also tested the magnetic compensation effect on two sensor positions due
 % \end{figure}
 
 \FloatBarrier
-The author in Ref.~\cite{bea} her PhD thesis was claimed in Section \textcolor{blue}{7.2.3} of the same study where more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. The Moore--Penrose pseudoinverse \cite{pseudo} or simply pseudoinverse can be used for the inversion. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD) which is a factorization or diagonalization of a matrix. The matrix can be real or complex square matrix or general rectangular matrix. The SVD~\cite{svd2,svd3} of a real matrix $\bm{M}$ with dimension $m \times n$ is 
+The author in Ref.~\cite{bea} in Section \textcolor{blue}{7.2.3} of her PhD thesis claimed that more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $m \times n$ where $m<n$ is 
 \begin{equation}\label{eq:m}
         \bm{M} = \bm{U} \bm{\Sigma} \bm{V^T}
 \end{equation}
@@ -229,11 +233,25 @@ where, $\bm{U}$ and $\bm{V}$ are the orthogonal matrices with dimensions $m \tim
 
 \begin{equation*}
 \bm{\Sigma} = \begin{pmatrix} 
-\Sigma_{11} & 0 \\
-0 & \Sigma_{dd} 
-\end{pmatrix}
+\Sigma_{11} &  &  & 0 \\
+  & . &  &  \\
+  &   & . &  \\
+
+0 &  &  & \Sigma_{nn} \\
+ \end{pmatrix}
 \end{equation*}
-where, $\Sigma_{11},..,\Sigma_{dd}=\text{diag}(\sigma_d)$ with $\Sigma_{11}\gg... \Sigma_{dd}\geq0$ and $d=(1,..,n)$ if $\bm{\Sigma}$ has $m \times n$ dimension and are called singular values of $\bm{M}$  and they are the positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$.
+where, $\Sigma_{11},..,\Sigma_{nn}=\text{diag}(\Sigma)$ with $\Sigma_{11}\gg... \Sigma_{nn}\geq0$ and are called singular values of $\bm{M}$  and they are the positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$.
+
+The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its invert. That is   $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
+\begin{equation}\label{eq:sigma_inv}
+\frac{1}{\bm{\Sigma}} = \begin{pmatrix} 
+\frac{1}{\Sigma_{1}} &  &  & 0 \\
+  & . &  &  \\
+  &   & . &  \\
+
+0 &  &  & \frac{1}{\Sigma_{n}} \\
+ \end{pmatrix}
+\end{equation}
 
 The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}$ and $\bm{V^T}$ and can be written as
 \begin{equation}\label{eq:psMinv}
@@ -241,116 +259,134 @@ The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}
 \end{equation}
 % ${\rm I\!R}$
 
+\fig{Images/6c_U_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{U}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{U}$ is orthonormal eigenvectors of $\bm{M}\bm{M^T}$ in sensors$\times$sensors dimension for 12 sensors signals (nT). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_U}}{Color map of $\bm{U}$.}
 
+\fig{Images/6c_V_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\bm{\Sigma}$}
 
+\fig{Images/6c_Wt_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{V^T}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{V^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils currents (A). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_Vt}}{Color map of $\bm{V^T}$.}
 
-But the matrix is found to be ill-conditioned which implies that it has got a large condition number which measure the change in the output for a small change in input. The condition number of $\bm{M}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
+In earlier Section we have discussed a matrix $\bm{M}$ which is shown in Fig.~\ref{fig:m}. $\bm{M^T}$ is the transpose of that matrix. $\bm{M^T}$ has been decomposed via SVD in $\bm{U}$ , $\bm{\Sigma}$ and $\bm{V^T}$ which are shown in Fig.~\ref{fig:6c_U}, Fig.~\ref{fig:v} and Fig.~\ref{fig:6c_Vt} respectively. The $\bm{\Sigma}$ in Fig.~\ref{fig:v} shows that except diagonal values all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{nn}$ in a decreasing order each having non-negative values. From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
  \begin{equation}\label{eq:cond}
-     cond(\bm{M})=\frac{max(\sigma_1)}{min(\sigma_d)}
+     cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
  \end{equation}
  
+Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
 
-The $\Sigma$ for a test $\bm{M}$ has been shown in Fig.~\ref{fig:v} where as discussed earlier except diagonal ones all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{dd}$ in a decreasing order each having non-negative values. Using the Eq.~\ref{eq:cond}, the condition number of $\bm{M}$=5724/53=108. The minimum condition number of $\bm{M}$ for the prototype is to be 40 and so the $\bm{M^{-1}}$ that calculated using Eq.~\ref{eq:psMinv} is producing unexpected huge currents. 
+Elements of $\bm{\Sigma}$ represent eigenvalues. Since no of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. A large $\sigma_1$ represents a coil mode where a small change in current gives rise to a large change in field. If $\sigma_c<<\sigma_1$ it means that mode corresponding to  $\sigma_c$ requires a much larger current in order to generate the same scale of magnetic field as for the $\sigma_1$ mode. The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field. In Section~\ref{sec:coil_config} we analyzed this effect further in both simulation and experiment. For now, we present the strategy of Ref.~\cite{bea} which we followed initially and it involved regularization.
 
-\fig{Images/v}{width = \textwidth}{Color map of $\Sigma$ for a test $\bm{M}$ found using Python programming language. Horizontal axis indicates the various coils, which are counted using the index $c$. Vertical axis indicates the various sensors, which are counted using the index $s$. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\Sigma$}
+Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
 
-\FloatBarrier
-
-The problem can visualized from Fig.~\ref{fig:m} where for example X-(1) has negligible sensitivity for 3x which means that particular matrix element (in nT/A) is very small. So, the pseudoinverse of $\bm{M}$ using Eq.~\ref{eq:psMinv} will produce very large element (in A/nT) which means that the amount of current will be huge there which will make the prototype unstable. To minimize the effect, the matrix must be regularized which means that all ill-conditioned places must be replaced  by well-conditioned ones.  Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) that's $\Sigma^{-1}_{dd}$ i.e. $\sigma_d^{-1}$ as
-
-\begin{equation}
-    \frac{1}{\sigma_d} \rightarrow \frac{\sigma_d}{\sigma_d^2+\alpha^2} 
-\end{equation}
-which has been further modified by stating $\alpha=10^r$ in the previous study \cite{bea}) as
-\begin{equation}\label{eq:sigma}
-    \frac{1}{\sigma_d} \rightarrow \frac{\sigma_d}{\sigma_d^2+(10^r)^2}
-\end{equation}
-
-So, the Eq.~(\ref{eq:psMinv}) will be modified due to the modified form of Tikhnov regularization as
 \begin{equation}\label{eq:minvR}
-    \bm{M^{-1}}(r) = \bm{V}\begin{pmatrix} 
-\frac{\sigma_1}{\sigma_1^2+(10^r)^2} & 0 \\
-0 & \frac{\sigma_d}{\sigma_d^2+(10^r)^2}
-\end{pmatrix} \bm{U^T}
+    \frac{1}{\sigma_n} \rightarrow \frac{\sigma_n}{\sigma_n^2+\alpha^2} 
 \end{equation}
-where, $r$ is called the regularization parameter and  $r \rightarrow - \infty$ will make Eq.~(\ref{eq:minvR}) same as Eq.~(\ref{eq:psMinv}) which is responsible big current fluctuations as described earlier whereas $r \rightarrow + \infty$ results in $\bm{M^{-1}} \rightarrow 0$ i.e. no control.
+Tikhonov regularization has been further modified by defining $\alpha=10^r$ as in the previous study \cite{bea}) where, $r$ is called the regularization parameter. If  $r \rightarrow - \infty$, Eq.~(\ref{eq:minvR}) becomes the same as Eq.~(\ref{eq:sigma_inv}) hence no regularization whereas $r \rightarrow + \infty$ results in $\bm{M^{-1}} \rightarrow 0$ i.e. no control. Generally, $r$ should be of order $\mathbf{log}(\sigma_{d})$ in order for regularization to have its desired effect of making the diagonal values of $\bm{\Sigma^{-1}}$ more equal. Example : suppose $\sigma_1$=100 and $\sigma_n$=1 and $\alpha$=10.
 
-Generally, $r$ should be within the order of $log(\sigma_{d})$ and the $r$ can be selected using several iterative methods. The obtained $r$ can be directly used in feedback algorithm and PI parameter can be tuned or that can be further changed alongside tuning PI parameters by observing it's effect on current response (see section \ref{sec:r_pi}).
+\begin{equation*}
+    \frac{1}{\sigma_1} \rightarrow \frac{100}{100^2+10^2}=\frac{1}{101} 
+\end{equation*}
+\begin{equation*}
+    \frac{1}{\sigma_n} \rightarrow \frac{1}{1^2+10^2}=\frac{1}{101} 
+\end{equation*}
+Therefore, the singular values become equalized.
+
+The value of $r$ may be selected using several iterative methods. The obtained $r$ can be directly used in feedback algorithm to determine $\bm{M^{-1}}$. Because, $\bm{M^{-1}}$ appears in the definition of the error in current (Eq.~(\ref{eq:del_I})). It has an effect also on the PI parameters. The PI parameters can be tuned in concept with $r$ by observing the effect on current response and this was studied further in Section~\ref{sec:r_pi}.
 
 
 An iterative method has been discussed in  the previous study~\cite{bea} to find $r$. The concept has been applied to the prototype which will be discussed next.
 
-\subsection{Monte Carlo Simulation to Find 'r'}\label{sec:mont}
+% \FloatBarrier
 
-Here, the simulation model of the previous study~\cite{bea} has been reproduced for the prototype to determine which value of $r$ produce optimal solution for compensation. Starting with relating $r$ with current fluctuation and field fluctuation, the section ends with a suitable value of $r$ to minimize both of the fluctuations.
+% \begin{equation}\label{eq:sigma}
+%     \frac{1}{\sigma_d} \rightarrow \frac{\sigma_d}{\sigma_d^2+(10^r)^2}
+% \end{equation}
 
-For the simulation model, a different sets of reasonable random magnetic fields ($B_s^{\text{rand}}$) are generated with center of distribution being 0 and standard deviation 5 nT  based on the horizontal axis of Fig~\ref{fig:hist} at sensor positions specified by the legends in the figure. 
+% So, the Eq.~(\ref{eq:psMinv}) will be modified due to the modified form of Tikhnov regularization as
+% \begin{equation}\label{eq:minvR}
+%     \bm{M^{-1}}(r) = \bm{V}\begin{pmatrix} 
+% \frac{\sigma_1}{\sigma_1^2+(10^r)^2} & 0 \\
+% 0 & \frac{\sigma_d}{\sigma_d^2+(10^r)^2}
+% \end{pmatrix} \bm{U^T}
+% \end{equation}
 
-\FloatBarrier
-As the center of the distribution according to Fig.~\ref{fig:hist} is zero, so using setpoint as zero, according to Eq.~(\ref{eq:del_B}) the drift in the B field will be  
+
+
+% \fig{Images/v}{width = \textwidth}{Color map of $\Sigma$ for a test $\bm{M}$ found using Python programming language. Horizontal axis indicates the various coils, which are counted using the index $c$. Vertical axis indicates the various sensors, which are counted using the index $s$. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\Sigma$}
+
+% \FloatBarrier
+
+% The problem can visualized from Fig.~\ref{fig:m} where for example X-(1) has negligible sensitivity for 3x which means that particular matrix element (in nT/A) is very small. So, the pseudoinverse of $\bm{M}$ using Eq.~\ref{eq:psMinv} will produce very large element (in A/nT) which means that the amount of current will be huge there which will make the prototype unstable. To minimize the effect, the matrix must be regularized which means that all ill-conditioned places must be replaced  by well-conditioned ones.  
+
+
+
+\subsection{Regularization by Random Fluctuation}\label{sec:mont}
+
+The method of a previous study~\cite{bea} was reproduced for my prototype to determine a value of $r$ by study its effect on the ability to cancel random field fluctuations without generating unacceptably large current fluctuations.
+
+For the method, a different sets of reasonable random magnetic fields ($B_s^{\text{rand}}$) are generated according to the normal distribution with a central value of 0 and standard deviation 1.5 nT. As in Ref.~\cite{bea}, the reasonable value for the standard deviation was determined by the scale of the fluctuations seen from second to second by the sensor array. The exact value of the standard deviation will turn out to be unimportant in the way Ref.~\cite{bea} finally deduces $r$ using normalized field and current fluctuations.
+
+Using the setpoint as zero, according to Eq.~(\ref{eq:del_B}) the change in the B field is  
 \begin{equation}\label{eq:del_Bs}
     \Delta B_s^{\text{sim}} = 0 - B_s^{\text{rand}}=-B_s^{\text{rand}}
 \end{equation}
 
-And thus an array of the current error  as function of $r$ due to the drift caused by $\Delta B_s^{\text{sim}}$ will be calculated using the product of regularized pseudoinverse found using Eq.~(\ref{eq:minvR}) and $\Delta B_s^{\text{sim}}$ which is similar to Eq.~(\ref{eq:del_I})
+The array of the current errors  as function of $r$ due to the the change in field $\Delta B_s^{\text{sim}}$ is then calculated using the regularized pseudoinverse using Eq.~(\ref{eq:del_I}) as
 \begin{equation}\label{eq:del_Is}
-    \Delta I_c^{\text{sim}}(r) =\sum_s^{s=1-12} M^{-1}_{cs}(r) \Delta B_s^{\text{sim}}=\sum_s^{s=1-12} M^{-1}_{cs}(r) (-B_s^{\text{rand}})
+    \Delta I_c^{\text{sim}}(r) =\sum_{s=1}^{12} M^{-1}_{cs}(r) \Delta B_s^{\text{sim}}=\sum_{s=1}^{12} M^{-1}_{cs}(r) (-B_s^{\text{rand}})
 \end{equation}
 
-Also the to get the overall response from the array of the current, the root mean square (RMS) of $\Delta I_c^{\text{sim}}(r)$ found using Eq.~(\ref{eq:del_Is}) will be calculated as
+To estimate the overall response from the array of the current, the root mean square (RMS) of $\Delta I_c^{\text{sim}}(r)$ is calculated as
 \begin{equation}\label{eq:delta_Isim_rms}
-     \Delta I_{\text{RMS}}^{\text{sim}}(r)= \sqrt{\sum_c^{c=1-6} \frac{1}{c}(\Delta I_c^{\text{sim}}(r))^2}
+     \Delta I_{\text{RMS}}^{\text{sim}}(r)= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{sim}}(r))^2}
 \end{equation}
-As, $\Delta I_c^{\text{sim}}(r)$ depends on both $r$ and $B_s^{\text{rand}}$, so to see the effect of current on the perturbation, $\Delta I_c^{\text{sim}}(r)$ and thus $ \Delta I_{\text{RMS}}^{\text{sim}}(r)$  has been calculated for different sets of $B_s^{\text{rand}}$ as a function of $r$. In Fig.~\ref{fig:Isim}, $ \Delta I_{\text{RMS}}^{\text{sim}}(r)$ as indicated by vertical axis over $r$ as indicated by horizontal axis has been shown for 30 different sets of $B_s^{\text{rand}}$. The distribution $B_s^{\text{rand}}$ is randomly chosen with center of distribution and standard deviation is discussed earlier. It is noticeable that with increase of $r$, the current fluctuations $\Delta I_c^{\text{simRMS}}$ are vanished as expected according to Eq.~(\ref{eq:minvR}).
 
-\fig{Images/6c_I}{width = \textwidth,height =9.5cm}{The effect of $r$ on the current fluctuations due to 30 different sets of $B_s^{\text{rand}}$ with the distribution described in the text. Horizontal axis represents different valu of $r$ while vertical axis is showing $\Delta I_c^{\text{simRMS}}$ found due to different sets of $B_s^{\text{rand}}$. \label{fig:Isim}}{The effect of $r$ on the current fluctuations.}
+Since, $\Delta I_c^{\text{sim}}(r)$ depends on both $r$ and $B_s^{\text{rand}}$, $ \Delta I_{\text{RMS}}^{\text{sim}}(r)$  is calculated as a function of $r$ for different sets of $B_s^{\text{rand}}$ (Fig.~\ref{fig:Isim}). It is noticeable that with the increase of $r$, the current fluctuations $\Delta I_{\text{RMS}}^{\text{sim}}$ vanish as expected.
+
+
+% $ \Delta I_{\text{RMS}}^{\text{sim}}(r)$ as indicated by vertical axis over $r$ as indicated by horizontal axis has been shown for 30 different sets of $B_s^{\text{rand}}$. The distribution $B_s^{\text{rand}}$ is randomly chosen with center of distribution and standard deviation is discussed earlier. 
+
+\fig{Images/6c_I}{width = \textwidth,height =9.5cm}{The effect of $r$ on the coil currents for 30 different sets of $B_s^{\text{rand}}$ generated according to the normal distribution with a central value of 0 and standard deviation 1.5 nT. The horizontal axis represents $r$ while the vertical axis shows $\Delta I_{\text{RMS}}^{\text{sim}}$. \label{fig:Isim}}{The effect of $r$ on the coil currents.}
 
 \FloatBarrier
-The field produced by $ \Delta I_c^{\text{sim}}$ can be calculated using Eq.~(\ref{eq:B_coils}). Thus the total field will be the superposition of $B_s^{\text{rand}}$ and the field produced by $ \Delta I_c^{\text{sim}}(r)$ and is given by
+The field produced by $ \Delta I_c^{\text{sim}}$ can be calculated using Eq.~(\ref{eq:B_coils}). Thus the total field at each sensor $s$ will be the superposition of $B_s^{\text{rand}}$ and the response produced by $ \Delta I_c^{\text{sim}}(r)$ 
 \begin{equation}\label{eq:B_coils-sim}
-    B_s^{\text{sim}}(r) =\sum_c^{c=1-6} M_{sc} \Delta I_c^{\text{sim}}(r) + B_s^{\text{rand}}
+    B_s^{\text{sim}}(r) =\sum_{c=1}^6 M_{sc} \Delta I_c^{\text{sim}}(r) + B_s^{\text{rand}}
 \end{equation}
-
-For a fully compensated system, the field produced by $ \Delta I_c^{\text{sim}}$ will be equal to $- B_s^{\text{rand}}$ which in turns make the $B_s^{\text{sim}}(r)$ according to Eq.~(\ref{eq:B_coils-sim}) as zero as it should be because the setpoint has been considered to be zero. Now, to see the effect of $ \Delta I_c^{\text{sim}}(r)$ on the $B_s^{\text{rand}}$ i.e. how much compensation has been possible due to the field produced by $ \Delta I_c^{\text{sim}}(r)$,  the ratio of RMS of $B_s^{\text{sim}}(r)$ to the RMS of $B_s^{\text{rand}}$ has been calculated as
+For a perfectly compensated system, the field produced by $ \Delta I_c^{\text{sim}}$ would equal $- B_s^{\text{rand}}$ which in turn would make the $B_s^{\text{sim}}(r)$ in Eq.~(\ref{eq:B_coils-sim}) identically zero. In practise, this is rarely the case. To quantify the effectiveness of the compensation,  the ratio of RMS of $B_s^{\text{sim}}(r)$ to the RMS of $B_s^{\text{rand}}$ is calculated as
 \begin{equation}\label{eq:fluc}
-    F(r)=\frac{\sqrt{\sum_s \frac{1}{s}(B_s^{\text{sim}}(r))^2}}{\sqrt{\sum_s \frac{1}{s}(B_s^{\text{rand}}(r))^2}}
+    F(r)=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_s^{\text{sim}}(r))^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_s^{\text{rand}}(r))^2}}
 \end{equation}
-So, for a fully compensated system as discussed earlier, the numerator of Eq.~(\ref{eq:fluc}) will be zero which makes $F(r)$ to be zero. So, for a fully compensated system $F(r)$ should be zero. The effect of $r$ on the compensation due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ to counteract $B_s^{\text{rand}}$ is shown in Fig.~\ref{fig:fluc-sim} for same sets of $B_s^{\text{rand}}$ as stated earlier. It is seen that with the increase of $r$, the field produced due to $\Delta I_c^{\text{sim}}$ to compensate $B_s^{\text{rand}}$  are increasing i.e. more field fluctuations. It is also noticeable that the systems can not be fully compensated due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ as $F(r)$ never goes to zero. The lowest $F(r)$ goes to 0.45. That means the highest compensation due to the field produced by  $\Delta I_c^{\text{sim}}$ to counteract $B_s^{\text{rand}}$ is (1-0.45$\times$100)$\%=$55$\%$.
+The function $F(r)$ would be zero for a perfectly compensated system and unity for an uncompensated system. In Ref.~\cite{bea}, $F(r)$ is called the "remaining noise". The values of $F(r)$ is shown in Fig.~\ref{fig:fluc-sim} for same sets of $B_s^{\text{rand}}$ used in Fig.~\ref{fig:Isim}. It is seen that with the increase of $r$, the field produced due to $\Delta I_c^{\text{sim}}$ to compensate $B_s^{\text{rand}}$  are increasing i.e. more field fluctuations. It is also noticeable that the system can not be fully compensated due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ as $F(r)$ never goes to zero. The lowest $F(r)$ is 0.45, indicating the system will not be terribly successful at correcting random fluctuations. We think this is mainly due to the purposely limited design used for this prototype, which was designed instead to focus on issues in multi-dimensional PI control.
 
 \fig{Images/6c_f}{width = \textwidth,height =9.5cm}{The effect of $r$ on horizontal axis on the compensation due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ to counteract $B_s^{\text{rand}}$ indicated by $F(r)$ on vertical axis. The different curves indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
 
 \FloatBarrier
-It is seen from the Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with the increase of $r$, current fluctuations are decreasing but field fluctuations are increasing respectively. So, a compromise between them has to be determined to figure out the value of $r$ which will optimally response for less field and current fluctuations.  That is, small current fluctuations ($r \rightarrow + \infty$) has to be traded off against small magnetic field fluctuations ($r \rightarrow - \infty$). For that, first $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized as
+It is seen from the Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with the increase of $r$, current fluctuations are decreasing but field fluctuations are increasing step. Ref.~\cite{bea} suggested a compromise between them be struck to determine the value of $r$, $\it i.e.$ that reducing current fluctuations ($r \rightarrow + \infty$) be traded off against reducing magnetic field fluctuations ($r \rightarrow - \infty$). to decide the value of $r$, $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized as
 
 \begin{equation}\label{eq:Inorm}
-    \overline{\Delta I_{\text{RMS}}^{\text{sim}}}(r)=\frac{\Delta I_{\text{RMS}}^{\text{sim}}(r)}{\Delta I_{\text{RMS}}^{\text{sim}}(r\rightarrow - \infty)}
+    \overline{\Delta I_{\text{RMS}}^{\text{sim}}}(r)=\frac{\Delta I_{\text{RMS}}^{\text{sim}}(r)}{\Delta I_{\text{RMS}}^{\text{sim}}(r\rightarrow - \infty)} \;\mathbf{,\;and}
 \end{equation}
 \begin{equation}\label{eq:flucNorm}
     \overline{F}(r)=\frac{F(r)- F(r\rightarrow - \infty)}{F(r\rightarrow \infty)- F(r\rightarrow - \infty)}
 \end{equation}
 
-Now, the value of $r$ for which the normalized value of $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$  as found using Eq.~(\ref{eq:Inorm}) and Eq.~(\ref{eq:flucNorm}) respectively produce $0.5$ has been stored for for same previously stated set of $B_s^{\text{rand}}$ and the stored $r$ are then averaged to finally get the optimized $r$. 
-
-The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ are shown in Fig.~\ref{fig:I-fluc} where with increase $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier. The optimized $r$ for the process described above has been found to be 2.87.
-
-\fig{Images/6c_I-fluc2}{width = \textwidth,height=9cm}{The effect of $r$ indicated by horizonatl axis on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ indicated by left vertical axis and $\overline{F}$ indicated by right vertical. The different curves on both vertical axes indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. The red lin indicates the 0.5 level in the figure.  \label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
+\fig{Images/6c_I-fluc2}{width = \textwidth,height=9cm}{The effect of $r$ indicated by horizontal axis on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ indicated by left vertical axis and $\overline{F}$ indicated by right vertical. The different curves on both vertical axes indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. The red line indicates the 0.5 level in the figure.  \label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
 
 \FloatBarrier
+The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ is shown in Fig.~\ref{fig:I-fluc}. With an increase in $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier.
+Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($>>$30). The optimized $r$ is thus found to be 2.87.
 
-So, the simulation model to find $r$ gives the insight about the effect of $r$ on current and filed fluctuations and also produce a suitable value of $r$ to compromised both fluctuations. Agter having $r$, its time to tune the PI parameter to get the current as given in Eq.~(\ref{eq:I}) which will be discussed next.
+The calculation to find $r$ gives insight about the effect of regularization on current and field fluctuations, resulting in a compromise that adequately reduces both. With $r$ in hand, $\bm{M^{-1}}$ may be determined and the current error  ?? which is used in the PI algorithm.
 
-\section{Tuning of PI Parameter}\label{sec:tune}
-This section is about tuning the Proportional (P) gain i.e. $k_c^p$ and Integral (I) reset i.e. $k_c^i$ term which are needed to calculate the required current as in Eq.~(\ref{eq:I}) to compensate the drift in magnetic fields producing due to the fluxgate sensors at various positions within the prototype.
+\section{Tuning of PI Parameters}\label{sec:tune}
+This section describes the tuning of the proportional (P) gain $k_c^p$ and integral (I) reset $k_c^i$ terms appearing in Eq.~(\ref{eq:I}) to compensate the changes in magnetic fields measured by the fluxgate sensors.
 
-
-
-According to the type of system and the way the control loop for a particular system has been chosen, the P and I can be tuned using various methods~\cite{tuning}. For the prototype, as we have a closed loop system with desired setpoint to meet, the best possible tuning method is Ziegler-Nichols closed tuning method~\cite{tuning_ZN}. Here, the tuning will be described by applying to the prototype. So, the variable in our case are the currents in all the six coils that generate the field to counter balance the drift in magnetic signals. So, for tuning, first the I term or $k_c^i$ value in Eq.~(\ref{eq:I}) is set to zero and gradually increases the P term or $k_c^p$ value until the currents in the different coils start oscillating. The $k_c^p$ value for which the current in the coils start oscillating is noted as ultimate gain ($G_{u}$) and the period for that is noted as ultimate oscillation period ($T_u$). Now the the value of $k_c^p$ and $k_c^i$ are chosen based on the PI on the Table~\ref{table:tuning} where the formula to find them are given in terms of only P controller and PI controller~\cite{tuning_formula}. 
+According to the type of system and the way the control loop for a particular system has been chosen, the P and I can be tuned using various methods~\cite{tuning}. A possible tuning method is Ziegler-Nichols closed tuning method~\cite{tuning_ZN}. We usually used this method as an initial guess for the PI parameters. Here, the tuning will be described in its application to our prototype. The control variables in our case are the currents in the coils. The errors are also currents, those deduced from matrix inversion and magnetic sensors deviations from setpoints. In Ziegler-Nichols, first, $k_c^i$ is set to zero and $k_c^p$ is increased until the currents in the different coils start oscillating. The $k_c^p$ value for which the current in the coils start oscillating is noted as the ultimate gain $G_{u}$ and the period of the oscillation is noted as ultimate oscillation period $T_u$. Now the the value of $k_c^p$ and $k_c^i$ are chosen based on the PI row of Table~\ref{table:tuning} modified from the Table~\textcolor{blue}{4} in Ref.~\cite{tuning_formula} where integral time $T_i=T_u/1.2$ is given. 
 
 \begin{table} [htb!]
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
-        Controller & Gain (P or $k_c^p$ ) & Reset (I or $k_c^i$)\\
+        Controller & Gain ($k_c^p$) & Reset ($k_c^i$)\\
         \hline\hline
          P & 0.5 $G_u$ & 0 \\ 
         \hline
@@ -358,30 +394,30 @@ According to the type of system and the way the control loop for a particular sy
         \hline
     \end{tabular}
     % \vspace{4mm}
-    \caption{Ziegler-Nichols tuning method for P and PI controller. }\label{table:tuning}
+    \caption{Ziegler-Nichols tuning method for P and PI controllers.}\label{table:tuning}
 \end{table}
 
 \FloatBarrier
-Here, the formula for finding $k_c^i$ has been derived from the original formula which is $T_i=T_u/1.2$ with $k_c^i=(k_c^p/T_i)\Delta t$ and so
+In Ref.~\cite{tuning_formula}, it is also mentioned that $k_c^i=(k_c^p/T_i)$ which for our case will be $k_c^i=(k_c^p/T_i)\Delta t$, where, $\Delta t$ is the time difference between two consecutive feedback loop. So, $k_c^i$ will be
 \begin{equation}
     k_c^i=\left(\frac{k_c^p}{T_u/1.2}\right)\Delta t=\left(\frac{1.2\times0.45 G_u}{T_u}\right)\Delta t=\left(\frac{0.54 G_u}{T_u}\right)\Delta t
 \end{equation}
-where, $\Delta t$ is the time difference between two consecutive feedback loop.
 
-\fig{Images/p134c1}{width = \textwidth}{The effect of $r$ indicated by horizonatl axis on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ indicated by left vertical axis and $\overline{F}$ indicated by right vertical. The different curves on both vertical axes indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. The red lin indicates the 0.5 level in the figure.  \label{fig:I-fluc2}}{The effect of $r$ on normalized current and remaining fluctuations.}
-
-
-\doublefig{Images/p97}{width =\textwidth,height=8cm}{at $k_c^p$=0.97. \label{fig:tuningNmod}}{Images/p97mod}{width = \textwidth,height=8cm}{$k_c^p$=0.97 with zoomed $C_y^-$.\label{fig:tuningMod}}{{The current behaviour in all six coils with $k_c^p$ =0.97 and $k_c^i$=0. Vertical axes represent the currents in all six coils having different colors. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. Both the figures are same except the current in $C_z^+$ coil has been zoomed in left figure.  } \label{fig:tuning}}{Tuning by observing coil currents}
-
-
-The Fig.~\ref{fig:tuning} is showing the tuning for the prototype. At $k_c^p$=0.97 and $k_c^i$=0, the current in the coils are start oscillating to an extent as shown in Fig.~\ref{fig:tuningNmod}. So, the $k_c^p$=0.97 is the ultimate gain $G_u$. Now, for that $G_u$ the ultimate period $T_u$ has to be obtained which is done by zooming the current in coil $C_y^-$ as shown in Fig.~\ref{fig:tuningMod} and is found to be $T_u$=0.3s. Now according to Table~\ref{table:tuning}
+\fig{Images/p134c1}{width = \textwidth}{Zoomed current behaviour in coil $C_x^+$ with $k_c^p$ =1.34 and $k_c^i$=0. Vertical axis represent the currents in coil $C_x^+$ with initial current being 100 mA. For position of the coil see Fig.~\ref{fig: coil}. \label{fig:tuning}}{Zoomed current behaviour in coil $C_x^+$.}
+% in response to the perturbation coils
+\FloatBarrier
+Fig.~\ref{fig:tuning} shows the first step in the tuning process for the prototype. At $k_c^p$=1.34 and $k_c^i$=0, the current in the coils oscillates allowing us to identify $G_u$=1.34. For simplicity, zoomed version of the current in coil $C_x^+$ for $G_u$=1.34 is shown only. The ultimate period $T_u$ is obtained to be $T_u$=0.287 s. Now, according to Table~\ref{table:tuning}, the proportional gain and integral reset are
 
 \begin{equation}
-    k_c^p=0.45\times1.34=0.60\;\;\text{and}\;\; k_c^i=0.(54\times1.34)8\times0.146/0.287=0.37
+    k_c^p=0.45\times1.34=0.60\;\;\text{and}\;\; k_c^i=\left(\frac{0.54 \times1.34}{0.287}\right)\times0.146=0.37
 \end{equation}
+They can be further tuned for the individual coil currents if necessary. In general, we treated them as free parameters and studied the impact of changing them on system response. More about PI tuning will be discussed in the next chapter with compensation results. Next, a simulation model will be discussed to quantify the prototype.
 
 
-They can be further tuned for the individual coil currents according to necessity. More about PI tuning will be discussed in the next chapter with compensation results. Next, a simulation model will be discussed to quantify the prototype.
+
+% \doublefig{Images/p97}{width =\textwidth,height=8cm}{at $k_c^p$=0.97. \label{fig:tuningNmod}}{Images/p97mod}{width = \textwidth,height=8cm}{$k_c^p$=0.97 with zoomed $C_y^-$.\label{fig:tuningMod}}{{The current behaviour in all six coils with $k_c^p$ =0.97 and $k_c^i$=0. Vertical axes represent the currents in all six coils having different colors. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. Both the figures are same except the current in $C_z^+$ coil has been zoomed in left figure.  } \label{fig:tuning}}{Tuning by observing coil currents}
+
+
 
 % Moreover, to double check, the experimentally obtained $\bm{M}$ has been compared with a simulation done using finite element analysis (FEA) via Opera 3D software as shown in Fig.\ref{fig:Mdiff}.
 
@@ -393,158 +429,39 @@ They can be further tuned for the individual coil currents according to necessit
 
 % Fig.\ref{fig:bt} shows the compensation over time with applied perturbation. \newpage
 \FloatBarrier
-\section{Simulation of Prototype Integrating Feedback Algorithm}
 
-To show the experimental results make sense, a simulation has been. This section starts with describing the simulation software for making the experimental setup geometry and extracting the magnetic field values in that geometry and then move forward to all the simulations made to run a fully functional PI simulation. For, data analysis, sorting  and modifying the data and also running the PI control algorithm the Python programming language has been used alongside the simulation software. The complete simulation is made of three different simulations. 
+
+
+
+\section{Quantitative Measures of Magnetic Compensation Performance\label{sec:metrics}}
+For every system, there are some metrics, which quantitatively determine the system's performance. The success of the prototype has been claimed similarly. Mainly, four areas have been looked into as derived from the previous studies \cite{bea,lins,rawlik}. They are
 
 \begin{itemize}
-    \item Simulation of Matrix M
-    \item Simulation of Magnetic Field Distribution
-    \item Simulation of PI Control
+    \item Condition Number
+    \item Reduction of Magnetic Field Fluctuation
+    \item PI Behavior to Stimulus
+    \item Allan Deviations and Shielding Factor
+
 \end{itemize}
-In the following  all of the above simulations  will be discussed in detail starting with the simulation software itself. The section ends with comparing the simulation results with the experimental ones.
+\subsection{Condition Number}
+The condition number of a matrix and its relation to the regularization parameter have already been discussed in Section~\ref{sec:inv}. Recall that the condition number of a matrix is $\geq$1, where low condition number indicates a well-conditioned matrix while large indicates a ill-conditioned matrix.  The condition number can be influenced by the dimension of a matrix. But, the change in condition number in case of  well-conditioned matrix is incomparably smaller than that in a ill-conditioned matrix~\cite{cond_m_size}. However, there is no upper bound that indicates the limit of well-conditioned matrix. So, there is no definite answer about how small is considered as well-conditioned matrix. For the active compensation system, the goal is to have matrix condition number as close to 1 as possible so that compensating a certain scale of change in magnetic field requires less change in current and also the compensation system does not loose its effect on all the sensors while making the condition number less. The results with well and ill-conditioned matrix are discussed in Chapter~\ref{ch:quantification}.
 
-\subsection{About Simulation Software}
-Here, the simulation software has been discussed in detail. Mainly, the focus is on the the module of the software that we have used .
+% The main aim is to make the prototype well-conditioned by determining the best compromise between current and field fluctuations which will lead us to the optimized $r$. It has been also explored to determine whether the optimized $r$ is giving the best result or not. If not, additional parameters have been tuned to get the best possible result.
 
-OPERA 3D Finite Element Analysis~(FEA)~\cite{opera} simulation software has been used for making the geometry of the prototype and extracting the magnetic field values along with applying current in the coils including the perturbation one. OPERA is a multi-physics software package which allows coupled simulations including the ability to couple a Static Module simulation with a thermal simulation or a stress simulation, for example to calculate the stress due to electromagnetic forces. We have used the Opera Static Electromagnetics Module which computes magnetostatic and electrostatic fields or direct current (DC) flow in three dimensions. The module solves Maxwell$'$s equations for the static case in a discretized model using FEA. The module automatically switches to the part containing magnetic spruces in case of magnetostatics. In this module, the properties of the magnetic materials can be specified as required i.e. linear, non-linear, isotropic, anisotropic, laminated or permanent magnet. For calculating magnetic fields from coils, the module uses Biot-Savart integral equation. To calculate the potential at each node of the mesh, OPERA uses an iterative solution technique which is memory-efficient and computationally fast.
+\subsection{Reduction of Magnetic Field Fluctuation}
 
-In the upcoming Sections, the geometry that has been built will be discussed along with all the steps done to finally make a PI control simulation
-
-
-\subsection{Experimental Setup in OPERA 3D FEA}
-
-Here, the process to build the prototype geometry in the OPERA has been discussed both with outermost layer of passive shielding and without the shield.
-
-In Section~\ref{sec:shield}, the mu-metal shields with the dimension of each of the shield layer have been discussed. Using those information the shield geometry has first been written in a file format known as 'comi' file which acts as command language to run the OPERA FEA simulation software. And then racetracks have been used to draw the coils round the shield including the perturbation one and the drawing command has also been written in the same 'comi' file. The coils properties have been taken from Section~\ref{sec:cube} where the dimension of the coils including the perturbation coil have been discussed. Another 'comi' file has been written where the mu-metal information has been ignored. The two 'comi' files while running individually in OPERA produce prototype geometry which has been shown with outermost passive shielding layer in Fig. \ref{fig:shield_opera} and that without any passive shielding layer in Fig. \ref{fig:noShield_opera} respectively. The dots in Fig. \ref{fig:noShield_opera} represents some fluxgate positions which can be anything with the labelling is discussed in Table~\ref{table:index}.
-
-\doublefig{Images/shield}{width =\textwidth,height =8cm}{with passive shielding layers. \label{fig:shield_opera}}{Images/noShield}{width = \textwidth,height =8cm}{without outermost passive shielding layer.\label{fig:noShield_opera}}{{Prototype setup in OPERA simulation software with outermost passive shielding layer (left)  and without any passive shielding layer (right). The coil in the far side in both of the figures is the perturbation coil. The shield dimensions and properties are given in Section~\ref{sec:shield}  and that of coils are given in Section~\ref{sec:cube}. The direction of each of the three axis has been shown in the right figure.} \label{fig:opera_setup}}{Prototype setup in OPERA simulation software.}
-
-\FloatBarrier
-
-After getting the prototype geometry in OPERA, the next is to discuss the simulation made to calculate the matrix elements and thus produce the matrix $\bm{M}$.
-
-\subsection{Simulation of Matrix M}\label{sec:mSim}
-
-Here, matrix elements $M_{sc}$ that are measured in Section~\ref{sec:m} to produce $\bm{M}$ will be reproduced in this simulation with exactly the same location of the sensor positions and coils. 
-
- First, a 'comi' file is written where the magnetic field contribution due to environment is set to zero as  matrix elements $M_{sc}$ relate the coils current to the field produced by the coils current (see Eq.~(\ref{eq:B_coils})). Now as matrix elements $M_{sc}$ are in the unit of nT/A, in the same 'comi' file current for the all the six coils have set to 1A which makes the Eq.~(\ref{eq:B_coils}) as
-
-\begin{equation}\label{eq:B_coils_1A}
-    B_s(\text{coils})=\sum_c^{c=1-6} M_{sc}
-\end{equation}
-where, $n$=1.
-
-Now the 'comi' file for the above setup will interact with the 'comi' file of the prototype geometry and then by using the solver of OPERA, $B_s(\text{coils})$ i.e. $M_{sc}$ elements will be calculated.  The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the co-ordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined. For the comparison with the experimental $\bm{M}(\text{exp})$, the simulation $\bm{M}(\text{sim})$ has been made by choosing co-ordinates of the point as same as the sensor positions in the experiment and then the absolute differences of the  $M_{sc}$ elements ( $M_{\text{diff}}^{\text{abs}}$ ) of them are calculated as
-
-\begin{equation}
-    M_{\text{diff}}^{\text{abs}}=\frac{\text{abs}(M_{sc}^{\text{abs}}(\text{exp})-M_{sc}^{\text{abs}}(\text{sim}))}{1000}
-\end{equation}
-where, $M_{sc}^{\text{abs}}(\text{exp})$ and $M_{sc}^{\text{abs}}(\text{sim})$ indicate the absolute values of $M_{sc}$ elements both in experiment and simulation respectively which are in nT/A. For better visualization the differences have been divided by 1000 to get $M_{\text{diff}}^{\text{abs}}$ in $\mu$T/A. 
-% And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the co-ordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
-% \fig{Images/noShield}{width =\textwidth,height=14 cm}{Prototype setup in OPERA simulation software without passive shielding layers. \label{fig:noShield_opera}}
-The comparison in terms of $M_{\text{diff}}^{\text{abs}}$ has been shown in Fig. \ref{fig:Mdiff}. It is seen that most of the $M_{\text{diff}}^{\text{abs}}$ differences are very small that means the simulation results match the experimental one. It is also noticeable that in some places, the $M_{\text{diff}}^{\text{abs}}$ are around 1 $\mu$T/A difference which is normal as its not possible to exactly pinpoint the locations both in experiment and simulation and also the simulation runs in ideal conditions where the experiment suffers from the condition of its surrounding. But overall the result is quite satisfactory.
-
-\fig{Images/Mdiff_37}{width = \textwidth}{The absolute differences between the  $M_{sc}$ elements experiment with that of simulation in $\mu$T/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$.  Red elements indicate positive values while blue elements indicate near zero values. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
-
-\FloatBarrier
-So, we have made simulation which can produce $M_{sc}$ elements for any number of the sensors placed in the prototype geometry. This will be a huge tool for the future students who are limited by sensor position and placing them correctly in their system to study in detail about the effect of $\bm{M}$ for any set of sensors.
+Active magnetic field compensation come into play in the first place to make the surrounding magnetic fluctuations as small as possible. So, prototype response for magnetic fluctuations has been studied in terms of its capabilities as reduction or amplification. We have already shown in Fig.~\ref{fig:fluc-sim} that the lowest remaining fluctuations due to several random fluctuations is 0.45. Ideally, the remaining fluctuations should be zero. The system is completely unsuccessful if the remaining fluctuation is found to be 1. Our goal for the prototype is to get remaining fluctuation at least 0.5.
 
 
-\subsection{Simulation of Magnetic Field Distribution}\label{sec:pSim}
-
-We have already got the prototype geometry  from the above discussion. Here, the magnetic field distribution without any current in the coils that is $B_s(\text{setpoint})$ and due to the current in the perturbation coil that is $B_s(\text{measure})$ will be determined. From those the drift in the signal will be determined using Eq.~(\ref{eq:del_B}) and lastly how the perturbation affects the current in all six coil sides will be discussed. 
-
-\subsubsection{Simulation of B (setpoint)}
- 
-Here, the magnetic field distribution without any current in the coils that is $B_s(\text{setpoint})$ will be determined by simulating the prototype in OPERA.
-
-First, a 'comi' file is written with setting the currents in all the coils including the perturbation one to zero. In this case, the magnetic field values of the environment surrounding the prototype are set according to Table~\ref{table:Benvironment}. Then the 'comi' file interact with the 'comi' file of the prototype geometry to run combinely in OPERA for simulation. After finishing the simulation the volume extraction 'comi' file will be run to export the magnetic field values of the whole prototype geometry into a 'csv' file. Finally, the data on that 'csv' file is cleaned, modified and the magnetic field values within the prototype are generated by providing the co-ordinates of the specified positions via the Python programming language which are act as $B_s(\text{setpoint})$.
-
-\subsubsection{Simulation of B (measure)}
-
-Here, the magnetic field distribution for current in the perturbation coil that is $B_s(\text{measure})$ will be determined by simulating the prototype in OPERA.
-
-
-To simulate $B_s(\text{measure})$ for a particular perturbation simialr steps have been taken as above except in this case, the current in the perturbation coil has been set to 770 mA. The reason of choosing 770 mA current in the perturbation coil is that in the experiment, 10 mA current has been provided to the perturbation coil with 77 no of turns. So, with this setting again a 'comi' file has been made which interacts with the 'comi' file of the prototype geometry to run combinely in OPERA for simulation. After finishing the simulation the volume extraction 'comi' file will be run to export the magnetic field values of the whole prototype geometry into a 'csv' file. Finally, the data on that 'csv' file is cleaned, modified and the magnetic field values within the prototype are generated by providing the co-ordinates of the specified positions via the Python programming language which are act as $B_s(\text{measure})$.
-
-
-
-For comparing the simulation result with experimental one, the effect of the perturbation has been found in terms of change in the coil currents in all six coils both in simulation and experiment. For the simulation, in the above, $B_s(\text{setpoint})$ and $B_s(\text{measure})$ have been determined by choosing co-ordinates of the points as same as the sensor positions in the experiment form which the drift in the signal i.e. $\Delta B_s$ have been determined using Eq.~(\ref{eq:del_B}). Finally, the change in the coils current i.e. the errors in the coils have been determined by multiplying $\Delta B_s$ with regularized pseudo-inverse of $\bm{M(\text{sim})}$ obtained from Section~\ref{sec:mSim} (see Eq.~(\ref{eq:del_I}) and Section~\ref{sec:inv}). For experiment the drifts in the fluxgate signals are determined by applying 10 mA in the perturbation  coil and then find $\Delta B_s$ using Eq.~(\ref{eq:del_B}) and eventually find the change in coil currents in the same way as done for the simulation. The change in current in all six coil sides found due to experiment and simulation are given in Table~\ref{table:currentChange} where the simulation results are quite similar to the experimental ones for all six coils sides.
-
-\begin{table} [htb!]
-    \centering
-    \begin{tabular} { |c|c|c|c|c|c|} 
-        \hline
-        Coils & \makecell{Chage in Current (mA)\\Experiment} & \makecell{Chage in Current (mA)\\Simulation}\\
-        \hline\hline
-        $C_x^-$ & -26 & -32 \\ 
-        \hline
-        $C_x^+$ & 22 & 20 \\
-        \hline
-        $C_y^-$ & -30 & -24 \\
-        \hline
-        $C_y^+$ & 24 & 17 \\
-        \hline
-        $C_z^-$ & -14 & -13 \\
-        \hline
-        $C_z^+$ & 54 & 46 \\
-        \hline
-
-    \end{tabular}
-    % \vspace{4mm}
-    \caption{Comparison of change in current in different coil sides at the time of applying perturbation both in experiment and simulation.}\label{table:currentChange}
-\end{table}
-
-\FloatBarrier
-In the above, simulation has been made via OPERA to find $B_s(\text{setpoint})$ and $B_s(\text{measure})$. For the purpose of comparison using those values the change in current in all six coil sides have been found and matched with experimental results. In the upcoming Section the results obtained due to various simulation will be used to make a fully functional PI simualtion.
-% The values obtained due to this have been compared with the values due to experimental setup and the results are similar as shown in Fig. \ref{fig:noShield_cSim}.
-
-% \fig{Images/cSim}{width =\textwidth, height=14cm}{Comparison of change in current in different Coil sides at the time of applying perturbation both in experiment and simulation. \label{fig:noShield_cSim}}
-
-
-\subsection{PI Simulation}
-Here, the simulation results from the above discussed Sections will be integrated to a new simulation to run PI control algorithm in time.
-
-From the previous Sections of the simulation, there are already values of $B_s(\text{setpoint})$, $B_s(\text{measure})$ and $\bm{M(\text{sim})}$ which will give the errors following the Eq.~(\ref{eq:del_B}), concept in Section~\ref{sec:inv} and Eq.~(\ref{eq:del_I}). Then, the value of $k_c^p$ and $k_c^i$ has been obatined by following the concept of PI tuning as discussed in Section~\ref{sec:tune}. After getting the tuned value of $k_c^p$ and $k_c^i$, the new current that should be fed to the coils for compensating the magnetic field drift is calculated using Eq.~(\ref{eq:I}). The same process have been repeated for a time duration. Thus, a PI simulation in time has been made. 
-
-The magnetic field compensation due to PI feedback loop has been shown in terms of experiment in Fig.~\ref{fig:pi_exp_all} and that of simulation in Fig.~\ref{fig:pi_sim_all}, where in the top rows all the reds indicate the compensation results while the colors represent the uncompensated magnetic fields in $x$, $y$ and $z$ axis respectively and the bottom row with different colors  indicates only the compensated magnetic fields in $x$, $y$ and $z$ axis respectively. The uncompensated magnetic field is the magnetic field without the compensation effect and predicted by
+\subsection{PI Behavior to Stimulus}
+Tuning is one of the main factor of PI control feedback algorithm. After going through all the steps, it needs to have a suitable value of PI parameters which can be obtained by tuning the prototype as discussed in section \ref{sec:tune}. Moreover, PI behavior has been also monitored for step response in the perturb electromagnet coil. As the main concern is about the experiment which will be carried inside the passive shielding, the response has been specially studied on the central sensors. Some of the responses have been shown in Fig. \ref{fig:bt_mod}. It is seen that without the compensation system (red colors) there are $\sim$+20 nT step responses in  1x and 1y sensor positions and $\sim$-30 nT step responses in 1z, 8x and 8y sensor positions. The magnetic field without the compensation effect i.e. uncompensated magnetic field is predicted by
 \begin{equation}\label{eq:Buncomp}
-    B_s^n(\text{uncompensated})=B_s^n(\text{measured})- B_s^n(\text{coils})
+     B_s^n(\text{uncompensated})=B_s^n(\text{measured})- B_s^n(\text{coils})
 \end{equation}
-where, $B_s^n(\text{measured})$ is the actual measurement from coming the fluxgate sensors in experiment or determined using simulation (see Section~\ref{sec:pSim}) with $n$=(1,...N) is the no of measurements taken and $B_s^n(coils)$ is determined using Eq.~(\ref{eq:B_coils}). The results from experiment and simulation are quite simialr.
+where, $B_s^n(\text{measured})$ is the actual measurement from coming the fluxgate sensors with $n$=(1,...N) is the no of measurements taken and $B_s^n(coils)$ is determined using Eq.~(\ref{eq:B_coils}). The active compensation can fully eliminate the step response in 1x sensor position and to some levels in other positions indicated by blue, green and cyan colors. Moreover, the last one named 'center-Z' predicts the response in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of step response level. We are considering the good results if the system response time is fastest without any overshoot and also reduces the step response levels as much as possible. The results are considered bad if the there is very slow response of the system.
 
+\fig{Images/bt-mod}{width =\textwidth,height=10cm}{Magnetic field reductions from some of the sensor positions closer to the perturbation coil. For positions of the sensors please see Fig.~\ref{fig: coil}. Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:bt_mod}}{Magnetic field reductions from some of the sensor positions.}
 \FloatBarrier
-\doublefig{Images/pi_exp_all}{width =\textwidth, height=10cm}{Experiment\label{fig:pi_exp_all}}{Images/pi_sim_all}{width = \textwidth,height=10cm}{Simulation\label{fig:pi_sim_all}}{{PI active magnetic field compensation results by both Experiment (a) and Simulation (b). Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. } \label{fig:pi_ExpSim_all}}{PI active magnetic field compensation results by both experiment and simulation.}
-
-\FloatBarrier
-
-
-
-
-% Again, the same result has been shown by separating $x$, $y$ and $z$ respectively in Fig. \ref{fig:pi_exp} obtained by experiment and in Fig. \ref{fig:pi_sim} due to simulation.
-
-% \fig{Images/pi_exp}{width =\textwidth,height=14cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Experiment. \label{fig:pi_exp}}
-
-% \fig{Images/pi_sim}{width =\textwidth,height=14cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Simulation. \label{fig:pi_sim}}
-
-
-Simulation of a certain system integrating feedback algorithm is a unique work that has not been still published in any thesis related to active compensation.
-
-\section{Metrics\label{sec:metrics}}
-For every system, there are some metrics, based upon whom the system will be justified. The success of the prototype has been claimed similarly. Mainly, four areas have been looked into as derived from the previous studies \cite{bea,lins,rawlik}. They are discussed in the following subsections.
-
-\subsection{Condition Number and Regularization Parameter}
-The condition number of a matrix and its relation to the regularization parameter has already been discussed in Section~\ref{sec:inv}. The main aim is to make the prototype well-conditioned by determining the best compromise between current and field fluctuations which will lead us to the optimized $r$. It has been also explored to determine whether the optimized $r$ is giving the best result or not. If not, additional parameters have been tuned to get the best possible result.
-
-\subsection{Magnetic and Current Fluctuation Reduction}
-
-Active magnetic field compensation come into play in the first place to make the surrounding magnetic fluctuations as minimum as possible. So, prototype response for magnetic fluctuations has been studied in terms of its capabilities as reduction or amplification. As the main concern is about the experiment which will be carried inside the passive shielding, the response has been specially studied on the central sensors. Some of the responses has been shown in Fig. \ref{fig:bt_mod} where the red indicates what is the fluctuation looks like without the compensation and the colors indicate the fluctuation levels after compensation. Moreover, the last one named 'center-Z' predicts the fluctuation in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of fluctuation.
-
-\fig{Images/bt-mod}{width =\textwidth,height=10cm}{Magnetic field reductions from some of the sensor positions closer to the perturbation coil. Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:bt_mod}}{Magnetic field reductions from some of the sensor positions.}
-
-\subsection{PI Behavior to Stimuli}
- Tuning is one of the main factor of PI control feedback algorithm. After going through all the steps, it needs to have a suitable value of PI parameters which can be obtained by tuning the prototype as discussed in section \ref{sec:tune}. Moreover, PI behavior has been also monitored for step response in the perturb electromagnet coil.
  
  \subsection{Allan Deviations and Shielding Factor}
  
@@ -552,18 +469,19 @@ Allan standard deviation \cite{allan} is usually applied to the time series to d
 \begin{equation}\label{eq:adev}
     \sigma_{Adev} (\tau)=\sqrt{\frac{1}{2(N-1)}\sum_{l=1}^{N-1} \left(B_{l+1}(\tau)-B_l(\tau)\right)^2}
 \end{equation}
-where, $B_l(\tau)$ is the average magnetic field for a sub sample $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ is the total measurement time and $N$ is total number of sub samples. The largest integration time for total measurement time $T$ is $\tau_{\text{max}}=T/2$ and for that the total number of sub sample is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. So, $\sigma_{Adev}(\tau_{\text{max}})$ is negligible since there is only one difference value of sub sample as seen by Eq.~(\ref{eq:adev}).
+where, $B_l(\tau)$ is the average magnetic field for a sub sample $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ is the total measurement time and $N$ is total number of sub samples. The largest integration time for total measurement time $T$ is $\tau_{\text{max}}=T/2$ and for that the total number of sub sample is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. So, $\sigma_{Adev}(\tau_{\text{max}})$ is negligible since there is only one difference value of sub sample as seen by Eq.~(\ref{eq:adev}). Moreover, $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ indicates random noise, $\sigma_{Adev}\approx \sqrt{\tau}$ indicates random walk and $\sigma_{Adev}\approx \tau$ indicates linear drift. 
 
-The Allan deviation of $B_s(\text{measured})$ and $B_s(\text{uncompensated})$ has been shown in the upper part of Fig.~\ref{fig:sf_mod}. $B_s(\text{uncompensated})$ can be predicted using Eq.~(\ref{eq:Buncomp}). The red colors in the upper part of Fig.~\ref{fig:sf_mod} indicates the Allan deviation of $B_s(\text{measured})$ and the colors other than red indicate the  Allan deviation of $B_s(\text{uncompensated})$ in $x$, $y$ and $z$ axis. With increase of integration time $\tau$, the Allan deviation of $B_s(\text{measured})$ is less than the  Allan deviation of $B_s(\text{uncompensated})$ which indicates that the magnetic field is less fluctuated i.e. more stable during compensation than without compensation in time. 
-\fig{Images/sf_mod}{width =\textwidth,height=12cm}{The Allan deviation (top) and shielding factor (bottom) for signals from some fluxgate sensors. Top vertical axis indicates the Allan deviation while bottom indicates shielding factor. Horizontal axis indicates the integration time. The different colors in top and bottom have been discussed in text.  \label{fig:sf_mod}}{The Allan deviation.}
+The Allan deviation calculation of $\Delta$B found by measuring 8x without any feedback loop for tau=100 s has been shown in Fig.~\ref{fig:sf_mod}\textcolor{blue}{(a)}. The Fig.~\ref{fig:sf_mod}\textcolor{blue}{(b)} shows the Allan deviation of the same $\Delta$B for different taus.  It is seen that $\sigma_{Adev}\approx \sqrt{\tau}$ which indicates random walk when there is no compensation system is running. For the prototype, $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ considers as good result while $\sigma_{Adev}\approx \sqrt{\tau}$ or $\approx \tau$ consider to be bad. That is the Allan deviation of the magnetic field due to compensation should be always less than the Allan deviation of the uncompensated magnetic field which indicates that the magnetic field is less fluctuated i.e. more stable during compensation than without compensation in time. 
+% \fig{Images/sf_mod}{width =\textwidth,height=12cm}{The Allan deviation (top) and shielding factor (bottom) for signals from some fluxgate sensors. Top vertical axis indicates the Allan deviation while bottom indicates shielding factor. Horizontal axis indicates the integration time. The different colors in top and bottom have been discussed in text.  \label{fig:sf_mod}}{The Allan deviation.}
 
+\fig{Images/sf_b}{width =\textwidth,height=12cm}{(a)$\Delta$B without feedback loop in sensor position 8x and (b) The Allan standard deviation of that $\Delta$B. Red horizontal lines in (a) indicate the Allan deviations for tau=100 s of 10 sub samples of $\Delta$B deviation and vertical black dashed lines indicate the upper limit of each sub sample. The Allan deviation of $\Delta$B in (a) for different taus are shown in (b). For position of sensor please see Fig.~\ref{fig: coil}. \label{fig:sf_mod}}{The Allan deviation.}
 \FloatBarrier
 
 Moreover, to determine the factor by which the magnetic field is more stable in compensation than uncompensated at a given $\tau$, the shielding factor~\cite{bea} has been calculated as
 \begin{equation}\label{eq:sf}
     \text{sf} (\tau)=\frac{\sigma_{\text{Adev}}^{\text{uncompensated}}(\tau)}{\sigma_{\text{Adev}}^{\text{measured}}(\tau)}
 \end{equation}
-So, the shielding factor in any of the fluxgate sensorat a given $\tau$  $>$ 1 indicates that the magnetic field is more stable on compensation than uncompensated on that fluxgate sensor on that $\tau$. Shielding factor is a vital factor to observe the long term stability under no stimulus condition. The shielding factors due to some of the fluxgate sensors have been shown in the lower part of Fig. \ref{fig:sf_mod}. The different colors indicate the  shielding factor in $x$, $y$ and $z$ axis. The shielding factors are found to be always $>$ 1 except at the beginning as the value lower than optimized $r$ has been used for better current response time which introduces some fluctuations as explained in section \ref{sec:r_pi}.
+So, the shielding factor in any of the fluxgate sensorat a given $\tau$  $>$ 1 indicates that the magnetic field is more stable on compensation than uncompensated on that fluxgate sensor on that $\tau$. Shielding factor is a vital factor to observe the long term stability under no stimulus condition. For the prototype, $\text{sf} (\tau)<$1 indicates terrible compensation, $\text{sf} (\tau)=$1 indicates bad compensation and $\text{sf} (\tau)>$1 indicates good result.
  
 
 %\fig{Images/sf}{width = 0.5 \textwidth}{Allan Deviation and Shielding Factor \label{fig:sf}}

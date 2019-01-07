@@ -29,7 +29,7 @@ The above discussion  has given an idea about the different apparatus that made 
 \section{Mu-Metal Shields}\label{sec:shield}
 Generally, the passive magnetic shielding as explained in Section \ref{sec:passive} is composed of a thin multi-layer shields with materials having high magnetic permeability such as mu-metal. The outer layers are usually cylindrical \cite{mu_cyl_1,mu_cyl_2} but they can also take the same forms as the magnetic shielded room (msr)~\cite{mu_msr_1,mu_msr_2}. The inner layer is designed based on the coil to achieve required homogeneity \cite{mu_inner_1,mu_inner_2}. 
 
-\fig{Images/passive}{width = \textwidth}{Prototype passive shielding at University of Winnipeg. Inner cylinder is shown in (a), (b) shows 4 mu-metal cylindrical shields of passive shielding by OPERA simulation software and (c) shows photograph of 3 layers of prototype passive shielding. The outer layer is not shown in (c).\label{fig: passive}}{Prototype passive shielding at University of Winnipeg}
+\fig{Images/passive}{width = \textwidth}{Prototype passive shielding at University of Winnipeg. Inner cylinder is shown in (a), (b) shows 4 mu-metal cylindrical shields of passive shielding by OPERA simulation software and (c) shows photograph of 3 layers of prototype passive shielding. The outer layer is not shown in (c). The figures are taken from R. Mammei presentation~\cite{mammei_presentation} in our collaboration meeting in 2013.\label{fig: passive}}{Prototype passive shielding at University of Winnipeg}
 
 
 However, in the prototype, there are four layers of cylindrical shields enclosing the imaginary experimental area with end-caps on them. The prototype passive shielding at University of Winnipeg is shown in Fig.~\ref{fig: passive}. The inner cylinder with end caps is shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. All the 4 layers are shown in Fig.~\ref{fig: passive}\textcolor{blue}{(b)} by OPERA simulation software and the software itself has been explained in detail in Section~\ref{fig:opera_setup}. A photograph of 3 layers excluding the outermost layer of prototype passive shielding is shown in Fig.~\ref{fig: passive}\textcolor{blue}{(c)}. Amumetal (Magnifer 7904) of thickness 0.0625 inch has been used for the layers,  which is an 80\% Nickel-Iron alloy and was fabricated and annealed by Amuneal Manufacturing Corp \cite{mu-metal}.  There are two end-caps in each cylinder with a 7.5 cm diameter in the central hole. And to minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5 cm is placed on each hole. One of the stove-pipe of the inner cylinder is seen in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. The radius and length of the four layers including the stove pipes are shown in Table \ref{table:mu-metal}. The center of the enclosed area is the center of the origin of the prototype. A combined DC shielding factor of the order of $\mathrm{10^6}$ is expected. A discussion about another prototype of similar design but smaller in size can be found in Ref. \cite{baby_shield}.
@@ -182,10 +182,46 @@ After having idea about the LabJack T7 Pro ADCs, now sampling frequency will be 
          
     \end{tabular}
     % \vspace{4mm}
-    \caption[T7 Pro sample frequency for different resolution index]{T7 Pro sample frequency for different resolution index, gain and voltage range.  A higher resolution index will result in lower noise and higher effective resolution but increases sample times.}\label{table:t7freq}
+    \caption[T7 Pro sample frequency for different resolution index]{T7 Pro sample frequency for different resolution index, gain and voltage range.  A higher resolution index will result in lower noise and higher effective resolution but increases sample times.}\label{table:t7freq2}
 \end{table}
 \FloatBarrier
-
+\begin{table} [!htb]
+    \centering
+    \begin{tabular} { |c|c|c|c|c| } 
+        \hline
+        \thead{Resolution Index} & \makecell{Loop bandwidth (Hz)\\for 1 channel\\ (Gain/Range: 1/$\pm$ 10V)}& \makecell{Loop bandwidth (Hz)\\for 14 channels\\ (Gain/Range: 1/$\pm$ 10V)}& \makecell{Possible Averages \\for 14 channels\\ to meet design goal}\\
+        \hline\hline
+        1 & 3846.2 & 344.7 & 50\\ 
+        \hline
+        2 & 3846.2 & 328.0 & 48\\ 
+        \hline
+        3 & 3448.3 & 303.2 & 45\\ 
+        \hline
+        4 & 2777.8 & 263.8 & 39\\ 
+        \hline
+        5 & 2272.7 & 209.4 & 31\\ 
+         \hline
+        6 & 1694.9 & 149.4 & 23\\ 
+        \hline
+        7 & 1204.8 & 95.3 & 15\\ 
+        \hline
+        8 & 694.4 & 55.4 & 9\\ 
+         \hline
+        9 & 237.5 & 19.5 & 3\\ 
+        \hline
+        10 & 71.6 & 5.3 & -\\ 
+        \hline
+        11 & 15.0 & 1.1 & -\\ 
+         \hline
+        12 & 6.3 & 0.4 & - \\ 
+         \hline
+         
+    \end{tabular}
+    % \vspace{4mm}
+    \caption[T7 Pro sample frequency for different resolution index]{T7 Pro sample frequency for different resolution index, gain and voltage range.  A higher resolution index will result in lower noise and higher effective resolution but increases sample times.}\label{table:t7freq}
+\end{table}
+For the prototype, by effective sampling frequency we meant that the number of signals of the fluxgate sensors that are going to the feedback algorithm via analog to digital converter (ADC) per second per measurement. But we are recording the time for a complete iteration which we call it as loop sampling frequency which includes the ADC effective sampling frequency plus rest of the loop frequency. The total loop sampling frequency is found to be 3846.2 Hz in Table~\ref{table:t7freq}, which is larger than the effective sampling frequency 25000 Hz reported in Table~\ref{table:t7freq} because of polling time which is typically~1~ms/channel read. The polling time includes LJM library overhead, Linux overhead, USB communication time, and device processing time. 
+\FloatBarrier
 The above discussion shows that the effective resolution that the LabJack corporation has given in their website are pretty similar to our result (see Fig.~\ref{fig: res}) and if we want to sample faster we need a lower resolution index ADC but that will increase noise. To get rid of that noise we can use filter which will be discussed in the latter part of this chapter.
 
 \subsubsection{LabJack T7 Pro with LJTickDAC}
