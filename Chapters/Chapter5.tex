@@ -5,9 +5,46 @@
 \chapter{Quantification of AMC Prototype}\label{ch:quantification}
 % \label{chap:image}
 
-In Chapter~\ref{ch:operation}, the magnetic control process and the simulation methods to understand the process have been described. The quantitative measures of the magnetic field compensation performance suggested by the Refs.\cite{bea,lins,rawlik} are also discussed there. While implementing the magnetic control process discussed in Chapter~\ref{ch:operation}, we have faced problems in terms of long drift in the coil currents and also slower response of the prototype system. We have been able to make the system faster by introducing filter which enables us to change the sample frequency without adding noise and will be discussed in Section~\ref{sec:freq}. In Section~\ref{sec:r_pi_revisit}, we have discussed the studies to understand regularization parameter and P and I term of PI control algorithm. But the coil current drifting problem is still there. We have then changed the fluxgate positions randomly to try to make condition number smaller and we have also removed the outermost passive shielding layer to see if there is any effect. For confirming the experimental coil current pattern, we have also made a simulation of the prototype. All the discussions about the different position of fluxgates and shield removal are in Section~\ref{sec:flux_place}. We have also implemented the new control algorithm suggested by Ref.~\cite{rawlik} and compared with our existing one suggested by Ref.~\cite{bea}. While comparing those we came up with an interesting similarity in the control algorithms which is discussed in Section~\ref{sec:style_pi}. But the new algorithm sill had no answers for the current drifting problems which encouraged us to study the regularization parameter in different way that is discussed in Section~\ref{sec:new_study_r}. The current drifting problem can be solved but that introduced additional noise. We have then realized that coil configuration has a great impact on the current modes which we have discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics that has been discussed in Section~\ref{sec:metrics} are presented in Section~\ref{sec:metrics_res}. There are some unique points discussed here which are not explicitly present on previous studies on active compensation. They are
+In Chapter~\ref{ch:operation}, the magnetic control process and the
+simulation methods to understand the process have been described. The
+quantitative measures of the magnetic field compensation performance
+suggested by the Refs.\cite{bea,lins,rawlik} are also discussed
+there. While implementing the magnetic control process discussed in
+Chapter~\ref{ch:operation}, we have faced problems in terms of long
+drift in the coil currents and also slower response of the prototype
+system. We have been able to make the system faster by introducing
+filter which enables us to change the sample frequency without adding
+noise and will be discussed in Section~\ref{sec:freq}. In
+Section~\ref{sec:r_pi_revisit}, we have discussed the studies to
+understand regularization parameter and P and I term of PI control
+algorithm. But the coil current drifting problem is still there. We
+have then changed the fluxgate positions randomly to try to make
+condition number smaller and we have also removed the outermost
+passive shielding layer to see if there is any effect. For confirming
+the experimental coil current pattern, we have also made a simulation
+of the prototype. All the discussions about the different position of
+fluxgates and shield removal are in Section~\ref{sec:flux_place}. We
+have also implemented the new control algorithm suggested by
+Ref.~\cite{rawlik} and compared with our existing one suggested by
+Ref.~\cite{bea}. While comparing those we came up with an interesting
+similarity in the control algorithms which is discussed in
+Section~\ref{sec:style_pi}. But the new algorithm sill had no answers
+for the current drifting problems which encouraged us to study the
+regularization parameter in different way that is discussed in
+Section~\ref{sec:new_study_r}. The current drifting problem can be
+solved but that introduced additional noise. We have then realized
+that coil configuration has a great impact on the current modes which
+we have discussed in Section~\ref{sec:coil_config}. Finally, the
+results of the metrics that has been discussed in
+Section~\ref{sec:metrics} are presented in
+Section~\ref{sec:metrics_res}. There are some unique points discussed
+here which are not explicitly present on previous studies on active
+compensation. These represent the principal improvements and
+innovations made in this thesis work.  They are: {\color{red}These
+should be made to sound impressive and potentially gathered together
+to make a smaller list.}
 \begin{itemize}
-    \item $\mathbf{4^{th}}$ order low pass Butterworth filter
+    \item a new $\mathbf{4^{th}}$ order low pass Butterworth filter
     \item PI tuning general behaviour on active compensation system 
     \item $r$ behaviour on PI tuning.
     \item Effect of $r$ on coil current response
@@ -18,8 +55,8 @@ In Chapter~\ref{ch:operation}, the magnetic control process and the simulation m
     \item Relation of different PI control algorithm
     \item Coil current modes based on coil configuration
 \end{itemize}
-
-The new directions for future studies set by the unique points are presented in Chapter~\ref{ch:conclusion}.
+New directions for future studies are presented in
+Chapter~\ref{ch:conclusion}.
 
 % we have the varied some parameters to quantify the prototype system. They are 
 % \begin{itemize}
@@ -32,54 +69,73 @@ The new directions for future studies set by the unique points are presented in 
 
 \section{Sampling Frequency and Filtering}\label{sec:freq}
 
+%\begin{itemize}
+%\item We built some analog filters which were discussed in Chapter 3
+%\item Goal of the filter was to remove high-frequency noise (low-pass Butterworth with 10~Hz corner frequency)
+%\item This would allow the ADC to operate with less averaging, reducing its effective sampling time (denoted by the ``resolution index'')  (refer to Ch. 3)
+%\item We show the effectiveness in this section.
+%\end{itemize}
 
+In Chapter~\ref{ch:amcP}, I discussed new low-pass analog Butterworth
+filters which I built and implemented into the system.  The filters
+were designed with 10~Hz corner frequency with the goal to remove
+high-frequency noise.  This would allow the ADC to operate with less
+averaging, increasing its effective sampling frequency (denoted by the
+``resolution index'' in Table~\ref{table:t7freq}).  The filter gives
+us more freedom in terms of
 \begin{itemize}
-\item We built some analog filters which were discussed in Chapter 3
-\item Goal of the filter was to remove high-frequency noise (low-pass Butterworth with 10~Hz corner frequency)
-\item This would allow the ADC to operate with less averaging, reducing its effective sampling time (denoted by the ``resolution index'')  (refer to Ch. 3)
-\item We show the effectiveness in this section.
+    \item using different sampling frequencies of the ADC,
+    \item reducing magnetic field compensation response time,
+    \item reducing coil current response time, and most importantly
+    \item maintaining our design sample rate with better reduction of noise.
 \end{itemize}
-
-In Chapter~\ref{ch:amcP}, some low pass analog Butterworth filters with 10~Hz corner frequency were discussed that we built. The goal of the filter was to remove high-frequency noise. This would allow the ADC to operate with less averaging, increasing its effective sampling frequency (denoted by the 'resolution index' as shown in Table~\ref{table:t7freq}). The filter gives us more degree of freedom in terms of
-
-\begin{itemize}
-    \item using different sampling frequencies of the ADC
-    \item reducing magnetic field compensation response time 
-    \item reducing coil current response time
-    \item most importantly maintaining our design sample rate with better reduction of noise.
-\end{itemize}
-
-The effectiveness of the filters are discussed in this section. 
-% The section starts with defining the sampling frequency and how we first consider building an analog filter in the first place. Then it shows the effect improving the response time on the prototype. Finally, the Section wraps up with some comparison in
-% current response time for different sampling frequency.
+My studies of the effectiveness of the filters in achieving these
+points are described in this section.
 
 
 
 % \subsubsection{Filtering effect to use the fastest sampling frequency}
 
 \begin{itemize}
-\item Fix Fig. 5.1 (scales) -- ideally plot all of them on the same graph.
-\item Noise reduced by factor of {\bf X}
-\item This is resolution index 1
-\item Without filter noise is dominated by 60 Hz and higher.
-\item Compensation is off
-\item Also compared with SCU... it agreed well.  Our filters gave slightly better performance (lower noise) likely due to slight difference in design.
-\item Loop frequency is 100~Hz.  This is larger than 25~kHz$/14\approx 2$~kHz reported in Chapter 3 (ref) because of polling time.  Typ.~1~ms/channel read.  When read in this way, can increase resolution index to 7 (and averaging time) before significant delays are noted.  (when ADC effective sample time approaches 1~ms)
-\item At times we did this alternate way:  increase resolution index.
-\item Another problem:  current drifting during compensation although field would not change.  This is discussed further in Sections~\ref{drifting1} and \ref{drifting2}.
-\item We thought maybe this was due to sequential reads (higher resol index $\sim$ 7) so in general we aimed for resol index 1 which makes the reads distributed in time.  (Explain better... it is leading up to Fig. 5.2 and 5.3.)  In such cases when using lower resol index (1) we did software averaging until the design loop rate was met.  This will be discussed further in the next sections.
-\item Another point:  in Fig. 5.1 is that there is a time lag (slewing?) for the filter... consistent with expectation.
-\item Conclusion:  the filter works and allows us to go to higher effective sample rate.
-\item We would be stuck at resolution index 11 or 12 otherwise.  12 has 6 Hz effective sample rate $\approx$ 10 PLC averaging.  If doing this for 12 channels it it means $<0.5$~Hz.  Impossible to do compensation at 6~Hz this way (fails to meet design goal).
+\item Fix Fig. 5.1 (horizontal scale)
+%\item Without filter noise is dominated by 60 Hz and higher.
+%\item Compensation is off
+%\item Also compared with SCU... it agreed well.  Our filters gave slightly better performance (lower noise) likely due to slight difference in design.
+%\item Loop frequency is 100~Hz.  This is larger than 25~kHz$/14\approx 2$~kHz reported in Chapter 3 (ref) because of polling time.  Typ.~1~ms/channel read.  When read in this way, can increase resolution index to 7 (and averaging time) before significant delays are noted.  (when ADC effective sample time approaches 1~ms)
+%\item At times we did this alternate way:  increase resolution index.
+%\item Another problem:  current drifting during compensation although field would not change.  This is discussed further in Sections~\ref{drifting1} and \ref{drifting2}.
+%\item We thought maybe this was due to sequential reads (higher resol index $\sim$ 7) so in general we aimed for resol index 1 which makes the reads distributed in time.  (Explain better... it is leading up to Fig. 5.2 and 5.3.)  In such cases when using lower resol index (1) we did software averaging until the design loop rate was met.  This will be discussed further in the next sections.
+%\item Another point:  in Fig. 5.1 is that there is a time lag (slewing?) for the filter... consistent with expectation.
+%\item Conclusion:  the filter works and allows us to go to higher effective sample rate.
+%\item We would be stuck at resolution index 11 or 12 otherwise.  12 has 6 Hz effective sample rate $\approx$ 10 PLC averaging.  If doing this for 12 channels it it means $<0.5$~Hz.  Impossible to do compensation at 6~Hz this way (fails to meet design goal).
 \end{itemize}
 
-Power line induced noise is of main concern while using ADC. The analog input signal while averaging over one or more power line cycles (PLCs) can filter that noise. The noise at the line frequency which is 60 Hz or 50 Hz depending on the geographical region can be removed over one cycle. So, one PLC averaging corresponds to 60 Hz. That is the signal is sampled at 60 Hz (no. of samples per second is 60). However, as the noise is not uniform, the signals should be averaged over many PLCs. Increasing the number of PLCs increases the accuracy of the signal which ensures greater noise reduction and better resolution. The effective sampling frequency as shown in Table~\ref{table:t7freq} goes as high as 3846.2 Hz to as low as 6.3 Hz for gain 1 indicated by the resolution index. In the early days of the prototype experiment, we were stucked with resolution index 11 and resolution index 12 which corresponds to $\approx$ 4 PLC averaging and $\approx$ 10 PLC averaging respectively to get rid of high frequency noise. As we have 14 fluxgate sensors including the control ones, the effective sampling frequency reduces to $\mathbf{<1.1}$~Hz or $\mathbf{<0.5}$~Hz depending on resolution index 11 or 12 respectively which fails to meet 6 Hz design goal. 
+Without the filters, the noise on the fluxgate signals are dominated
+by 60~Hz and higher frequency noise.  As a consequence, resolution
+index 11 or 12 was always used in order to remove this noise.
+Resolution index 12 would correspond to averaging over roughly 10
+power line cycles (PLC), as indicated in Table~\ref{table:t7freq2},
+and would therefore significantly reduce the noise.  The problem with
+this solution is that the feedback and control loop cycle time for all
+14 ADC channels would be limited to $\sim 0.5$~Hz, which does not meet
+the design goal of $\gtrsim 6$~Hz.
 
+\fig{Images/filtering}{width=\textwidth}{Filtering effect on the magnetic field signal measured at the 1X position.  For this measurement, the PI control system was switched off so that it would not affect the noise.  Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) found from the measurement of sensor (a) without filter, (b) with Bartington's SCU1 (Signal Conditioning Unit) and (c) with our filter. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.  The current supplied on perturbation coil was 100~mA and resolution index 1 was used for the ADC. The loop sampling frequency for (a), (b) and (c) are shown in Hz and is limited by the polling time for the 14 sensors.\label{fig:filtering}}{Filtering effect on the magnetic field signals.}
 
-\fig{Images/filtering}{width = \textwidth}{Filtering effect on the magnetic field signals measured by 14 fluxgate sensors including the control sensors placed at 1, 3 , 6, 8 and center. For position of the sensor see Fig.~\ref{fig: coil}. For simplicity only position '1x' is shown. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) found from the measurement of sensor '1x' (a) without filter, (b) with Bartington$'$s SCU1 (Signal Conditioning Unit) and (c) with our filter. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively.  The current supplied on perturbation coil was 100 mA. The resolution index 1 (see Table~\ref{table:t7freq}) was used. The loop sampling frequency  for (a), (b) and (c) are shown in Hz. \label{fig:filtering}}{Filtering effect on the magnetic field signals.}
+Fig.~\ref{fig:filtering} shows an example of the importance of using
+the filter, comparing an unfiltered signal to one filtered by
+Bartington's SCU1 10 Hz low pass filter, and comparing with our
+filter.  For this study the fastest effective sampling rate
+(resolution index 1) has been used.  The loop sampling frequency is
+found to be $\sim 220$~Hz limited by the polling time for all 14
+channels and additional delays arising from LabJack communications.
 
-The Fig.~\ref{fig:filtering} shows the importance of using the filter. The data was taken by measuring the drift in the signal $\Delta$B (see Eq.~(\ref{eq:del_B})) by 14 fluxgate sensors including the control sensors placed at 1, 3 , 6, 8 and center separately without filter in Fig.~\ref{fig:filtering}\textcolor{blue}{(a)}, with Bartington$'$s SCU1 10 Hz low pass filter in Fig.~\ref{fig:filtering}\textcolor{blue}{(b)} and with our filter in Fig.~\ref{fig:filtering}\textcolor{blue}{(c)}. For simplicity only position '1x' is shown. It is seen that the signal is very noisy without any filter. The noise is reduced 10 times while using Bartington$'$s SCU1 10 Hz low pass filter. Our filters gave slightly better performance (lower noise) likely due to slight difference in design. For data acquisition, resolution index 1 of ADC was used. 100 mA current was supplied in the perturbation coil  at $\sim$ 0.32 s and cut off at $\sim$0.95 s. The total loop sampling frequency is found to be $\sim$220 Hz which is larger than the loop sampling frequency 344.7 Hz reported in Table~\ref{table:t7freq} for 14 channels because of new command time added for supplying current in perturbation coil. The typical polling time as discussed in Chapter~\ref{ch:amcP} is 1~ms/channel read. It is also seen that the outputs are limited by the slew rate of the op-amps used in the SCU1 and our filter. Slew rate is the rate of change in the output due to a step change on the input. That is output is change by certain amount at a given time and the limit is called the slew rate.
-
+It is seen that the signal is very noisy without any filter. The noise
+is reduced by a factor of ten using Bartington's SCU1 10 Hz low pass
+filter.  Our filters gave slightly better performance (lower noise)
+than the Bartington SCU1 module, likely due to slight differences in
+components and design.  It is also seen that the outputs are limited
+in their time response by the filters, as expected.
 
 % When read in this way, the resolution index can be increased to 7 before significant delays are noted which is the same time when ADC loop sample time approaches 1~ms. We thought maybe this was due to sequential reads (higher resol index $\sim$ 7) so in general we aimed for resol index 1 which makes the reads distributed in time.  (Explain better... it is leading up to Fig. 5.2 and 5.3.)  In such cases when using lower resol index (1) we did software averaging until the design loop rate was met.  This will be discussed further in the next sections.
 
@@ -103,65 +159,92 @@ The Fig.~\ref{fig:filtering} shows the importance of using the filter. The data 
 
 
 
-\FloatBarrier
+%\FloatBarrier
 % The Fig.~\ref{fig:filtering} shows the importance of using the filter discussed above. The data was taken by measuring the drift in the signal $\Delta$B (see Eq.~(\ref{eq:del_B})) by '1x' sensor position two times where one with filter and another one without filter. On the part of data measurement, current has been applied in the perturbation coil at $\sim$ 0.32 s which is indicated by the vertical red dashed line and is termed as ON. At $\sim$0.95 s current supply in the perturbation coil has cut off which is indicated by the green vertical dash line and termed as OFF. The total loop sampling frequency is found to be $\sim$220 Hz. It is seen that the signal is very less attenuated while using filter and very noisy without any filter.
 
-So our filter is capable of reducing high frequency noise and allows us to go to higher effective sample rate.
+The conclusion is that the filter is capable of reducing high
+frequency noise and allows us to go to higher effective sample rate.
+Given this additional freedom we can even do additional software
+averaging within the feedback and control loop in order to further
+reduce the noise.
+
 % So, for faster sampling it needs to have filter to avoid high frequency noise. Next, after applying filter let's see how the sampling frequency has impact on response time of the magnetic field compensation.
 
 
 % \subsubsection{Effect on Response Time of Magnetic Field Compensation}
 
-\begin{itemize}
-\item Fig. 5.2.  Left: with filter, resol index 1, 50 software averages per point, compensation ON, loop cycle rate (correction rate) 6.57 Hz indicated in the Fig.  Right:  no filter, resolution index 12, no other averaging (other than what the ADC oes), graph is on longer timescale because loop rate is slower (0.45~Hz).  Corrected/uncorrected (projected) values are shown.
-\item Main point:  loop cycle rate is good!  $\sim$ 15x faster.  Even plenty of time for additional averaging to reduce noise further.  Likely the same result if somewhat higher resolution index used, possibly even with reduced software averaging.
-\end{itemize}
+%\begin{itemize}
+%\item Fig. 5.2.  Left: with filter, resol index 1, 50 software averages per point, compensation ON, loop cycle rate (correction rate) 6.57 Hz indicated in the Fig.  Right:  no filter, resolution index 12, no other averaging (other than what the ADC oes), graph is on longer timescale because loop rate is slower (0.45~Hz).  Corrected/uncorrected (projected) values are shown.
+%\item Main point:  loop cycle rate is good!  $\sim$ 15x faster.  Even plenty of time for additional averaging to reduce noise further.  Likely the same result if somewhat higher resolution index used, possibly even with reduced software averaging.
+%\end{itemize}
 
-\fig{Images/samp_freq_iteration}{width = \textwidth,height=8 cm}{Active magnetic field compensation by sensor position '1y' using resolution index 1 (left) and resolution index 12 (right). For position of the sensors please see Fig.~\ref{fig: coil}. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '1y' with red represents uncompensated $\Delta$B. They are described in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:samp_freq_iteration}}{Active magnetic field compensation by sensor position '1y'.}
+\fig{Images/samp_freq_iteration}{width=\textwidth,height=8cm}{Magnetic field at sensor position 1y using resolution index 1 with 50 software averages per cycle (left) and resolution index 12 (right) when the active magnetic compensation system is switched on.  Blue curves:  measured field change $\Delta B$.  Red curves:  predicted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_iteration}}{Active magnetic field compensation at sensor position 1y.}
 
-The Fig.~\ref{fig:samp_freq_iteration} shows the comparison between using highest sampling frequency (left) and the slowest one (right). The results are part of the compensation by all the 12 sensors placed just like explained by the horizontal axis in Fig.~\ref{fig:m} using regularized pseudoinverse and PI tuning in the feedback algorithm explained in Chapter~\ref{ch:operation}. The figure only shows compensation for position '1y for simplicity. Note that the left and right are two different compensation measurements with highest (resolution index 1) and lowest sampling frequency (resolution index 12) of our ADC (see Section~\ref{sec:DAQ}) having same number of feedback loop in each case. We have used filter in the left figure. We have done 50 software averages per iteration to meet the design goal frequency and it is seen that the loop frequency 6.57 Hz. We have not used any filter in the right figure and also there is no software averaging. It is seen that for same number of iteration, the graph on the right is on longer timescale because of the slower loop rate which is 0.45 Hz and it is 6.57/0.45$\approx$15 times slower. The same information can be seen by the horizontal timescale in both the graphs that is 670/45$\approx$15 times slower. 
+Fig.~\ref{fig:samp_freq_iteration} shows an example of using the
+filters with the active compensation system switched on (left).  Only
+one of the 12 sensors being used in the system has been displayed.  In
+this case, 50 software averages could also be conducted, achieving a
+loop cycle rate of 6.57~Hz.  This can be compared with the right panel
+of Fig.~\ref{fig:samp_freq_iteration}, where the analog filters were
+not used, necessitating PLC averaging using the largest resolution
+index of the ADC.  In this case a loop cycle rate of 0.45~Hz is
+achieved.  Although both schemes achieve similar noise performance,
+the analog filtering solution can increase the loop cycle rate by a
+factor of $6.57/0.45\approx 15$.  The two panels of
+Fig.~\ref{fig:samp_freq_iteration} appear on different time bases
+because the number of feedback control loops has been equalized.
+
+%\begin{itemize}
+%\item Fig. 5.3.  Always filtered.  Different resolution indices indicated on the figure along with their loop cycle rates.  Always 50 software averages done.
+%\item By resolution index 8 or 9, the loop cycle rate for the 50 software averages slows to 1.1 and 0.39 Hz respectively.  The results look similar to resolution index 12 (without filter) but much less noisy, smoother.
+%\item Another option is to run with fewer averages than 50 and at higher resolution index, while still achieving the 6 Hz loop rate design goal.  This would likely also work just fine although we didn't try it.  The advantage of resolution index 1 with averaging is that the channels are all sampled at closer to the same time, which we suspected was a problem, as discussed earlier.
+%\end{itemize}
 
 
+Another significant problem that I faced in this experiment was that
+the current would drift during compensation although field would not
+change significantly.  This is discussed further in
+Sections~\ref{drifting1} and \ref{drifting2}.  For this reason I was
+often concerned with any sources of slow current response.  The main
+point of the remainder of this section is to study the trade-offs
+involved in the resolution index, the loop cycle rate, and the number
+of software averages, and their effect on changes in the coil currents
+driven by the compensation system.
 
-% So after we have our filter ready to use, now let's see what I meant by increasing the sampling frequency and its effect on the magnetic field  compensation response time.
+\fig{Images/samp_freq_time}{width=\textwidth,height=8cm}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 8x for various resolution indices.  The resolution indices are represented by 1, 6, 7, 8 and 9 with the corresponding loop sampling frequencies indicated.  In each case, 50 software averages were done in the loop as well.  Vertical dashed lines indicate the perturbation coil state. \label{fig:samp_freq_example_time}}{Compensation behaviour for various resolution indices.}
+
+Fig.~\ref{fig:samp_freq_example_time} shows an active compensation
+result displaying the current in one of the 6 coils and the field in
+one of the 12 fluxgate axes, when the resolution index is changed.
+For each case, 50 software averages have always been done in the
+feedback loop, further reducing the loop cycle rate.  Increasing the
+resolution index slows the response of the system, and most notably
+the current response time increases.  For example, it takes $\sim 7$~s
+for the $C_x^-$ coil current to settle after the perturbation coil is
+switched on when the loop sampling frequency is 6.35 Hz. It is also
+seen that the loop cycle rate slows to 1.1 Hz and 0.39 Hz by
+resolution index 8 and 9 respectively.  The results look similar to
+resolution index 12 (without filter) but are generally much less
+noisy, and smoother over longer periods of time as well.
 
 
+\fig{Images/samp_freq_same}{width = \textwidth,height=8 cm}{Active magnetic field compensation for resolution indices 1, 3, 5 and 7 and for 50, 45, 29 and 13 software averages respectively.  These settings achieve nearly the same loop cycle rates ($\sim 6$~Hz, indicated in parentheses).  Only the $C_x^-$ coil current (left) and $\Delta B$ for fluxgate 8x (right) are shown.  Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_same}}{Short}
 
+Another option is to run with fewer averages than 50 and at higher
+resolution index, while still achieving the 6 Hz loop rate design
+goal.  Fig.~\ref{fig:samp_freq_same} shows a study where, as the
+resolution index is increased, the number of software averages is
+decreased, so as to maintain nearly the same $\sim 6$~Hz loop cycle
+rate.  As expected, they all have a similar effect on the magnetic
+compensation result.  But the coil current and magnetic field for
+resolution index 7 is noisier compared to others. 
 
-\FloatBarrier
-So the filter helps us to utilize $\approx$15 times faster response time while also maintaining design goal rate.
+We expect that the advantage of resolution index 1 with larger
+software averaging is due to the fact that the 12 channels are sampled
+more continuously over the entire course of one loop cycle.  This
+potentially gives a more accurate measurement of the true magnetic
+field, averaged over that cycle.
 
-
-% \subsubsection{Effect on Coil Current Response Time }
-
-\begin{itemize}
-\item Fig. 5.3.  Always filtered.  Different resolution indices indicated on the figure along with their loop cycle rates.  Always 50 software averages done.
-\item By resolution index 8 or 9, the loop cycle rate for the 50 software averages slows to 1.1 and 0.39 Hz respectively.  The results look similar to resolution index 12 (without filter) but much less noisy, smoother.
-\item Another option is to run with fewer averages than 50 and at higher resolution index, while still achieving the 6 Hz loop rate design goal.  This would likely also work just fine although we didn't try it.  The advantage of resolution index 1 with averaging is that the channels are all sampled at closer to the same time, which we suspected was a problem, as discussed earlier.
-\end{itemize}
-
-
-Form above discussion it is found that the more the sampling frequency is the less it takes for the compensation to respond. The effect of the sampling frequency has been revisited here again to show its effect in coil current response time.
-
-\FloatBarrier
-\fig{Images/samp_freq_time}{width = \textwidth,height=8 cm}{$C_x^-$ coil current (left) and active magnetic field compensation (right) by sensor position '8x' for different resolution index. The resolution indices are (see Table~\ref{fig: res} and Sec.~\ref{sec:DAQ}) represented by 1, 6, 7, 8 and 9 while loop sampling frequencies are given in the parentheses respectively. They are describe more in the text. Vertical axis of the left one represents $C_x^-$ coil current graph and the right one indicates   $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '8x' with red represents uncompensated $\Delta$B for different resolution index respectively. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:samp_freq_example_time}}{Short}
-
-The Fig.~\ref{fig:samp_freq_example_time} shows the active compensation by fluxgate position 1, 3, 6 and 8 for resolution index 1, 3, 5, 7 and 9 for 50 software averages using filter. Different resolution indices indicated on the figure along with their loop cycle rates.  The results are again part of the compensation by all the 12 sensors placed just like explained earlier. Here, different measurements was taken for a same time frame i.e. 180s compared to earlier where time was independent for different ones. For simplicity only $C_x^-$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' for different loop sampling frequencies have been shown instead of showing all current coils and sensor positions. For a complete list of positions see the color map of $\bm{M}$ in Fig.~\ref{fig:m}.  As seen from the $C_x^-$ coil current (left) and $\Delta$B (right) due to '8x' graph that with decrease of loop sampling frequency, the current response time increases. For example, it takes $\sim$ 7s for $C_x^-$ coil current to settle down after the perturbation coil being turned ON when the loop sampling frequency is 6.35 Hz indicated by blue color curve compared to $\sim$ 52s when the loop sampling frequency is 0.39 Hz indicated by magenta color curve. So, the current response time has been faster by 52/7$\approx$7.5 times and we are not even considering the slowest one. It is also seen that the loop cycle rate slows to 1.1 Hz and 0.39 Hz by resolution index 8 and 9 respectively.  The results look similar to resolution index 12 (without filter) but much less noisy, smoother.
-
-\FloatBarrier
-
-So for better response time in the coil current and eventually in magnetic field compensation system, there should an ADC with higher sampling frequency and a filtering method to get rid of higher frequencies. 
-
-\FloatBarrier
-\fig{Images/samp_freq_same}{width = \textwidth,height=8 cm}{Active magnetic field compensation fluxgate position 1, 3, 6 and 8 for resolution index 1, 3, 5 and 7 for 50, 45, 29 and 13 software averages respectively using filter. For simplicity only $C_x^-$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' have been shown. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '8x' with red represents uncompensated $\Delta$B. They are described in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:samp_freq_same}}{Short}
-
- The Fig.~\ref{fig:samp_freq_same} shows the active compensation by fluxgate position 1, 3, 6 and 8 for resolution index 1, 3, 5 and 7 for 50, 45, 29 and 13 software averages respectively using filter. For simplicity only $C_x^-$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' have been shown instead of showing all current coils and sensor positions. For a complete list of positions see the color map of $\bm{M}$ in Fig.~\ref{fig:m}.  It is seen that the loop sample rate in every case is almost similar and they have similar effect on magnetic compensation (right) but the magnetic compensation due to resolution index 7 looks noisy compare to others. Moreover, the coil current (left) for different resolution index looks similar.
- 
-\FloatBarrier
-\begin{itemize}
-    \item Conclusion of the figure  ?
-    \item why use resol 1?
-\end{itemize}
 
 % \FloatBarrier
 % In the upcoming Section PI, regularization parameter and condition number will be revisited with results.
@@ -169,13 +252,24 @@ So for better response time in the coil current and eventually in magnetic field
 \section{PI Tuning General Behavior}\label{sec:pi_behave}
 Main points:
 \begin{itemize}
-\item Trying to show that P doesn't do much (5.5) but I has a big effect.  I term gives smaller Delta B in one axis (5.6).  I term can also affect response time in that axis (5.7).  After I term is set, the P term doesn't seem to do too much. (5.8).
-\item Current drifting problem is starting to become apparent.  Does not appear for P only.  Appears much more pronounced for I only, and PI combined.
-\item Do we need all the figures?  Can the data be summarized better (all currents and all fields on two graphs for each setting?)
-\item Should we show data?  I think so.  Need to establish that the simulation agrees with the data.  That could also be a major point of this section.  It would also lead into discussion of the current-drifting problem and that since the simulation and data agree, and we checked the hardware, that it is not a hardware problem.
+\item Trying to show that P doesn't do much (5.5) but I has a big effect.  I term gives smaller Delta B with no P (5.8).  After I term is set, the P term doesn't seem to do too much. (delete 5.9, retain 5.10).
+\item additional P studies:
+\begin{itemize}
+\item Increasing P to values much larger than 1 only increases currents without much change in fields (5.6).
+\item Studies where both P and r are changed (5.7) also did not give a great solution.  If r is increased to reduce the effect of compensation, then P must be increased correspondingly and then the compensation still tends to work.  (I think we can also delete this graph though - it needs to be fixed otherwise.)  Add forward reference to section where r is more explicitly studied.
+\end{itemize}
+\item Current drifting problem is starting to become apparent.  Does not appear for P only.  Appears much more pronounced for I only (5.8), and PI combined (5.10).
+\item Lead into discussion of the current-drifting problem and that since the simulation and data agree, and we checked the hardware, that it is not a hardware problem.
 \end{itemize}
 
-The tuning method of proportional gain (P) or $k_c^p$ term  and integral reset (I) or $k_c^i$ term (see Eq.~(\ref{eq:I})) have been discussed in Section~\ref{sec:tune}. The individual effect has not been shown explicitly there. This Section describes the effect of changing P and I term individually and combined. Moreover, the necessity of having both of them or just individual one will be explained. The current drifting problem will become apparent here and how the P and I term is involved will be explained. 
+The tuning method of proportional gain (P) or $k_c^p$ term and
+integral reset (I) or $k_c^i$ term (see Eq.~(\ref{eq:I})) have been
+discussed in Section~\ref{sec:tune}. The individual effect has not
+been shown explicitly there. This Section describes the effect of
+changing P and I term individually and combined. Moreover, the
+necessity of having both of them or just individual one will be
+explained. The current drifting problem will become apparent here and
+how the P and I term is involved will be explained.
 
 % \subsection{PI Tuning General Behavior}\label{sec:pi_behave}
 % Here, the individual effect of P and I term will be discussed first and then concludes with the effect of using PI together.
