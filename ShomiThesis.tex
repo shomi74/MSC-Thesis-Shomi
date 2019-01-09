@@ -1,6 +1,8 @@
 %change to one side if you want single sided.  Two side will properly
 %alternate margins and page numbers for two-sided binding.
-\documentclass[a4paper, 11pt, final]{thesis}
+% \documentclass[a4paper, 11pt, final]{thesis}
+\documentclass[letterpaper,12pt,oneside,final]{thesis}
+
 %\documentclass[11pt,one side,final]{Thesis}
 \usepackage[section]{placeins}
 \usepackage{epsfig,bm,epsf,float}
@@ -14,7 +16,41 @@
 % \usepackage[tbtags]{amsmath}
 \usepackage{layouts}
 
+   
+   
+%%% Image Macros
+%%%-------------------------------------------------------------
+\usepackage[font=singlespacing]{caption}
 
+% Single figure macro
+\newcommand{\fig}[4]{\begin{figure}[!htb]
+\centering
+\includegraphics[{#2}]{{#1}}
+\caption[#4]{#3}
+%\caption{#3}
+\end{figure}}
+
+
+% Double figure, side by side macro
+\newcommand{\doublefig}[8]{\begin{figure}[!htb]
+\centering
+\begin{subfigure}{0.5\textwidth}
+  \centering
+  \includegraphics[{#2}]{#1}
+  \caption{#3}
+\end{subfigure}%
+\begin{subfigure}{0.5\textwidth}
+  \centering
+  \includegraphics[{#5}]{#4}
+  \caption{#6}
+\end{subfigure}
+% \caption{#7}
+\caption[#8]{#7}
+\end{figure}}
+
+% % Standard figure sizes
+% \newcommand{\Allanstdexample}{0.7}
+% \newcommand{\AllanStdPlot}{0.7275}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
@@ -28,8 +64,8 @@
 \usepackage{makecell}
 %%%%%%%%%%%%
 \usepackage{amsmath,paralist,amssymb,multirow}
-\usepackage{tgbonum,amsthm,framed,enumitem}
-\usepackage{lineno,hyperref,amssymb,graphicx}
+\usepackage{framed,enumitem}
+\usepackage{lineno,amssymb,graphicx}
 %%%%%%%%%%%%
 \usepackage{bm}% bold math
 

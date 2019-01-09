@@ -1290,7 +1290,8 @@
 \renewcommand{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter:\ #1}{}}
 
 \fancyhf{}
-\fancyfoot[C]{\thepage}
+% \fancyfoot[C]{\thepage}
+\fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -1314,7 +1315,8 @@
 
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyfoot[C]{\thepage}
+%   \fancyfoot[C]{\thepage}
+    \fancyhead[R]{\thepage}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
@@ -1372,35 +1374,35 @@
 %%%-------------------------------------------------------------
 % \usepackage[font=singlespacing]{caption}
 
-% Single figure macro
-\newcommand{\fig}[4]{\begin{figure}[!htb]
-\centering
-\includegraphics[{#2}]{{#1}}
-\caption[#4]{#3}
-%\caption{#3}
-\end{figure}}
+% % Single figure macro
+% \newcommand{\fig}[4]{\begin{figure}[!htb]
+% \centering
+% \includegraphics[{#2}]{{#1}}
+% \caption[#4]{#3}
+% %\caption{#3}
+% \end{figure}}
 
 
-% Double figure, side by side macro
-\newcommand{\doublefig}[8]{\begin{figure}[!htb]
-\centering
-\begin{subfigure}{0.5\textwidth}
-  \centering
-  \includegraphics[{#2}]{#1}
-  \caption{#3}
-\end{subfigure}%
-\begin{subfigure}{0.5\textwidth}
-  \centering
-  \includegraphics[{#5}]{#4}
-  \caption{#6}
-\end{subfigure}
-% \caption{#7}
-\caption[#8]{#7}
-\end{figure}}
+% % Double figure, side by side macro
+% \newcommand{\doublefig}[8]{\begin{figure}[!htb]
+% \centering
+% \begin{subfigure}{0.5\textwidth}
+%   \centering
+%   \includegraphics[{#2}]{#1}
+%   \caption{#3}
+% \end{subfigure}%
+% \begin{subfigure}{0.5\textwidth}
+%   \centering
+%   \includegraphics[{#5}]{#4}
+%   \caption{#6}
+% \end{subfigure}
+% % \caption{#7}
+% \caption[#8]{#7}
+% \end{figure}}
 
-% Standard figure sizes
-\newcommand{\Allanstdexample}{0.7}
-\newcommand{\AllanStdPlot}{0.7275}
+% % Standard figure sizes
+% \newcommand{\Allanstdexample}{0.7}
+% \newcommand{\AllanStdPlot}{0.7275}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \endinput
 

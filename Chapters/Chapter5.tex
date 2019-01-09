@@ -479,7 +479,7 @@ There are four layers of shields have been used for passive shielding in this pr
 \FloatBarrier
 So neither fluxgate placement nor shielding effect provide us with the solution of current unsettle problem. Next we will discuss an unique work of us which turns out to be handy for the new works we have presented in the future Sections.
 
-\section{Simulation of Prototype Integrating Feedback Algorithm}
+\section{Simulation of Prototype Integrating Feedback Algorithm}\label{sec:pSim}
 
 We were still in dark about current unsettle problem. So we thought simulating  the prototype would confirm whether we were getting the correct current graph. We first made a simulation without PI control algorithm to compare the experimental change in coil currents due to certain perturbation with the simulation ones (Eq.~(\ref{eq:del_I})) and the results were agreed except some sign issues. But we wanted to see simulated coil currents in time due to PI control algorithm (Eq.~(\ref{eq:I})). My supervisor made a simple one dimensional PI simulation in time in Python programming language which later I used to make a fully functional multi-dimensional PI simulation. The simulation process has been divided into three groups. They are 
 
@@ -856,7 +856,7 @@ In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and
 \item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
 \end{itemize}
 
-The discussion on Section~\ref{sec:pi_behave} suggests that I term
+The discussion in Section~\ref{sec:pi_behave} suggests that I term
 is necessary for fast system response due to any drift in the magnetic
 signal as it takes care of the offset problems which is unsolvable by
 using only P term. But, in doing so, it also creates problems in terms
