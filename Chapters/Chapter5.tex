@@ -159,7 +159,7 @@ in their time response by the filters, as expected.
 
 
 
-%\FloatBarrier
+%
 % The Fig.~\ref{fig:filtering} shows the importance of using the filter discussed above. The data was taken by measuring the drift in the signal $\Delta$B (see Eq.~(\ref{eq:del_B})) by '1x' sensor position two times where one with filter and another one without filter. On the part of data measurement, current has been applied in the perturbation coil at $\sim$ 0.32 s which is indicated by the vertical red dashed line and is termed as ON. At $\sim$0.95 s current supply in the perturbation coil has cut off which is indicated by the green vertical dash line and termed as OFF. The total loop sampling frequency is found to be $\sim$220 Hz. It is seen that the signal is very less attenuated while using filter and very noisy without any filter.
 
 The conclusion is that the filter is capable of reducing high
@@ -168,7 +168,7 @@ Given this additional freedom we can even do additional software
 averaging within the feedback and control loop in order to further
 reduce the noise.
 
-%\FloatBarrier
+%
 
 % So, for faster sampling it needs to have filter to avoid high frequency noise. Next, after applying filter let's see how the sampling frequency has impact on response time of the magnetic field compensation.
 
@@ -230,7 +230,7 @@ noisy, and smoother over longer periods of time as well.
 
 
 
-%\FloatBarrier
+%
 \fig{Images/samp_freq_same}{width = \textwidth,height=8 cm}{Active magnetic field compensation for resolution indices 1, 3, 5 and 7 and for 50, 45, 29 and 13 software averages respectively.  These settings achieve nearly the same loop cycle rates ($\sim 6$~Hz, indicated in parentheses).  Only the $C_x^-$ coil current (left) and $\Delta B$ for fluxgate 8x (right) are shown.  Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_same}}{Compensation behaviour for various resolution indices with different software averages.}
 
 Another option is to run with fewer averages than 50 and at higher
@@ -249,7 +249,7 @@ potentially gives a more accurate measurement of the true magnetic
 field, averaged over that cycle.
 
 
-% \FloatBarrier
+% 
 % In the upcoming Section PI, regularization parameter and condition number will be revisited with results.
 
 \section{PI Tuning General Behavior}\label{sec:pi_behave}
@@ -282,7 +282,7 @@ results in the error never being fully corrected and hence ``droop''.
 Raising $k_c^p$ can decrease the droop but will eventually result in
 system oscillation.
 
-\fig{Images/p25p125}{width=\textwidth,height=14cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta$B (right) for 12 fluxgate axes with fluxgate positions 1, 3, 6 and 8.  (a) $k_c^p=0.25$, (b) $k_c^p=1.25$.  In both cases $k_c^i=0$.  Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off.\label{fig:p_pi}}{Coil currents with drift $\Delta$B for different values of $k_c^p$ only.}
+\fig{Images/p25p125}{width=\textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta$B (right) for 12 fluxgate axes with fluxgate positions 1, 3, 6 and 8.  (a) $k_c^p=0.25$, (b) $k_c^p=1.25$.  In both cases $k_c^i=0$.  Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off.\label{fig:p_pi}}{Coil currents with field change $\Delta$B for different values of $k_c^p$.}
 
 
 The effect of changing $k_c^p$ is shown in Fig.~\ref{fig:p_pi}.  The
@@ -327,7 +327,7 @@ I also studied the effect of varying the regularization parameter $r$.
 As expected, when $r$ is increased, it decreases the amount of the
 control.  The proportional gain would therefore have to be increased
 in order to provide compensation.  Further studies of the adjustment
-of $r$ are presented in Section~\ref{sec:r}.
+of $r$ are presented in Section~\ref{sec:new_study_r}.
 
 % \doublefig{Images/p25}{width =\textwidth,height =8cm}{with passive shielding layers. \label{fig:shield_opera2}}{Images/p125}{width = \textwidth,height =8cm}{without outermost passive shielding layer.\label{fig:noShield_opera}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for different values of $k_c^p$ with $k_c^i$ in Eq.~(\ref{eq:I}) being zero. Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}) while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and sensors see Fig.~\ref{fig: coil} \label{fig:p_pi}}}{Prototype setup in OPERA simulation software.}
 
@@ -366,7 +366,7 @@ of $r$ are presented in Section~\ref{sec:r}.
 
 % It is seen that $\Delta$B=17.5 nT, 15.5 nT and 13.5 nT for $k_c^p$ = 0.25, 0.5 and 0.75 respectively (see Fig.~\ref{fig:p_pi}\textcolor{blue}{(a)}, Fig.~\ref{fig:p_pi}\textcolor{blue}{(b)}, Fig.~\ref{fig:p_pi}\textcolor{blue}{(c)}). That is, with the increase of $k_c^p$, $\Delta$B magnetic field decreases. But, it has a limit after which with the increase of $k_c^p$, the systems becomes unstable and starts oscillating which can be seen from Fig.~\ref{fig:p_pi}\textcolor{blue}{(d)}) where the currents (left) are oscillating and the drift itself also at $\Delta$B=12.5 nT (right). So, the error is reduced maximum by (20.5-12.5)/20.5 * 100$\%\approx$37$\%$ from the initial drift of $\Delta$B=20.5 nT denoted by the red curve at position '1x'. 
 
-%\FloatBarrier
+%
 The above results confirm that increasing $k_c^p$ reduces difference
 between the setpoint and the actual measurements of the magnetic
 field, at least until the point when the system starts to oscillate.
@@ -387,7 +387,7 @@ eventually it results in overshoot i.e. exceed the setpoint.
 
 % As like the effect on P, the effect of changing I has been shown in Fig.~\ref{fig:i_pi} where the change in current in all six coil sides with  $\Delta$B on a particular sensor position have been observed for $k_c^i$=0.25, 0.5, 0.75 and 1.0 . It is seen that with increase of I the level of compensation of the magnetic field is almost similar but the main difference occurs on how fast the system response in an expense of increasing current in all the coil sides (see Fig.~\ref{fig:i_pi}\textcolor{blue}{(a)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(b)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(c)} and Fig.~\ref{fig:i_pi}\textcolor{blue}{(d)}). The main problem with changing only I term is that it creates a very slow current response time. But, in terms of compensation only changing I gives very good result. The slow current response can be minimized by decreasing the value of optimized $r$ (see Section~\ref{sec:r_pi} and Section~\ref{sec:r_currentResponse} ).
 
-\fig{Images/i125}{width=\textwidth,height =7cm}{Currents (left) in all six coils with magnetic field $\Delta$B (right) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^i$=1.25 with $k_c^p=0$.  Grey curves denote the uncompensated field while color curves denote the measured field.  Vertical dashed lines indicate the perturbation coil being turned on and off.\label{fig:i_pi}}{Coil currents with drift $\Delta$B for $k_c^i$ only.}
+\fig{Images/i125}{width=\textwidth,height =7cm}{Currents (left) in all six coils with field change $\Delta$B (right) at 12 fluxgate sensors with fluxgate positions 1, 3, 6 and 8 for $k_c^i$=1.25 with $k_c^p=0$.  Grey curves denote the uncompensated field change while color curves denote the measured field change.  Vertical dashed lines indicate the perturbation coil being turned on and off.\label{fig:i_pi}}{Coil currents with field change $\Delta$B for $k_c^i$.}
 
 % \begin{figure}[!htb]
 %     \begin{subfigure}{.5\linewidth}
@@ -440,12 +440,12 @@ proportional-only control.
 The other observation is that in the left panel of
 Fig.~\ref{fig:i_pi}, the currents drift for very long periods of time.
 This may be contrasted with the right panel of Fig.~\ref{fig:i_pi},
-where it is clear the the fields do not drift with such long
+where it is clear that the fields do not drift with such long
 timescales.  This can also be compared with Fig.~\ref{fig:p_pi} where
 no such long-term drift of the currents can be seen either.
 
 Eventually we figured out this problem was due to ill conditioning,
-and it is discussed further in Section~\ref{sec:5coil}.  But at the
+and it is discussed further in Section~\ref{sec:coil_config}.  But at the
 stage we decided to characterize the problem further by adjusting the
 PI parameters to see what effect that might have.
 
@@ -453,7 +453,7 @@ PI parameters to see what effect that might have.
 %     \item message from the Fig.~\ref{fig:i_pi} ?
 % \end{itemize}
 
-%\FloatBarrier
+%
 
 % \doublefig{Images/i100_33_zoom}{width =\textwidth,height =8cm}{at $k_c^i$=1.0 \label{fig:shield_opera2}}{Images/i125_33_zoom}{width = \textwidth,height =8cm}{at $k_c^i$=1.25 \label{fig:noShield_opera}}{{Simulated zoomed version of the drift $\Delta$B for fluxgate position 1x for different values of $k_c^i$ with $k_c^p$ ( see Eq.~(\ref{eq:I}) ) being zero. For position of coils and sensors see Fig.~\ref{fig: coil}. For description about simulation see Section~\ref{sec:pSim}. The red vertical dashed line indicates the time of the perturbation coil being turned 'ON'. A time delay of 0.145 s was used to match the experimental loop sampling frequency of $\sim$6.5 Hz. \label{fig:i_pi_zoom}}}{Simulated zoomed version of the drift $\Delta$B.}
 
@@ -496,10 +496,10 @@ PI parameters to see what effect that might have.
 % \fig{Images/i_pi_zoom}{width = \textwidth,height =10cm}{Zoomed in version of the drift $\Delta$B shown in right side of Fig.~\ref{fig:i_pi}\textcolor{blue}{(a)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(b)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(c)} and Fig.~\ref{fig:i_pi}\textcolor{blue}{(d)} respectively at sensor position '1x' for different values of $k_c^i$ with $k_c^p$ ( see Eq.~(\ref{eq:I}) ) being zero. The red vertical dashed line indicates the time of the perturbation coil being turned 'ON'. For position of coils and sensors see Fig.~\ref{fig: coil}.\label{fig:i_pi_zoom}}
 
 
-%\FloatBarrier
+%
 
 The above results show that using only the I term provides better
-compensation, but that it gives rise to slowly-varying currents that
+compensation, but then it gives rise to slowly-varying currents that
 take a long time to settle.  I often refer to this problem as the
 ``current drifting problem'' in the remainder of this thesis.
 
@@ -524,7 +524,7 @@ tuned values were found to be $k_c^p=0.60$ and $k_c^i=0.37$.
 
 
 
-\fig{Images/pi_i_mCond30}{width=\textwidth,height=12cm}{Currents (left) in all six coil sides with field measurements $\Delta$B (right) from 12 sensor axes with fluxgate positions 1, 3, 6 and 8 for $k_c^i=0.37$ and adjusting (a) $k_c^p=0.6$ to (b) $k_c^p=0$.  Grey curves denote the uncompensated field.\label{fig:pi_i_mCond30}}{Coil currents with drift $\Delta$B for different values of $k_c^p$ only.}
+\fig{Images/pi_i_mCond30}{width=\textwidth,height=12cm}{Currents (left) in all six coil sides with field measurements $\Delta$B (right) from 12 sensor axes with fluxgate positions 1, 3, 6 and 8 for $k_c^i=0.37$ and adjusting (a) $k_c^p=0.6$ to (b) $k_c^p=0$.  Grey curves denote the uncompensated field change.\label{fig:pi_i_mCond30}}{Coil currents with drift $\Delta$B for different values of $k_c^p$ only.}
 
 The results of running the system with these parameters is shown in
 Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} It is seen that the
@@ -562,7 +562,7 @@ supplies, and by running the system with a reduced number of axes of
 control.  For example, when only one axis of control was used, the
 system performed just like a usual PI loop with properly adjusted
 currents and fields.  This is one reason the studies presented in
-Section~\ref{something-in-chapter4} were done.
+Section~\ref{sec:inv} were done.
 
 Section~\ref{sec:flux_place} represents other studies that were geared
 mostly at solving this problem.  In these studies the positioning of
@@ -570,14 +570,14 @@ the fluxgates were changed and the passive shield within the coils was
 removed.  As will be shown, neither had an impact on the current
 drifting problem.
 
-In Section~\ref{sec:simulation}, simulation results are presented and
+In Section~\ref{sec:pSim}, simulation results are presented and
 compared with the data.  It was at this point that we started to gain
 confidence that this was a true problem of multidimensional control,
 because, surprisingly (to us) the simulations agreed perfectly with
 the data and even reproduced the current drifting problem.
 
 By the studying the simulation results and the conditioning of the
-matrix (Section~\ref{sec:condnumber}), we eventually determined that
+matrix (Section~\ref{sec:cond}), we eventually determined that
 ill conditioning was the main problem.  The next several sections all
 follow this theme of developing a better understanding of
 multidimensional control and ultimately show that the simulation tools
@@ -655,7 +655,7 @@ The above discussion of the Table~\ref{table:flux-pos} shows that current goes c
 As fluxgate placements failed to solve the slow coil current response, we thought that increasing sampling frequency will solve the problem. So, besides the advantages discussed in Section~\ref{sec:freq}, solving the slow current response time was also a motivation to build the filters as that would allow us to use the fastest sampling frequency of the ADC. Due to time limitations and cost concern we had only built 12 filters to support 12 fluxgate sensors. Using the filter, we had reduced the response time but that was not the solution of the current unsettle problem. Then we thought the passive shielding layer had some impact on the current unsettle problem and decided to remove the outermost shield (see Section~\ref{sec:shield}). 
 
 % After that we decided to use the fastest sampling frequency of our ADC for which we have to build the filters.  Now, due to this the current response time has increased but that was not the solution of the current unsettle problem. Finally, we have realized that in addition to fastest response we have to also consider the matrix condition number and if the condition number is large then we have to lower the value of optimized $r$ (see Section~\ref{sec:new_study_r}). Here, we will talk about the the studies we have done on fluxgate placements.
-\fig{Images/shield_noShield}{width = \textwidth,height=14cm}{Currents (left) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right) for fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})) and $r$=2.8 with (a) shield and (b) without shield. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
+\fig{Images/shield_noShield}{width = \textwidth,height=12cm}{Currents (left) in all six coils with filed change $\Delta$B (right) in fluxgate positions 1, 3, 6 and 8 for $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.8$ with (a) shield and (b) without shield. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
 
 There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen with outermost shield and no shield. The results are shown in Fig.~\ref{fig:shield_noShield} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors with outermost passive shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(a)} and without shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(b)}. It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern which clears our confusion about the impact of shield on current unsettle problem.
 
@@ -771,7 +771,7 @@ A block shaped background region 4 times the scale in $x$, $y$ and $z$ axis with
 
 % \fig{Images/Mdiff_56}{width = \textwidth}{The absolute differences between the  experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. For position of the sensors and coils please see Fig.~\ref{fig: coil}. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
-% \FloatBarrier
+% 
 % So, we have made simulation which can produce $M_{sc}$ elements for any number of the sensors placed in the prototype geometry. This will be a tool for the future students who are limited by sensor position and placing them correctly in their system to study in detail about the effect of $\bm{M}$ for any set of sensors.
 
 
@@ -836,13 +836,13 @@ To field for a particular perturbation similar steps have been taken as above ex
 %     \caption[Comparison of change in current in experiment and simulation.]{Comparison of change in current in different coil sides at the time of applying perturbation both in experiment and simulation.}\label{table:currentChange}
 % \end{table}
 
-% \FloatBarrier
+% 
 % In the above, simulation made via OPERA to find $B_s(\text{setpoint})$ and $B_s(\text{measure})$ have been used to find the change in current in all six coil sides and matched with experimental results. 
 
 In the upcoming Section the field maps obtained due to various simulations in OPERA will be used to generate matrix and drift in signals which will then integrate in PI control algorithm to make a fully functional PI simulation.
 % The values obtained due to this have been compared with the values due to experimental setup and the results are similar as shown in Fig. \ref{fig:noShield_cSim}.
 
-% \fig{Images/cSim}{width =\textwidth, height=14cm}{Comparison of change in current in different Coil sides at the time of applying perturbation both in experiment and simulation. \label{fig:noShield_cSim}}
+% \fig{Images/cSim}{width =\textwidth, height=12cm}{Comparison of change in current in different Coil sides at the time of applying perturbation both in experiment and simulation. \label{fig:noShield_cSim}}
 
 \subsection{Field Maps Processing in Python}
 
@@ -891,10 +891,10 @@ Matrix $\bm{M(\text{sim})}$ and $\Delta$ B have been generated in Python from th
 
 For comparing experimental PI result with that simulation one, Matrix $\bm{M(\text{sim})}$ and $\Delta$ B have been generated in Python at the same position of the experimental fluxgates. Then the process discussed eralier has been used to make a PI simulation. The comparison is shown in Fig.~\ref{fig:exp_sim} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors in (a) experiment and (b). It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern. It confirms that the current unsettle problem being seen in the experiment is real.
 
-\fig{Images/exp_sim}{width = \textwidth,height=14cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
+\fig{Images/exp_sim}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
 
 
-\FloatBarrier
+
 The magnetic field compensation due to PI feedback loop and the currents in all the six coil sides results from experiment and simulation are quite similar. Next we show new ways to deal with the current unsettle problem. 
 
 % The uncompensated magnetic field is the magnetic field without the compensation effect and predicted by
@@ -903,7 +903,7 @@ The magnetic field compensation due to PI feedback loop and the currents in all 
 % \end{equation}
 % where, $B_s^n(\text{measured})$ is the actual measurement from coming the fluxgate sensors in experiment or determined using simulation (see Section~\ref{sec:pSim}) with $n$=(1,...N) is the no of measurements taken and $B_s^n(coils)$ is determined using Eq.~(\ref{eq:B_coils}).
 
-% \FloatBarrier
+% 
 % \doublefig{Images/pi_exp_all}{width =\textwidth, height=10cm}{Experiment\label{fig:pi_exp_all}}{Images/pi_sim_all}{width = \textwidth,height=10cm}{Simulation\label{fig:pi_sim_all}}{{PI active magnetic field compensation results by both Experiment (a) and Simulation (b). Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. } \label{fig:pi_ExpSim_all}}{PI active magnetic field compensation results by both experiment and simulation.}
 
 
@@ -913,9 +913,9 @@ The magnetic field compensation due to PI feedback loop and the currents in all 
 
 % Again, the same result has been shown by separating $x$, $y$ and $z$ respectively in Fig. \ref{fig:pi_exp} obtained by experiment and in Fig. \ref{fig:pi_sim} due to simulation.
 
-% \fig{Images/pi_exp}{width =\textwidth,height=14cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Experiment. \label{fig:pi_exp}}
+% \fig{Images/pi_exp}{width =\textwidth,height=12cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Experiment. \label{fig:pi_exp}}
 
-% \fig{Images/pi_sim}{width =\textwidth,height=14cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Simulation. \label{fig:pi_sim}}
+% \fig{Images/pi_sim}{width =\textwidth,height=12cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Simulation. \label{fig:pi_sim}}
 
 \section{New Studies on Regularization Parameter}\label{sec:new_study_r}
 
@@ -969,7 +969,7 @@ In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and
 
 % The effect of changing $k_c^p$ has been shown in Fig.~\ref{fig:p_pi_m} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B found by Eq.~(\ref{eq:del_B}) in sensor position '1x'.  It is seen that $\Delta$B=23 nT, 18.5 nT and 16.5 nT for $k_c^p$ = 0.25, 0.5 and 0.75 respectively (see Fig.~\ref{fig:p_pi_m}\textcolor{blue}{(a)}, Fig.~\ref{fig:p_pi_m}\textcolor{blue}{(b)}, Fig.~\ref{fig:p_pi_m}\textcolor{blue}{(c)}). That is, with the increase of $k_c^p$, $\Delta$B magnetic field decreases. But, it has a limit after which with the increase of $k_c^p$, the systems becomes unstable and starts oscillating which can be seen from Fig.~\ref{fig:p_pi_m}\textcolor{blue}{(d)}) where the currents (left) are oscillating and the drift itself also at $\Delta$B=14.5 nT (right). So, the error is reduced maximum by (29.5-14.5)/29.5 * 100$\%\approx$51$\%$ from the initial drift of $\Delta$B=29.5 nT denoted by the red curve at position '1x'. 
 
-% \FloatBarrier
+% 
 % The above results confirm that matrix condition number has minimal effect on P term by comparing the effect shown in Section~\ref{sec:pi_behave}. Next, we will discuss about the effect on only I term.
 
 % \subsubsection{Condition Number Effect on Changing only I term}
@@ -1017,7 +1017,7 @@ In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and
 % % \fig{Images/i_pi_zoom}{width = \textwidth,height =10cm}{Zoomed in version of the drift $\Delta$B shown in right side of Fig.~\ref{fig:i_pi}\textcolor{blue}{(a)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(b)}, Fig.~\ref{fig:i_pi}\textcolor{blue}{(c)} and Fig.~\ref{fig:i_pi}\textcolor{blue}{(d)} respectively at sensor position '1x' for different values of $k_c^i$ with $k_c^p$ ( see Eq.~(\ref{eq:I}) ) being zero. The red vertical dashed line indicates the time of the perturbation coil being turned 'ON'. For position of coils and sensors see Fig.~\ref{fig: coil}.\label{fig:i_pi_zoom}}
 
 
-% \FloatBarrier
+% 
 % The above results confirm the currents in the coils never settles in if there is a ill-conditioned matrix present.. Next the condition number effect on both both of them after tuning (see Section~\ref{sec:tune}) will be discussed and may be the currents settle there!!
 
 
@@ -1035,7 +1035,7 @@ In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and
 
 % \doublefig{Images/p43i52}{width =\textwidth,height =8cm}{at $k_c^p$=0.43 and $k_c^i$=0.52. \label{fig:pi_tuned_m}}{Images/i52}{width = \textwidth,height =8cm}{at $k_c^p$=0.0 and $k_c^i$=0.52..\label{fig:i52m}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ ( see Eq.~(\ref{eq:I}) ). Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig: coil}.} \label{fig:tuned_vs_i_m}}{short}
 
-% \FloatBarrier
+% 
 % The above results rather confirm that matrix condition number does not bring any change while using P and  term at a time. But it has got huge impact on I term for which the coil current never settles in case of ill conditioned matrix. Next we will try to improve the current settling problem by changing the regularization parameter.
 
 \subsection{Effect of $\mathbf{r}$ on PI Tuning}\label{sec:r_pi}
@@ -1070,7 +1070,7 @@ effect with possible outcome.
 As we have realized that having tuned P and I terms have similar effect like
 having only I term, we have studied the effect of different I term keeping the P term fixed to see whether the current unsettle problems goes away. The Fig.~\ref{fig:rp_i} shows the active compensation by fluxgate position 1, 3, 6 and 8 for with $k_c^p$=0.6, $r$=3.04 and different values of $k_c^i$ for 50 software averages respectively using filter in resolution index 1. For simplicity only $C_z^+$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' have been shown instead of showing all current coils and sensor positions. For a complete list of positions see the color map of $\bm{M}$ in Fig.~\ref{fig:m}.  The blue color denotes current (left) in coil $C_z^+$ to compensate magnetic drift on fluxgate sensor position '8x' for $k_c^p$=0.6, $r$=3.04 and $k_c^i$=0.0. It is seen that there is no current unsettle problem (left) and the magnetic drift (right) reduces from 25 nT to 15 nT which is expected from the discussion of the effect of changing only P term in Section~\ref{sec:pi_behave}. It is also seen that for all other colors the magnetic drift vanishes very fast as different values of I term are applied which is also expected from from the discussion of the effect of changing only I term in Section~\ref{sec:pi_behave} though we have used a fixed P term here which has minimal effect as discussed earlier. Our main concern is whether the current unsettle problems appear for changing I term and it is seen that as long as there is I term, the current unsettle problem appears. But the trend shows that if I term is in increasing order, then the current unsettle problem may disappear. We have also seen the effect of increasing I term in Section~\ref{sec:pi_behave} which suggests that increasing I term after a point makes the current unstable with creating overshoot problem. So, that can not be as solution to our original problem of current unsettle.
 
-\FloatBarrier
+
 \fig{Images/pi_r}{width = \textwidth,height=8 cm}{Active magnetic field compensation on fluxgate position 1, 3, 6 and 8 for resolution index 1 with $k_c^p$=0.6, $k_c^i$=0.37 and different values of $r$ for 50 software average using filter. For simplicity only $C_z^+$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' have been shown. Vertical axis represent $\Delta$B (see Eq.~(\ref{eq:del_B})) due to '8x' with red represents uncompensated $\Delta$B. They are described in the text. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:pi_r}}{Active magnetic field compensation for different values of $r$}
 
 
@@ -1079,14 +1079,14 @@ As increasing I term is not the solution for the current unsettle problem, we ha
 
 
 
-\FloatBarrier
 
-\fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=.60, $k_c^i$=0.37 (see Eq.~(\ref{eq:I})) and $r$=2.4. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:pi_tuned_r24}}{Coil currents with drift $\Delta$B for $k_c^p$=0.60, $k_c^i$=0.37 and $r$=2.4}
+
+\fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=.60, $k_c^i$=0.37 (see Eq.~(\ref{eq:I})) and $r$=2.4. For position of coils and fluxgates see Fig.~\ref{fig: coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:pi_tuned_r24}}{Coil currents with drift $\Delta$B for $k_c^p$=0.60, $k_c^i$=0.37 and $r$=2.4}
 
 The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using lower value of $r$ to show its effect on all the fluxgate sensors and shown in in Fig.~\ref{fig:pi_tuned_r24} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B (right) found by Eq.~(\ref{eq:del_B}). It is seen the current unsettle problems in all the coil sides are disappeared but high frequency noises are induced.
 
 
-\FloatBarrier
+
  
  The above results show that if $r$ or condition number is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If $r$ set falsely low, it also doesn't help because it induces high frequency noises and setting PI large again induces slow response. Next we will talk about a new method of regularization based on condition number.
  
@@ -1101,16 +1101,16 @@ The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using 
 
 % The effect of changing $r$ with $k_c^p$=0 and $k_c^i$=0.52 has been shown in Fig.~\ref{fig:r_pi} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B found by Eq.~(\ref{eq:del_B}) in sensor position '1x'.  It is seen from Fig.~\ref{fig:r_pi}\textcolor{blue}{(a)}, Fig.~\ref{fig:r_pi}\textcolor{blue}{(b)}, Fig.~\ref{fig:r_pi}\textcolor{blue}{(c)} and Fig.~\ref{fig:r_pi}\textcolor{blue}{(d)} which are correspond to $r$ = 2.0, 2.4, 2.8 and 3.2 respectively that the changing $r$ has significant effect on the coil current graph and barely any effect on the system response time for reducing the drift in the signal. That is at $r$=2.0, the coil current graph has the fastest settling time where the current settles within 3 s after the perturbation has been applied. At $r$=2.4, it takes 10s for the coil currents to settle in. But at $r$=2.8, it seems like the coil current never settles in which is again improved at $r$=3.2. Note that the here seriously ill conditioned matrix with condtion number 129 has been used and optimized $r$ found by the simulation model is $\sim$2.9 which tells us that the coil settling of the current graph seems to have issue with the that optimized 'r for ill-conditioned matrix. So, instead of taking the optimized $r$ that has been found by the simulation model we may have to choose the lower value of $r$. 
 
-% \fig{Images/exp_sim}{width = \textwidth,height=14cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
+% \fig{Images/exp_sim}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
 
-\FloatBarrier
+
 \begin{itemize}
     \item message from Fig.~\ref{fig:i100_r24}??
     \item current drifting in Fig.~\ref{fig:exp_sim}\textcolor{blue}{(a)} is hugely reduced in Fig.~\ref{fig:i100_r24}. 
 \end{itemize}
 
-\FloatBarrier
-\fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})) and $r$=2.4. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=2.4 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:i100_r24}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.4}
+
+\fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})) and $r$=2.4. For position of coils and fluxgates see Fig.~\ref{fig: coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=2.4 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:i100_r24}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.4}
 
 % % \fig{Images/cp0i100r24}{width = \textwidth}{short.\label{fig:m2}}{Short}
 % \begin{itemize}
@@ -1150,7 +1150,7 @@ The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using 
 %     \label{fig:r_pi}
 % \end{figure}
 
-\FloatBarrier
+
 % Now the question arises about what if $r$ value is chosen more than the optimized $r$. For answering that question, we have also studied the effect for more values of $r$ with same setup which are shown in Fig.~\ref{fig:r_pi_more}. It is seen from Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(a)}, Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(b)}, Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(c)} and Fig.~\ref{fig:r_pi_more}\textcolor{blue}{(d)} which are correspond to $r$ = 3.5, 3.6, 3.7 and 3.9 respectively that the coil current graph seems to be settle in for larger value of $r$ before it starts showing less responsive for example at $r$=3.9.   
 
 % \begin{figure}[!htb]
@@ -1184,7 +1184,7 @@ The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using 
 %     \label{fig:r_pi_more}
 % \end{figure}
 
-\FloatBarrier
+
 
 % The above results confirm that for a matrix with large condition number, the value of $r$ has to be tuned alongside the PI tuning. Next we will talk about a new method to find $r$.
 
@@ -1214,7 +1214,7 @@ We introduce Eq.~\ref{eq:minvR} with various values of $r$ and each time the con
  
 \fig{Images/mc_Mcond2}{width = \textwidth,height =7cm}{Condition Number of $\bm{M}$ (vertical axis) in (a) for different values of 'r.  For description of the figure in (b) see Fig.~\ref{fig:I-fluc}. The matrix is similar to the matrix as described by the Fig.~\ref{fig:m}. \label{fig:cond}}{Comparing $r$ from two different methods.}
 
-\FloatBarrier
+
 
 In the above, different method to find optimize $r$ has been discussed which is a good alternative to the one explained in Section~\ref{sec:mont} and the results are similar. It could be more useful, not requiring an random number technique to find the best $r$. 
 
@@ -1286,7 +1286,7 @@ In the above, different method to find optimize $r$ has been discussed which is 
 % Mainly the corner positions and the center of each of the coil faces  have been tested. Also, they have been analyzed by moving slightly in different positions. The results for different no of sensors in different positions are given in Table~\ref{table:flux-pos}. Position of the fluxgates are defined by the numbers while they are in corners and when they are in the center of each of the coil faces they are termed as 'Center ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)'. Center-6cm means all the sensors in the center of the coil faces have been brought 6cm towards the origin from the center and center+6cm means they have brught 6cm away outside the center. For, the full picture of the positions see Fig.~\ref{fig: coil}. the It is seen that that matrix condition number is from 22-36 for the fluxgates being placed either in corners or in center. But if they are slightly moved within $\pm$6cm of center then the matrix condition number becomes very large. Only considering the matrix condition number, it seems that having fluxgates in all the corners and the center of each of the coil faces should be the best choice as its giving the lowest condition number which is 22. But that is not the whole story! To quantify more we have taken the help of regenerating Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim}. From Fig.~\ref{fig:Isim}, we have recorded the maximum  $\Delta I_c^{\text{simRMS}}$ (mA) for 30 different sets of $B_s^{\text{rand}}$. For maximum compensation we have generated the Fig.\ref{fig:fluc-sim} for same for 30 different sets of $B_s^{\text{rand}}$ from which we have recorded lowest the remaining fluctuation F. For example- for fluxgate positions 1, 3, 6 and 8, the lowest F goes to 0.3. That means the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is(1-0.3$\times$100$\%$) =70$\%$. For more details see Section~\ref{sec:mont}. It seen that the current goes crazy if the fluxgates are placed in the center of the coil faces and the maximum $\Delta I_c^{\text{simRMS}}$ ranges from 98 to 192 mA. But the maximum $\Delta I_c^{\text{simRMS}}$ is 12 mA when the center fluxgates are used with the corners one. But on that time the maximum compensation due to the field produced by $\Delta I_c^{\text{sim}}$to counteract $B_s^{\text{rand}}$ is only 15$\%$. So, anything with center seems to give crazy results. Then by looking at the all the three parameters e.g. matrix condition number, maximum $\Delta I_c^{\text{simRMS}}$ and maximum compensation for the 3 different sets of corner positions only, it is seen that the results are more balanced and surprisingly the compensation with 4*3-axis sensors are better than 8*3-axis sensors in exchange of more maximum $\Delta I_c^{\text{simRMS}}$.
 
 
-% \FloatBarrier
+% 
 
 
 % % The increase in matrix condition number for the center of the coil sides is noteworthy.  So, a study has been done to see the current response effect while sensors are in the middle of the coil sides as shown in Fig.~\ref{fig:cb_center}. The Fig.~\ref{fig:cb_center_p} represents the current response on all the six coil sides with their effect on the $z$-axis in the origin as shown in the right with only choosing proportional (P) term. But just adding a small fraction of integral resest (I) term makes the current response unstable as shown in Fig.~\ref{fig:cb_center_pi}. So only P controller is suitable if fluxgates are placed in the middle of the coil sides but in the case of corner positions either P only or I only or PI controller option is available. In a summary, the more the sensors the more is the matrix condition number. Corner positions are better in terms of different freedom of controlling.
@@ -1298,7 +1298,7 @@ In the above, different method to find optimize $r$ has been discussed which is 
 % % \doublefig{Images/bt8}{width =\textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:bt8}}{Images/sf8}{width = \textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:sf8}}{{PI Active Magnetic Field Compensation Results by both Experiment and Simulation.} \label{fig:btSF8}}
 % The above discussion of the Table~\ref{table:flux-pos} shows that current goes crazy if the fluxgates are placed in the center of each of the coil faces and crazier if they are slightly moved inside or outside of the center. The corners position fluxgates shows normal behaviour compare to the center positions and surprisingly less sensors shows better compensation in the corners in exchange more more currents.
 
-% \FloatBarrier
+% 
 % \subsection{Different Shields}
 
 % There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen using outermost shield and no shields. Both of the configurations produce similar results.
@@ -1309,7 +1309,7 @@ In the above, different method to find optimize $r$ has been discussed which is 
 
 % % except for the case of shield, the matrix condition number is less. The Fig.~\ref{fig:btSF8_s} shows the AMC compensation (Fig.~\ref{fig:bt8_s}) and the corresponding allan deviation and shielding factor ( Fig.~\ref{fig:sf8_s}) with outermost layer of shield. The matrix condition number is found to be 19. Similarly, the Fig.~\ref{fig:btSF8} shows the AMC compensation (Fig.~\ref{fig:bt8}) and the corresponding allan deviation and shielding factor ( Fig.~\ref{fig:sf8}) without any shield. The matrix condition number in this case is 132. The one advantage of having shielding is that , the shielding factor for all the sensors remain $geq$1 but in case of no shield, the shielding factor may be very good at certain point but in some point it can go below 1.
 
-% \fig{Images/shield_noShield}{width = \textwidth,height=14cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})) and $r$=2.8. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
+% \fig{Images/shield_noShield}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})) and $r$=2.8. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
 
 % % \doublefig{Images/bt8_shield}{width =\textwidth, height= 7 cm}{Position=1,2,3,4,6,8\label{fig:bt8_s}}{Images/sf8_shield}{width = \textwidth, height= 7 cm}{Position=1,2,3,4,6,8\label{fig:sf8_s}}{{Shield} \label{fig:btSF8_s}}{short}
 
@@ -1363,7 +1363,7 @@ To verify that we run the prototype two times. First time we set the value of $k
 % \doublefig{Images/i100_old}{width =\textwidth, height= 6.5 cm}{at $k_c^p$=0.0 and $k_c^i$=1.0 for 'Old PI' \label{fig:i100_old}}{Images/p100_new}{width = \textwidth, height= 6.5 cm}{at $k_c^p$=1.0 and $k_c^i$=0.0 for 'New PI'\label{fig:p100_new}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig: coil}..} \label{fig:style_of_pi}}{short}
 
 
-\FloatBarrier
+
 But again is it really true about what we are claiming ?
 
 To verify that the equation has been studied deeply. The mathematical equivalent of Eq.~(\ref{eq:I_raw}) is- 
@@ -1458,25 +1458,25 @@ For the prototype, two different configuration of compensation coils have been e
 
 \fig{Images/wt5c}{width = \textwidth}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 5 coils. \label{fig:wt5c}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 5 coils.}
 
-\FloatBarrier
+
 
 \begin{itemize}
      \item message from Fig.~\ref{fig:coil_reg}??
  \end{itemize}
 
 % \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
-\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta$B for different coil configuration in regularized $\bm{M^{-1}}$}
 
-\FloatBarrier
+
 \begin{itemize}
      \item message from Fig.~\ref{fig:coil_pseudo}??
  \end{itemize}
-\FloatBarrier
+
 % \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
-\fig{Images/coil_pseudo2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. All grey color curves in $\Delta$B graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
+\fig{Images/coil_pseudo2}{width =\textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig: coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta$B for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
- \FloatBarrier
+ 
 %  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
  It can be as explained by Fig.~\ref{fig:cDir} where one of the coil current mode was shown for all six coils. The total current contribution is found to be zero due to current contributions from $C_x^{\pm}$ in Fig.~\ref{fig:c1}, $C_y^{\pm}$ in Fig.~\ref{fig:c3} and $C_z^{\pm}$ in Fig.~\ref{fig:c5}. To break the mode, two out of the six coils have been wired together so that they can act as one resulting total compensation coils be five. 
 %It was found that due to this, the condition number is decreased drastically to 2.
@@ -1609,7 +1609,7 @@ The effect of $r$ on the current error and remaining field fluctuations in exper
 % \fig{Images/mont_comp3}{width = \textwidth,height =10cm}{Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:mont_comp}}{Short}
 
 
-\FloatBarrier
+
 % The above results in Fig.~\ref{fig:mont_comp}, where simulation results are similar to experimental one justify the simulation method described in Section~\ref{sec:mont}. The upcoming Section is all about P and I term (see Eq.~(\ref{eq:I}) ) behaviour. 
 % \fig{Images/sf6p}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:adev}}{Short}
 \fig{Images/sf6sr}{width = \textwidth}{Allan deviation and shielding factor for fluxgate positions 1, 3, 6 and 8. For position of fluxgate sensors see Fig.~\ref{fig: coil}.\label{fig:adev}}{Allan deviation and shielding factor.}
