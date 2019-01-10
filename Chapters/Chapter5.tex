@@ -611,11 +611,11 @@ that I could not change the condition number or the current drifting
 problem significantly.
 \item The slow current response might be due to magnetic responses that were slow.
 To address this, I tried removing the magnetic shielding system from
-the coil cube and retuning the system.  The conclusion of this study
+the coil cube and re-tuning the system.  The conclusion of this study
 was that it also did not fix the problem.
 \end{enumerate}
 In this Section, the results of those studies are shown and discussed.
-As will be shown in Section~\ref{sec:coildesign}, the problem
+As will be shown in Section~\ref{sec:coil_config}, the problem
 originates from having too many degrees of freedom in the coil system
 itself.  Nonetheless these studies are important to show the process
 by which we learned this.
@@ -624,11 +624,11 @@ by which we learned this.
 
 Previous work of others did not fully investigate the principles by
 which the fluxgate positions should decided.  In general the strategy
-of Ref.~\cite{bib:bfranke-thesis} was to place a larger number of
+of Ref.~\cite{bea} was to place a larger number of
 fluxgates than required at conveniently mounted locations, generally
 distributed within the region of the coils and magnetic shield.
 
-Based on this reference, we started taking data with 4x3-axis fluxgate
+Based on this reference, we started taking data with $14\times 3$-axis fluxgate
 magnetometers placed just inside various corners of our coil cube.
 One hypotheses was that increasing the number of sensors would
 eliminate the problem of current drifting. To test this, we
@@ -690,7 +690,7 @@ positions (see Fig.~\ref{fig:coil}) and when they are in the center of
 each of the coil faces they are termed as ($C_x^\pm$, $C_y^\pm$, and
 $C_z^\pm$). Center-6cm means all the sensors in the center of the coil
 faces have been brought 6~cm towards the origin at the center and
-center+6cm means they are 6~cm farther away from the center.
+Center+6cm means they are 6~cm farther away from the center.
 
 The matrix can be created for an arbitrary number of sensor positions
 by moving the sensors and recording field data for the various coil
@@ -698,7 +698,7 @@ settings in subsequent runs.  This has been done for example in the
 lowest row of the table where $14\times 3$-axis fluxgates have been
 incorporated into the matrix.
 
-The general conclusion of Table~\ref{tab:flux-pos} is that while the
+The general conclusion of Table~\ref{table:flux-pos} is that while the
 fluxgate positions have some impact on the condition number of both
 the unregularized and regularized pseudoinverse, they do not solve the
 problem of ill-conditioning: the matrix must still be regularized or
@@ -711,10 +711,10 @@ Interestingly, even if a large number of sensors are included ({\it
 e.g.}~the final two rows of the table), this does not necessarily have
 a positive impact on the condition number.
 
-Another conclusion is that an overconstrained system (more fluxgate
+Another conclusion is that an over-constrained system (more fluxgate
 axes than coils) is not necessarily sufficient in order to have a
 well-conditioned problem.  It is not even clear whether an
-overconstrained system is absolutely necessary to generate good
+over-constrained system is absolutely necessary to generate good
 control.  For example, at the center face positions, the fluxgates
 only ever sense a large magnetic field in one particular direction,
 because the magnetic field must be perpendicular to the magnetic
@@ -725,9 +725,9 @@ properties for the matrix as any other row in the Table.  We also
 tried studies where we used only those six axes in the control system,
 with very similar results to the corner-placement positions.
 
-In Section~\ref{sec:simulation} I will report a simulation which is
+In Section~\ref{sec:pSim}, I will report a simulation which is
 successful in reproducing these results.  Although not shown here, the
-results of PI tuning of the sytems for which we had enough sensors
+results of PI tuning of the systems for which we had enough sensors
 were also acquired.  None of the positions gave particularly better PI
 control than any of the others and all of them generally suffered from
 the same current drifting problem.
@@ -735,7 +735,7 @@ the same current drifting problem.
 I also tried slight adjustments to the corner positions and this had a
 similar small effect.  It will be discussed further in
 Section~\ref{sec:cond} that it is also noticeable that regularization
-by two different methods (the method of Ref.~\cite{bib:bfranke-these}
+by two different methods (the method of Ref.~\cite{bea}
 and my new method) agree.
 
 % \doublefig{Images/cB_t_center_p}{width =\textwidth, height= 6 cm}{Position=1,2,3,4,6,8\label{fig:cb_center_p}}{Images/cB_t_center_pi}{width = \textwidth, height= 6 cm}{Position=1,2,3,4,6,8\label{fig:cb_center_pi}}{{PI Active Magnetic Field Compensation Results by both Experiment and Simulation.} \label{fig:cb_center}}
@@ -774,7 +774,7 @@ As fluxgate placements failed to solve the slow coil current response, we though
 % After that we decided to use the fastest sampling frequency of our ADC for which we have to build the filters.  Now, due to this the current response time has increased but that was not the solution of the current unsettle problem. Finally, we have realized that in addition to fastest response we have to also consider the matrix condition number and if the condition number is large then we have to lower the value of optimized $r$ (see Section~\ref{sec:new_study_r}). Here, we will talk about the the studies we have done on fluxgate placements.
 \fig{Images/shield_noShield}{width = \textwidth,height=12cm}{Currents (left) in all six coils with filed change $\Delta$B (right) in fluxgate positions 1, 3, 6 and 8 for $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.8$ with (a) shield and (b) without shield. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
 
-There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen with outermost shield and no shield. The results are shown in Fig.~\ref{fig:shield_noShield} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors with outermost passive shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(a)} and without shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(b)}. It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern which clears our confusion about the impact of shield on current unsettle problem.
+There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen with outermost shield and no shield. The results are shown in Fig.~\ref{fig:shield_noShield} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for filed change $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors with outermost passive shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(a)} and without shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(b)}. It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern which clears our confusion about the impact of shield on current unsettle problem.
 
 \begin{itemize}
      \item message from Fig.~\ref{fig:shield_noShield}??
