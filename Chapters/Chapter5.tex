@@ -2,7 +2,7 @@
 \lhead{\emph{Quantification of AMC Prototype}}
 %\part{Privacy Preserving Approximation of Edit Distance on Genomic Data}
 
-\chapter{Quantification of AMC Prototype}\label{ch:quantification}
+\chapter{Quantification of Active Magnetic Compensation Prototype}\label{ch:quantification}
 % \label{chap:image}
 
 In Chapter~\ref{ch:operation}, the magnetic control process and the
@@ -16,27 +16,26 @@ system. We have been able to make the system faster by introducing
 filter which enables us to change the sample frequency without adding
 noise and will be discussed in Section~\ref{sec:freq}. In
 Section~\ref{sec:pi_behave}, we have discussed the studies to
-understand P and I term of PI control
-algorithm. But the coil current drifting problem is still there. We
-have then changed the fluxgate positions randomly to try to make
-condition number smaller and we have also removed the outermost
-passive shielding layer to see if there is any effect. For confirming
-the experimental coil current pattern, we have also made a simulation
-of the prototype. All the discussions about the different position of
-fluxgates and shield removal are in Section~\ref{sec:flux_place}. We
-have also implemented the new control algorithm suggested by
-Ref.~\cite{rawlik} and compared with our existing one suggested by
-Ref.~\cite{bea}. While comparing those we came up with an interesting
-similarity in the control algorithms which is discussed in
-Section~\ref{sec:style_pi}. But the new algorithm sill had no answers
-for the current drifting problems which encouraged us to study the
-regularization parameter in different way that is discussed in
-Section~\ref{sec:new_study_r}. The current drifting problem can be
-solved but that introduced additional noise. We have then realized
-that coil configuration has a great impact on the current modes which
-we have discussed in Section~\ref{sec:coil_config}. Finally, the
-results of the metrics that has been discussed in
-Section~\ref{sec:metrics} are presented in
+understand P and I term of PI control algorithm. But the coil current
+drifting problem is still there. We have then changed the fluxgate
+positions randomly to try to make condition number smaller and we have
+also removed the outermost passive shielding layer to see if there is
+any effect. For confirming the experimental coil current pattern, we
+have also made a simulation of the prototype. All the discussions
+about the different position of fluxgates and shield removal are in
+Section~\ref{sec:flux_place}. We have also implemented the new control
+algorithm suggested by Ref.~\cite{rawlik} and compared with our
+existing one suggested by Ref.~\cite{bea}. While comparing those we
+came up with an interesting similarity in the control algorithms which
+is discussed in Section~\ref{sec:style_pi}. But the new algorithm sill
+had no answers for the current drifting problems which encouraged us
+to study the regularization parameter in different way that is
+discussed in Section~\ref{sec:new_study_r}. The current drifting
+problem can be solved but that introduced additional noise. We have
+then realized that coil configuration has a great impact on the
+current modes which we have discussed in
+Section~\ref{sec:coil_config}. Finally, the results of the metrics
+that has been discussed in Section~\ref{sec:metrics} are presented in
 Section~\ref{sec:metrics_res}. There are some unique points discussed
 here which are not explicitly present on previous studies on active
 compensation. These represent the principal improvements and
@@ -229,8 +228,6 @@ resolution index 12 (without filter) but are generally much less
 noisy, and smoother over longer periods of time as well.
 
 
-
-%
 \fig{Images/samp_freq_same}{width = \textwidth,height=8 cm}{Active magnetic field compensation for resolution indices 1, 3, 5 and 7 and for 50, 45, 29 and 13 software averages respectively.  These settings achieve nearly the same loop cycle rates ($\sim 6$~Hz, indicated in parentheses).  Only the $C_x^-$ coil current (left) and $\Delta B$ for fluxgate 8x (right) are shown.  Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_same}}{Compensation behaviour for various resolution indices with different software averages.}
 
 Another option is to run with fewer averages than 50 and at higher
@@ -769,16 +766,46 @@ and my new method) agree.
 
 \subsection{Impact of Passive Shield}
 
-As fluxgate placements failed to solve the slow coil current response, we thought that increasing sampling frequency will solve the problem. So, besides the advantages discussed in Section~\ref{sec:freq}, solving the slow current response time was also a motivation to build the filters as that would allow us to use the fastest sampling frequency of the ADC. Due to time limitations and cost concern we had only built 12 filters to support 12 fluxgate sensors. Using the filter, we had reduced the response time but that was not the solution of the current unsettle problem. Then we thought the passive shielding layer had some impact on the current unsettle problem and decided to remove the outermost shield (see Section~\ref{sec:shield}). 
+Fluxgate placements failed to solve the slow coil current response.
+Another hypothesis developed around this time was that increasing
+sampling frequency will solve the problem.  So, besides the advantages
+discussed in Section~\ref{sec:freq}, solving the slow current response
+time was also a motivation to build the filters as that would allow us
+to use the fastest sampling frequency of the ADC.  As can be see in
+that Section, using the filter, we successfuly reduced the response
+time but still suffered from current drifts over long timescales.
+
+Then we thought the passive shielding layer might have cause some
+slower response of the system, perhaps due to slow changes in the
+magnetization of the shield To test if this affected the feedback and
+control system, I conducted tests where I removed the magnetic shield
+from within the coil cube.
+
 
 % After that we decided to use the fastest sampling frequency of our ADC for which we have to build the filters.  Now, due to this the current response time has increased but that was not the solution of the current unsettle problem. Finally, we have realized that in addition to fastest response we have to also consider the matrix condition number and if the condition number is large then we have to lower the value of optimized $r$ (see Section~\ref{sec:new_study_r}). Here, we will talk about the the studies we have done on fluxgate placements.
-\fig{Images/shield_noShield}{width = \textwidth,height=12cm}{Currents (left) in all six coils with filed change $\Delta$B (right) in fluxgate positions 1, 3, 6 and 8 for $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.8$ with (a) shield and (b) without shield. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 25  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:shield_noShield}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.8}
+\fig{Images/shield_noShield}{width=\textwidth,height=12cm}{Magnetic compensation results (a) with shield and (b) without shield within the coil cube.  The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.8$.  The current supplied to the perturbation coil was 25  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:shield_noShield}}{Comparison of magnetic compensation results with and without the magnetic shield present.}
 
-There are four layers of shields have been used for passive shielding in this prototype (see Section~\ref{sec:shield}). The active compensation effect has been seen with outermost shield and no shield. The results are shown in Fig.~\ref{fig:shield_noShield} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for filed change $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors with outermost passive shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(a)} and without shield in Fig.~\ref{fig:shield_noShield}\textcolor{blue}{(b)}. It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern which clears our confusion about the impact of shield on current unsettle problem.
+Fig.~\ref{fig:shield_noShield} compares the response of the system
+with the outermost magnetic shield layer inside the coil cube, to the
+response when no magnetic shields are within the coil cube.  When the
+shield is removed, it changes the matrix elements significantly. The
+matrix was therefore remeasured and the regularization process redone.
+It was possible to get satisfactory results for the inversion of both
+matrices (shield and no shield) using $r=2.8$.
+Fig.~\ref{fig:shield_noShield} demonstrates that removal of the
+magnetic shield, while having a significant impact on the matrix
+elements, does not have much impact on the effectiveness of the system
+to compensate the field.  It also has no impact on the current
+drifting problem, although the pattern of currents has changed
+somewhat, because of the change in the matrix elements.
 
-\begin{itemize}
-     \item message from Fig.~\ref{fig:shield_noShield}??
- \end{itemize}
+Another difference between Fig.~\ref{fig:shield_noShield} and
+Fig.~\ref{fig:5.7} is that the connection of the coils to current
+sinks was changed, resulting in a change in the sign of some of the
+currents.  These kinds of changes were also done often in order to try
+to address the current drifting problem and conduct tests of the
+current sinks.
+
 
 % except for the case of shield, the matrix condition number is less. The Fig.~\ref{fig:btSF8_s} shows the AMC compensation (Fig.~\ref{fig:bt8_s}) and the corresponding allan deviation and shielding factor ( Fig.~\ref{fig:sf8_s}) with outermost layer of shield. The matrix condition number is found to be 19. Similarly, the Fig.~\ref{fig:btSF8} shows the AMC compensation (Fig.~\ref{fig:bt8}) and the corresponding allan deviation and shielding factor ( Fig.~\ref{fig:sf8}) without any shield. The matrix condition number in this case is 132. The one advantage of having shielding is that , the shielding factor for all the sensors remain $geq$1 but in case of no shield, the shielding factor may be very good at certain point but in some point it can go below 1.
 
@@ -788,11 +815,24 @@ There are four layers of shields have been used for passive shielding in this pr
 
 % \doublefig{Images/bt8}{width =\textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:bt8}}{Images/sf8}{width = \textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:sf8}}{{No SHield} \label{fig:btSF8}}{short}
 
-So neither fluxgate placement nor shielding effect provide us with the solution of current unsettle problem. Next we will discuss an unique work of us which turns out to be handy for the new works we have presented in the future Sections.
+In the end, neither fluxgate placement nor shielding effect provided a
+solution of the current drifting problem.  How I really started to
+determine the source of the problem was by simulating the full,
+multidimensional feedback and control system.
 
-\section{Simulation of Prototype Integrating Feedback Algorithm}\label{sec:pSim}
+\section{Simulation of Multidimensional Feedback System}\label{sec:pSim}
 
-We were still in dark about current unsettle problem. So we thought simulating  the prototype would confirm whether we were getting the correct current graph. We first made a simulation without PI control algorithm to compare the experimental change in coil currents due to certain perturbation with the simulation ones (Eq.~(\ref{eq:del_I})) and the results were agreed except some sign issues. But we wanted to see simulated coil currents in time due to PI control algorithm (Eq.~(\ref{eq:I})). My supervisor made a simple one dimensional PI simulation in time in Python programming language which later I used to make a fully functional multi-dimensional PI simulation. The simulation process has been divided into three groups. They are 
+We were still in dark about current unsettle problem. So we thought
+simulating the prototype would confirm whether we were getting the
+correct current graph. We first made a simulation without PI control
+algorithm to compare the experimental change in coil currents due to
+certain perturbation with the simulation ones (Eq.~(\ref{eq:del_I}))
+and the results were agreed except some sign issues. But we wanted to
+see simulated coil currents in time due to PI control algorithm
+(Eq.~(\ref{eq:I})). My supervisor made a simple one dimensional PI
+simulation in time in Python programming language which later I used
+to make a fully functional multi-dimensional PI simulation. The
+simulation process has been divided into three groups. They are
 
 \begin{enumerate}
     \item Simulation in OPERA to Generate Field Maps in Coil Cube
