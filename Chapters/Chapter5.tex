@@ -913,17 +913,22 @@ arbitrarily after the simulation was complete.
 A cubic mother volume with side length 4 times the side length of the
 coil cube was used.
 
-{\bf consider a Table for the following paragraph.}
+%{\bf consider a Table for the following paragraph.}
 
-\fig{Images/surface_mesh}{width =\textwidth}{Settings to generate surface mesh in OPERA. \label{fig:s_mesh}}{Settings to generate surface mesh in OPERA.}
+\fig{Images/surface_mesh}{width =0.8\textwidth}{Settings to generate surface mesh in OPERA. \label{fig:s_mesh}}{Settings to generate surface mesh in OPERA.}
+
 In OPERA, surfaces are first meshed, and then these meshes are
-extended into the volume with a subsequent volume meshing step.  \textcolor{red}{To
-generate the surface mesh, the maximum mesh element size was chosen to
-be 10 with maximum angle between elements of 10$^\circ$. The maximum
-deviation from surface was set to 0 and the absolute tolerance used to
-check point coincidence was set to $1\times10^{-8}$. The mesh
-type was set to ``Prefer Mosaic''.} To generate the volume
-mesh the absolute tolerance was set to $1\times10^{-8}$.
+extended into the volume with a subsequent volume meshing step.
+%\textcolor{red}{To
+%generate the surface mesh, the maximum mesh element size was chosen to
+%be 10 with maximum angle between elements of 10$^\circ$. The maximum
+%deviation from surface was set to 0 and the absolute tolerance used to
+%check point coincidence was set to $1\times10^{-8}$. The mesh
+%type was set to ``Prefer Mosaic''.}
+The settings used to generate the surface mesh are presented in
+Fig.~\ref{fig:s_mesh}, where a portion of the settings window is
+shown.  To generate the volume mesh there is one additional setting
+which is another absolute tolerance; it was set to $1\times10^{-8}$.
 
 \subsubsection{Simulation Applying Current in Compensation Coils}\label{sec:mSim}
 
@@ -1023,24 +1028,24 @@ under the assumption of linear material properties.
 We used the same meshing as described earlier.  The perturbation coil
 was energized, or left unenergized, in a similar fashion as used for
 the coil-cube.  
-
-\textcolor{red}{The main difference compared to the previous coil-cube simulation was
-that the magnetic field $\bm{H}$ on the boundary of the mother volume
-was set according to Table~\ref{table:Benvironment}}.
-\textcolor{blue}{The main difference compared to the previous coil-cube simulation was
-that the external magnetic field $\bm{H}$ on TOSCA analysis module
-was set according to Table~\ref{table:Benvironment}}
-
-\textcolor{magenta}{It is sometimes convenient to introduce a “background” magnetic field into
-an analysis. OPERA-3d supports this facility in magnetostatic TOSCA,
-ELEKTRA and CARMEN analyses and in SCALA. A uniform field with
-any orientation may be specified. In these analyses, the applied magnetic field contributes to the overall coil
-fields in the problem. It is equivalent to having an infinite solenoid whose
-axis is oriented in the direction of the field. Consequently, it is necessary
-for the exterior of the model space (the outer layers of finite elements in the
-mesh) to use reduced magnetic scalar potential. The extent of this layer is
-unimportant – a single layer of elements works just as well as making all
-the air reduced potential. }
+%\textcolor{red}{The main difference compared to the previous coil-cube simulati%on was
+%that the magnetic field $\bm{H}$ on the boundary of the mother volume
+%was set according to Table~\ref{table:Benvironment}}.
+%\textcolor{blue}{
+The main difference compared to the previous coil-cube simulation was
+that the external magnetic field $\bm{H}$ on TOSCA analysis module was
+set according to Table~\ref{table:Benvironment}.
+%}
+%\textcolor{magenta}{It is sometimes convenient to introduce a “background” magnetic field into
+%an analysis. OPERA-3d supports this facility in magnetostatic TOSCA,
+%ELEKTRA and CARMEN analyses and in SCALA. A uniform field with
+%any orientation may be specified. In these analyses, the applied magnetic field contributes to the overall coil
+%fields in the problem. It is equivalent to having an infinite solenoid whose
+%axis is oriented in the direction of the field. Consequently, it is necessary
+%for the exterior of the model space (the outer layers of finite elements in the
+%mesh) to use reduced magnetic scalar potential. The extent of this layer is
+%unimportant – a single layer of elements works just as well as making all
+%the air reduced potential. }
 Otherwise the
 field was solved and outputted to a {\tt csv} file as in the previous
 section.  Two {\tt csv} files (one each for the perturbation coil
@@ -1109,7 +1114,7 @@ fluxgate positions, and then output the relevant field values from
 OPERA.
 
 
-\subsubsection{$\mathbf{M}$ Matrix Comparison to Data}
+%\subsubsection{$\mathbf{M}$ Matrix Comparison to Data}
 
 %There are 6 field maps generated for currents in all six coils where
 %each of the six field maps represents the values associated with the
@@ -1132,51 +1137,152 @@ OPERA.
 For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$
 has been made by choosing co-ordinates of the points as same as the
 sensor positions in the experiment. Then the absolute differences
-between the experimental $M_{sc}$ elements with that of the simulation
-ones are calculated as
-
+between the experimental and simulated matrix elements are calculated
+as
+%\begin{equation}
+%    M_{\text{RMS}}^{\text{diff}}=\sqrt{\frac{(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)^2}{12\times6}}
+%\end{equation}
 \begin{equation}
-    M_{\text{RMS}}^{\text{diff}}=\sqrt{\frac{(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)^2}{12\times6}}
+    \Delta|M|_{sc}=|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|
 \end{equation}
-where, $|M_{\text{sc}}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$ indicate the absolute values of $M_{sc}$ elements both in experiment and simulation respectively.
+where, $|M_{\text{sc}}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$
+indicate the absolute values of the $M_{sc}$ elements both in
+experiment and simulation respectively.  The absolute value is taken
+to avoid any potential sign errors in the coil directions in
+experiment compared to simulation.
 
-\fig{Images/Mdiff_31}{width = \textwidth}{The RMS differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
+%\fig{Images/Mdiff_31}{width = \textwidth}{The RMS differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
-\fig{Images/Mdiff2_31}{width = \textwidth}{The differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff2}}{Comparison of experimental $\bm{M}$ with simulation one.}
+\fig{Images/Mdiff2_31}{width = \textwidth}{Differences between absolute experimental and simulated matrix elements $\Delta|M|_{sc}$ (defined in the text).  Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$.\label{fig:Mdiff2}}{Comparison of experimental and simulated $\bm{M}$.}
 
-\fig{Images/Mdev}{width = \textwidth}{Maximum variations in $M_{sc}$ elements for $\bm{M}$ measure in every 15 mins for 8 hours in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdev}}{Comparison of experimental $\bm{M}$ with simulation one.}
-
-
-{\bf Try some different ways of graphing this and making some
-different statistics to quantify the agreement.}
-
-
-The absolute differences $|M_{sc}^{\text{diff}}|$ have been shown in Fig. \ref{fig:Mdiff}. It is seen that most of $|M_{sc}^{\text{diff}}|$ differences are within 100 nT/A. But that in some of the positions the differences are very big. The reason is that it is very difficult to exactly pinpoint the locations both in experiment and simulation and also the simulation runs in ideal conditions where the experiment suffers from the condition of its surrounding. The differences can be made smaller by choosing different co-ordinates of the sensor positions. We are not that concerned about that because the $M_{sc}$ element due to a particular coil and sensor position has similar response pattern both in experiment and simulation. 
+%\fig{Images/Mdev}{width = \textwidth}{Maximum variations in $M_{sc}$ elements for $\bm{M}$ measure in every 15 mins for 8 hours in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdev}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
 
+The resultant differences $\Delta|M_{sc}|$ are presented in
+Fig.~\ref{fig:Mdiff2}.  These can be compared with the experimental
+values which were presented in Fig.~\ref{fig:m}.
 
-\subsubsection{Change in B Field Generation}
+In general the simulated values are somewhat larger than the
+experimental values resulting in Fig.~\ref{fig:Mdiff2} having more
+blue than red numbers.  This is particularly true of fluxgate sensor 3
+(3x, 3y, and 3z).  The largest difference seen is in the 3x sensor in
+its response to the $C_x^+$ coil.  On average, the matrix elements
+agree within about 30\% with the matrix elements in Fig.~\ref{ref:m},
+as can be seen from the change in the color scales on the figures.
 
-For generating change in B field i.e. $\Delta$B field, difference between the setpoint and actual measurement is required (Eq.~(\ref{eq:del_B})). 
+We expect that most of the differences can be attributed to
+discrepancies in the sensor placements between the experiment and
+simulation.  Indeed the value of the field measured and its slope with
+current are very sensitive to location in this region between the
+coils and the shield.  For example the field near the surface of the
+magnetic shield can be enhanced by a factor of 2 to 3 over the general
+background field far from the shield.
 
-For generating setpoint, we have used the Python programming language where the field map generated due to no current in any coils with external field applied as discussed earlier is acted as input. We convert the field map into nT to match the experimental unit and depending on the co-ordinates of the points provided by us, the $B_s(\text{setpoint})$ are generated in the output of the Python code. 
+Interestingly the condition number of the two matrices are very
+similar.  The experimental $M$ has a condition number of 29.5 and the
+simulated one is 30.6.  Recall that the condition number is the ratio
+of the maximum and minimum singular values.  This likely indicates
+that ratios of the important matrix elements are reproduced better
+than the absolute difference would indicate.  The singular value
+decomposition also tends to correct for sensor misalignment.  In other
+simulations I found that moving sensors slightly or changing their
+alignment had little to no effect on the condition number, even though
+the matrix elements might change.
 
-Similarly, for generating actual measurement, we have again used the Python programming language where the field map generated due to current in perturbation coil with external field applied as discussed earlier is acted as input. We convert the field map again into nT to match the experimental unit and depending on the co-ordinates of the points provided by us, the measurements $B_s(\text{measure})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate in both case.
+In another experimental study, I measured the stability of the matrix
+elements over an eight-hour period, continually ramping the currents
+on each coil and measuring the slope over and over again.  I found
+that the measured matrix elements were reproducible at the level of
+100 nT/A.  I also discovered a technical issue that the $C_x^-$ coil
+current had stability issues, which turned out to be due a bad
+connection, which was repaired.
+
+%It is seen that most of $|M_{sc}^{\text{diff}}|$ differences are
+%within 100 nT/A. But that in some of the positions the differences are
+%very big. The reason is that it is very difficult to exactly pinpoint
+%the locations both in experiment and simulation and also the
+%simulation runs in ideal conditions where the experiment suffers from
+%the condition of its surrounding. The differences can be made smaller
+%by choosing different co-ordinates of the sensor positions. We are not
+%that concerned about that because the $M_{sc}$ element due to a
+%particular coil and sensor position has similar response pattern both
+%in experiment and simulation.
 
 
-The difference between $B_s(\text{setpoint})$ and $B_s(\text{measure})$ will then produce $\Delta$B field. While comparing experimentally measured $\Delta$B field with that determined by simulation we have found that, the values are similar except some sign issues which we fixed by comparing with experimental values. 
+
+%\subsubsection{Change in Magnetic Field Generation}
+
+%For generating change in B field i.e. $\Delta$B field, difference
+%between the setpoint and actual measurement is required
+%(Eq.~(\ref{eq:del_B})).
+
+%For generating setpoint, we have used the Python programming language
+%where the field map generated due to no current in any coils with
+%external field applied as discussed earlier is acted as input. We
+%convert the field map into nT to match the experimental unit and
+%depending on the co-ordinates of the points provided by us, the
+%$B_s(\text{setpoint})$ are generated in the output of the Python code.
+
+%Similarly, for generating actual measurement, we have again used the
+%Python programming language where the field map generated due to
+%current in perturbation coil with external field applied as discussed
+%earlier is acted as input. We convert the field map again into nT to
+%match the experimental unit and depending on the co-ordinates of the
+%points provided by us, the measurements $B_s(\text{measure})$ are
+%generated in the output of the Python code. Note that the points must
+%be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$,
+%$y$ and $z$ co-ordinate in both case.
+
+
+%The difference between $B_s(\text{setpoint})$ and
+%$B_s(\text{measure})$ will then produce $\Delta$B field. While
+%comparing experimentally measured $\Delta$B field with that determined
+%by simulation we have found that, the values are similar except some
+%sign issues which we fixed by comparing with experimental values.
+
+Of course the effect of the perturbation coil on the fluxgate signals
+was also compared between experiment and simulation.  We discuss these
+results further in the case of the PI system operating, in the next
+section.
+
 
 \subsection{PI Simulation in Python}
 
-Matrix $\bm{M(\text{sim})}$ and $\Delta$ B have been generated in Python from the simulated field maps discussed earlier. Errors in the coil currents (Eq.~(\ref{eq:del_I})) are generated using $\Delta$ B and regularized pseudoinverse of $\bm{M(\text{sim})}$ discussed in Section~\ref{sec:inv}. The value of $k_c^p$ and $k_c^i$ has been obtained by following the concept of PI tuning as discussed in Section~\ref{sec:tune}. After getting the tuned value of $k_c^p$ and $k_c^i$, the new current that should be fed to the coils for compensating the magnetic field drift is calculated using Eq.~(\ref{eq:I}). Moreover, in Section~\ref{sec:tune}, the time difference between two consecutive feedback loop is found to be 0.146 s. To match the same time of completing a feedback loop both in simulation and experiment, we have added a time delay of 0.146 s in the PI simulation code. After adding the time delay, The same process have been repeated for a time duration. Thus, a PI simulation in time has been made. 
+The matrix $\bm{M}$ and perturbation coil $\Delta B$ simulations can
+now be implemented into a dynamic PI simulation.  The $\Delta B$
+perturbation can be turned on at a particular time.  Errors in the
+coil currents (Eq.~(\ref{eq:del_I})) are generated using $\Delta B$
+and the regularized pseudoinverse of the simulated $\bm{M}$. The same values
+of $k_c^p$ and $k_c^i$ are used in the simulation as in the experiment.
 
-For comparing experimental PI result with that simulation one, Matrix $\bm{M(\text{sim})}$ and $\Delta$ B have been generated in Python at the same position of the experimental fluxgates. Then the process discussed eralier has been used to make a PI simulation. The comparison is shown in Fig.~\ref{fig:exp_sim} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta$B (right) found by Eq.~(\ref{eq:del_B}) in fluxgate positions 1, 3, 6 and 8 excluding two control sensors in (a) experiment and (b). It is seen that the coil currents (left) and $\Delta$B (right) graphs have similar pattern. It confirms that the current unsettle problem being seen in the experiment is real.
+I decided to simulate the PI loop in real-time.  In
+Section~\ref{sec:tune}, the time difference between two consecutive
+feedback loop is found to be 0.146~s. To match the same time of
+completing a feedback loop both in simulation and experiment, I added
+a time delay of 0.146~s in the PI simulation code. After adding the
+time delay, The same process have been repeated for the same time
+duration as the experiment.
 
-\fig{Images/exp_sim}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig:coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
+The comparison of the experimental and simulated PI loops is shown in
+Fig.~\ref{fig:exp_sim}.  It is seen that the coil current responses
+and field changes have similar pattern in the simulation, when
+compared to the experiment.
 
+The most amazing aspect of the graph is that the current drifting
+problem is reproduced.  The currents drift for long periods of time,
+whereas the field corrections appear to occur on a much more rapid
+timescale.
 
+\textcolor{red}{Need to edit the figure caption.}
 
-The magnetic field compensation due to PI feedback loop and the currents in all the six coil sides results from experiment and simulation are quite similar. Next we show new ways to deal with the current unsettle problem. 
+\fig{Images/exp_sim}{width=\textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta$B (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0 and $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). For position of coils and fluxgates see Fig.~\ref{fig:coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement and $r$=3.1 were used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:exp_sim}}{Coil currents with drift $\Delta$B for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=3.1}
+
+Seeing this anomolous effect reproduced so accurately in the
+multidimensional PI gave us confidence that it is a real effect which
+is somehow due to the algorithm that we were following.  This led to
+additional simulations and the discovery of new ways to deal with the
+current drifting problem, without making large changes to the
+apparatus.
 
 % The uncompensated magnetic field is the magnetic field without the compensation effect and predicted by
 % \begin{equation}\label{eq:Buncomp}
