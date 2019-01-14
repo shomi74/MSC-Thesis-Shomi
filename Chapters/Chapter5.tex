@@ -822,35 +822,40 @@ multidimensional feedback and control system.
 
 \section{Simulation of Multidimensional Feedback System}\label{sec:pSim}
 
-We were still in dark about current unsettle problem. So we thought
-simulating the prototype would confirm whether we were getting the
-correct current graph. We first made a simulation without PI control
-algorithm to compare the experimental change in coil currents due to
-certain perturbation with the simulation ones (Eq.~(\ref{eq:del_I}))
-and the results were agreed except some sign issues. But we wanted to
-see simulated coil currents in time due to PI control algorithm
-(Eq.~(\ref{eq:I})). My supervisor made a simple one dimensional PI
-simulation in time in Python programming language which later I used
-to make a fully functional multi-dimensional PI simulation. The
-simulation process has been divided into three groups. They are
-
+I developed a variety of simulation tools in order to understand the
+behavior of the multidimensional PI control loop:
 \begin{enumerate}
-    \item Simulation in OPERA to Generate Field Maps in Coil Cube
-    \item Field Maps Processing in Python
-    \item PI Simulation in Python
+\item {\bf Three-dimensional finite-element analysis simulations in OPERA.}  These were used to simulate
+\begin{enumerate}
+\item the quasi-static magnetic response of the magnetic shield to Earth's field
+\item the magnetic response of the magnetic shield to changes in coil-cube currents (in turn enabling us to determine $\mathbf{M}$), and
+\item the magnetic response of the magnetic shield to the perturbation coil (in turn allowing us to simulate the PI system response to this pertubation.
 \end{enumerate}
-    
+\item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into {\it e.g.}~the matrix $\mathbf{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
+\item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed me to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
+\end{enumerate}
+As will be shown, these simulations were quite successful at
+describing the system including: the matrix $\mathbf{M}$ and its
+inverse, and the time-dependent response of the PI loop to
+perturbation.
 
 \subsection{Simulation in OPERA to Generate Field Maps in Coil Cube}
 % The simulating process will be discussed here at first and then the result of the simulation will be compared with the experiment and whether there is current unsettle problem exists in the simulation will be discovered.
 
-OPERA 3D Finite Element Analysis~(FEA)~\cite{opera} simulation software is used for simulating the prototype and generating field map within the coil cube of the prototype. OPERA is a multi-physics software package.  We have used the Opera Static Electromagnetics module which computes magnetostatic and electrostatic fields in three dimensions. The module solves Maxwell$'$s equations for the static case in a discretized model using FEA. For calculating magnetic fields from coils, the module uses Biot-Savart integral equation. Mainly OPERA helps us to 
-% \renewcommand{\labelitemi}{$\square$}
-\begin{itemize}
-    \item make geometry of the experimental setup.
-    \item extract the magnetic field values within the geometry.
-    \item energize each coil.
-\end{itemize}
+OPERA 3D Finite Element Analysis~(FEA)~\cite{opera} simulation
+software was used for simulating the prototype and generating field
+maps within the coil cube of the prototype. OPERA is a multi-physics
+software package.  We have used the Opera Static Electromagnetics
+module which computes magnetostatic and electrostatic fields in three
+dimensions. The module solves Maxwell's equations for the static case
+in a discretized model using FEA. For calculating magnetic fields from
+coils, the module uses the Biot-Savart integral equation.
+
+%\begin{itemize}
+%    \item define the geometry of the experimental setup.
+%    \item extract the magnetic field values within the geometry.
+%    \item energize each coil.
+%\end{itemize}
 
 
 
@@ -876,25 +881,75 @@ OPERA 3D Finite Element Analysis~(FEA)~\cite{opera} simulation software is used 
 % In the upcoming Sub-sections, the geometry that has been built will be discussed along with all the steps done to finally make a PI control simulation.
 
 
-\subsubsection{Geometry of Experimental Setup in OPERA}
+\subsubsection{Geometry Definition in OPERA}
 
-For simulating the prototype we first need its geometry. The dimensions of the prototype passive shielding layers and the stove pipe are given in Table~\ref{table:mu-metal}. We have used the dimension of the outermost passive shielding layer along with stove pipes to draw in OPERA. The dimensions of the coils are given in Table~\ref{table:coil}. We have used the dimensions of all the coils to draw a cube in OPERA. Moreover, we have also used the dimension of the perturbation coil from the same Table to draw the perturbation coil itself in OPERA. The process to build the prototype geometry in the OPERA has been discussed both with outermost layer of passive shielding and without the shield.
+\doublefig{Images/shield2}{width=\textwidth,height=8cm}{\label{fig:shield_opera}}{Images/noShield}{width=\textwidth,height=8cm}{\label{fig:noShield_opera}}{{Geometry in OPERA simulation (a) with passive shielding, and (b) without passive shielding.  The square in the back, appearing in both drawings, is the perturbation coil. The direction of each of the three axes may be seen in (b).} \label{fig:opera_setup}}{Prototype setup in OPERA simulation software.}
 
-\doublefig{Images/shield2}{width =\textwidth,height =8cm}{with passive shielding layers. \label{fig:shield_opera}}{Images/noShield}{width = \textwidth,height =8cm}{without outermost passive shielding layer.\label{fig:noShield_opera}}{{Prototype setup in OPERA simulation software (a) with outermost passive shielding layer  and (b) without any passive shielding layer. The square in the back appearing in both drawings is the perturbation coil. The shield dimensions and properties were given in Section~\ref{sec:shield}  and those of the coils in Section~\ref{sec:cube}. The direction of each of the three axis has been shown in (b).} \label{fig:opera_setup}}{Prototype setup in OPERA simulation software.}
+Fig.~\ref{fig:opera_setup} shows the geometry as defined in OPERA,
+both with and without the magnetic shields present.  The dimensions of
+the prototype passive shielding layers and the stove pipe were given
+in Table~\ref{table:mu-metal}.  These were implemented using simple
+cylindrical and planar shapes available in OPERA.  The dimensions of
+the coils were given in Table~\ref{table:coil}.  These were
+implemented as wires of square profile 0.1~cm~$\times$~0.1~cm.
 
-A cylinder has been drawn in OPERA using the dimensions of outermost passive shielding layer and air has been chosen as material there (dimensions in Table~\ref{table:mu-metal}). Then a tube has been drawn keeping the length same but adding a thickness of 0.3175 cm with the radius of the outermost shield and the material is chosen to be linear with relative permeability 20000. Thus the outermost shield with air inside has been drawn in OPERA. Similarly, the dimensions of stove pipe has been used to draw it in both sides of the outermost shield layer with air inside.  Another cylinder has been drawn to fill the space between the coils and the outermost shield with air. The coils have been drawn using the dimensions in Table~\ref{table:coil} and thickness of the coil is 0.1 cm. Similarly, the perturbation coil has been drawn which is 106 cm away from the center of origin of the drawn prototype shield.  All the information has been written in a file format known as 'comi' file which acts as command language to run OPERA. Another comi file has been made where the shield has been replaced with air for the prototype geometry with no shield. The two 'comi' files while running individually in OPERA produce prototype geometry which has been shown with outermost passive shielding layer in Fig.~\ref{fig:opera_setup}\textcolor{blue}{(a)} and that without any passive shielding layer in Fig.~\ref{fig:opera_setup}\textcolor{blue}{(b)} respectively. The dots in Fig.~\ref{fig:opera_setup}\textcolor{blue}{(b)} represents some fluxgate positions.
+The material of the magnetic shield was chosen to be linear with
+relative magnetic permeability $\mu_r=20,000$.  Some air volumes were
+also drawn near the shields to aid in meshing near the thin layers.
 
+The perturbation coi is 106~cm away from the origin, which is at the
+center of the coil cube.
 
+All the information has been written in the {\tt comi} file format
+file which is the command language in OPERA. Another {\tt comi} file
+was made with no shield
+(Fig.~\ref{fig:opera_setup}\textcolor{blue}{(b)}) for simulation of
+that experiment.  The dots in
+Fig.~\ref{fig:opera_setup}\textcolor{blue}{(b)} represent some
+fluxgate positions.  But in general both simulations outputted full
+field maps so that the fluxgate positions could be adjusted
+arbitrarily after the simulation was complete.
 
+A cubic mother volume with side length 4 times the side length of the
+coil cube was used.
 
+{\bf consider a Table for the following paragraph.}
 
-% After getting the prototype geometry in OPERA, the next is to discuss the simulation made to calculate the matrix elements and thus produce the matrix $\bm{M}$.
+In OPERA, surfaces are first meshed, and then these meshes are
+extended into the volume with a subsequent volume meshing step.  To
+generate the surface mesh, the maximum mesh element size was chosen to
+be 10 with maximum angle between elements of 10$^\circ$. The maximum
+deviation from surface was set to 0 and the absolute tolerance used to
+check point coincidence was set to $1\times10^{-8}$. The mesh
+type was set to ``preferred to be mosaic''. To generate the volume
+mesh the absolute tolerance was set to $1\times10^{-8}$.
 
-\subsubsection{Simulation of Field Map With Current in Compensation Coils}\label{sec:mSim}
+\subsubsection{Simulation Applying Current in Compensation Coils}\label{sec:mSim}
 
-In Section~\ref{sec:m}, matrix elements $M_{sc}$ are measured  to produce $\bm{M}$ which relates coil currents with the magnetic field. Inversion of the matrix produce current error (Eq.~(\ref{eq:del_I})) that later goes to PI control algorithm (Eq.~(\ref{eq:I})) to find new current that should be fed to compensate the drift in field. For matrix simulation, zero magnetic field is applied so that six current generated field map in T/A for six coils in the cube can be generated with current being supplied to the the coils one at a time with others having zero current. The process is discussed here. 
+%In Section~\ref{sec:m}, matrix elements $M_{sc}$ are measured  to produce $\bm{M}$ which relates coil currents with the magnetic field. Inversion of the matrix produce current error (Eq.~(\ref{eq:del_I})) that later goes to PI control algorithm (Eq.~(\ref{eq:I})) to find new current that should be fed to compensate the drift in field. For matrix simulation, zero magnetic field is applied so that six current generated field map in T/A for six coils in the cube can be generated with current being supplied to the the coils one at a time with others having zero current. The process is discussed here. 
 
-A block shaped background region 4 times the scale in $x$, $y$ and $z$ axis without change in the symmetry has been set in the same 'comi' file where prototype geometry has been written. To generate surface mesh, the maximum mesh element size is chosen to be 10 with maximum angle between elements is 10 degree. The maximum deviation from surface is 0 and the absolute tolerance used to check point coincidence is $\mathrm{1\times10^{-8}}$. The mesh type has been preferred to be mosaic. To generate the volume mesh the absolute tolerance is chosen to be $\mathrm{1\times10^{-8}}$. After meshing the geometry we modified the coil $C_x^+$ by introducing to 1 A/ Area, where area is determined by the OPERA based on the dimensions provided for that coil earlier. For analyzing the data, we used TOSCA Magnetostatic module of OPERA and set numerical solution convergence tolerance to be $\mathrm{1\times10^{-13}}$ and magnetic field $\bm{H}$ to be zero and the model was solved by OPERA. Once the solution has completed, in the Post-Processor of OPERA we set the unit of the magnetic fields to be Tesla and used the GRID command  which evaluates the fields over a 3D grid. The grid started from -62 cm in  $x$, $y$ and $z$ co-ordinates with an increment of 1 cm and ends at 62 cm which covers the full cube dimensions. The number of points in each of the co-ordinate are 125. The output of the GRID are 6 columns where first 3 columns indicate the the points in $x$, $y$ and $z$ co-ordinates and last 3 columns indicate the corresponding magnetic fields in Bx, By and Bz respectively and are stored in a 'csv' file. The unit is T/A as there is no external field present. In this way 6 field maps are stored in 6 'csv' files for all the 6 coil sides.
+In order to simulate the matrix $\mathbf{M}$ we need to energize each
+coil in turn and measure the magnetic field change at each fluxgate
+position.
+
+In OPERA, a coil was energized by setting its current density to
+1~A/area, where the area is determined automatically by the OPERA
+based on the dimensions provided.  To conduct the finite element
+analysis, I used the TOSCA magnetostatic module of OPERA.  I set the
+numerical solution convergence tolerance to be $1\times10^{-13}$.
+
+Once the solution for a single energize coil was completed, the field
+map was outputted to a file using the the post-processor of OPERA.
+The unit of the magnetic field was set to be T, and I used the GRID
+command which evaluates the fields over a uniform 3D grid. The grid
+started from $-62$~cm in $x$, $y$ and $z$ co-ordinates with an
+increment of 1~cm and ends at $+62$~cm which covers the full cube
+dimensions.  The output of the GRID command gives a text ({\tt csv})
+file with 6 columns, where the first 3 columns indicate the
+coordinates of the grid point ($x$,$y$,$z$) and the last 3 columns
+indicate the magnetic field ($B_x$,$B_y$,$B_z$) at that point.  In
+this way 6 field maps are stored in 6 {\tt csv} files, one for each of
+the 6 coils.
 
 % The background region defines the sa 'comi' file is written where the magnetic field contribution due to environment is set to zero as  matrix elements $M_{sc}$ relate the coils current to the field produced by the coils current (see Eq.~(\ref{eq:B_coils})). Now as matrix elements $M_{sc}$ are in the unit of nT/A, in the same 'comi' file current for the all the six coils have set to 1A which makes the Eq.~(\ref{eq:B_coils}) as
 
@@ -938,17 +993,42 @@ A block shaped background region 4 times the scale in $x$, $y$ and $z$ axis with
 
 % and lastly how the perturbation affects the current in all six coil sides will be discussed. 
 
-\subsubsection{Simulation of Field Map Without Current}
+\subsubsection{The Effect of Earth's Field and of the Perturbation Coil}
 
-The main aim of active compensation is to compensate the drift that generates due to the difference between the setpoint and the actual measurement. The measurement of the field by fluxgates surrounding the prototype without any compensation system running are given in Table~\ref{table:Benvironment} which we have used to generate two field maps one with no current in any coils and another with current in the perturbation coil. The concept is that without any perturbation, the field is always same. So, the field map with no current in any coil will generate the setpoint i.e. $B_s(\text{setpoint})$ and the field map with current in perturbation coilwill generate the actual measurement i.e. $B_s(\text{measure})$. The difference between $B_s(\text{measure})$ and $B_s(\text{setpoint})$ will generate drift in field (Eq.~(\ref{eq:del_B})).
- 
+The field maps of the previous section were calculated in the absence
+of Earth's field.  In general, the fluxgate setpoints were decided by
+first measuring the field and then selecting the setpoint based on
+that measurement.  The feedback system would then try to lock the
+fields to those setpoints.
+
+The average field measured by fluxgates surrounding the prototype
+without any compensation system running were given in
+Table~\ref{table:Benvironment}.  I used this information to try to
+simulate the setpoints.  This was done for two field maps: one with no
+current in any coils and another with current only in the perturbation
+coil.  So, the field map with no current in any coil will generate the
+setpoint i.e. $B_s(\text{setpoint})$ and the field map with current in
+perturbation coil will generate the actual measurement
+i.e. $B_s(\text{measure})$. The difference between
+$B_s(\text{measure})$ and $B_s(\text{setpoint})$ will generate the
+change in field $\Delta B$.
+
+The six field maps generated by the coil-cube simulation of the
+previous section can be added to these maps without loss of generality
+under the assumption of linear material properties.
+
 % The magnetic field distribution without any current in the coils that is $B_s(\text{setpoint})$ will be determined by simulating the prototype in OPERA.
 % The 770 mA is same as providing 10 mA in the experimental perturbation coil as the experimental one has 77 turns
-We used the same meshing as described earlier. After meshing the geometry, the current density on the the perturbation coil $P_z^+$ was set to 0 mA/area, where area is determined by the OPERA based on the dimensions provided for $P_z^+$ coil earlier. For analyzing the data, keeping all the settings same as earlier , magnetic field $\bm{H}$ were set according to Table~\ref{table:Benvironment} and the model was solved by OPERA. Once the solution has completed, in the Post-Processor of OPERA, as earlier we set the unit of the fields to be Tesla. Using GRID command in OPERA, the the fields over the cube dimensions starting from -62 cm in  $x$, $y$ and $z$ co-ordinates with an increment of 1 cm and ends at 62 cm have been determined as earlier and stored in a 'csv' file. The 'csv' file is the field map over the cube dimensions with no current in any coil in presence of an external field.
+We used the same meshing as described earlier.  The perturbation coil
+was energized, or left unenergized, in a similar fashion as used for
+the coil-cube.  
 
-% \begin{itemize}
-%     \item[$\blacksquare$] \textbf{Creation of Setpoints}
-% \end{itemize}
+The main difference compared to the previous coil-cube simulation was
+that the magnetic field $\bm{H}$ on the boundary of the mother volume
+was set according to Table~\ref{table:Benvironment}.  Otherwise the
+field was solved and outputted to a {\tt csv} file as in the previous
+section.  Two {\tt csv} files (one each for the perturbation coil
+switched on and off) were created.
 
 % For generating setpoints, we have used the Python programming language where the fields map is acted as input. We convert the fields maps into nT as to match the experimental unit  and depending on the co-ordinates of the points provided by us, the $B_s(\text{setpoint})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
 
@@ -957,9 +1037,12 @@ We used the same meshing as described earlier. After meshing the geometry, the c
 
 % As long as the signs of Bx, By and Bz are same both in simulation and experiment, the difference is no issues as the main aim is to find the drift in the magnetic field.
 
-\subsubsection{Simulation of Field Map With Current in Perturbation Coil}
+%\subsubsection{Simulation of Field Map With Current in Perturbation Coil}
 
-To field for a particular perturbation similar steps have been taken as above except in this case, the current density on the perturbation coil $P_z^+$ was set to 770 mA/area. The reason of choosing 770 mA current in the perturbation coil is that in the experiment, 10 mA current has been provided to the perturbation coil with 77 turns. For analyzing the data, keeping all the settings same as earlier , magnetic field $\bm{H}$ were set according to Table~\ref{table:Benvironment} and the model was solved by OPERA. Once the solution has completed, in the Post-Processor of OPERA, as earlier we set the unit of the fields to be Tesla. Using GRID command in OPERA, the the fields over the cube dimensions starting from -62 cm in  $x$, $y$ and $z$ co-ordinates with an increment of 1 cm and ends at 62 cm have been determined as earlier and stored in a 'csv' file. The 'csv' file is the field map over the cube dimensions with current in perturbation coil in presence of an external field.
+When the perturbation coil was switched in, its current density on the
+was set to 770~mA/area.  The reason is that, in the experiment, 10~mA
+current was normally provided to the perturbation coil which has
+77~turns.
 
 % \begin{itemize}
 %     \item[$\blacksquare$] \textbf{Creation of Measurements}
@@ -996,19 +1079,33 @@ To field for a particular perturbation similar steps have been taken as above ex
 % 
 % In the above, simulation made via OPERA to find $B_s(\text{setpoint})$ and $B_s(\text{measure})$ have been used to find the change in current in all six coil sides and matched with experimental results. 
 
-In the upcoming Section the field maps obtained due to various simulations in OPERA will be used to generate matrix and drift in signals which will then integrate in PI control algorithm to make a fully functional PI simulation.
+%In the upcoming Section the field maps obtained due to various simulations in OPERA will be used to generate matrix and drift in signals which will then integrate in PI control algorithm to make a fully functional PI simulation.
 % The values obtained due to this have been compared with the values due to experimental setup and the results are similar as shown in Fig. \ref{fig:noShield_cSim}.
 
 % \fig{Images/cSim}{width =\textwidth, height=12cm}{Comparison of change in current in different Coil sides at the time of applying perturbation both in experiment and simulation. \label{fig:noShield_cSim}}
 
-\subsection{Field Maps Processing in Python}
+\subsection{Field Map Processing in Python}
 
-Three field maps are generated in OPERA which have been discussed earlier. Python programming language is used to generate matrix M and drift in field from those field maps. The generated matrix and drift in field are then used in a PI control algorithm in time to make a PI simulation in time.
+A set of Python codes are used to generate files containing the matrix
+$\mathbf{M}$ and $\Delta B$ perturbations from the OPERA field maps.
+The codes accept as input the field maps and the coordinates for the
+fluxgate positions, and then output the relevant field values from
+OPERA.
 
 
-\subsubsection{M Matrix Generation}
-There are 6 field maps generated for currents in all six coils where each of the six field maps represents the values associated with the current bearing coil.  
-The advantage of simulation is that which we can use 6 field maps to generate any dimensions of matrix $\bm{M}$ within the cube dimensions. For generating the matrix, we used the Python programming language where the fields maps are acted as input. We convert the fields maps into nT/A to match the experimental unit and depending on the co-ordinates of the points provided by us, the matrix is generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
+\subsubsection{$\mathbf{M}$ Matrix Comparison to Data}
+
+%There are 6 field maps generated for currents in all six coils where
+%each of the six field maps represents the values associated with the
+%current bearing coil.  The advantage of simulation is that which we
+%can use 6 field maps to generate any dimensions of matrix $\bm{M}$
+%within the cube dimensions. For generating the matrix, we used the
+%Python programming language where the fields maps are acted as
+%input. We convert the fields maps into nT/A to match the experimental
+%unit and depending on the co-ordinates of the points provided by us,
+%the matrix is generated in the output of the Python code. Note that
+%the points must be from -62 cm to 62 cm with an increment of 1 cm in
+%each of the $x$, $y$ and $z$ co-ordinate.
 
 
 % The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the co-ordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined.
@@ -1016,7 +1113,11 @@ The advantage of simulation is that which we can use 6 field maps to generate an
 % And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the co-ordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
 % \fig{Images/noShield}{width =\textwidth,height=14 cm}{Prototype setup in OPERA simulation software without passive shielding layers. \label{fig:noShield_opera}}
 
-For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$ has been made by choosing co-ordinates of the points as same as the sensor positions in the experiment. Then the absolute differences between the experimental $M_{sc}$ elements with that of the simulation ones  are calculated as
+For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$
+has been made by choosing co-ordinates of the points as same as the
+sensor positions in the experiment. Then the absolute differences
+between the experimental $M_{sc}$ elements with that of the simulation
+ones are calculated as
 
 \begin{equation}
     |M_{sc}^{\text{diff}}|=|(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)|
@@ -1025,6 +1126,8 @@ where, $|M_{sc}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$ indicate the absolute
 
 \fig{Images/Mdiff_56}{width = \textwidth}{The absolute differences between the  experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. For position of the sensors and coils please see Fig.~\ref{fig:coil}. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
+{\bf Try some different ways of graphing this and making some
+different statistics to quantify the agreement.}
 
 
 The absolute differences $|M_{sc}^{\text{diff}}|$ have been shown in Fig. \ref{fig:Mdiff}. It is seen that most of $|M_{sc}^{\text{diff}}|$ differences are within 100 nT/A. But that in some of the positions the differences are very big. The reason is that it is very difficult to exactly pinpoint the locations both in experiment and simulation and also the simulation runs in ideal conditions where the experiment suffers from the condition of its surrounding. The differences can be made smaller by choosing different co-ordinates of the sensor positions. We are not that concerned about that because the $M_{sc}$ element due to a particular coil and sensor position has similar response pattern both in experiment and simulation. 
