@@ -883,7 +883,7 @@ coils, the module uses the Biot-Savart integral equation.
 
 \subsubsection{Geometry Definition in OPERA}
 
-\doublefig{Images/shield2}{width=\textwidth,height=8cm}{\label{fig:shield_opera}}{Images/noShield}{width=\textwidth,height=8cm}{\label{fig:noShield_opera}}{{Geometry in OPERA simulation (a) with passive shielding, and (b) without passive shielding.  The square in the back, appearing in both drawings, is the perturbation coil. The direction of each of the three axes may be seen in (b).} \label{fig:opera_setup}}{Prototype setup in OPERA simulation software.}
+\doublefig{Images/shield2}{width=\textwidth,height=8cm}{\label{fig:shield_opera}}{Images/noShield}{width=\textwidth,height=8cm}{\label{fig:noShield_opera}}{{Geometry in OPERA simulation (a) with passive shielding, and (b) without passive shielding.  The square in the back, appearing in both drawings, is the perturbation coil. The direction of each of the three axes may be seen in (b).} \label{fig:opera_setup}}{Prototype geometry in OPERA simulation}
 
 Fig.~\ref{fig:opera_setup} shows the geometry as defined in OPERA,
 both with and without the magnetic shields present.  The dimensions of
@@ -891,13 +891,13 @@ the prototype passive shielding layers and the stove pipe were given
 in Table~\ref{table:mu-metal}.  These were implemented using simple
 cylindrical and planar shapes available in OPERA.  The dimensions of
 the coils were given in Table~\ref{table:coil}.  These were
-implemented as wires of square profile 0.1~cm~$\times$~0.1~cm.
+implemented as wires of square profile 1.24~m~$\times$~1.24~cm.
 
 The material of the magnetic shield was chosen to be linear with
 relative magnetic permeability $\mu_r=20,000$.  Some air volumes were
 also drawn near the shields to aid in meshing near the thin layers.
 
-The perturbation coi is 106~cm away from the origin, which is at the
+The perturbation coil is 1.06~m away from the origin, which is at the
 center of the coil cube.
 
 All the information has been written in the {\tt comi} file format
@@ -915,13 +915,14 @@ coil cube was used.
 
 {\bf consider a Table for the following paragraph.}
 
+\fig{Images/surface_mesh}{width =\textwidth}{Settings to generate surface mesh in OPERA. \label{fig:s_mesh}}{Settings to generate surface mesh in OPERA.}
 In OPERA, surfaces are first meshed, and then these meshes are
-extended into the volume with a subsequent volume meshing step.  To
+extended into the volume with a subsequent volume meshing step.  \textcolor{red}{To
 generate the surface mesh, the maximum mesh element size was chosen to
 be 10 with maximum angle between elements of 10$^\circ$. The maximum
 deviation from surface was set to 0 and the absolute tolerance used to
 check point coincidence was set to $1\times10^{-8}$. The mesh
-type was set to ``preferred to be mosaic''. To generate the volume
+type was set to ``Prefer Mosaic''.} To generate the volume
 mesh the absolute tolerance was set to $1\times10^{-8}$.
 
 \subsubsection{Simulation Applying Current in Compensation Coils}\label{sec:mSim}
@@ -1023,9 +1024,24 @@ We used the same meshing as described earlier.  The perturbation coil
 was energized, or left unenergized, in a similar fashion as used for
 the coil-cube.  
 
-The main difference compared to the previous coil-cube simulation was
+\textcolor{red}{The main difference compared to the previous coil-cube simulation was
 that the magnetic field $\bm{H}$ on the boundary of the mother volume
-was set according to Table~\ref{table:Benvironment}.  Otherwise the
+was set according to Table~\ref{table:Benvironment}}.
+\textcolor{blue}{The main difference compared to the previous coil-cube simulation was
+that the external magnetic field $\bm{H}$ on TOSCA analysis module
+was set according to Table~\ref{table:Benvironment}}
+
+\textcolor{magenta}{It is sometimes convenient to introduce a “background” magnetic field into
+an analysis. OPERA-3d supports this facility in magnetostatic TOSCA,
+ELEKTRA and CARMEN analyses and in SCALA. A uniform field with
+any orientation may be specified. In these analyses, the applied magnetic field contributes to the overall coil
+fields in the problem. It is equivalent to having an infinite solenoid whose
+axis is oriented in the direction of the field. Consequently, it is necessary
+for the exterior of the model space (the outer layers of finite elements in the
+mesh) to use reduced magnetic scalar potential. The extent of this layer is
+unimportant – a single layer of elements works just as well as making all
+the air reduced potential. }
+Otherwise the
 field was solved and outputted to a {\tt csv} file as in the previous
 section.  Two {\tt csv} files (one each for the perturbation coil
 switched on and off) were created.
@@ -1039,7 +1055,7 @@ switched on and off) were created.
 
 %\subsubsection{Simulation of Field Map With Current in Perturbation Coil}
 
-When the perturbation coil was switched in, its current density on the
+When the perturbation coil was switched on, its current density on the
 was set to 770~mA/area.  The reason is that, in the experiment, 10~mA
 current was normally provided to the perturbation coil which has
 77~turns.
@@ -1120,11 +1136,16 @@ between the experimental $M_{sc}$ elements with that of the simulation
 ones are calculated as
 
 \begin{equation}
-    |M_{sc}^{\text{diff}}|=|(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)|
+    M_{\text{RMS}}^{\text{diff}}=\sqrt{\frac{(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)^2}{12\times6}}
 \end{equation}
-where, $|M_{sc}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$ indicate the absolute values of $M_{sc}$ elements both in experiment and simulation respectively.
+where, $|M_{\text{sc}}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$ indicate the absolute values of $M_{sc}$ elements both in experiment and simulation respectively.
 
-\fig{Images/Mdiff_56}{width = \textwidth}{The absolute differences between the  experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. For position of the sensors and coils please see Fig.~\ref{fig:coil}. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
+\fig{Images/Mdiff_31}{width = \textwidth}{The RMS differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
+
+\fig{Images/Mdiff2_31}{width = \textwidth}{The differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff2}}{Comparison of experimental $\bm{M}$ with simulation one.}
+
+\fig{Images/Mdev}{width = \textwidth}{Maximum variations in $M_{sc}$ elements for $\bm{M}$ measure in every 15 mins for 8 hours in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdev}}{Comparison of experimental $\bm{M}$ with simulation one.}
+
 
 {\bf Try some different ways of graphing this and making some
 different statistics to quantify the agreement.}
