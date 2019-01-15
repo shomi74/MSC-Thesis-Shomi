@@ -1290,8 +1290,8 @@
 \renewcommand{\chaptermark}[1]{\markboth{\@chapapp\ \thechapter:\ #1}{}}
 
 \fancyhf{}
-% \fancyfoot[C]{\thepage}
-\fancyhead[R]{\thepage}
+\fancyfoot[C]{\thepage}
+% \fancyhead[R]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0pt}
 
@@ -1315,8 +1315,8 @@
 
 \fancypagestyle{plain}{
   \fancyhf{}
-%   \fancyfoot[C]{\thepage}
-    \fancyhead[R]{\thepage}
+    \fancyfoot[C]{\thepage}
+    % \fancyhead[R]{\thepage}
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
 }
