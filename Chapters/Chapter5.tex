@@ -250,10 +250,10 @@ field, averaged over that cycle.
 % In the upcoming Section PI, regularization parameter and condition number will be revisited with results.
 
 \section{PI Tuning General Behavior}\label{sec:pi_behave}
-Main points:
-\begin{itemize}
-\item Lead into discussion of the current-drifting problem and that since the simulation and data agree, and we checked the hardware, that it is not a hardware problem.
-\end{itemize}
+%Main points:
+%\begin{itemize}
+%\item Lead into discussion of the current-drifting problem and that since the simulation and data agree, and we checked the hardware, that it is not a hardware problem.
+%\end{itemize}
 
 The tuning method of proportional gain $k_c^p$ (P) and integral reset
 $k_c^i$ (I) have been discussed in Section~\ref{sec:tune}, for example
@@ -583,13 +583,12 @@ I developed are the best way to design the control system.
 
 \section{Fluxgate Placements and Impact of Passive Shield}\label{sec:flux_place}
 
-
-\begin{itemize}
-\item We still had no clue so we just started changing things randomly.
-\item We changed fluxgate positions to try to make cond number smaller to see if it had an effect.  Could not change the cond number or the problem significantly.  (Table 5.1).  We also ran the compensation system and it still had the current drifting problem to varying degrees.
-\item We were confused if the slow current response might be due to magnetic responses that were slow.  So we tried removing the shields.  No change.  Fig. 5.9.
-\item And then we realized this had nothing to do with it.
-\end{itemize}
+%\begin{itemize}
+%\item We still had no clue so we just started changing things randomly.
+%\item We changed fluxgate positions to try to make cond number smaller to see if it had an effect.  Could not change the cond number or the problem significantly.  (Table 5.1).  We also ran the compensation system and it still had the current drifting problem to varying degrees.
+%\item We were confused if the slow current response might be due to magnetic responses that were slow.  So we tried removing the shields.  No change.  Fig. 5.9.
+%\item And then we realized this had nothing to do with it.
+%\end{itemize}
 
 An observation of the previous section was that the coil current does
 not settle properly although the field seems to be compensated on
@@ -1164,22 +1163,24 @@ values which were presented in Fig.~\ref{fig:m}.
 
 In general, the simulated values are somewhat larger than the
 experimental values resulting in Fig.~\ref{fig:Mdiff2} having more
-blue than red numbers.  This is particularly true of fluxgate sensor position 3
-(3x, 3y, and 3z).  The largest difference seen is in the 3x sensor in
-its response to the $C_x^+$ coil.  On average, the matrix elements
-agree within about 30\% with the matrix elements in Fig.~\ref{fig:m},
-as can be seen from the change in the color scales on the figures.
-
-
-\textcolor{red}{The mean absolute error is found to be 168 nT/A and the root mean square absolute error is found to be 291 nT/A.}
+blue than red numbers.  This is particularly true of fluxgate sensor
+position 3 (3x, 3y, and 3z).  The largest difference seen is in the 3x
+sensor in its response to the $C_x^+$ coil.  On average, the matrix
+elements agree within about 30\% with the matrix elements in
+Fig.~\ref{fig:m}, as can be seen from the change in the color scales
+on the figures.  The mean of the absolute values of the entries in
+Fig.~\ref{fig:Mdiff2} is found to be 168 nT/A, and the root mean
+square of the values is found to be 291 nT/A.  These are indications
+of the average absolute deviation of the simulation from the
+experimental values.
 
 We expect that most of the differences can be attributed to
 discrepancies in the sensor placements between the experiment and
-simulation.  Indeed the value of the field measured and its slope with
-current are very sensitive to location in this region between the
-coils and the shield.  For example, the field near the surface of the
-magnetic shield can be enhanced by a factor of 2 to 3 over the general
-background field far from the shield.
+simulation.  Experimentally, the value of the field measured and its
+slope with current are very sensitive to location in this region
+between the coils and the shield.  For example, the field near the
+surface of the magnetic shield can be enhanced by a factor of 2 to 3
+over the general background field far from the shield.
 
 Interestingly, the condition number of the two matrices are very
 similar.  The experimental $\bm{M}$ has a condition number of 29.6 and the
@@ -1276,8 +1277,6 @@ problem is reproduced.  The currents drift for long periods of time,
 whereas the field corrections appear to occur on a much more rapid
 timescale.
 
-\textcolor{red}{Need to edit the figure caption.}
-
 \fig{Images/exp_sim}{width=\textwidth,height=12cm}{Magnetic filed compensation results in (a) experiment and (b) simulation.  The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=3.1$.  The current supplied to the perturbation coil was 10~mA when switched on.  Resolution index 1 with 50 averages per cycle were used.\label{fig:exp_sim}}{Comparison of experimental and simulated magnetic compensation results.}
 
 Seeing this anomalous effect reproduced so accurately in the
@@ -1307,9 +1306,25 @@ apparatus.
 
 % \fig{Images/pi_sim}{width =\textwidth,height=12cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Simulation. \label{fig:pi_sim}}
 
-\section{New Studies on Regularization Parameter}\label{sec:new_study_r}
+\section{New Studies on the Regularization Parameter $r$}\label{sec:new_study_r}
 
-In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and then discussed regularization by random fluctuations in Section~\ref{sec:mont} which is based on the previous study from Ref.~\cite{bea}. We have also talked about the PI behaviour in Section~\ref{sec:pi_behave}. The effect of $r$ on current unsettle problem will be discussed here. The current unsettle problem will be reduced by looking from the perspective of changing $r$. We will also propose a new method of regularization based on condition number of matrix. 
+In Section~\ref{sec:inv} I introduced the regularization parameter $r$
+and then discussed regularization by random fluctuations in
+Section~\ref{sec:mont} which is based on the previous study from
+Ref.~\cite{bea}.
+
+These studies were expanded in relation to the current drifting
+problem.  I found that the current drifting problem can be reduced by
+adjusting $r$ and the PI parameters, treating $r$ more-or-less as
+another free parameter.  But this is generally at the expense of also
+introducing higher-frequency noise.
+
+Finally, I propose a new method of determining the regularization
+parameter which is unique compared to the Monte Carlo method
+introduced in Section~\ref{sec:mont} and used in Ref.~\cite{bea}.  The
+method is based on minimizing the condition number of the regularized
+matrix.  This will give similar results as the Monte Carlo method, and
+the correspondence between the two methods will be discussed.
 
 % So, first the importance of matrix condition number on PI will be discussed.
 
@@ -1440,47 +1455,86 @@ In Section~\ref{sec:inv} we have introduced the regularization parameter $r$ and
 \item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
 \end{itemize}
 
-The discussion on Section~\ref{sec:pi_behave} suggests that I term
-is necessary for fast system response due to any drift in the magnetic
-signal as it takes care of the offset problems which is unsolvable by
-using only P term. But, in doing so, it also creates problems in terms
-of the coil currents which never settle in for the duration of the
-perturbation in case of ill-conditioned matrix. The tuning method
-described in Section~\ref{sec:tune} should have take care of this but
-we have realized that having tuned P and I has similar effect like
-having only I term. So, tuning method doesn't give us the
-solution. Rather looking for different tuning method , we have focused
-on the effect of $r$ on PI tuning. This Section will discuss that
-effect with possible outcome.
+The discussion on Section~\ref{sec:pi_behave} suggests that the
+$k_c^i$ term in the PI feedback algorithm is necessary for fast system
+response, and to reduce proportional droop and hence the error
+signals.  But, in including this term, I found that it also creates
+problems in terms of the coil currents which take long periods of time
+to settle (several tens of seconds).  I called this problem the
+current drifting problem.  Adjusting the PI feedback parameters
+changed the problem somewhat but ultimately did not reduce the current
+drifting time.  Here we focus on the effect of $r$ on this problem,
+treating it on a more equal footing with the PI parameters.
 
 
-\fig{Images/rp_i}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p$=0.6, $r$=3.04 and different values of $k_c^i$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:rp_i}}{Single magnetic field compensation results for fixed $k_c^p$ and $r$ and different values of $k_c^i$.}
+\fig{Images/rp_i}{width=\textwidth,height=8cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ for sensor 8x (right) with $k_c^p$=0.6, $r$=3.04 and different values of $k_c^i$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:rp_i}}{Single magnetic field compensation results for fixed $k_c^p$ and $r$ and different values of $k_c^i$.}
 
+Fig.~\ref{fig:rp_i} shows an example of the impact of changing $k_c^i$
+when $k_c^p$ is held fixed and the regularization parameter $r$ is set
+to its best value.  Only the current in one coil and the field
+measured in one fluxgate axis are shown so that the impact of changing
+$k_c^i$ can be seen.
 
-As we have realized that having tuned P and I terms have similar effect like
-having only I term, we have studied the effect of different I term keeping the P term fixed to see whether the current unsettle problems goes away. The Fig.~\ref{fig:rp_i} shows the active compensation by fluxgate position 1, 3, 6 and 8 for with $k_c^p$=0.6, $r$=3.04 and different values of $k_c^i$ for 50 software averages respectively using filter in resolution index 1. For simplicity only $C_z^+$ coil current (left) and magnetic compensation (right) on fluxgate sensor position '8x' have been shown instead of showing all current coils and sensor positions. For a complete list of positions see the color map of $\bm{M}$ in Fig.~\ref{fig:m}.  The blue color denotes current (left) in coil $C_z^+$ to compensate magnetic drift on fluxgate sensor position '8x' for $k_c^p$=0.6, $r$=3.04 and $k_c^i$=0.0. It is seen that there is no current unsettle problem (left) and the magnetic drift (right) reduces from 25 nT to 15 nT which is expected from the discussion of the effect of changing only P term in Section~\ref{sec:pi_behave}. It is also seen that for all other colors the magnetic drift vanishes very fast as different values of I term are applied which is also expected from from the discussion of the effect of changing only I term in Section~\ref{sec:pi_behave} though we have used a fixed P term here which has minimal effect as discussed earlier. Our main concern is whether the current unsettle problems appear for changing I term and it is seen that as long as there is I term, the current unsettle problem appears. But the trend shows that if I term is in increasing order, then the current unsettle problem may disappear. We have also seen the effect of increasing I term in Section~\ref{sec:pi_behave} which suggests that increasing I term after a point makes the current unstable with creating overshoot problem. So, that can not be as solution to our original problem of current unsettle.
+It is seen that there is no current drifting problem if $k_c^i=0.0$ is
+used, but that the field error is consequently larger.  If $k_c^i=0.8$
+is used, the field is corrected in a few seconds to a smaller error,
+but the current drifts for considerably longer, about 10-20 seconds.
+This is similar to the observations described in
+Section~\ref{sec:pi_behave}.  We have also seen the effect in
+Section~\ref{sec:pi_behave} that increasing $k_c^i$ after a point
+makes the current unstable resulting in overshoot.
 
+For these studies I focused on the $C_z^+$ coil and the 8x sensor
+because they are located closer to the pertubation coil and hence see
+most of the effect.
 
 \fig{Images/pi_r}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p$=0.6, $k_c^i$=0.37 and different values of $r$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:pi_r}}{Single magnetic field compensation results for fixed $k_c^p$ and $k_c^i$ and different values of $r$.}
 
 
- 
-As increasing I term is not the solution for the current unsettle problem, we have then tried changing $r$ keeping P and I terms fixed. The Fig.~\ref{fig:pi_r} shows the active compensation for same fluxgate positions and same settings as in Fig.~\ref{fig:rp_i} except in this case we have chosen $k_c^p$=0.6, $k_c^i$=0.37 and different values of $r$ . It is seen that if we kept P and I term fixed, and changed only $r$, then for decreasing $r$ , we get the current unsettle problem goes away but doing such introduces high frequency noise. It is natural that $r$ should affect PI, because the error function involves $\bm{M^{-1}}$ and therefore $r$.  See e.g.~Eq.~(\ref{eq:minvR}) for r and Eq.~(\ref{eq:del_I}) and Eq.~(\ref{eq:I}) for how $\bm{M^{-1}}$ enters the PI algorithm.  If $r$ is big then $\bm{M^{-1}}$ gets small.  So it would be reasonable to expect that if r increases then we need to increase both $k_c^p$ and $k_c^i$ accordingly (see Eq.~(\ref{eq:I})).
+I then tried changing $r$ while keeping $k_c^i$ and $k_c^p$ terms
+fixed.  Fig.~\ref{fig:pi_r} shows the active compensation for same
+fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
+$k_c^i$=0.37, and this time for different values of $r$. The
+observation is that for decreasing $r$, the current drifting problem
+disappears, but the feedback system introduces high frequency
+noise.
 
-\begin{itemize}
-    \item Fig.~\ref{fig:pi_tuned_r24} or Fig.~\ref{fig:i100_r24} and the message??
-\end{itemize}
-
-
+It is natural that $r$ should affect the PI control, because the error
+function involves $\bm{M^{-1}}$ and therefore $r$ (see
+e.g.~Eqs.~(\ref{eq:minvR}), (\ref{eq:del_I}), and (\ref{eq:I})).  If
+$r$ is larger then $\bm{M^{-1}}$ generally gets small.  So it would be
+reasonable to expect that if $r$ increases then we need to increase
+both $k_c^p$ and $k_c^i$ accordingly (see Eq.~(\ref{eq:I})).
 
 \fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.6$, $k_c^i=0.37$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:pi_tuned_r24}}{Coil currents with filed change $\Delta B$ for $k_c^p$=0.60, $k_c^i$=0.37 and $r$=2.4}
 
-The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using lower value of $r$ to show its effect on all the fluxgate sensors and shown in in Fig.~\ref{fig:pi_tuned_r24} where the currents (left) that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) for drift $\Delta B$ (right) found by Eq.~(\ref{eq:del_B}). It is seen the current unsettle problems in all the coil sides are disappeared but high frequency noises are induced.
+The best that can be done to fix the current drifting problem is then
+that $r$, $k_c^p$, and $k_c^i$ be adjusted to reduce the current
+drifting problem without too much impact on high-frequency noise.  An
+example of an attempt to make this trade-off is shown in in
+Fig.~\ref{fig:pi_tuned_r24}.  Other than changing $r$ to 2.4, this
+Figure uses the same settings as
+Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)}.  Indeed reducing $r$
+has increased the speed with which the currents settle, but an
+increase in high-frequency noise on the currents is apparent.
+However, this increase in current noise does not noticable increase
+the noise on the field measurements, which is similar in both cases.
+In Fig.~\ref{fig:i100_r24} I have retained this value of $r=2.4$ and
+adjusted the PI parameters to attempt to further improve the response
+time on the currents.
 
+Eventually I determined that neither of these solutions is truly
+optimal.  I now characterize them as being generally
+ill-conditioned.  The final solution is discussed further in
+Section~\ref{sec:coil_config}.
 
-
- 
- The above results show that if $r$ or condition number is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If $r$ set falsely low, it also doesn't help because it induces high frequency noises and setting PI large again induces slow response. Next we will talk about a new method of regularization based on condition number.
+The above results show that if $r$ (or the condition number) is bad
+(too big) then no amount of PI tuning will help speed up the current
+drifting.  If $r$ set falsely low, it has the undesirable impact of
+inducing high frequency current noise, similar to increasing the PI
+parameters, which is expected. While this might be acceptable in some
+situations, such as if the field noise is already rather large, it is
+not the best general solution.
  
 
 
@@ -1579,33 +1633,77 @@ The Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)} has been regenerated using 
 
 \subsection{Regularization by Matrix Condition Number Method  }\label{sec:cond}
 
-\begin{itemize}
-\item This previous stuff plus Rawlik made us believe that cond number is important.  It's important to make it small.
-\item We noticed another relationship between condition number and regularization parameter for this system:  the best r determined by MC method gave the smallest cond \#.  Fig. 5.15 shows that when r is varied there is a minimum cond \#.  We tested this for a broad variety of M both theoretical and experimental and found it to be always true that the MC method gave the same best r as if we had just selected the one that gives the smallest cond number.
-\item We suspect this is because Tikhonov regularization minimizes both RMS current as well as field fluctuations.  cite Wikipedia (I mean some Tikhonov thing).  In Wikipedia, it minimizes Gammax2 + Ax2.  L2 reg.
-\item So it's not surprising and could be more useful, not requiring an random number technique to find the best r.
-\item Maybe add example graph somehow comparing to the MC technique?
-\end{itemize}
+%\begin{itemize}
+%\item This previous stuff plus Rawlik made us believe that cond number is important.  It's important to make it small.
+%\item We noticed another relationship between condition number and regularization parameter for this system:  the best r determined by MC method gave the smallest cond \#.  Fig. 5.15 shows that when r is varied there is a minimum cond \#.  We tested this for a broad variety of M both theoretical and experimental and found it to be always true that the MC method gave the same best r as if we had just selected the one that gives the smallest cond number.
+%\item We suspect this is because Tikhonov regularization minimizes both RMS current as well as field fluctuations.  cite Wikipedia (I mean some Tikhonov thing).  In Wikipedia, it minimizes Gammax2 + Ax2.  L2 reg.
+%\item So it's not surprising and could be more useful, not requiring an random number technique to find the best r.
+%\item Maybe add example graph somehow comparing to the MC technique?
+%\end{itemize}
 
 
-Matrix Condition number ( see Eq.~(\ref{eq:cond} ) and regularization parameter $r$ ( see Eq.~(\ref{eq:minvR} ) have been introduced in Section.~\ref{sec:m} while discussing the inversion of the matrix $\bm{M}$ . Moreover, in Section~\ref{sec:mont}, a method of regularization by random fluctuation has been discussed. We will here propose another method of regularization using the concept of matrix condition number.
- 
+The condition number of $\bm{M}$ and its regularized pseudoinverse,
+and the regularization parameter $r$ were introduced in
+Section.~\ref{sec:m} while discussing the inversion of the matrix
+$\bm{M}$ . Moreover, in Section~\ref{sec:mont}, the method of
+Ref.~\cite{bea} of selecting the best value for $r$ by randomly
+generated field perturbations has been discussed.  The purpose of this
+section is to report that this method of selecting $r$ is equivalent
+to minimizing the condition number of the regularized pseudoinverse
+$\bm{M^{-1}}$.
+
 %  Recall from Section~\ref{sec:inv}, regularization is needed in the first place while inverse of the matrix $\bm{M}$ because $\bm{M}$ itself is ill-conditioned matrix. That means the $\bm{M}$ has a large condition number which while inverse would produce large currents in some ill-positioned places that will make the system unstable. So, it is required to have a well-conditioned  $\bm{M^{-1}}$ which implies that the condition number of $\bm{M^{-1}}$ should be small and that's what regularization has been doing. So, 
  
-We introduce Eq.~\ref{eq:minvR} with various values of $r$ and each time the condition number of $\bm{M^{-1}}$ is stored. Then the optimized $r$  has been determined by selecting the $r$ for which the condition number of $\bm{M^{-1}}$ is the minimum.
- 
- The condition number of $\bm{M^{-1}}$ for different values of $r$ has been shown in Fig.~\ref{fig:cond}. It is seen that for $r$=0, the condition number of $\bm{M^{-1}}$=$\sim$51 that is same as the condition number of $\bm{M}$ itself. So, without regularization that is the condition number of pseudo-inverse of $\bm{M}$ would also give =$\sim$51. In regularization method, several $r$ is tried ( see Eq.~(\ref{eq:minvR}) ) and each time the condition number has been stored which are shown in the vertical axis. The red diamond symbol indicates that for $r$=2.90, the condition number of $\bm{M^{-1}}$ is minimum and that is 3.2. That by using $r$=2.99 in Eq.~(\ref{eq:minvR}), the condition number decrease from 51 to 3.1 which is 51/3.2$\approx$17 times of decrements. The Fig.~\ref{fig:cond}\textcolor{blue}{(b)} shows that the $r$=2.88 compared to $r$=2.90 that we found here. So, both method shows comparable result. This method will always produce fixed optimized $r$ for a particular  $\bm{M}$. We suspect this is because Tikhonov regularization minimizes both RMS current as well as field fluctuations. But the method by random fluctuation (see Section~\ref{sec:mont}) will produce different optimize $r$ for different run as it because depends on the random field.
- 
- \begin{itemize}
-     \item message from Fig.~\ref{fig:cond}??
- \end{itemize}
+%We introduce Eq.~\ref{eq:minvR} with various values of $r$ and each time the condition number of $\bm{M^{-1}}$ is stored. Then the optimized $r$  has been determined by selecting the $r$ for which the condition number of $\bm{M^{-1}}$ is the minimum.
 
- 
-\fig{Images/mc_Mcond2}{width = \textwidth,height =7cm}{Condition Number of $\bm{M}$ (vertical axis) in (a) for different values of 'r.  For description of the figure in (b) see Fig.~\ref{fig:I-fluc}. The matrix is similar to the matrix as described by the Fig.~\ref{fig:m}. \label{fig:cond}}{Comparing $r$ from two different methods.}
+The condition number of $\bm{M^{-1}}$ for different values of $r$ is
+presented in Fig.~\ref{fig:cond}\textcolor{blue}{(a)} and exhibits a
+clear minimum at $r=2.90$ (indicated by the red diamond in the
+Figure).  It is seen that for $r=0$, the condition number of
+$\bm{M^{-1}}$=$\sim 51$ which is by definition the same as the
+condition number of $\bm{M}$ itself.  The minimum value of the
+condition number is 3.2 which is a factor of 17 reduction.  Recall
+that the ideal value of the condition number is unity.
+
+Fig.~\ref{fig:cond}\textcolor{blue}{(b)} shows the same matrix being
+analyzed using the random field fluctuation method of
+Section~\ref{sec:mont} and Ref.~\cite{bea}, where current fluctuations
+are traded off against field control.  In this study, the ``best''
+value $r=2.88$ is determined, which can be compared to $r=2.90$ which
+minimizes the condition number of the regularized pseudoinverse.
+
+I tried this same comparison for a variety of different $\bm{M}$ and
+always found the same level of agreement in the determination of $r$.
+A sample of results was shown in Table~\ref{table:flux_pos}.  I think
+that the method of minimizing the condition number is more robust
+because it does not involve random number generation and therefore is
+free of any additional statistical error.
+
+I suspect the excellent agreement seen between the two methods results
+from the definition of Tikhonov regularization~\cite{bib:wikipedia}.
+
+Given a vector of field fluctuations $\Delta\vec{B}$ and a vector of
+correction currents $\Delta\vec{I}$, the Moore-Penrose pseudoinverse
+$\bm{M}^{-1}$ can be thought of as the matrix which minimizes
+$|\Delta\vec{I}-\bm{M}^{-1}\vec{B}|$, which is analogous to
+chi-squared minimization for a system of linear equations.  Tikhonov
+regularization is used when this problem becomes ill conditioned, and
+introduces another constraint that the modulus of the vector
+$|\Delta\vec{I}|$ simultaneously be minimized.  In
+Ref.~\cite{bib:wikipedia}, this is also referred to as L2
+minimization.  In a way this is equivalent to the compromise being
+made in the selection of the ``best'' $r$ using the random field
+fluctuation method.  Current and field fluctuations are being traded
+off against one another in order prevent large current fluctuations
+from occurring.
+
+\fig{Images/mc_Mcond2}{width = \textwidth,height =7cm}{(a) Condition number of $\bm{M}^{-1}$ vs.~$r$, and (b) determination of $r$ using random field fluctuations.  For a more complete description of (b) see Fig.~\ref{fig:I-fluc}.\label{fig:cond}}{Comparing $r$ from two different methods.}
 
 
-
-In the above, different method to find optimize $r$ has been discussed which is a good alternative to the one explained in Section~\ref{sec:mont} and the results are similar. It could be more useful, not requiring an random number technique to find the best $r$. 
+I think it is therefore not surprising that the two methods give good
+agreement.  I feel the minimization of condition number is a better
+defined solution, not requiring random number generation, and that it
+is a superior and robust method to determine $r$.
 
 
 % \subsubsection{Optimized r  Revisited Based on Current Response Time}\label{sec:r_currentResponse}
