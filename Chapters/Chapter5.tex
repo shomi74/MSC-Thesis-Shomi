@@ -1684,7 +1684,8 @@ because it does not involve random number generation and therefore is
 free of any additional statistical error.
 
 I suspect the excellent agreement seen between the two methods results
-from the definition of Tikhonov regularization~~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3}.
+from the definition of Tikhonov
+regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3}.
 
 Given a vector of field fluctuations $\Delta\vec{B}$ and a vector of
 correction currents $\Delta\vec{I}$, the Moore-Penrose pseudoinverse
@@ -1806,17 +1807,17 @@ is a superior and robust method to determine $r$.
 
 
 
-\section{``New'' feedback algorithms vs.~standard PI control}\label{sec:style_pi}
+\section{``New'' feedback algorithm vs.~standard PI control}\label{sec:style_pi}
 
-\begin{itemize}
-\item We were led astray by M. Rawlik in late 2017 (nEDM2017).  It is also written in his thesis.
-\item The claim is that the PI algorithm is not necessary.  Just use this magic new algorithm and you don't need PI any more.
-\item Describe the algorithm and its difference compared to typical PI (our understanding).  Our implementation included P and I terms also.  The main difference seemed to be that I0 wasn't used but rather In in order to determine In+1.
-\item In our implementation we noticed experimentally that kp=1 in the new system corresponded to ki=1 in the old system.
-\item Eventually we figured out why (derivation).
-\item Main conclusion:  the ``New PID'' is the ``old PID'' but with a very particular choice ki=1 and kp=0.  It is clearly better to allow more freedom in the algorithm than this.  Old PID is therefore more general.  Although indeed ki=1 and kp=0 generally do seem to be close to optimal, we think this is a coincidence rather than physics.  We also note the time delays inserted into Rawlik's algorithm are themselves a form of tuning.
-\item So we use regular PI and treat the parameters as TBD by system tuning.
-\end{itemize}
+%\begin{itemize}
+%\item We were led astray by M. Rawlik in late 2017 (nEDM2017).  It is also written in his thesis.
+%\item The claim is that the PI algorithm is not necessary.  Just use this magic new algorithm and you don't need PI any more.
+%\item Describe the algorithm and its difference compared to typical PI (our understanding).  Our implementation included P and I terms also.  The main difference seemed to be that I0 wasn't used but rather In in order to determine In+1.
+%\item In our implementation we noticed experimentally that kp=1 in the new system corresponded to ki=1 in the old system.
+%\item Eventually we figured out why (derivation).
+%\item Main conclusion:  the ``New PID'' is the ``old PID'' but with a very particular choice ki=1 and kp=0.  It is clearly better to allow more freedom in the algorithm than this.  Old PID is therefore more general.  Although indeed ki=1 and kp=0 generally do seem to be close to optimal, we think this is a coincidence rather than physics.  We also note the time delays inserted into Rawlik's algorithm are themselves a form of tuning.
+%\item So we use regular PI and treat the parameters as TBD by system tuning.
+%\end{itemize}
 
 In Sections~\ref{sec:tune} and \ref{sec:pi_behave} I discussed the PI
 feedback algorithm and my studies of tuning both the PI parameters and
@@ -1843,16 +1844,28 @@ new algorithm is
     I^{n+1}= I^n+M^{-1} (B_{\rm setpoint}-B_{\rm
     measure}^n)=I^n+M^{-1} \Delta B^n
 \end{equation}
-which is taken directly from Eq.~(YYY) of Ref.~\cite{rawlik}.  This
-algorithm can be compared with the standard PI algorithm, which I
-presented in Eq.~(\ref{someq}).  Naively the main difference between
-the two equations appeared to be that the current from the previous
-step was being used to determine the next current with the error from
-the present step also being included.  Eq.~(\ref{someq}) on the other
-hand, references the next current to the initial current, and
-implements two control terms: a proportional term which appears
-similar to the error term containing $M^{-1}$ above, and an integral
-term containing an sum over the past history of errors.
+which is taken directly from Eq.~(28) in Section~5.5 of
+Ref.~\cite{rawlik}.  In this equation, $\Delta B^n$ is a vector of
+magnetic field values measured in the given feedback step.  The
+dimension is equal to the number of fluxgate axes being used for
+control (12 in my case).  The quantity $M^{-1}$ is the Moore-Penrose
+pseudoinverse (a $6\times 12$ non-square matrix, in my case).  The
+quantity $I^n$ are a vector of currents (dimension 6, in my case).
+The index $n$ refers to the values as of the present feedback step.
+The index $n+1$ on the left-hand-side of the equation is indicating
+the next vector of currents that will be set based on this feedback
+algorithm.
+
+This algorithm can be compared with the standard PI algorithm, which I
+presented in Eqs.~(\ref{someq} 4.3 and 4.4).  Naively the main
+difference between the two equations appeared to be that the current
+from the previous step was being used to determine the next current
+with the error from the present step also being included.
+Eq.~(\ref{someq}) on the other hand, references the next current to
+the initial current, and implements two control terms: a proportional
+term which appears similar to the error term containing $M^{-1}$
+above, and an integral term containing an sum over the past history of
+errors.
 
 %  or with
 %a delay like -
@@ -1875,69 +1888,57 @@ results.
 % \doublefig{Images/i100_old}{width =\textwidth, height= 6.5 cm}{at $k_c^p$=0.0 and $k_c^i$=1.0 for 'Old PI' \label{fig:i100_old}}{Images/p100_new}{width = \textwidth, height= 6.5 cm}{at $k_c^p$=1.0 and $k_c^i$=0.0 for 'New PI'\label{fig:p100_new}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}..} \label{fig:style_of_pi}}{short}
 
 
-
-To verify that the equation has been studied deeply. The mathematical equivalent of Eq.~(\ref{eq:I_raw}) is- 
+In the case of $k^p=0$ and $k^i=1$, the PI feedback algorithm in Eq.~(\ref{fixme}, 4.3, 4.4) can be written as
 \begin{equation}\label{eq:I_raw_eq}
-    I^{n+1}= \sum_{i=0}^n M^{-1} (B_{setpoint}-B_{ambient}^i)
+    I^{n+1}= I^0+\sum_{i=0}^n M^{-1}\Delta B^i
 \end{equation}
+where the same matrix and vector notation is being used as in
+Eq.~(\ref{eq:I_raw}).
 
-The equivalency can be proved by mathematical induction. That is, for n$\geq$0, let $P_n$ be the following statement -
-\begin{equation}\label{eq:I_raw_eq_both}
-   I^n+M^{-1} (B_{setpoint}-B_{measure}^n)= \sum_{i=0}^n M^{-1} (B_{setpoint}-B_{ambient}^i)
+Studying Eqs.~(\ref{eq:I_raw}) and (\ref{eq:I_raw_eq}) further, I was
+able to prove that the similar results actually arise because the two
+implementations are mathematically equivalent.
+
+Suppose that Eq.~(\ref{eq:I_raw_eq}) is true.  It will also have been
+true for the previous step $n\rightarrow n-1$
+\begin{equation}\label{eq:nminus1}
+    I^{n}= I^0+\sum_{i=0}^{n-1} M^{-1}\Delta B^i.
 \end{equation}
-
-For n=0, the statement $P_0$ is-
-
-\begin{align*}
-    \begin{split}
-      LHS &=I^0+M^{-1} (B_{setpoint}-B_{measure}^0) \\
-        &=I^0+M^{-1} (B_{setpoint}-B_{ambient}^0 -M I^0) \\
-        &=I^0+M^{-1} (B_{setpoint}-B_{ambient}^0) - MM^{-1} I^0) \\
-        &=I^0+M^{-1} (B_{setpoint}-B_{ambient}^0) - I^0 \\
-        &=M^{-1} (B_{setpoint}-B_{ambient}^0)
-    \end{split}
-    \\
-    \begin{split}
-      RHS &=M^{-1} (B_{setpoint}-B_{ambient}^0)\\
-          &= LHS
-    \end{split}
-\end{align*}
-$\therefore$ The Eq.~(\ref{eq:I_raw_eq_both}) is true for n=0.\newline
-Suppose it is also true for k$\geq$0. That is, the following statement $P_k$ holds -
-\begin{equation}\label{eq:I_raw_99}
-   I^k+M^{-1} (B_{setpoint}-B_{measure}^k)= \sum_{i=0}^k M^{-1} (B_{setpoint}-B_{ambient}^i)
+Eq.~(\ref{eq:I_raw_eq}) can then be rewritten by removing the final
+term from its sum, then applying Eq.~(\ref{eq:nminus1}):
+\begin{equation}
+\begin{split}
+I^{n+1}&=I^0+\sum_{i=0}^n M^{-1}\Delta B^i\\
+&=I^0+\sum_{i=0}^{n-1}M^{-1}\Delta B^i+ M^{-1}\Delta B^n\\
+&=I^n+ M^{-1}\Delta B^n
+\end{split}
 \end{equation}
+which is just Eq.~(\ref{eq:I_raw}).  This was further confirmed by
+implementing both algorithms in the PI simulation of
+Section~\ref{sec:pSim}.  In this case the algorithms indeed gave
+identical results since there is no experimental noise in the
+simulation.
 
-It is to be showed that $P_{k+1}$ also holds, that is-
+Hence we conclude that the ``new'' feedback algorithm of
+Ref.~\cite{rawlik} is simply the usual PI feedback algorithm, with the
+PI parameters being restricted to the particular values $k^p=0$ and
+$k^i=1$.  My recommendation would be to keep these as tunable
+parameters and allow for the potential of some ability to make
+adjustments to them as necessary, rather than falsely restricting them
+to particular values.  It is interesting that the particular tuning
+$k^p=0$ and $k^i=1$ (integral control) does seem to be fairly optimal
+for this particular system.
 
-\begin{equation}\label{eq:I_raw_98}
-   I^{k+1}+M^{-1} (B_{setpoint}-B_{measure}^{k+1})= \sum_{i=0}^{k+1} M^{-1} (B_{setpoint}-B_{ambient}^i)
+Ref.~\cite{rawlik} further mentions that due to time delays in their
+active magnetic compensation system, it was logically more correct to
+use the current from three steps prior to make the correction for the
+$n+1$ step
+\begin{equation}\label{eq:I_raw_delay}
+    I^{n+1}= I^{n-2}+M^{-1} \Delta B^{n-2}
 \end{equation}
-\begin{align*}
-    \begin{split}
-      LHS &=I^{k+1}+M^{-1} (B_{setpoint}-B_{measure}^{k+1}) \\
-        &=I^{k+1}+M^{-1} (B_{setpoint}-B_{ambient}^{k+1} -M I^{k+1}) \\
-        &=I^{k+1}+M^{-1} (B_{setpoint}-B_{ambient}^{k+1}) - MM^{-1} I^{k+1}) \\
-        &=I^{k+1}+M^{-1} (B_{setpoint}-B_{ambient}^0) - I^{k+1} \\
-        &=M^{-1} (B_{setpoint}-B_{ambient}^{k+1})
-    \end{split}
-    \\
-    \begin{split}
-      RHS &=M^{-1} (B_{setpoint}-B_{ambient}^{k+1})\\
-          &= LHS
-    \end{split}
-\end{align*}
-$\therefore \: P_{k+1}$ also holds which validates the Eq.~(\ref{eq:I_raw_eq_both}) by the principle of mathematical induction. \newline
-Now, the Eq.~(\ref{eq:I_raw_eq}) is equivalent to the implementation of PI -
-\begin{equation}\label{eq:I_raw_pi}
-    I^{n+1}= k_p E^n+ k_i \sum_{i=0}^n E^i \Delta t
-\end{equation}
-with $k_p=0$ and $k_i$ set to a particular value. Here, the error is , $E^i=M^{-1} (B_{setpoint}-B_{ambient}^i)$. So, the Eq.~(\ref{eq:I_raw}) is a PI with a particular tuning and termed as 'New PI' control. Similarly, the delay showed in Eq.~(\ref{eq:I_raw_delay}) is another form of tuning.
-
-So the above discussion verifies that 'Old PI' and 'New PI' are just two different form of tuning based on the control algorithm. We can also clear our previous questions about the effectiveness of the P term and the tuning method discussed in Section~\ref{sec:pi_behave} that instead of the tuning method discussed in Section~\ref{sec:tune}, we are using different from of tuning with changing the value of $k_c^i$ keeping $k_c^p$=0. In upcoming Section we then studied the effect of  matrix condition number in P and I term. and propose a new method to find regularization parameter using matrix condition number. 
-
-
-
+(which is Eq.~(30) of Ref.~\cite{rawlik}).  This could also be
+considered as another form of PI tuning where the past history of the
+system is weighted differently.
 
 
 \section{Coil Configuration}\label{sec:coil_config}
@@ -1946,8 +1947,8 @@ So the above discussion verifies that 'Old PI' and 'New PI' are just two differe
 \begin{itemize}
 \item coil cube with matrix calculation in python by Jeff shows the condition number to be infinity.
 \item exploits the diagonal matrix (Section~\ref{sec:m}) and found one of them is giving zero
-\item wire the two coils to work as one and matrix condition number is hugely improved. close to one!!
 \item Reason: Maxwell's equation and current mode in all the six coils.
+\item wire the two coils to work as one and matrix condition number is hugely improved. close to one!!
 \item Yes, fine, but does this actually fix the current drifting problem?
 \end{itemize}
 
