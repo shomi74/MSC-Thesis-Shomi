@@ -152,7 +152,14 @@ Here, $M^{-1}_{cs}$ are the elements of the inverse of the matrix $\bm{M}$. The 
 \begin{equation}\label{eq:I}
     I^n_c=I^0_c+k^p_c \Delta I_c^n+k^i_c\sum_n \Delta I_c^n
 \end{equation}
-where, $I^0_c$ indicates the initial value of current for the set of the coils when the setpoint has been set (100 mA). $\Delta I_c^n$ is the error found using Eq.~(\ref{eq:del_I}) and the sum is over no. of iterations $n$ where $n$ runs from 1 to $N$ as explained in Table~\ref{table:index}. The term $k^p_c$ is the proportional gain (P) and $k^i_c$ is the integral reset (I) for a particular coil. P and I that is $k^p_c$ and $k^i_c$ terms need to tune properly before they calculate the new current which will be explained later in Section~\ref{sec:tune}. The index $c$ in $k^p_c$ and $k^i_c$ terms represent the P and I value for coils $c$ where $c$ runs from 1 to 6. As only P and I terms have been used, so it is called Proportional Integral or simply PI controller~\cite{pid}. We limit ourselves from using derivative term (D) because of the amplification of noise while using it.
+where, $I^0_c$ indicates the initial value of current for the set of the coils when the setpoint has been set (100 mA). $\Delta I_c^n$ is the error found using Eq.~(\ref{eq:del_I}) and the sum is over no. of iterations $n$ where $n$ runs from 1 to $N$ as explained in Table~\ref{table:index}. The term $k^p_c$ is the proportional gain (P) and $k^i_c$ is the integral reset (I) for a particular coil. P and I that is $k^p_c$ and $k^i_c$ terms need to tune properly before they calculate the new current which will be explained later in Section~\ref{sec:tune}. The index $c$ in $k^p_c$ and $k^i_c$ terms represent the P and I value for coils $c$ where $c$ runs from 1 to 6. But throughout the thesis, I have used same values of $k_c^p$ and $k_c^i$ in all six coils. As only P and I terms have been used, so it is called Proportional Integral or simply PI controller~\cite{pid}. We limit ourselves from using derivative term (D) because of the amplification of noise while using it.
+
+\fig{Images/1s1c1zc1}{width = \textwidth}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 1z with $k_c^p=1.0$, and $k_c^i=0.0$. Green curve:  measured field change $\Delta B$.  Red curve: predicted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:1s1c1zc1} }{The compensation effect on single sensor due to single coil.}
+
+Fig.~\ref{fig:1s1c1zc1} shows a simple one dimensional control example implementing PI control algorithm. It is seen that the magnetic field change on sensor position 1z  has been compensated successfully due to coil current $C_x^-$. 
+
+
+Next, the inversion process of matrix $\bm{M}$ will be discussed for multidimensional control.
 
 
 \section{Inversion of Matrix}\label{sec:inv}
@@ -160,19 +167,16 @@ where, $I^0_c$ indicates the initial value of current for the set of the coils w
 This Section describes in detail the inversion process of the non-square matrix $\bm{M}$ and issues encountered. It also discusses the solution to inversion which uses regularization by random fluctuations, a strategy pursued previously by other groups. 
 
 
-\fig{Images/1s1c3zc1}{width = \textwidth}{The compensation effect on sensor position 3z due to coil $C_x^-$. Vertical axis shows the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the green color indicates $\Delta$ B due to compensation and the red indicates $\Delta$ B without compensation. The red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensor and coils see the Fig.~\ref{fig:coil}.\label{fig:1s1c3zc1} }{The compensation effect on single sensor due to single coil.}
-
-We have tested the one dimensional control of a single fluxgate sensor using a single coil current which is shown in Fig.~\ref{fig:1s1c3zc1}. It is seen that the magnetic field on sensor position 1z due to coil current $C_x^-$ has been stablized very well indicated by the green color as compared to the field that would have been without compensation indicated by the red color. 
-
-\fig{Images/1s2c3zc1c62}{width = \textwidth}{The compensation effect on sensor position 1z due to coil $C_x^-$ and coil $C_z^+$. Vertical axis in left shows the coil currents that have been sent to coils $C_x^-$ (blue color) and $C_z^+$ (green color). $C_x^-$ and $C_z^+$ have been separated by 40 mA for showing them together in the same figure. Vertical axis in right shows the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the blue color indicates $\Delta$ B due to compensation and the red indicates $\Delta$ B without compensation. In both figures, the red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensor and coils see the Fig.~\ref{fig:coil}.\label{fig:1s2c3zc1c6}}{The compensation effect on single sensor due to two coils.}
+We have a non-square matrix $\bm{M}$ with dimension $6*12$ (coils~$\times$~sensors). The matrix $\bm{M}$ is discussed earlier in Section~\ref{sec:m} and shown in Fig.~\ref{fig:m}. $\bm{M}$ needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}.
+% \fig{Images/1s2c3zc1c62}{width = \textwidth}{The compensation effect on sensor position 1z due to coil $C_x^-$ and coil $C_z^+$. Vertical axis in left shows the coil currents that have been sent to coils $C_x^-$ (blue color) and $C_z^+$ (green color). $C_x^-$ and $C_z^+$ have been separated by 40 mA for showing them together in the same figure. Vertical axis in right shows the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the blue color indicates $\Delta$ B due to compensation and the red indicates $\Delta$ B without compensation. In both figures, the red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensor and coils see the Fig.~\ref{fig:coil}.\label{fig:1s2c3zc1c6}}{The compensation effect on single sensor due to two coils.}
 
 
-Similar effect has been found if we use two coils current to control one sensor as shown in Fig.~\ref{fig:1s2c3zc1c6}. It is seen that the magnetic field on sensor position 1z (right) due to coils current $C_x^-$ and $C_z^+$ (left) has been stablized very well indicated by the blue color (right) as compared to the field that would have been without compensation indicated by the red color. 
+% Similar effect has been found if we use two coils current to control one sensor as shown in Fig.~\ref{fig:1s2c3zc1c6}. It is seen that the magnetic field on sensor position 1z (right) due to coils current $C_x^-$ and $C_z^+$ (left) has been stablized very well indicated by the blue color (right) as compared to the field that would have been without compensation indicated by the red color. 
 
-\fig{Images/2s1c3y3zc12}{width = \textwidth}{The compensation effect on sensor position 1y and 1z due to coil $C_x^-$. Vertical axis in left shows the coil currents that have been sent to coil $C_x^-$. Vertical axes in middle and right show the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the blue (middle) and green (right) colors indicate $\Delta$ B due to compensation and the red in both indicates $\Delta$ B without compensation. In all three figures, the red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensors and coil see the Fig.~\ref{fig:coil}.\label{fig:2s1c3y3zc1}}{The compensation effect on two sensors due to one coils.}
+% \fig{Images/2s1c3y3zc12}{width = \textwidth}{The compensation effect on sensor position 1y and 1z due to coil $C_x^-$. Vertical axis in left shows the coil currents that have been sent to coil $C_x^-$. Vertical axes in middle and right show the $\Delta$ B found using Eq.~(\ref{eq:del_B}), where the blue (middle) and green (right) colors indicate $\Delta$ B due to compensation and the red in both indicates $\Delta$ B without compensation. In all three figures, the red color dashed line indicates the time when the perturbation coil is turned on and the green color dashed line indicates when that is turned off. For position of the sensors and coil see the Fig.~\ref{fig:coil}.\label{fig:2s1c3y3zc1}}{The compensation effect on two sensors due to one coils.}
 
 
-We have also tested the magnetic compensation effect on two sensor positions due to single coil current as shown in Fig.~\ref{fig:2s1c3y3zc1}. It is seen that the magnetic field fluctuations ($\Delta$ B found using Eq.~(\ref{eq:del_B})) on sensor positions 1y (middle) and 1z (right) due to coil current $C_x^-$ (left) are similar/more while compensation indicated by blue color (middle) and green color (right) as compared to without compensation indicated by the red color. So, if we don$'$t have a matrix to deal with, this system seems to work fine.
+% We have also tested the magnetic compensation effect on two sensor positions due to single coil current as shown in Fig.~\ref{fig:2s1c3y3zc1}. It is seen that the magnetic field fluctuations ($\Delta$ B found using Eq.~(\ref{eq:del_B})) on sensor positions 1y (middle) and 1z (right) due to coil current $C_x^-$ (left) are similar/more while compensation indicated by blue color (middle) and green color (right) as compared to without compensation indicated by the red color. So, if we don$'$t have a matrix to deal with, this system seems to work fine.
 
 
 
@@ -223,13 +227,15 @@ We have also tested the magnetic compensation effect on two sensor positions due
 %     \label{fig:1d}
 % \end{figure}
 
-\FloatBarrier
-The author in Ref.~\cite{bea} in Section \textcolor{blue}{7.2.3} of her PhD thesis claimed that more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $m \times n$ where $m<n$ is 
+% \FloatBarrier
+% The author in Ref.~\cite{bea} in Section \textcolor{blue}{7.2.3} of her PhD thesis claimed that more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. 
+
+The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $s \times c$ and $s>c$ is 
 \begin{equation}\label{eq:m}
         \bm{M} = \bm{U} \bm{\Sigma} \bm{V^T}
 \end{equation}
 % where, $\bm{U}\:\epsilon\:\mathbb{R}^{m \times m}$, $\bm{V^*}\:\epsilon\:\mathbb{R}^{n \times n}$ 
-where, $\bm{U}$ and $\bm{V}$ are the orthogonal matrices with dimensions $m \times m$ and $n \times n$ respectively and $\bm{V^T}$ is the transpose of $\bm{V}$. $\bm{\Sigma}$ is a real non-negative diagonal matrix with same dimension as  $\bm{M}$ and can be written as
+where, $\bm{U}$ and $\bm{V}$ are the orthogonal matrices with dimensions $s \times s$ and $c \times c$ respectively and $\bm{V^T}$ is the transpose of $\bm{V}$. $\bm{\Sigma}$ is a real non-negative diagonal matrix with same dimension as  $\bm{M}$ and can be written as
 
 \begin{equation*}
 \bm{\Sigma} = \begin{pmatrix} 
@@ -240,16 +246,16 @@ where, $\bm{U}$ and $\bm{V}$ are the orthogonal matrices with dimensions $m \tim
 0 &  &  & \Sigma_{nn} \\
  \end{pmatrix}
 \end{equation*}
-where, $\Sigma_{11},..,\Sigma_{nn}=\text{diag}(\Sigma)$ with $\Sigma_{11}\gg... \Sigma_{nn}\geq0$ and are called singular values of $\bm{M}$  and they are the positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$.
+where, $\Sigma_{11},..,\Sigma_{nn}=\sigma_{n}$ are diagonal values of $\bm{\Sigma}$ with $\Sigma_{11}\gg... \Sigma_{nn}\geq0$. The positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ yield $\sigma_{n}$, and are called singular values of $\bm{M}$. 
 
 The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its invert. That is   $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
 \begin{equation}\label{eq:sigma_inv}
 \frac{1}{\bm{\Sigma}} = \begin{pmatrix} 
-\frac{1}{\Sigma_{1}} &  &  & 0 \\
+\frac{1}{\Sigma_{11}} &  &  & 0 \\
   & . &  &  \\
   &   & . &  \\
 
-0 &  &  & \frac{1}{\Sigma_{n}} \\
+0 &  &  & \frac{1}{\Sigma_{nn}} \\
  \end{pmatrix}
 \end{equation}
 
@@ -257,24 +263,45 @@ The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}
 \begin{equation}\label{eq:psMinv}
     \bm{M^{-1}} = \bm{V \Sigma^{-1} U^T}
 \end{equation}
+
+
 % ${\rm I\!R}$
+%  \fig{Images/6c_U_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{U}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{U}$ is orthonormal eigenvectors of $\bm{M}\bm{M^T}$ in sensors$\times$sensors dimension for 12 sensors signals (nT). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_U}}{Color map of $\bm{U}$.}
 
-\fig{Images/6c_U_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{U}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{U}$ is orthonormal eigenvectors of $\bm{M}\bm{M^T}$ in sensors$\times$sensors dimension for 12 sensors signals (nT). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_U}}{Color map of $\bm{U}$.}
+ \fig{Images/V_30}{width = \textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\bm{\Sigma}$}
 
-\fig{Images/6c_V_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\bm{\Sigma}$}
+%  \fig{Images/6c_Wt_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{V^T}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{V^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils currents (A). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_Vt}}{Color map of $\bm{V^T}$.}
 
-\fig{Images/6c_Wt_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{V^T}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{V^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils currents (A). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_Vt}}{Color map of $\bm{V^T}$.}
+% In earlier Section we have discussed a matrix $\bm{M}$ which is shown in Fig.~\ref{fig:m}. $\bm{M^T}$ is the transpose of that matrix. $\bm{M^T}$ has been decomposed via SVD in $\bm{U}$ , $\bm{\Sigma}$ and $\bm{V^T}$ which are shown in Fig.~\ref{fig:6c_U}, Fig.~\ref{fig:v} and Fig.~\ref{fig:6c_Vt} respectively. The $\bm{\Sigma}$ in Fig.~\ref{fig:v} shows that except diagonal values all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{nn}$ in a decreasing order each having non-negative values. 
 
-In earlier Section we have discussed a matrix $\bm{M}$ which is shown in Fig.~\ref{fig:m}. $\bm{M^T}$ is the transpose of that matrix. $\bm{M^T}$ has been decomposed via SVD in $\bm{U}$ , $\bm{\Sigma}$ and $\bm{V^T}$ which are shown in Fig.~\ref{fig:6c_U}, Fig.~\ref{fig:v} and Fig.~\ref{fig:6c_Vt} respectively. The $\bm{\Sigma}$ in Fig.~\ref{fig:v} shows that except diagonal values all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{nn}$ in a decreasing order each having non-negative values. From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
- \begin{equation}\label{eq:cond}
-     cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
- \end{equation}
+% From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
+%  \begin{equation}\label{eq:cond}
+%      cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
+%  \end{equation}
  
-Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
+% Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
 
-Elements of $\bm{\Sigma}$ represent eigenvalues. Since no of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. A large $\sigma_1$ represents a coil mode where a small change in current gives rise to a large change in field. If $\sigma_c<<\sigma_1$ it means that mode corresponding to  $\sigma_c$ requires a much larger current in order to generate the same scale of magnetic field as for the $\sigma_1$ mode. The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field. In Section~\ref{sec:coil_config} we analyzed this effect further in both simulation and experiment. For now, we present the strategy of Ref.~\cite{bea} which we followed initially and it involved regularization.
+But I found that matrix $\bm{M}$ has some small singular values {\it e.g} small $\sigma_n$. The diagonal elements $\sigma_n$ of $\bm{\Sigma}$ represent eigenvalues. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. A large $\Sigma_{11}$ represents a coil mode where a small change in current gives rise to a large change in field. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
 
-Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
+\begin{equation}\label{eq:del_I_pseudo}
+    \Vec{\Delta I} \approx\bm{M^{-1}}\Vec{\Delta B}=\bm{V \Sigma^{-1} U^T}\Vec{\Delta B}=\sum_{n=1}^{rank(\bm{M})}\frac{v_n u_n^T \Vec{\Delta B}}{ \sigma_n}
+\end{equation}
+
+It is seen that $\Vec{\Delta I}$ is dominated by the singular vectors $v_n$ due to small $\sigma_n$.
+
+% The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field.
+In Section~\ref{sec:coil_config} we analyzed this effect further in both simulation and experiment. 
+For now, we present the strategy of Ref.~\cite{bea} which we followed initially and it involved regularization.
+
+ 
+Regularization methods help to reduce the dominance $v_n$. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which solves the problem as 
+
+\begin{equation}
+    ||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2^2+{\alpha}^2||\Vec{\Delta I}||_2^2
+\end{equation}
+
+
+which modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
 
 \begin{equation}\label{eq:minvR}
     \frac{1}{\sigma_n} \rightarrow \frac{\sigma_n}{\sigma_n^2+\alpha^2} 

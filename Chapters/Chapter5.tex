@@ -1308,8 +1308,8 @@ apparatus.
 
 \section{New Studies on the Regularization Parameter $r$}\label{sec:new_study_r}
 
-In Section~\ref{sec:inv} I introduced the regularization parameter $r$
-and then discussed regularization by random fluctuations in
+In Section~\ref{sec:inv}, I introduced the regularization parameter $r$
+and then discussed regularization by random field fluctuations in
 Section~\ref{sec:mont} which is based on the previous study from
 Ref.~\cite{bea}.
 
@@ -1446,14 +1446,14 @@ the correspondence between the two methods will be discussed.
 \subsection{Effect of $r$ on PI Tuning}\label{sec:r_pi}
 
 
-\begin{itemize}
-\item We noticed that if we kept P \& I fixed, and changed only $r$, then we'd also get worse current drifting.  But paradoxically, the field would respond quite fast.
-\item It is natural that r should affect PI, because the error function involves $\bm{M^{-1}}$ and therefore $r$.  See e.g.~Eq.~(4.10) for r and (4.3) and (4.4) for how Minv enters the PI algorithm.  If $r$ is big then Minv gets small.  So it would be reasonable to expect that if r increases then we need to crank up both kp and ki accordingly see eq. 4.4.
-\item Consider showing a study where you change P\& I to try to compensate?
-\item We tried this but it didn't work.  Data?  Or simulation?
-\item Lower r seems better Fig.~5.13(a), but what I remember is that when we did that it made the B-noise worse.  Seems like an overcorrected system.  Setting P\& I lower to try to compensate the overcorrection I think made the system slower again (?)
-\item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
-\end{itemize}
+% \begin{itemize}
+% \item We noticed that if we kept P \& I fixed, and changed only $r$, then we'd also get worse current drifting.  But paradoxically, the field would respond quite fast.
+% \item It is natural that r should affect PI, because the error function involves $\bm{M^{-1}}$ and therefore $r$.  See e.g.~Eq.~(4.10) for r and (4.3) and (4.4) for how Minv enters the PI algorithm.  If $r$ is big then Minv gets small.  So it would be reasonable to expect that if r increases then we need to crank up both kp and ki accordingly see eq. 4.4.
+% \item Consider showing a study where you change P\& I to try to compensate?
+% \item We tried this but it didn't work.  Data?  Or simulation?
+% \item Lower r seems better Fig.~5.13(a), but what I remember is that when we did that it made the B-noise worse.  Seems like an overcorrected system.  Setting P\& I lower to try to compensate the overcorrection I think made the system slower again (?)
+% \item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
+% \end{itemize}
 
 The discussion on Section~\ref{sec:pi_behave} suggests that the
 $k_c^i$ term in the PI feedback algorithm is necessary for fast system
@@ -1463,17 +1463,17 @@ problems in terms of the coil currents which take long periods of time
 to settle (several tens of seconds).  I called this problem the
 current drifting problem.  Adjusting the PI feedback parameters
 changed the problem somewhat but ultimately did not reduce the current
-drifting time.  Here we focus on the effect of $r$ on this problem,
+drifting time.  Here, I focus on the effect of $r$ on this problem,
 treating it on a more equal footing with the PI parameters.
 
 
-\fig{Images/rp_i}{width=\textwidth,height=8cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ for sensor 8x (right) with $k_c^p$=0.6, $r$=3.04 and different values of $k_c^i$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:rp_i}}{Single magnetic field compensation results for fixed $k_c^p$ and $r$ and different values of $k_c^i$.}
+\fig{Images/rp_i}{width=\textwidth,height=8cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ for sensor 8x (right) with $k_c^p=0.6$, $r=3.04$ and different values of $k_c^i$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:rp_i}}{Single magnetic field compensation results for fixed $k_c^p$ and $r$ and different values of $k_c^i$.}
 
 Fig.~\ref{fig:rp_i} shows an example of the impact of changing $k_c^i$
 when $k_c^p$ is held fixed and the regularization parameter $r$ is set
 to its best value.  Only the current in one coil and the field
 measured in one fluxgate axis are shown so that the impact of changing
-$k_c^i$ can be seen.
+$k_c^i$ can be observed.
 
 It is seen that there is no current drifting problem if $k_c^i=0.0$ is
 used, but that the field error is consequently larger.  If $k_c^i=0.8$
@@ -1484,29 +1484,29 @@ Section~\ref{sec:pi_behave}.  We have also seen the effect in
 Section~\ref{sec:pi_behave} that increasing $k_c^i$ after a point
 makes the current unstable resulting in overshoot.
 
-For these studies I focused on the $C_z^+$ coil and the 8x sensor
+For these studies, I focused on the $C_z^+$ coil and the 8x sensor
 because they are located closer to the pertubation coil and hence see
 most of the effect.
 
-\fig{Images/pi_r}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p$=0.6, $k_c^i$=0.37 and different values of $r$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:pi_r}}{Single magnetic field compensation results for fixed $k_c^p$ and $k_c^i$ and different values of $r$.}
+\fig{Images/pi_r}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p=0.6$, $k_c^i=0.37$ and different values of $r$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:pi_r}}{Single magnetic field compensation results for fixed $k_c^p$ and $k_c^i$ and different values of $r$.}
 
 
 I then tried changing $r$ while keeping $k_c^i$ and $k_c^p$ terms
 fixed.  Fig.~\ref{fig:pi_r} shows the active compensation for same
 fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
-$k_c^i$=0.37, and this time for different values of $r$. The
+$k_c^i=0.37$, and this time for different values of $r$. The
 observation is that for decreasing $r$, the current drifting problem
 disappears, but the feedback system introduces high frequency
 noise.
 
 It is natural that $r$ should affect the PI control, because the error
 function involves $\bm{M^{-1}}$ and therefore $r$ (see
-e.g.~Eqs.~(\ref{eq:minvR}), (\ref{eq:del_I}), and (\ref{eq:I})).  If
-$r$ is larger then $\bm{M^{-1}}$ generally gets small.  So it would be
+{\it e.g.}~Eqs.~(\ref{eq:del_I}), (\ref{eq:I}), and (\ref{eq:minvR})).  If
+$r$ is larger then $\bm{M^{-1}}$ generally gets small.  So, it would be
 reasonable to expect that if $r$ increases then we need to increase
 both $k_c^p$ and $k_c^i$ accordingly (see Eq.~(\ref{eq:I})).
 
-\fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.6$, $k_c^i=0.37$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:pi_tuned_r24}}{Coil currents with filed change $\Delta B$ for $k_c^p$=0.60, $k_c^i$=0.37 and $r$=2.4}
+\fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.6$, $k_c^i=0.37$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:pi_tuned_r24}}{Coil currents with field change $\Delta B$ for $k_c^p=0.60$, $k_c^i=0.37$ and $r=2.4$}
 
 The best that can be done to fix the current drifting problem is then
 that $r$, $k_c^p$, and $k_c^i$ be adjusted to reduce the current
@@ -1517,13 +1517,15 @@ Figure uses the same settings as
 Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)}.  Indeed reducing $r$
 has increased the speed with which the currents settle, but an
 increase in high-frequency noise on the currents is apparent.
-However, this increase in current noise does not noticable increase
-the noise on the field measurements, which is similar in both cases.
-In Fig.~\ref{fig:i100_r24} I have retained this value of $r=2.4$ and
+However, this increase in current noise does not increase
+the noise on the field measurements noticeably, which is similar in both cases.
+In Fig.~\ref{fig:i100_r24}, I have retained this value of $r=2.4$ and
 adjusted the PI parameters to attempt to further improve the response
 time on the currents.
 
-Eventually I determined that neither of these solutions is truly
+\fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:i100_r24}}{Coil currents with field change $\Delta B$ for $k_c^p=0.0$, $k_c^i=1.0$ and $r=2.4$}
+
+Eventually, I determined that neither of these solutions is truly
 optimal.  I now characterize them as being generally
 ill-conditioned.  The final solution is discussed further in
 Section~\ref{sec:coil_config}.
@@ -1553,7 +1555,7 @@ not the best general solution.
 
 
 
-\fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:i100_r24}}{Coil currents with field change $\Delta B$ for $k_c^p$=0.0, $k_c^i$=1.0 and $r$=2.4}
+
 
 % % \fig{Images/cp0i100r24}{width = \textwidth}{short.\label{fig:m2}}{Short}
 % \begin{itemize}
@@ -1647,7 +1649,7 @@ and the regularization parameter $r$ were introduced in
 Section.~\ref{sec:m} while discussing the inversion of the matrix
 $\bm{M}$ . Moreover, in Section~\ref{sec:mont}, the method of
 Ref.~\cite{bea} of selecting the best value for $r$ by randomly
-generated field perturbations has been discussed.  The purpose of this
+generated field perturbations was discussed.  The purpose of this
 section is to report that this method of selecting $r$ is equivalent
 to minimizing the condition number of the regularized pseudoinverse
 $\bm{M^{-1}}$.
@@ -1656,11 +1658,13 @@ $\bm{M^{-1}}$.
  
 %We introduce Eq.~\ref{eq:minvR} with various values of $r$ and each time the condition number of $\bm{M^{-1}}$ is stored. Then the optimized $r$  has been determined by selecting the $r$ for which the condition number of $\bm{M^{-1}}$ is the minimum.
 
+\fig{Images/mc_Mcond2}{width = \textwidth,height =7cm}{(a) Condition number of $\bm{M}^{-1}$ vs.~$r$, and (b) determination of $r$ using random field fluctuations.  For a more complete description of (b) see Fig.~\ref{fig:I-fluc}.\label{fig:cond}}{Comparing $r$ from two different methods.}
+
 The condition number of $\bm{M^{-1}}$ for different values of $r$ is
 presented in Fig.~\ref{fig:cond}\textcolor{blue}{(a)} and exhibits a
 clear minimum at $r=2.90$ (indicated by the red diamond in the
 Figure).  It is seen that for $r=0$, the condition number of
-$\bm{M^{-1}}$=$\sim 51$ which is by definition the same as the
+$\bm{M^{-1}}\approx 51$ which is by definition the same as the
 condition number of $\bm{M}$ itself.  The minimum value of the
 condition number is 3.2 which is a factor of 17 reduction.  Recall
 that the ideal value of the condition number is unity.
@@ -1674,34 +1678,32 @@ minimizes the condition number of the regularized pseudoinverse.
 
 I tried this same comparison for a variety of different $\bm{M}$ and
 always found the same level of agreement in the determination of $r$.
-A sample of results was shown in Table~\ref{table:flux_pos}.  I think
+A sample of results was shown in Table~\ref{table:flux-pos}.  I think
 that the method of minimizing the condition number is more robust
 because it does not involve random number generation and therefore is
 free of any additional statistical error.
 
 I suspect the excellent agreement seen between the two methods results
-from the definition of Tikhonov regularization~\cite{bib:wikipedia}.
+from the definition of Tikhonov regularization~~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3}.
 
 Given a vector of field fluctuations $\Delta\vec{B}$ and a vector of
 correction currents $\Delta\vec{I}$, the Moore-Penrose pseudoinverse
 $\bm{M}^{-1}$ can be thought of as the matrix which minimizes
-$|\Delta\vec{I}-\bm{M}^{-1}\vec{B}|$, which is analogous to
+$|\Delta\vec{I}-\bm{M}^{-1}\Delta\vec{B}|$, which is analogous to
 chi-squared minimization for a system of linear equations.  Tikhonov
 regularization is used when this problem becomes ill conditioned, and
-introduces another constraint that the modulus of the vector
-$|\Delta\vec{I}|$ simultaneously be minimized.  In
-Ref.~\cite{bib:wikipedia}, this is also referred to as L2
-minimization.  In a way this is equivalent to the compromise being
+introduces another constraint that simultaneously minimized the modulus of the vector
+$|\Delta\vec{I}|$ . In a way this is equivalent to the compromise being
 made in the selection of the ``best'' $r$ using the random field
 fluctuation method.  Current and field fluctuations are being traded
-off against one another in order prevent large current fluctuations
+off against one another in order to prevent large current fluctuations
 from occurring.
 
-\fig{Images/mc_Mcond2}{width = \textwidth,height =7cm}{(a) Condition number of $\bm{M}^{-1}$ vs.~$r$, and (b) determination of $r$ using random field fluctuations.  For a more complete description of (b) see Fig.~\ref{fig:I-fluc}.\label{fig:cond}}{Comparing $r$ from two different methods.}
 
 
-I think it is therefore not surprising that the two methods give good
-agreement.  I feel the minimization of condition number is a better
+
+I think, it is therefore not surprising that the two methods give good
+agreement. I feel the minimization of condition number is a better
 defined solution, not requiring random number generation, and that it
 is a superior and robust method to determine $r$.
 
@@ -1844,7 +1846,8 @@ To verify that we run the prototype two times. First time we set the value of $k
 \end{itemize}
 % For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figures. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figures. 
 
-\fig{Images/pi_comp}{width = \textwidth,height=10cm}{Currents (left vertical axis) in coil side $C_z^+$ with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Green color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement was used. The loop sampling frequency was found to be $\sim$6.5 Hz. \label{fig:style_of_pi}}{Currents in coil side $C_z^+$ with drift $\Delta B$ .}
+\fig{Images/pi_comp}{width = \textwidth,height=12cm}{(a), and (c) Currents in coil $C_z^+$, and (b), and (d) field change $\Delta B$ for sensor position 1x. The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$ at (a), and $k_c^p=1.0$, $k_c^i=0.0$ at (b) .  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.
+\label{fig:style_of_pi}}{Comparison between old and new PI .}
 
 
 % \doublefig{Images/i100_old}{width =\textwidth, height= 6.5 cm}{at $k_c^p$=0.0 and $k_c^i$=1.0 for 'Old PI' \label{fig:i100_old}}{Images/p100_new}{width = \textwidth, height= 6.5 cm}{at $k_c^p$=1.0 and $k_c^i$=0.0 for 'New PI'\label{fig:p100_new}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}..} \label{fig:style_of_pi}}{short}
@@ -1937,13 +1940,15 @@ For the prototype, two different configuration of compensation coils have been e
      \item message from Fig.~\ref{fig:v2}, Fig.~\ref{fig:wt}, Fig.~\ref{fig:v5c} and Fig.~\ref{fig:wt5c}??
  \end{itemize}
 
-\fig{Images/v2}{width = \textwidth}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$  in sensors$\times$coils dimension for 6 coils. \label{fig:v2}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 6 coils.}
+\fig{Images/v2}{width = \textwidth}{
+Color map of $\bm{\Sigma}$ found by SVD of $\bm{M}$ shown in Fig.~\ref{fig:m} for 12 sensors and 6 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:v2}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 6 coils.}
 
-\fig{Images/wt}{width = \textwidth}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils. \label{fig:wt}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 6 coils.}
+\fig{Images/wt}{width = \textwidth}{
+Color map of $\bm{W^T}$ found by SVD of $\bm{M}$ shown in Fig.~\ref{fig:m} in A. $\bm{W^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coil currents. \label{fig:wt}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 6 coils.}
 
-\fig{Images/v5c}{width = \textwidth}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$  in sensors$\times$coils dimension for 5 coils. \label{fig:v5c}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 5 coils.}
+\fig{Images/v5c}{width = \textwidth}{Color map of $\bm{\Sigma}$ for 12 sensors and 5 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:v5c}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 5 coils.}
 
-\fig{Images/wt5c}{width = \textwidth}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 5 coils. \label{fig:wt5c}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 5 coils.}
+\fig{Images/wt5c}{width = \textwidth}{Color map of $\bm{W^T}$ for 5 coil currents in A. $\bm{W^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension. \label{fig:wt5c}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 5 coils.}
 
 
 
@@ -1952,7 +1957,7 @@ For the prototype, two different configuration of compensation coils have been e
  \end{itemize}
 
 % \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
-\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
 
 
 \begin{itemize}
@@ -1961,7 +1966,8 @@ For the prototype, two different configuration of compensation coils have been e
 
 % \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
-\fig{Images/coil_pseudo2}{width =\textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig:coil}. Grey curves denote the uncompensated $\Delta B$ whereas colors indicate the compensated values with one color denoting each axis.  Vertical dashed lines indicate the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
+\fig{Images/coil_pseudo2}{width =\textwidth,height=12cm}{
+Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8. Pseudoinverse was used in both case.  The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:coil_pseudo}}{Coil currents with field change $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
  
 %  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
