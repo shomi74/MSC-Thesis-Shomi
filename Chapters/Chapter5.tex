@@ -1806,7 +1806,7 @@ is a superior and robust method to determine $r$.
 
 
 
-\section{Style of PI (Old/New)}\label{sec:style_pi}
+\section{``New'' feedback algorithms vs.~standard PI control}\label{sec:style_pi}
 
 \begin{itemize}
 \item We were led astray by M. Rawlik in late 2017 (nEDM2017).  It is also written in his thesis.
@@ -1818,43 +1818,63 @@ is a superior and robust method to determine $r$.
 \item So we use regular PI and treat the parameters as TBD by system tuning.
 \end{itemize}
 
+In Sections~\ref{sec:tune} and \ref{sec:pi_behave} I discussed the PI
+feedback algorithm and my studies of tuning both the PI parameters and
+the regularization parameter $r$.  The studies were all based on the
+work of Ref.~\cite{bea}.
 
-We have talked about the tuning method in Section~\ref{sec:tune} and
-later in Section~\ref{sec:pi_behave} we have shown the the effect of
-the P and I term where the effectiveness of the P term and the tuning
-method arises. Those were all based on the works from
-Ref.\cite{bea}. In early 2018, another author on his PhD
-thesis \cite{rawlik} claimed that there is no need of PI!! As we have
-done most of our work following the Ref.\cite{bea}, so we wanted to
-verify that the claim of no PI by Ref.\cite{rawlik} is actually true
-or not. So, this Section is all about comparing the work from two
-Ref.\cite{bea} and Ref.\cite{rawlik} and verify the claim.
+Subsequently, Refs.~\cite{rawlik,rawkliknedm2017,rawlikpriv} made the
+claim that there is no need to use the standard PI feedback algorithm.
+This led to a number of studies using the ``new'' feedback algorithm,
+which indeed seemed to give similar results when compared to the
+``old'' feedback algorithm.
 
-Here, the PI control algorithm as discussed by the Eq.~(\ref{eq:I}) which taken from Ref.~\cite{bea}) is termed as the 'Old PI' control. and no PI claim by Ref.~\cite{rawlik} is termed as 'New PI' control and the new current can be found by -
+Eventually, I determined this is due to the fact that they are
+mathematically equivalent under certain conditions which correspond
+closely to the typical operating conditions of my active magnetic
+compensation apparatus.
+
+The basis of the ``new'' feedback algorithm is presented in
+Ref.~\cite{rawlik} as providing an updated version of current
+$I^{n+1}$ which is based on the current determined by the previous
+step $I^n$.  The equation to be used to find the next current in the
+new algorithm is
 \begin{equation}\label{eq:I_raw}
-    I^{n+1}= I^n+M^{-1} (B_{setpoint}-B_{measure}^n)=I^n+M^{-1} \Delta B^n
+    I^{n+1}= I^n+M^{-1} (B_{\rm setpoint}-B_{\rm
+    measure}^n)=I^n+M^{-1} \Delta B^n
 \end{equation}
-or with a delay like -
-\begin{equation}\label{eq:I_raw_delay}
-    I^{n+1}= I^{n-2}+M^{-1} (B_{setpoint}-B_{measure}^n)=I^{n-2}+M^{-1} \Delta B^n
-\end{equation}
-But is it really possible ? 
+which is taken directly from Eq.~(YYY) of Ref.~\cite{rawlik}.  This
+algorithm can be compared with the standard PI algorithm, which I
+presented in Eq.~(\ref{someq}).  Naively the main difference between
+the two equations appeared to be that the current from the previous
+step was being used to determine the next current with the error from
+the present step also being included.  Eq.~(\ref{someq}) on the other
+hand, references the next current to the initial current, and
+implements two control terms: a proportional term which appears
+similar to the error term containing $M^{-1}$ above, and an integral
+term containing an sum over the past history of errors.
 
-To verify that we run the prototype two times. First time we set the value of $k_c^p$=0.0 and $k_c^i$=1.0 to find the new current by Eq.~(\ref{eq:I}) from 'Old PI' and another with $k_c^p$=1.0 and $k_c^i$=0.0 to find the new current determined by Eq.~(\ref{eq:I_raw}) of 'New PI'. The results from 'Old PI' are given in Fig.~\ref{fig:style_of_pi}\textcolor{blue}{(a)} and in Fig.~\ref{fig:style_of_pi}\textcolor{blue}{(b)} and that of 'New PI' in Fig.~\ref{fig:style_of_pi}\textcolor{blue}{(c)} and in Fig.~\ref{fig:style_of_pi}\textcolor{blue}{(d)} . It is seen that the results in both of the figures are same. That is P and I term of 'Old PI' has been transformed into I and P term of 'New PI' current equation.
-\begin{itemize}
-    \item message from the Fig.~\ref{fig:style_of_pi} ?
-\end{itemize}
-% For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figures. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figures. 
+%  or with
+%a delay like -
+%\begin{equation}\label{eq:I_raw_delay}
+%    I^{n+1}= I^{n-2}+M^{-1} (B_{setpoint}-B_{measure}^n)=I^{n-2}+M^{-1} \Delta B^n
+%\end{equation}
 
-\fig{Images/pi_comp}{width = \textwidth,height=12cm}{(a), and (c) Currents in coil $C_z^+$, and (b), and (d) field change $\Delta B$ for sensor position 1x. The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$ at (a), and $k_c^p=1.0$, $k_c^i=0.0$ at (b) .  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.
-\label{fig:style_of_pi}}{Comparison between old and new PI .}
+I implemented the new feedback algorithm into my code to test it.
+Experimentally, I discovered that the new algorithm gave very similar
+results to the standard PI algorithm if I set $k_c^p=0$ and used
+$k_c^i=1.0$.  The results of such a test are shown in
+Fig.~\ref{fig:style_of_pi}, where the two algorithms are compared in
+both their current and field response, and give suspiciously similar
+results.
+
+\fig{Images/pi_comp}{width = \textwidth,height=12cm}{``Old'' ((a) and (b)) and ``new'' ((c) and (d)) feedback algorithms compared.  Panels (a) and (c) compare the currents in coil $C_z^+$, and (b) and (d) the field change $\Delta B$ for sensor position 1x. The feedback parameters used for the ``old'' PI algorithm  $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10~mA when switched on. Resolution index 1 with 50 averages per cycle were used.
+\label{fig:style_of_pi}}{Comparison of old and new feedback algorithms.}
 
 
 % \doublefig{Images/i100_old}{width =\textwidth, height= 6.5 cm}{at $k_c^p$=0.0 and $k_c^i$=1.0 for 'Old PI' \label{fig:i100_old}}{Images/p100_new}{width = \textwidth, height= 6.5 cm}{at $k_c^p$=1.0 and $k_c^i$=0.0 for 'New PI'\label{fig:p100_new}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}..} \label{fig:style_of_pi}}{short}
 
 
-
-But again is it really true about what we are claiming ?
 
 To verify that the equation has been studied deeply. The mathematical equivalent of Eq.~(\ref{eq:I_raw}) is- 
 \begin{equation}\label{eq:I_raw_eq}
