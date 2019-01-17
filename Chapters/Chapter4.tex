@@ -274,18 +274,19 @@ The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}
 
 % In earlier Section we have discussed a matrix $\bm{M}$ which is shown in Fig.~\ref{fig:m}. $\bm{M^T}$ is the transpose of that matrix. $\bm{M^T}$ has been decomposed via SVD in $\bm{U}$ , $\bm{\Sigma}$ and $\bm{V^T}$ which are shown in Fig.~\ref{fig:6c_U}, Fig.~\ref{fig:v} and Fig.~\ref{fig:6c_Vt} respectively. The $\bm{\Sigma}$ in Fig.~\ref{fig:v} shows that except diagonal values all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{nn}$ in a decreasing order each having non-negative values. 
 
-% From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
-%  \begin{equation}\label{eq:cond}
-%      cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
-%  \end{equation}
+From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
+ \begin{equation}\label{eq:cond}
+     cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
+ \end{equation}
  
-% Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
+Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
 
 But I found that matrix $\bm{M}$ has some small singular values {\it e.g} small $\sigma_n$. The diagonal elements $\sigma_n$ of $\bm{\Sigma}$ represent eigenvalues. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. A large $\Sigma_{11}$ represents a coil mode where a small change in current gives rise to a large change in field. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
 
 \begin{equation}\label{eq:del_I_pseudo}
     \Vec{\Delta I} \approx\bm{M^{-1}}\Vec{\Delta B}=\bm{V \Sigma^{-1} U^T}\Vec{\Delta B}=\sum_{n=1}^{rank(\bm{M})}\frac{v_n u_n^T \Vec{\Delta B}}{ \sigma_n}
 \end{equation}
+where, rank of $\bm{M}$ is equal to the number of positive singular values.
 
 It is seen that $\Vec{\Delta I}$ is dominated by the singular vectors $v_n$ due to small $\sigma_n$.
 

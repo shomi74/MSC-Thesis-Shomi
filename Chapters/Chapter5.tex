@@ -1819,9 +1819,9 @@ is a superior and robust method to determine $r$.
 %\item So we use regular PI and treat the parameters as TBD by system tuning.
 %\end{itemize}
 
-In Sections~\ref{sec:tune} and \ref{sec:pi_behave} I discussed the PI
+In Sections~\ref{sec:tune} and \ref{sec:pi_behave}, I discussed the PI
 feedback algorithm and my studies of tuning both the PI parameters and
-the regularization parameter $r$.  The studies were all based on the
+the regularization parameter $r$. The studies were all based on the
 work of Ref.~\cite{bea}.
 
 Subsequently, Refs.~\cite{rawlik,rawkliknedm2017,rawlikpriv} made the
@@ -1837,40 +1837,40 @@ compensation apparatus.
 
 The basis of the ``new'' feedback algorithm is presented in
 Ref.~\cite{rawlik} as providing an updated version of current
-$I^{n+1}$ which is based on the current determined by the previous
-step $I^n$.  The equation to be used to find the next current in the
+$\vec{I^{n+1}}$ which is based on the current determined by the previous
+step $\vec{I^n}$.  The equation to be used to find the next current in the
 new algorithm is
 \begin{equation}\label{eq:I_raw}
-    I^{n+1}= I^n+M^{-1} (B_{\rm setpoint}-B_{\rm
-    measure}^n)=I^n+M^{-1} \Delta B^n
+    \vec{I^{n+1}}= \vec{I^n}+\bm{M^{-1}} (\vec{B_{\rm setpoint}}-\vec{B_{\rm
+    measure}^n})=\vec{I^n}+\bm{M^{-1}} \Delta \vec{B^n}
 \end{equation}
-which is taken directly from Eq.~(28) in Section~5.5 of
-Ref.~\cite{rawlik}.  In this equation, $\Delta B^n$ is a vector of
+which is taken directly from Eq.~\textcolor{blue}{(28)} in Section~\textcolor{blue}{5.5} of
+Ref.~\cite{rawlik}. In this equation, $\Delta \vec{B^n}$ is a vector of
 magnetic field values measured in the given feedback step.  The
 dimension is equal to the number of fluxgate axes being used for
-control (12 in my case).  The quantity $M^{-1}$ is the Moore-Penrose
+control (12 in my case).  The quantity $\bm{M^{-1}}$ is the Moore-Penrose
 pseudoinverse (a $6\times 12$ non-square matrix, in my case).  The
-quantity $I^n$ are a vector of currents (dimension 6, in my case).
+quantity $\vec{I^n}$ are a vector of currents (dimension 6, in my case).
 The index $n$ refers to the values as of the present feedback step.
 The index $n+1$ on the left-hand-side of the equation is indicating
 the next vector of currents that will be set based on this feedback
 algorithm.
 
 This algorithm can be compared with the standard PI algorithm, which I
-presented in Eqs.~(\ref{someq} 4.3 and 4.4).  Naively the main
+presented in Eqs.~(\ref{eq:del_I}), and (\ref{eq:I}).  Naively, the main
 difference between the two equations appeared to be that the current
 from the previous step was being used to determine the next current
 with the error from the present step also being included.
-Eq.~(\ref{someq}) on the other hand, references the next current to
+Eq.~(\ref{eq:I}) on the other hand, references the next current to
 the initial current, and implements two control terms: a proportional
-term which appears similar to the error term containing $M^{-1}$
+term which appears similar to the error term containing $\bm{M^{-1}}$
 above, and an integral term containing an sum over the past history of
 errors.
 
 %  or with
 %a delay like -
 %\begin{equation}\label{eq:I_raw_delay}
-%    I^{n+1}= I^{n-2}+M^{-1} (B_{setpoint}-B_{measure}^n)=I^{n-2}+M^{-1} \Delta B^n
+%    \vec{I^{n+1}}= \vec{I^{n-2}}+\bm{M^{-1}} (B_{setpoint}-B_{measure}^n)=\vec{I^{n-2}}+\bm{M^{-1}} \Delta B^n
 %\end{equation}
 
 I implemented the new feedback algorithm into my code to test it.
@@ -1888,9 +1888,9 @@ results.
 % \doublefig{Images/i100_old}{width =\textwidth, height= 6.5 cm}{at $k_c^p$=0.0 and $k_c^i$=1.0 for 'Old PI' \label{fig:i100_old}}{Images/p100_new}{width = \textwidth, height= 6.5 cm}{at $k_c^p$=1.0 and $k_c^i$=0.0 for 'New PI'\label{fig:p100_new}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ by applying Eq.~(\ref{eq:I}) at (a) and Eq.~(\ref{eq:I_raw}) at (b) . Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}..} \label{fig:style_of_pi}}{short}
 
 
-In the case of $k^p=0$ and $k^i=1$, the PI feedback algorithm in Eq.~(\ref{fixme}, 4.3, 4.4) can be written as
+In the case of $k_c^p=0$ and $k_c^i=1$, the PI feedback algorithm in Eq.~(\ref{eq:I}) can be written as
 \begin{equation}\label{eq:I_raw_eq}
-    I^{n+1}= I^0+\sum_{i=0}^n M^{-1}\Delta B^i
+    \vec{I^{n+1}}= \vec{I^0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B^i}
 \end{equation}
 where the same matrix and vector notation is being used as in
 Eq.~(\ref{eq:I_raw}).
@@ -1902,31 +1902,31 @@ implementations are mathematically equivalent.
 Suppose that Eq.~(\ref{eq:I_raw_eq}) is true.  It will also have been
 true for the previous step $n\rightarrow n-1$
 \begin{equation}\label{eq:nminus1}
-    I^{n}= I^0+\sum_{i=0}^{n-1} M^{-1}\Delta B^i.
+    \vec{I^n}= \vec{I^0}+\sum_{i=0}^{n-1} \bm{M^{-1}}\Delta \vec{B^i}.
 \end{equation}
 Eq.~(\ref{eq:I_raw_eq}) can then be rewritten by removing the final
 term from its sum, then applying Eq.~(\ref{eq:nminus1}):
 \begin{equation}
 \begin{split}
-I^{n+1}&=I^0+\sum_{i=0}^n M^{-1}\Delta B^i\\
-&=I^0+\sum_{i=0}^{n-1}M^{-1}\Delta B^i+ M^{-1}\Delta B^n\\
-&=I^n+ M^{-1}\Delta B^n
+\vec{I^{n+1}}&=\vec{I^0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B^i}\\
+&=\vec{I^0}+\sum_{i=0}^{n-1}\bm{M^{-1}}\Delta \vec{B^i}+ \bm{M^{-1}}\Delta \vec{B^n}\\
+&=\vec{I^n}+ \bm{M^{-1}}\Delta \vec{\vec{B^n}}
 \end{split}
 \end{equation}
 which is just Eq.~(\ref{eq:I_raw}).  This was further confirmed by
 implementing both algorithms in the PI simulation of
-Section~\ref{sec:pSim}.  In this case the algorithms indeed gave
+Section~\ref{sec:pSim}.  In this case, the algorithms indeed gave
 identical results since there is no experimental noise in the
 simulation.
 
-Hence we conclude that the ``new'' feedback algorithm of
+Hence, I conclude that the ``new'' feedback algorithm of
 Ref.~\cite{rawlik} is simply the usual PI feedback algorithm, with the
-PI parameters being restricted to the particular values $k^p=0$ and
-$k^i=1$.  My recommendation would be to keep these as tunable
+PI parameters being restricted to the particular values $k_c^p=0$ and
+$k_c^i=1$. My recommendation would be to keep these as tunable
 parameters and allow for the potential of some ability to make
 adjustments to them as necessary, rather than falsely restricting them
-to particular values.  It is interesting that the particular tuning
-$k^p=0$ and $k^i=1$ (integral control) does seem to be fairly optimal
+to particular values. It is interesting that the particular tuning
+$k_c^p=0$ and $k_c^i=1$ (integral control) does seem to be fairly optimal
 for this particular system.
 
 Ref.~\cite{rawlik} further mentions that due to time delays in their
@@ -1934,9 +1934,10 @@ active magnetic compensation system, it was logically more correct to
 use the current from three steps prior to make the correction for the
 $n+1$ step
 \begin{equation}\label{eq:I_raw_delay}
-    I^{n+1}= I^{n-2}+M^{-1} \Delta B^{n-2}
+    \vec{I^{n+1}}= \vec{I^{n-2}}+\bm{M^{-1}} \Delta \vec{B^{n-2}}
 \end{equation}
-(which is Eq.~(30) of Ref.~\cite{rawlik}).  This could also be
+(which is Eq.~\textcolor{blue}{(30)} in Section~\textcolor{blue}{5.5} of
+Ref.~\cite{rawlik}).  This could also be
 considered as another form of PI tuning where the past history of the
 system is weighted differently.
 
@@ -1953,47 +1954,19 @@ system is weighted differently.
 \end{itemize}
 
 
+We have discussed different parameters to understand the current drifting problem which are discussed in previous Sections (Sections~\ref{sec:freq}, \ref{sec:pi_behave}, \ref{sec:flux_place}). But none of those came with the solution of the current drifting problem. This led us to made a simulation (Section~\ref{sec:pSim}) of the active compensation system which validates the current drifting problem is real. In Section~\ref{sec:new_study_r}, we discussed a way to decrease the current settling timescale but that introduces high frequency noise. As we were continuously seeking for the optimal solution, my supervisor simulated a 3 three dimensional coil cube with the same dimension as our active compensation system in Python to calculate the matrix. Interestingly, the matrix was giving a condition number of infinity by which we were more confused. To find the answer we exploit the diagonal matrix (discussed in Section~\ref{sec:inv}).
 
+\fig{Images/Diag_patch_6c}{width = \textwidth}{
+Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$ for 18 sensors and 6 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:diag_patch_6c}}{Diagonal Matrix for 6 coils.}
 
-For the prototype, two different configuration of compensation coils have been exploited. In the first case, all the six coils have been used in the six faces surrounding the compensation area and for the later one, two coils have been wired together so that they can act as one making total five instead of six coils. The main reason for using the second configuration is the condition number of $\bm{M}$. It was found to be $\sim$4.7 for the second one as compared to $\sim$51 in the first.
+Fig.~\ref{fig:diag_patch_6c} shows the diagonal matrix $\Sigma$ of the simulated coil cube in Python where the diagonal elements $\sigma_n$ are arranged in descending order . $8\times3=24$ axes fluxgate sensors were used. They were placed evenly in eight corners of the coil cube.  Recalling the Eq.~(\ref{eq:cond}), it is clearly seen that the reason of the matrix condition number is infinity as because the minimum diagonal element is zero. 
 
-\begin{itemize}
-     \item message from Fig.~\ref{fig:v2}, Fig.~\ref{fig:wt}, Fig.~\ref{fig:v5c} and Fig.~\ref{fig:wt5c}??
- \end{itemize}
+We then tried to understand the reason of being the minimum diagonal element to be zero by exploiting right singlur vectors $\bm{V^T}$.
 
-\fig{Images/v2}{width = \textwidth}{
-Color map of $\bm{\Sigma}$ found by SVD of $\bm{M}$ shown in Fig.~\ref{fig:m} for 12 sensors and 6 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:v2}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 6 coils.}
+\fig{Images/Right_patch_6c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 18 sensors and 6 coils. $\bm{V^T}$ is the orthonormal eigenvectors of $\bm{M^T}\bm{M}$. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
 
-\fig{Images/wt}{width = \textwidth}{
-Color map of $\bm{W^T}$ found by SVD of $\bm{M}$ shown in Fig.~\ref{fig:m} in A. $\bm{W^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coil currents. \label{fig:wt}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 6 coils.}
+Fig.~\ref{fig:right_patch_6c} show the right singlur vectors $\bm{V^T}$.
 
-\fig{Images/v5c}{width = \textwidth}{Color map of $\bm{\Sigma}$ for 12 sensors and 5 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:v5c}}{Square root of eigenvalues of $\bm{M^T}\bm{M}$ and $\bm{M}\bm{M^T}$ for 5 coils.}
-
-\fig{Images/wt5c}{width = \textwidth}{Color map of $\bm{W^T}$ for 5 coil currents in A. $\bm{W^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension. \label{fig:wt5c}}{Orthonormal eigenvectors of $\bm{M^T}\bm{M}$ for 5 coils.}
-
-
-
-\begin{itemize}
-     \item message from Fig.~\ref{fig:coil_reg}??
- \end{itemize}
-
-% \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
-\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
-
-
-\begin{itemize}
-     \item message from Fig.~\ref{fig:coil_pseudo}??
- \end{itemize}
-
-% \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
-
-\fig{Images/coil_pseudo2}{width =\textwidth,height=12cm}{
-Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8. Pseudoinverse was used in both case.  The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:coil_pseudo}}{Coil currents with field change $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
-
- 
-%  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
- It can be as explained by Fig.~\ref{fig:cDir} where one of the coil current mode was shown for all six coils. The total current contribution is found to be zero due to current contributions from $C_x^{\pm}$ in Fig.~\ref{fig:c1}, $C_y^{\pm}$ in Fig.~\ref{fig:c3} and $C_z^{\pm}$ in Fig.~\ref{fig:c5}. To break the mode, two out of the six coils have been wired together so that they can act as one resulting total compensation coils be five. 
-%It was found that due to this, the condition number is decreased drastically to 2.
 \begin{figure}
     \begin{subfigure}{.5\linewidth}
         \centering
@@ -2016,6 +1989,42 @@ Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field 
     \caption[short]{Current direction in $C_x^{\pm}$, $C_y^{\pm}$ and $C_z^{\pm}$ . The net current is zero while adding the current contribution from all the six coils for this orientation. $C_z^{\pm}$ coils have been wired together to break the configuration which results in significant decrease in matrix condition number. }
     \label{fig:cDir}
 \end{figure}
+
+
+It can be as explained by Fig.~\ref{fig:cDir} where one of the coil current mode was shown for all six coils. The total current contribution is found to be zero due to current contributions from $C_x^{\pm}$ in Fig.~\ref{fig:cDir}\textcolor{blue}{(a)}, $C_y^{\pm}$ in Fig.~\ref{fig:cDir}\textcolor{blue}{(b)} and $C_z^{\pm}$ in Fig.~\ref{fig:cDir}\textcolor{blue}{(c)}. To break the mode, two out of the six coils have been wired together so that they can act as one resulting total compensation coils be five. 
+%It was found that due to this, the condition number is decreased drastically to 2.
+
+
+% For the prototype, two different configuration of compensation coils have been exploited. In the first case, all the six coils have been used in the six faces surrounding the compensation area and for the later one, two coils have been wired together so that they can act as one making total five instead of six coils. The main reason for using the second configuration is the condition number of $\bm{M}$. It was found to be $\sim$4.7 for the second one as compared to $\sim$51 in the first.
+
+
+
+
+
+
+\fig{Images/Diag_patch_5c}{width = \textwidth}{
+Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$ for 18 sensors and 5 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
+
+
+\fig{Images/Right_patch_5c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 18 sensors and 5 coils. $\bm{V^T}$ is the orthonormal eigenvectors of $\bm{M^T}\bm{M}$. \label{fig:right_patch_5c}}{Orthogonal matrix $\bm{V^T}$ for 5 coils.}
+
+
+
+
+
+% \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg2}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
+
+
+
+% \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
+
+\fig{Images/coil_pseudo2}{width =\textwidth,height=12cm}{
+Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8. Pseudoinverse was used in both case.  The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:coil_pseudo}}{Coil currents with field change $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
+
+ 
+%  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
+ 
 
 \begin{table} [htb!]
     \centering
