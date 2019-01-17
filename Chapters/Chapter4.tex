@@ -96,7 +96,7 @@ where, $M_{sc}$ are the elements of the matrix $\bm{M}$ and $I_c^n$ is the curre
     \caption[Definition of different indices to indicate sensor, coil and no. of iteration in the feedback loop]{Definition of different indices to indicate sensor, coil and no. of iteration in the feedback loop where $s$ or $S$ (if control sensors are included) can be taken different labels based on how the sensor position has been specified. For example- it could start with center-$x$ or 3$x$ which means the first sensor is at position center or 3 as specified in Section~ \ref{sec:cube} in $x$-axis respectively. Similarly, $c$ started with $C_x^-$ means the first coil is $C_x^-$ as defined again in Section~ \ref{sec:cube}. The index $n$ denotes the iteration number of the PI feedback control algorithm. }\label{table:index}
 \end{table}
 
-\FloatBarrier
+%\FloatBarrier
 
 
 The matrix defined in this way is easy to measure using the system.  Each coil $c$ is set to a current, with all other currents set to zero.  The change in the sensor reading $s$ then gives the matrix element $M_{sc}$. 
@@ -104,7 +104,7 @@ The matrix defined in this way is easy to measure using the system.  Each coil $
 
 \fig{Images/Mdiff3_31}{width = \textwidth}{Color map of $\bm{M}$ measured using the scheme indicated in the text.  Horizontal axis indicates the various sensors, which are counted using the index $s$.  Vertical axis indicates the various coils, which are counted using the index $c$.  The color axis ($z$-axis) indicates the value of the matrix element.  Red elements indicate positive values while blue elements indicate negative values.  Elements that appear white are near zero in the matrix element.\label{fig:m}}{Color map of $\bm{M}$}
 
-\FloatBarrier
+%\FloatBarrier
 The color map of a matrix $\bm{M}$ measured in this fashion is shown in Fig.~\ref{fig:m}.  The results are reasonable considering the design of the system.  The system was designed to compensate magnetic field of order 100~nT for currents of 200~mA, which would imply the matrix elements should be of scale 500~nT/A.  Generally this agrees with the color scale seen in Fig.~\ref{fig:m}.  Furthermore, the strongest matrix elements are those where the coil is closest to the sensor in question.  For example, 8y is closest to coils Y- and X+.  It also makes sense that 8y would have strong matrix elements here because it is near the corner of the magnetic shield which causes {\it e.g.} the X+ coil to be converted into a strong y component.  The red and blue colors are a result of the definitions of positive/negative current in relation to coil in question's orientation and the sensor axis definition.
 
 
@@ -136,7 +136,7 @@ The typical magnetic field of the surroundings has been measured using a fluxgat
     \caption[Typical magnetic fields surrounding the prototype]{Typical magnetic field values of the environment surrounding the prototype obtained from fluxgate measurements when the $x$, $y$ and $z$ axis represent the northward, vertical downward, and westward direction respectively. }\label{table:Benvironment}
 \end{table}
 
-\FloatBarrier
+%\FloatBarrier
 For PI control, the setpoint is measured using the fluxgate array by applying 100 mA current to the coils. Our current sink (see Section~\ref{sec:sink}) can generate 0-200 mA current. So, the 100 mA current has been chosen to utilize the full capacity of the current sink to compensate the field fluctuations in either direction. After finding the setpoint from the first measurement of the fluxgates, the change in the fluxgate signal is
 \begin{equation}\label{eq:del_B}
     \Delta B_s^n = B_s(setpoint) - B_s^n(measure)
@@ -227,7 +227,7 @@ We have a non-square matrix $\bm{M}$ with dimension $6*12$ (coils~$\times$~senso
 %     \label{fig:1d}
 % \end{figure}
 
-% \FloatBarrier
+% %\FloatBarrier
 % The author in Ref.~\cite{bea} in Section \textcolor{blue}{7.2.3} of her PhD thesis claimed that more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. 
 
 The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $s \times c$ and $s>c$ is 
@@ -321,7 +321,7 @@ The value of $r$ may be selected using several iterative methods. The obtained $
 
 An iterative method has been discussed in  the previous study~\cite{bea} to find $r$. The concept has been applied to the prototype which will be discussed next.
 
-% \FloatBarrier
+% %\FloatBarrier
 
 % \begin{equation}\label{eq:sigma}
 %     \frac{1}{\sigma_d} \rightarrow \frac{\sigma_d}{\sigma_d^2+(10^r)^2}
@@ -339,7 +339,7 @@ An iterative method has been discussed in  the previous study~\cite{bea} to find
 
 % \fig{Images/v}{width = \textwidth}{Color map of $\Sigma$ for a test $\bm{M}$ found using Python programming language. Horizontal axis indicates the various coils, which are counted using the index $c$. Vertical axis indicates the various sensors, which are counted using the index $s$. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\Sigma$}
 
-% \FloatBarrier
+% %\FloatBarrier
 
 % The problem can visualized from Fig.~\ref{fig:m} where for example X-(1) has negligible sensitivity for 3x which means that particular matrix element (in nT/A) is very small. So, the pseudoinverse of $\bm{M}$ using Eq.~\ref{eq:psMinv} will produce very large element (in A/nT) which means that the amount of current will be huge there which will make the prototype unstable. To minimize the effect, the matrix must be regularized which means that all ill-conditioned places must be replaced  by well-conditioned ones.  
 
@@ -373,7 +373,7 @@ Since, $\Delta I_c^{\text{sim}}(r)$ depends on both $r$ and $B_s^{\text{rand}}$,
 
 \fig{Images/6c_I}{width = \textwidth,height =9.5cm}{The effect of $r$ on the coil currents for 30 different sets of $B_s^{\text{rand}}$ generated according to the normal distribution with a central value of 0 and standard deviation 1.5 nT. The horizontal axis represents $r$ while the vertical axis shows $\Delta I_{\text{RMS}}^{\text{sim}}$. \label{fig:Isim}}{The effect of $r$ on the coil currents.}
 
-\FloatBarrier
+%\FloatBarrier
 The field produced by $ \Delta I_c^{\text{sim}}$ can be calculated using Eq.~(\ref{eq:B_coils}). Thus the total field at each sensor $s$ will be the superposition of $B_s^{\text{rand}}$ and the response produced by $ \Delta I_c^{\text{sim}}(r)$ 
 \begin{equation}\label{eq:B_coils-sim}
     B_s^{\text{sim}}(r) =\sum_{c=1}^6 M_{sc} \Delta I_c^{\text{sim}}(r) + B_s^{\text{rand}}
@@ -386,7 +386,7 @@ The function $F(r)$ would be zero for a perfectly compensated system and unity f
 
 \fig{Images/6c_f}{width = \textwidth,height =9.5cm}{The effect of $r$ on horizontal axis on the compensation due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ to counteract $B_s^{\text{rand}}$ indicated by $F(r)$ on vertical axis. The different curves indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
 
-\FloatBarrier
+%\FloatBarrier
 It is seen from the Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with the increase of $r$, current fluctuations are decreasing but field fluctuations are increasing step. Ref.~\cite{bea} suggested a compromise between them be struck to determine the value of $r$, $\it i.e.$ that reducing current fluctuations ($r \rightarrow + \infty$) be traded off against reducing magnetic field fluctuations ($r \rightarrow - \infty$). to decide the value of $r$, $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized as
 
 \begin{equation}\label{eq:Inorm}
@@ -398,7 +398,7 @@ It is seen from the Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with th
 
 \fig{Images/6c_I-fluc2}{width = \textwidth,height=9cm}{The effect of $r$ indicated by horizontal axis on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ indicated by left vertical axis and $\overline{F}$ indicated by right vertical. The different curves on both vertical axes indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. The red line indicates the 0.5 level in the figure.  \label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
 
-\FloatBarrier
+%\FloatBarrier
 The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ is shown in Fig.~\ref{fig:I-fluc}. With an increase in $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier.
 Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($>>$30). The optimized $r$ is thus found to be 2.87.
 
@@ -424,7 +424,7 @@ According to the type of system and the way the control loop for a particular sy
     \caption{Ziegler-Nichols tuning method for P and PI controllers.}\label{table:tuning}
 \end{table}
 
-\FloatBarrier
+%\FloatBarrier
 In Ref.~\cite{tuning_formula}, it is also mentioned that $k_c^i=(k_c^p/T_i)$ which for our case will be $k_c^i=(k_c^p/T_i)\Delta t$, where, $\Delta t$ is the time difference between two consecutive feedback loop. So, $k_c^i$ will be
 \begin{equation}
     k_c^i=\left(\frac{k_c^p}{T_u/1.2}\right)\Delta t=\left(\frac{1.2\times0.45 G_u}{T_u}\right)\Delta t=\left(\frac{0.54 G_u}{T_u}\right)\Delta t
