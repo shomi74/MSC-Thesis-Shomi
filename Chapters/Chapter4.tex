@@ -230,33 +230,50 @@ We have a non-square matrix $\bm{M}$ with dimension $6*12$ (coils~$\times$~senso
 % %\FloatBarrier
 % The author in Ref.~\cite{bea} in Section \textcolor{blue}{7.2.3} of her PhD thesis claimed that more sensors than coils with some optimization give better compensation forming a non-square matrix which needs to be inverted for calculating the error using Eq.~\ref{eq:del_I}. 
 
-The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $s \times c$ and $s>c$ is 
+The Moore--Penrose pseudoinverse can be used for the inversion process. A tutorial review of the pseudoinverse can be found in Ref.~\cite{pseudo}. The pseudoinverse of a matrix can be computed using singular value decompostion (SVD). SVD is a factorization or diagonalization of a matrix. The matrix can be real or complex square or rectangular matrix. The SVD~\cite{svd4,svd2,svd3} of a real rectangular matrix $\bm{M}$ with dimension $m \times n$ and $m>n$ is 
+% \begin{equation}\label{eq:m}
+%     \begin{split}
+%         \bm{M} = \bm{U} \bm{\Sigma} \bm{V^T}
+%               &=\begin{bmatrix} 
+%                     \Sigma_{11} &  &  & 0 \\
+%                     & . &  &  \\
+%                     &   & . &  \\
+%                     0 &  &  & \Sigma_{nn} \\
+%                     \end{bmatrix}
+%                 \begin{bmatrix} 
+%                     \Sigma_{11} &  &  & 0 \\
+%                      & . &  &  \\
+%                      &   & . &  \\
+%                      0 &  &  & \Sigma_{nn} \\
+%                 \end{bmatrix}
+%     \end{split}
+% \end{equation}
 \begin{equation}\label{eq:m}
-        \bm{M} = \bm{U} \bm{\Sigma} \bm{V^T}
+    \bm{M} = \bm{U} \bm{\Sigma} \bm{V^T}
 \end{equation}
 % where, $\bm{U}\:\epsilon\:\mathbb{R}^{m \times m}$, $\bm{V^*}\:\epsilon\:\mathbb{R}^{n \times n}$ 
-where, $\bm{U}$ and $\bm{V}$ are the orthogonal matrices with dimensions $s \times s$ and $c \times c$ respectively and $\bm{V^T}$ is the transpose of $\bm{V}$. $\bm{\Sigma}$ is a real non-negative diagonal matrix with same dimension as  $\bm{M}$ and can be written as
+where, $\bm{U}$ and $\bm{V}$ are the orthogonal unitary matrices with dimensions $m \times m$ and $n \times n$ respectively and $\bm{V^T}$ is the transpose of $\bm{V}$. $\bm{U}$ and $\bm{V^T}$ are called left and right singular vectors and are the orthonormal eigenvectors of $\bm{M}\bm{M^T}$ and $\bm{M^T}\bm{M}$ respectively. $\bm{\Sigma}$ is a real non-negative diagonal matrix with same dimension as  $\bm{M}$ and can be written as
 
 \begin{equation*}
-\bm{\Sigma} = \begin{pmatrix} 
+\bm{\Sigma} = \begin{bmatrix} 
 \Sigma_{11} &  &  & 0 \\
   & . &  &  \\
   &   & . &  \\
 
 0 &  &  & \Sigma_{nn} \\
- \end{pmatrix}
+ \end{bmatrix}
 \end{equation*}
 where, $\Sigma_{11},..,\Sigma_{nn}=\sigma_{n}$ are diagonal values of $\bm{\Sigma}$ with $\Sigma_{11}\gg... \Sigma_{nn}\geq0$. The positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ yield $\sigma_{n}$, and are called singular values of $\bm{M}$. 
 
 The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its invert. That is   $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
 \begin{equation}\label{eq:sigma_inv}
-\frac{1}{\bm{\Sigma}} = \begin{pmatrix} 
+\frac{1}{\bm{\Sigma}} = \begin{bmatrix} 
 \frac{1}{\Sigma_{11}} &  &  & 0 \\
   & . &  &  \\
   &   & . &  \\
 
 0 &  &  & \frac{1}{\Sigma_{nn}} \\
- \end{pmatrix}
+ \end{bmatrix}
 \end{equation}
 
 The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}$ and $\bm{V^T}$ and can be written as
