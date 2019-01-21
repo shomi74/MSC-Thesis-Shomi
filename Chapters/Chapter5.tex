@@ -1954,14 +1954,86 @@ system is weighted differently.
 \end{itemize}
 
 
-We have discussed different parameters to understand the current drifting problem which are discussed in previous Sections (Sections~\ref{sec:freq}, \ref{sec:pi_behave}, \ref{sec:flux_place}). But none of those came with the solution of the current drifting problem. This led us to made a simulation (Section~\ref{sec:pSim}) of the active compensation system which validates the current drifting problem is real. In Section~\ref{sec:new_study_r}, we discussed a way to decrease the current settling timescale but that introduces high frequency noise. As we were continuously seeking for the optimal solution, my supervisor simulated a 3 three dimensional coil cube with the same dimension as our active compensation system in Python to calculate the matrix. Interestingly, the matrix was giving a condition number of infinity by which we were more confused. To find the answer we exploit the diagonal matrix (discussed in Section~\ref{sec:inv}).
+%We have discussed different parameters to understand the current
+%drifting problem which are discussed in previous Sections
+%(Sections~\ref{sec:freq}, \ref{sec:pi_behave}, \ref{sec:flux_place}). But
+%none of those came with the solution of the current drifting
+%problem. This led us to made a simulation (Section~\ref{sec:pSim}) of
+%the active compensation system which validates the current drifting
+%problem is real. In Section~\ref{sec:new_study_r}, we discussed a way
+%to decrease the current settling timescale but that introduces high
+%frequency noise. As we were continuously seeking for the optimal
+%solution, my supervisor simulated a 3 three dimensional coil cube with
+%the same dimension as our active compensation system in Python to
+%calculate the matrix. Interestingly, the matrix was giving a condition
+%number of infinity by which we were more confused. To find the answer
+%we exploit the diagonal matrix (discussed in Section~\ref{sec:inv}).
+
+In light of the previous studies, there was now strong evidence to
+suggest that the current drifting problem had more to do with the
+structure of the non-square matrix than with other possible problems
+such as instability of the current sinks or issues with the PI
+feedback loop.  In light of this, I began to focus more on
+understanding the matrix, its pseudo-inverse, and the concepts of
+matrix regularization.
+
+In order to study a broader range of possible coil geometries, another
+Python code was written which could perform magnetic field
+calculations for rectangular coils wound on the  in free space.  Since it would not
+rely on OPERA simulations, the process of generating matrices then
+became much faster.  Studying such a case was also a reasonable step,
+since the current drifting problem had been shown experimentally not
+to depend on whether the magnetic shields were present withing the
+coil cube.
+
+The code generated coil geometries that were very highly idealized.
+They were like the coil cube displayed in Fig.~\ref{fig:coil}, but
+with the currents exactly on top of one another.  Fluxgate positions
+were again generally placed in the corners of a slightly smaller cube,
+or could alternately be placed in the middles of the faces of cube,
+much like the studies presented in Table~\ref{table:flux_pos}.
+
+The interesting result of the code was that it would always give
+condition number infinity when six coils were used, no matter what
+positions for the fluxgates were used nor the number of fluxgate axes
+used.  An example of one such simulation is shown in
+Fig.~\ref{fig:diag_patch_6c} where the $\bm{\Sigma}$ matrix involved
+in singular value decomposition of the matrix $\bm{M}$ is displayed
+(see Section~\ref{sec:inv} for the description of the process of
+singular value decomposition).  The matrix $\bm{\Sigma}$ is a diagonal
+matrix whose elements are the positive square roots of the singular
+values of $\bm{M^T}\bm{M}$, sorted from largest to smallest.
 
 \fig{Images/Diag_patch_6c}{width = \textwidth}{
-Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$ for 18 sensors and 6 coils in nT/A. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension. \label{fig:diag_patch_6c}}{Diagonal Matrix for 6 coils.}
+Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$
+for 24 fluxgate axes and 6 coils.  In the simulation, the six coils
+are wound on the faces of a cube of side-length 1.24~m, and the
+fluxgates are placed in the eight corners of a smaller cube of
+side-length 1.20~m.\label{fig:diag_patch_6c}}{Diagonal Matrix for 6
+coils.}
 
-Fig.~\ref{fig:diag_patch_6c} shows the diagonal matrix $\Sigma$ of the simulated coil cube in Python where the diagonal elements $\sigma_n$ are arranged in descending order . $8\times3=24$ axes fluxgate sensors were used. They were placed evenly in eight corners of the coil cube.  Recalling the Eq.~(\ref{eq:cond}), it is clearly seen that the reason of the matrix condition number is infinity as because the minimum diagonal element is zero. 
+The condition number is the ratio of the largest $\Sigma_{1,1}$
+component of the $\Sigma_{n,n}$ where $n=6$ is limited by the number
+of coils.  (Note that in Fig.~\ref{fig:diag_patch_6c} counting goes
+from zero to five rather than one to six.)  The key problem with the
+matrix $\Sigma$ was that the $\Sigma_{n,n}$ matrix element was always
+zero.  Changing the geometry (coils or fluxgates) would alter the
+other singular values, but would never make the smallest singular
+value larger than zero.
 
-We then tried to understand the reason of being the minimum diagonal element to be zero by exploiting right singlur vectors $\bm{V^T}$.
+
+%Fig.~\ref{fig:diag_patch_6c} shows the diagonal matrix $\Sigma$ of the
+%simulated coil cube in Python where the diagonal elements $\sigma_n$
+%are arranged in descending order. $8\times3=24$ axes fluxgate sensors
+%were used. They were placed evenly in eight corners of the coil cube.
+%Recalling the Eq.~(\ref{eq:cond}), it is clearly seen that the reason
+%of the matrix condition number is infinity as because the minimum
+%diagonal element is zero.
+
+We then tried to understand the reason of being the minimum diagonal
+element to be zero by exploiting right singular vectors $\bm{V^T}$.
+The singular values may be analogized to eigenvalues seen in the case
+of square matrices.  The singular vectors...
 
 \fig{Images/Right_patch_6c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 18 sensors and 6 coils. $\bm{V^T}$ is the orthonormal eigenvectors of $\bm{M^T}\bm{M}$. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
 
