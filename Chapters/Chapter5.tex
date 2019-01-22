@@ -2019,10 +2019,8 @@ sorted from largest to smallest.
 
 \fig{Images/Diag_patch_6c}{width = \textwidth}{
 Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$
-for 24 fluxgate axes and 6 coils.  In the simulation, the six coils
-are wound on the faces of a cube of side-length 1.24~m, and the
-fluxgates are placed in the eight corners of a smaller cube of
-side-length 1.20~m.\label{fig:diag_patch_6c}}{Diagonal Matrix for 6
+for 24 fluxgate axes and 6 coils. Coil
+dimensions and fluxgate positions are given in Fig.~\ref{fig:matrix_patch_6c}.\label{fig:diag_patch_6c}}{Diagonal Matrix for 6
 coils.}
 
 The condition number is the ratio of the largest $\Sigma_{11}$
@@ -2041,15 +2039,16 @@ never make the smallest singular value larger than zero.
 %of the matrix condition number is infinity as because the minimum
 %diagonal element is zero.
 
-\fig{Images/Right_patch_6c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 6 coils. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
+\fig{Images/Right_patch_6c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil
+dimensions and fluxgate positions are given in Fig.~\ref{fig:matrix_patch_6c}. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
 
 I then tried to understand the reason for the minimum diagonal element
-being zero, by studing the right singular vectors, which are
+being zero, by studying the right singular vectors, which are
 represented by the rows of $\bm{V^T}$.  This matrix is displayed in
 Fig.~\ref{fig:right_patch_6c}.
 
 The singular values may be analogized to eigenvalues seen in the case
-of square matrices.  The diagonal matrix represented by the
+of square matrices. The diagonal matrix represented by the
 eigenvalues express the same matrix, where an orthogonal similarity
 transformation to the eigenbasis has been performed.  The rows of the
 orthogonal transformation are the eigenvectors corresponding to each
@@ -2093,7 +2092,7 @@ We can imagine the elements of the singular vector as describing
 eigen-currents.  In row 6, this would describe a set of currents like
 those depicted in Fig.~\ref{fig:cDir}.  In this case, if the coils all
 overlap perfectly, as they do in this simulation, such a mode has a
-net current of zero.  Hence no matter what the total current applied
+net current of zero.  Hence, no matter what the total current applied
 to this mode, it will never generate a magnetic field.  Hence the
 singular value is always zero.
 
@@ -2122,7 +2121,7 @@ gradient in the $z$ direction
 \begin{equation}
 \frac{\partial B_z}{\partial z}=-\frac{\partial B_x}{\partial x}-\frac{\partial B_y}{\partial y}.\label{eq:dbzdz}
 \end{equation}
-The third coil, which generates $\frac{\partial B_z}{\partial z}$ is
+The third coil, which generates $\partial B_z/\partial z$ is
 therefore unnecessary.  Or conversely, if the third coil is included
 in a three-dimensional feedback system, it is possible that the
 control system will generate a current in the third coil which
@@ -2132,16 +2131,16 @@ described by Fig.~\ref{fig:cDir}.
 
 Eq.~(\ref{eq:dbzdz}) suggests one method to prevent the problematic
 coil mode from ever being excited: remove the coil which generates
-$\frac{\partial B_z}{\partial z}$.  I implemented this in the Python
+$\partial B_z/\partial z$.  I implemented this in the Python
 code by requiring that the currents in the $C_z^+$ and $C_z^-$ always
 be in the same direction and have the same value, {\it i.e.}~like the
 currents in a Helmholtz coil.  This means that there are only five
 independently controlled currents, which I denote $C_x^+$, $C_x^-$,
 $C_y^+$, $C_y^-$, and $C_z^\pm$.
 
-\textcolor{red}{Need to add a note here about spherical harmonics.  Need to add some note about Rawlik's patch coil system.  Or this could/should go in future work with a forward reference here.}
+\textcolor{red}{Need to add a note here about spherical harmonics. Need to add some note about Rawlik's patch coil system.  Or this could/should go in future work with a forward reference here.}
 
-
+\textcolor{red}{Where to add Refs.~\cite{field_abel,field_jeff} ?}
 %To break the mode, two out of
 %the six coils have been wired together so that they can act as one
 %resulting total compensation coils be five.
@@ -2154,7 +2153,7 @@ $C_y^+$, $C_y^-$, and $C_z^\pm$.
 %\textcolor{red}{Is Fig.~\ref{fig:matrix_patch_5c} required ????}
 
 \fig{Images/matrix_patch_5c}{width = \textwidth}{
-Color map of $M_{sc}$ elements for 24 fluxgate axes and 5 coils.  Coil
+Color map of $M_{sc}$ elements for 24 fluxgate axes and 5 coils. Coil
 dimensions and fluxgate positions are the same as for
 Fig.~\ref{fig:matrix_patch_6c}.\label{fig:matrix_patch_5c}}{Matrix for
 5 coils.}
@@ -2175,7 +2174,7 @@ resulting from singular value decomposition.  This results in five
 singular values, one for each coil mode.  Most importantly, the
 singular value which was zero has been removed from the matrix.  The
 remaining singular values are now also all of similar order of
-magnitude.  The condition number of the matrix is 2.005, which is a
+magnitude.  The condition number of the matrix is 2.01, which is a
 considerable improvement compared to the infinite condition number of
 the six-coil system.
 
@@ -2201,7 +2200,7 @@ each of the $x$ and $y$ directions.
         \hline
         \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
         \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.2 \\
+        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.62 \\
         \hline
         \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
         \hline
@@ -2243,7 +2242,7 @@ regularization process are also displayed in
 Table~\ref{table:mcond_coil}.
 
 % \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
-\fig{Images/coil_reg3}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg4}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
 
 
 
@@ -2259,45 +2258,63 @@ averages per cycle were used.\label{fig:coil_pseudo}}{Coil currents
 with field change $\Delta B$ for different coil configuration in
 non-regularized $\bm{M^{-1}}$}
 
+
+\FloatBarrier
+\subsection{Extra Data}
+\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
+
+\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
+
+\fig{Images/diag_comb}{width = \textwidth}{.. \label{fig:diag_comb}}{S}
+
+\fig{Images/right_comb}{width = \textwidth}{.. \label{fig:right_comb}}{S}
+
+\fig{Images/5c_x}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x}}{S}
+
+\fig{Images/5c_x_all}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x_all}}{S}
  
-%  As previously discussed in Section~\ref{sec:prototype}, there are six compensation coils ($\bm{C_x^\pm}$, $\bm{C_y^\pm}$ and $\bm{C_z^\pm}$) and one perturbation coil ($\bm{P_z^+}$). 
- 
+\fig{Images/5c_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$ . \label{fig:5c_y}}{S}
+
+\fig{Images/5c_y_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_y_all}}{S}
+\fig{Images/5c_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z}}{S}
+
+\fig{Images/5c_z_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z_all}}{S}
 
 
-%
-% \begin{table} [htb!]
-%     \centering
-%     \begin{tabular} { |c|c|c|c|c|c|} 
-%         \hline
-%         Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter, $r$}\\
-%         \hline\hline
-%         \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
-%         \hline
-%         \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.2 \\
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$+$C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 2.97 & 1.14 & 3.6 \\
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$,$C_y^-$,\\ $C_y^+$+$C_z^-$ and $C_z^+$ } & 2.8 & 1.14 & 3.62 \\
-%         \hline
-%         \makecell{$C_x^-$+$C_y^-$, $C_x^+$,\\ $C_y^+$,$C_z^-$ and $C_z^+$ } & 25 & 1.69 & 3.06 \\
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$+$C_y^+$,\\ $C_y^-$, $C_z^-$ and $C_z^+$ } & 25 & 1.70 & 3.05 \\
-%         \hline
-%         \makecell{$C_x^-$, $C_x^+$, $C_y^+$,\\ $C_y^-$+$C_z^-$ and $C_z^+$ } & 26.14 & 1.65 & 3.06 \\
-%         \hline
-%         \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\$C_z^-$ and $C_z^+$ } & 440.57 & 1.79 & 2.54 \\
-%         \hline
-%         \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\ and $C_z^-$+$C_z^+$ } & 1.27 & 1.0 & 3.73 \\
-%         \hline
 
-%     \end{tabular}
-%     % \vspace{4mm}
-%     \caption[short]{Properties of different no of fluxgate sensors for different positions. Max $\Delta I_c^{\text{simRMS}}$ column has been taken for each of the positions defined by generating Fig.~\ref{fig:Isim}. Max compensation column has been determined for for each of the positions defined by generating Fig.~\ref{fig:fluc-sim} and the description is given in text. For the positions of the fluxgates see Fig.~\ref{fig:coil} }\label{table:mcond_coil}
-% \end{table}
+\begin{table} [htb!]
+    \centering
+    \begin{tabular} { |c|c|c|c|c|c|} 
+        \hline
+        Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter, $r$}\\
+        \hline\hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
+        \hline
+        \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.62 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$+$C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 2.97 & 1.14 & 3.6 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$,$C_y^-$,\\ $C_y^+$+$C_z^-$ and $C_z^+$ } & 2.8 & 1.14 & 3.62 \\
+        \hline
+        \makecell{$C_x^-$+$C_y^-$, $C_x^+$,\\ $C_y^+$,$C_z^-$ and $C_z^+$ } & 25 & 1.69 & 3.06 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$+$C_y^+$,\\ $C_y^-$, $C_z^-$ and $C_z^+$ } & 25 & 1.70 & 3.05 \\
+        \hline
+        \makecell{$C_x^-$, $C_x^+$, $C_y^+$,\\ $C_y^-$+$C_z^-$ and $C_z^+$ } & 26.14 & 1.65 & 3.06 \\
+        \hline
+        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\$C_z^-$ and $C_z^+$ } & 440.57 & 1.79 & 2.54 \\
+        \hline
+        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\ and $C_z^-$+$C_z^+$ } & 1.27 & 1.0 & 3.73 \\
+        \hline
+
+    \end{tabular}
+    % \vspace{4mm}
+    \caption[Properties for different coil configurations]{Matrix properties for different 6- and 5-coil configurations for fluxgate sensors at 1, 3, 6 and 8.}\label{table:mcond_coi2}
+\end{table}
 
 \section{Future Section ??}\label{sec:metrics_res}
 
