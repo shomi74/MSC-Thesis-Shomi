@@ -2416,39 +2416,71 @@ for the system itself to be able to generate different currents in
 $C_z^+$ and $C_z^-$ if aiming to have the smallest changes in the
 currents.
 
-\subsection{Extra Data}
-\begin{itemize}
-\item Some data with shield inside.
-\begin{enumerate}
-\item Something like $\bm{\Sigma}$ for the 5- and 6-coil.
-\item An example of the feedback system operating.
-\item Internal sensor perturbations (could appear in next section)
-\item Allan deviations (could appear in next section also) ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
-\end{enumerate}
-\end{itemize}
-
-\fig{Images/matrix_comb_shield}{width = \textwidth}{.. \label{fig:matrix_comb_shield}}{S}
-
-\fig{Images/diag_comb_shield}{width=\textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
-$\bm{M}$ for the available 12 fluxgate axes and for (a) 5 coils,
-where the the $C_x^\pm$ coils are required to carry the same current,
-and (b) 6 coils which, are permitted to carry any
-current.\label{fig:diag_comb_shield}}{Experimental results for the
-$\bm{\Sigma}$ matrix.}
+%\subsection{Extra Data}
+%\begin{itemize}
+%\item Some data with shield inside.
+%\begin{enumerate}
+%\item Something like $\bm{\Sigma}$ for the 5- and 6-coil.
+%\item An example of the feedback system operating.
+%\item Internal sensor perturbations (could appear in next section)
+%\item Allan deviations (could appear in next section also) ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
+%\end{enumerate}
+%\end{itemize}
 
 
-\fig{Images/right_comb_shield}{width = \textwidth}{Experimentally determined right singular vectors, represented by the rows of the matrix $\bm{V^T}$ resulting from SVD of the experimentally measured matrix $\bm{M}$.\label{fig:right_comb_shield}}{Experimentally measured right singular vectors.}
+I also redid the tests with the magnetic shield inside the coil cube.
+Not surprisingly, the conclusions were the same.
 
+%\fig{Images/matrix_comb_shield}{width = \textwidth}{.. \label{fig:matrix_comb_shield}}{S}
 
+\fig{Images/diag_comb_shield}{width=\textwidth}{Color map of diagonal matrix
+$\bm{\Sigma}$ with the magnetic shield in place found by SVD of
+experimentally measured $\bm{M}$ for the available 12 fluxgate axes
+and for (a) 5 coils, where the the $C_x^\pm$ coils are required to
+carry the same current, and (b) 6 coils which, are permitted to carry
+any current.\label{fig:diag_comb_shield}}{Experimental results for the
+$\bm{\Sigma}$ matrix with the magnetic shield in place.}
 
-\fig{Images/6c_reg_shield}{width = \textwidth}{6c reg shield. \label{fig:6c_reg_shield}}{S}
+Fig.~\ref{fig:diag_comb_shield} shows the results for the
+$\bm{\Sigma}$ matrix when the magnetic shield is in place.  The
+general trends in the singular values are very similar as in the case
+without the magnetic shield.  As reported in
+Table~\ref{table:mcond_coil}, the condition number in the five-coil
+case is 2.05 and in the six-coil case it is 25.96.
 
-\fig{Images/6c_pseudo_shield}{width = \textwidth}{6c pseudo shield. \label{fig:6c_pseudo_shield}}{S}
+%\fig{Images/right_comb_shield}{width = \textwidth}{Experimentally determined right singular vectors, represented by the rows of the matrix $\bm{V^T}$ resulting from SVD of the experimentally measured matrix $\bm{M}$.\label{fig:right_comb_shield}}{Experimentally measured right singular vectors.}
+
+The right singular vectors corresponding to the coil modes also show
+similar trends.  For the six-coil case, the same problematic mode is
+present.  For the five-coil case, the same general mode structure is
+apparent, consisting of three uniform field modes and two gradient
+modes in the same pattern.
+
+%\fig{Images/6c_reg_shield}{width = \textwidth}{6c reg shield. \label{fig:6c_reg_shield}}{S}
+
+%\fig{Images/6c_pseudo_shield}{width = \textwidth}{6c pseudo shield. \label{fig:6c_pseudo_shield}}{S}
  
-\fig{Images/5c_pseudo_shield_x}{width = \textwidth}{$C_x^\pm$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$ . \label{fig:5c_pseudo_shield_x}}{S}
+%\fig{Images/5c_pseudo_shield_x}{width = \textwidth}{$C_x^\pm$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$ . \label{fig:5c_pseudo_shield_x}}{S}
 
-\fig{Images/5c_pseudo_shield_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_pseudo_shield_y}}{S}
-\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
+\fig{Images/5c_pseudo_shield_y}{width = \textwidth}{Five-coil feedback
+algorithm with the magnetic shield placed inside the coil cube.  The
+currents $C_y^+$ and $C_y^-$ are required to be a common current
+$C_y^\pm$.  All other parameters are the same as for
+Fig.~\ref{fig:coil_reg}\label{fig:5c_pseudo_shield_y}}{Five-coil
+feedback results with the magnetic shield inside the coil cube.}
+
+The improvement in the general feedback system operation for the
+five-coil feedback algorithm is also very clear when the magnetic
+shield is within the coil cube.  Results of the usual test with the
+excitation coil are shown in Fig.~\ref{fig:5c_pseudo_shield_y}, where
+the non-regularized pseudoinverse has been used.  For
+Fig.~\ref{fig:5c_pseudo_shield_y}, the $C_y^+$ and $C_y^-$ coils have
+been required to carry a common current $C_y^\pm$ while the other five
+coils may be adjusted freely.  Even with the magnetic shield present,
+the results are very similar to Fig.~\ref{fig:coil_pseudo}(b) where no
+shield was present.
+
+%\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
 
 %\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
 %\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
@@ -2495,45 +2527,60 @@ $\bm{\Sigma}$ matrix.}
 %    \caption[Properties for different coil configurations]{Matrix properties for different 6- and 5-coil configurations for fluxgate sensors at 1, 3, 6 and 8.}\label{table:mcond_coi2}
 %\end{table}
 
-\section{Future Section ??}\label{sec:metrics_res}
 
-\subsection{Experimental Current Error and Remaining Fluctuation... maybe change this into a discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible.}
 
-\begin{itemize}
-\item Basic message of Fig. 5.4 is that experiment and simulation kind of agree.
-% \item In simulation a set of twelve $B_s^\text{rand}$ has been generated by normal distribution around zero with standard deviation being 1.5 nT.
-% % \item In experiment  set of twelve $B_s^\text{rand}$ has been generated by magnetic field signals from fluxgate positions at 1, 2 and 7 using Eq.~(\ref{eq:del_B}). For position of the fluxgates please see Fig.~\ref{fig:coil}.
-% \item $r$ has been varied from 0 to 6 in an increment of 0.29 and for each $r$, PI control algorithm has been implemented for n measurements and for every measurements, signals from fluxgates at positions 1,2 and 7 are stored as $B_{\text{meas}}$ and uncompensated B field has been stored as $B_{\text{uncomp}}$ using  $B_{\text{meas}}-\bm{M}(I_c^n-I_c^0)$ where $I_c^n$ can be found using Eq.~(\ref{eq:I}). From those stored values,  Eq.~(\ref{eq:B_coils-sim}) has been found by $B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)$ and $B_s^\text{rand}$ has been found by $B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)$ and $\Delta I_c^{\text{exp}}(r)$ has been found using same as Eq.(\ref{eq:del_Is}). 
-\end{itemize}
 
-\fig{Images/mont_exp}{width = \textwidth}{The effect of $r$ on (a) current error  and (b) remaining field fluctuations in experimental setup for $k_c^p=1.0$ for fluxgate signals from 1, 2 and 7. Here, 100 mA current has been supplied in the perturbation coil. For position of the fluxgates  and coil see Fig.~\ref{fig:coil}.\label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
 
-The effect of $r$ on the current error and remaining field
-fluctuations in experimental setup for fluxgate signals from 1, 2 and
-7 are shown in Fig.~\ref{fig:mont_comp}. For position of the sensors
-please see Fig.~\ref{fig:coil}. For data measurement, for certain
-loops, PI control algorithm with $k_c^p=$1.0 and $k_c^i=$0.0 has been
-implemented for $r$ ranges from 0 to 6 in an increment of 0.29. For
-every measurements, signals from fluxgates at positions 1,2 and 7 are
-stored as $B_{\text{meas}}$ and uncompensated B field has been stored
-as $B_{\text{uncomp}}$ which is predicted by Eq.~\ref{eq:Buncomp}. The
-difference between maximum value of $B_{\text{uncomp}}$ and
-$B_{\text{uncomp}}$ will give the field fluctuation due to 100 mA
-supplied in rhe perturbation coil. Moreover, the difference between
-maximum value of $B_{\text{meas}}$ and $B_{\text{meas}}$ will give the
-amount of compensation of the field which when equal to field
-fluctuation indicates no compensation. The ratio of rms value of this
-to the field fluctuation will generate the remaining fluctuation $F$
-which is shown for different $r$ in
-Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}. It is seen that for a
-particular filed perturbation, the remaining fluctuation is
-$\approx$0.45 which indicates that the maximum correction is
-$\mathbf{(1-0.45)\times100\%=55\%}$. Moreover, $\Delta
-I_c^{\text{exp}}(r)$ has been found using Eq.(\ref{eq:del_Is}) and the
-rms has been determined which is shown in
-Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}. It is seen that around
-100 mA rms of current array is required to compensate the perturbation
-which eventually vanishes with $r$ increment as expected.
+\section{Other metrics of feedback system performance}\label{sec:metrics_res}
+
+
+%\subsection{Extra Data} % (copied from previous Section)
+
+\begin{enumerate}
+\item Allan deviations ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
+\item Internal sensor perturbations (related to previous section).
+\end{enumerate}
+
+
+
+
+%\subsection{Experimental Current Error and Remaining Fluctuation... maybe change this into a discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible.}
+
+%\begin{itemize}
+%\item Basic message of Fig. 5.4 is that experiment and simulation kind of agree.
+%% \item In simulation a set of twelve $B_s^\text{rand}$ has been generated by normal distribution around zero with standard deviation being 1.5 nT.
+%% % \item In experiment  set of twelve $B_s^\text{rand}$ has been generated by magnetic field signals from fluxgate positions at 1, 2 and 7 using Eq.~(\ref{eq:del_B}). For position of the fluxgates please see Fig.~\ref{fig:coil}.
+%% \item $r$ has been varied from 0 to 6 in an increment of 0.29 and for each $r%$, PI control algorithm has been implemented for n measurements and for every measurements, signals from fluxgates at positions 1,2 and 7 are stored as $B_{\text{meas}}$ and uncompensated B field has been stored as $B_{\text{uncomp}}$ using  $B_{\text{meas}}-\bm{M}(I_c^n-I_c^0)$ where $I_c^n$ can be found using Eq.~(\ref{eq:I}). From those stored values,  Eq.~(\ref{eq:B_coils-sim}) has been found by $B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)$ and $B_s^\text{rand}$ has been found by $B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)$ and $\Delta I_c^{\text{exp}}(r)$ has been found using same as Eq.(\ref{eq:del_Is}). 
+%\end{itemize}
+
+%\fig{Images/mont_exp}{width = \textwidth}{The effect of $r$ on (a) current error  and (b) remaining field fluctuations in experimental setup for $k_c^p=1.0$ for fluxgate signals from 1, 2 and 7. Here, 100 mA current has been supplied in the perturbation coil. For position of the fluxgates  and coil see Fig.~\ref{fig:coil}.\label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
+
+%The effect of $r$ on the current error and remaining field
+%fluctuations in experimental setup for fluxgate signals from 1, 2 and
+%7 are shown in Fig.~\ref{fig:mont_comp}. For position of the sensors
+%please see Fig.~\ref{fig:coil}. For data measurement, for certain
+%loops, PI control algorithm with $k_c^p=$1.0 and $k_c^i=$0.0 has been
+%implemented for $r$ ranges from 0 to 6 in an increment of 0.29. For
+%every measurements, signals from fluxgates at positions 1,2 and 7 are
+%stored as $B_{\text{meas}}$ and uncompensated B field has been stored
+%as $B_{\text{uncomp}}$ which is predicted by Eq.~\ref{eq:Buncomp}. The
+%difference between maximum value of $B_{\text{uncomp}}$ and
+%$B_{\text{uncomp}}$ will give the field fluctuation due to 100 mA
+%supplied in rhe perturbation coil. Moreover, the difference between
+%maximum value of $B_{\text{meas}}$ and $B_{\text{meas}}$ will give the
+%amount of compensation of the field which when equal to field
+%fluctuation indicates no compensation. The ratio of rms value of this
+%to the field fluctuation will generate the remaining fluctuation $F$
+%which is shown for different $r$ in
+%Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}. It is seen that for a
+%particular filed perturbation, the remaining fluctuation is
+%$\approx$0.45 which indicates that the maximum correction is
+%$\mathbf{(1-0.45)\times100\%=55\%}$. Moreover, $\Delta
+%I_c^{\text{exp}}(r)$ has been found using Eq.(\ref{eq:del_Is}) and the
+%rms has been determined which is shown in
+%Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}. It is seen that around
+%100 mA rms of current array is required to compensate the perturbation
+%which eventually vanishes with $r$ increment as expected.
 % We have studied the coil current response and magnetic fluctuation reduction in
 
 % In Section~\ref{sec:inv}, we have already talked about how the regularization parameter $r$ came into effect. Then, in Section~\ref{sec:mont}, regularization by random magnetic distribution method has been described which has been taken from Ref.~\cite{bea} where a suitable value of $r$ has been found which will give the best compromise between the magnetic field fluctuation and coil current fluctuation. We have generated a fluctuation by our perturbation coil. $r$ has been varied from 0 to 6 in an increment of 0.29 and for each $r$, PI control algorithm has been implemented for n measurements and for every measurements, signals from fluxgates at positions 1,2 and 7 are stored as $B_{\text{meas}}$ and uncompensated B field has been stored as $B_{\text{uncomp}}$ using  $B_{\text{meas}}-\bm{M}(I_c^n-I_c^0)$ where $I_c^n$ can be found using Eq.~(\ref{eq:I}). From those stored values,  Eq.~(\ref{eq:B_coils-sim}) has been found by $B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)$ and $B_s^\text{rand}$ has been found by $B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)$ and $\Delta I_c^{\text{exp}}(r)$ has been found using same as Eq.(\ref{eq:del_Is}). 
