@@ -2018,10 +2018,11 @@ positive square roots of the singular values of $\bm{M^T}\bm{M}$,
 sorted from largest to smallest.
 
 \fig{Images/Diag_patch_6c}{width = \textwidth}{
-Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$
-for 24 fluxgate axes and 6 coils. Coil
-dimensions and fluxgate positions are given in Fig.~\ref{fig:matrix_patch_6c}.\label{fig:diag_patch_6c}}{Diagonal Matrix for 6
-coils.}
+Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
+$\bm{M}$ for 24 fluxgate axes and 6 coils. Coil dimensions and
+fluxgate positions are given in
+Fig.~\ref{fig:matrix_patch_6c}.\label{fig:diag_patch_6c}}{Diagonal
+Matrix for 6 coils.}
 
 The condition number is the ratio of the largest $\Sigma_{11}$
 component of the $\Sigma_{nn}$ where $n=6$ is limited by the number of
@@ -2167,7 +2168,9 @@ the singular value decomposition, the differences become evident.
 
 
 \fig{Images/Diag_patch_5c}{width = \textwidth}{
-Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 5 coils. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
+Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
+$\bm{M}$ for 24 fluxgate axes and 5
+coils. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
 
 Fig.~\ref{fig:diag_patch_5c} displays the $\bm{\Sigma}$ matrix
 resulting from singular value decomposition.  This results in five
@@ -2194,7 +2197,7 @@ each of the $x$ and $y$ directions.
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
-        Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter, $r$}\\
+        Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter $r$}\\
         \hline\hline
         \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
         \hline
@@ -2233,7 +2236,7 @@ configurations gave essentially the same results for the condition
 number.
 
 Clearly, in the six-coil case, it is an absolute necessity to
-regularize the matrix, which as I discussed early may be done by
+regularize the matrix.  As I discussed earlier this may be done by
 adjusting the regularization parameter to minimize the condition
 number of the Tikhonov regularized pseudoinverse.  I decided also to
 study Tikhonov regularization for the five-coil case, to see if it had
@@ -2242,83 +2245,240 @@ regularization process are also displayed in
 Table~\ref{table:mcond_coil}.
 
 % \fig{Images/coil_reg}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). The $r$=2.9 in (a) and $r$=3.39 in (b). For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_reg}}{Coil currents with drift $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
-\fig{Images/coil_reg4}{width = \textwidth,height=12cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback parameters are $k_c^p=0.0$, $k_c^i=1.0$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used. The matrix condition number is 26.37 in (a) which while inverse for $r$=3.04 gives 1.71 and The matrix condition number is 2.26 in (b) which while inverse for $r$=3.6 gives 1.08.\label{fig:coil_reg}}{Coil currents with field change $\Delta B$ for different coil configuration in regularized $\bm{M^{-1}}$}
+\fig{Images/coil_reg4}{width=\textwidth,height=12cm}{(a) 6-coil feedback algorithm compared with (b) 5-coil feedback algorithm, where the only change is that the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$.  Both pseudoinverses have been regularized using the method described Section~\ref{sec:new_study_r}.  Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels.
+In both (a) and (b), the feedback parameters are $k_c^p=0.0$ and
+$k_c^i=1.0$.\label{fig:coil_reg}}{Coil currents with field change
+$\Delta B$ for different coil configurations in regularized
+$\bm{M^{-1}}$}
 
+Fig.~\ref{fig:coil_reg} shows experimental data which demonstrate the
+success of the five-coil method compared to the six-coil method.  In
+this case, I have compared the matrices with my regularization method,
+determining the best value of $r$ based on its ability to minimize the
+condition number of the resultant pseudoinverse (see
+Section~\ref{sec:new_study_r}).  Figs.~\ref{fig:coil_reg}(a) and (b)
+correspond to the settings described in the first two rows of
+Table~\ref{table:mcond_coil}.
 
+The main success is that in the five-coil algorithm, the currents
+settle rapidly after the excitation coil has been switched on, and
+return rapidly to their initial values when switched off.  This can be
+contrasted with the six-coil algorithm where the current drifting
+problem is quite evident: the coil currents take more than ten seconds
+to settle.
+
+Another clear success is that in the five-coil case, the coil $C_z^+$,
+which is {\it closest} to the perturbation coil, is the one that has
+the most current driven by the feedback algorithm.  Certainly this
+would be the expected result.  In the six-coil case,
+Fig.~\ref{fig:coil_reg}(a) demonstrates that the initial coil
+responses are quite similar to the five-coil method (within the first
+$<1$~s), but then the current drifting problem sets in, and the
+currents grow in coils where one would expect them to be small.  The
+growth of the problematic mode with singular value zero is also quite
+evident in the six-coil case: the currents in opposite coils have
+opposite changes relative to the initial current and are roughly equal
+in magnitude.  This is the mode that in the ideal simulation does not
+generate any magnetic field.  Because of the smallness of the effect
+of this mode, the six-coil algorithm tends to set the current to a
+somewhat arbitrary value.
+
+In both the five-coil and six-coil cases, the overall results for the
+reduction in the magnetic field at the control sensor positions are
+quite similar.  Some small, longer term drifts in the six-coil case
+can be seen.  We expect that this happens because the field generated
+by the problematic mode is small but non-zero, because the coils do
+not exactly overlap as they do in the ideal simulation.  There is some
+evidence that there is additional higher frequency noise in the
+six-coil case, which could be coming from the considerably larger and
+less stable currents generated by the problematic mode.
+
+So, while the two algorithms give similar results for the generated
+magnetic fields, clearly the five-coil algorithm is more desirable
+because smaller coil currents with smaller random fluctuations are
+generated.  The five-coil system is clearly responding to a field in
+the $z$-direction that is located near the $C_z^+$ coil.
 
 % \fig{Images/coil_pseudo}{width = \textwidth,height=12cm}{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at 12 sensor positions with fluxgate positions 1, 3, 6 and 8 for $k_c^p$=0.0, $k_c^i$=1.0 (see Eq.~(\ref{eq:I})). Pseudoinverse was used in both case. For position of coils and fluxgates see Fig.~\ref{fig:coil}. All grey color curves in $\Delta B$ graph denote the drift in signal that would have been without the compensation while all other color curves denote the actual drift in signal at all 12 sensor positions found by Eq.~(\ref{eq:del_B}). Vertical dashed lines indicate the time of the perturbation coil being turned on and off. The current supplied on perturbation coil was 10  mA. The resolution index 1 (see Table~\ref{table:t7freq}) with 50 no of averages per measurement used. The loop sampling frequency was found to be $\sim$6.5 Hz.\label{fig:coil_pseudo}}{Coil currents with drift $\Delta B$ for different coil configuration in non-regularized $\bm{M^{-1}}$}
 
-\fig{Images/coil_pseudo3}{width =\textwidth,height=12cm}{
-Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$)
-and field change $\Delta B$ (right). The fluxgate positions are 1, 3,
-6 and 8. Pseudoinverse was used in both case.  The feedback parameters
-are $k_c^p=0.0$ and $k_c^i=1.0$.  The current supplied to the
-perturbation coil was 10 mA when switch on. Resolution index 1 with 50
-averages per cycle were used.\label{fig:coil_pseudo}}{Coil currents
-with field change $\Delta B$ for different coil configuration in
-non-regularized $\bm{M^{-1}}$}
+\fig{Images/coil_pseudo3}{width =\textwidth,height=12cm}{(a) 6-coil feedback algorithm compared with (b) 5-coil feedback algorithm, where the only change is that the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$.  No regularization of the pseudoinverse has been done in either case.  All other parameters are the same as for Fig.~\ref{fig:coil_reg}.\label{fig:coil_pseudo}}{Coil currents with field change
+$\Delta B$ for different coil configurations with non-regularized
+$\bm{M^{-1}}$.}
+
+The five-coil algorithm can even be operated without the need for
+Tikhonov regularization of the pseudoinverse.
+Fig.~\ref{fig:coil_pseudo} compares the six-coil and five-coil
+algorithms when no regularization is performed.  The five-coil case
+performs well, perhaps even better than the results displayed in
+Fig.~\ref{fig:coil_reg}(b) because the field fluctuations are smaller.
+This might also indicate that the PI feedback parameters are not fully
+optimal, since more overshoot is also evident in
+Fig.~\ref{fig:coil_pseudo}(b) when compared to
+Fig.~\ref{fig:coil_reg}(b).  For this study, the feedback parameters
+were held constant, and in Section~\ref{sec:new_r} I showed that there
+is a relationship between these parameters.  Additional optimization
+is possible and could affect this conclusion.
 
 
-\FloatBarrier
-\subsection{Extra Data}
-\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
+%\FloatBarrier
+%\subsection{Extra Data}
+%\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
 
-\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
+In general, I expect that the non-regularized solution is superior.
+Tikhonov regularization introduces additional constraints in order
+attempt to keep a poorly conditioned feedback system from oscillating.
+It is a superior principle to design the system to be well-conditioned
+rather than relying on Tikhonov regularization to solve the problem of
+ill-conditioning.  This is also one of the general conclusions of
+Ref.~\cite{rawlik}.
 
-\fig{Images/diag_comb}{width = \textwidth}{.. \label{fig:diag_comb}}{S}
 
-\fig{Images/right_comb}{width = \textwidth}{.. \label{fig:right_comb}}{S}
 
-\fig{Images/5c_x}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x}}{S}
 
-\fig{Images/5c_x_all}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x_all}}{S}
+%\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
+
+In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c} I
+showed the ideal simulation results.  The matrix measured
+experimentally is similar in its structure to these simulation
+results.
+
+\fig{Images/diag_comb}{width = \textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
+$\bm{M}$ for the available 12 fluxgate axes and for (left) 5 coils,
+where the the $C_x^\pm$ coils are required to carry the same current,
+and (right) 6 coils which, are permitted to carry any
+current.\label{fig:diag_comb}}{Experimental results for the
+$\bm{\Sigma}$ matrix.}
+
+It is interesting to compare the results for the diagonal matrix
+$\bm{\Sigma}$ in simulation and experiment.  The experimental results
+for $\bm{\Sigma}$ are presented in Fig.~\ref{fig:diag_comb}, for both
+the five-coil and six-coil case.  These can be compare with the
+simulated results which were presented in
+Figs.~\ref{fig:diag_patch_5c} and \ref{fig:diag_patch_6c}.  It can be
+seen that, despite having only 12 fluxgate axes available
+experimentally, the $\Sigma$ matrices compare favorably with the
+simulated counterparts.  In general the matrix elements are smaller
+experimentally, but this is simply because the fluxgates were located
+about 8-10~cm inside the corner positions of the coil cube, whereas in
+the previously presented simulations, they were only 2~cm inside and
+hence were closer to the coils.
+
+The main similarity is in the trends of the singular values and in the
+condition number of the matrix.  In the five-coil case, the singular
+values are all the same order of magnitude, and the condition number
+is 2.26 (see also Table~\ref{table:mcond_coil}).  In the six-coil
+case, the first five singular values are of similar orders of
+magnitude, and the sixth is significantly smaller.  In the simulation
+(Fig.~\ref{fig:diag_patch_6c}), this singular value was exactly zero.
+We expect the difference (zero vs.~non-zero) is due to the currents
+not exactly overlapping in the experimental case.
+
+\fig{Images/right_comb}{width = \textwidth}{Experimentally determined right singular vectors, represented by the rows of the matrix $\bm{V^T}$ resulting from SVD of the experimentally measured matrix $\bm{M}$.\label{fig:right_comb}}{Experimentally measured right singular vectors.}
+
+Similarities can also be seen in the right singular vectors, described
+by the rows of the $\bm{V^T}$ matrix.  The experimental results for
+the right singular vectors are presented in Fig.~\ref{fig:right_comb}
+and can be compared with the simulation results which were presented
+in Figs.~\ref{fig:right_patch_6c} and \ref{fig:right_patch_5c}.  In
+the right panel of Fig.~\ref{fig:right_comb}, the problematic mode
+corresponding to the smallest singular value can indeed be seen to
+result from opposing currents of nearly equal magnitude being
+generated in each of the six coils.  In the five-coil experimental
+results shown in the left panel, a similar pattern of singular vectors
+can be seen as for the simulated version presented in
+Fig.~\ref{fig:right_patch_5c}.  Row 1 corresponds to the uniform field
+in the $x$-direction.  Rows 2 and 5 appear to correspond to admixtures
+of gradients in the $y$ and $z$ directions.  Row 3, having two red
+values in $C_y^+$ and $C_y^-$ most closely corresponds to a uniform
+field in the $y$-direction, whereas row 4 corresponds most closely to
+the uniform field in the $z$-direction.  There is some admixture of
+the identities of the singular vectors which are likely due to some
+experimental geometrical imperfections.
+
+%\fig{Images/5c_x}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x}}{S}
+
+%\fig{Images/5c_x_all}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x_all}}{S}
  
-\fig{Images/5c_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$ . \label{fig:5c_y}}{S}
+%\fig{Images/5c_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$ . \label{fig:5c_y}}{S}
 
-\fig{Images/5c_y_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_y_all}}{S}
-\fig{Images/5c_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z}}{S}
+%\fig{Images/5c_y_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_y_all}}{S}
 
-\fig{Images/5c_z_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z_all}}{S}
+\fig{Images/5c_z}{width=\textwidth}{Five-coil feedback algorithm, where the the currents $C_z^+$ and $C_z^-$ are required to be a common current $C_z^\pm$.  Tikhonov regularization of the pseudoinverse has been done, although the results would be very similar even without this.  All other parameters are the same as for Fig.~\ref{fig:coil_reg}.\label{fig:5c_z}}{Five-coil feedback results for common $C_z^\pm$ configuration.}
+
+In Fig.~\ref{fig:coil_reg}(b), it was shown that the dominant current
+response to the excitation coil was in the $C_z^+$ coil.  The reason
+for this is that the $C_z^+$ coil is located at the closest position
+and in the correct direction to cancel the field coming from the
+excitation coil.  For that study, the $C_x^\pm$ coils were required to
+have a common current.  I was interested to study the effect on the
+five-coil feedback algorithm if common current was required in the
+$C_z^\pm$ coils instead.
+
+The results of this alternate choice are shown in Fig.~\ref{fig:5c_z}.
+Turning on the excitation coil indeed causes the common $C_z^\pm$
+current to become more positive with have the change of the previous
+result for $C_z^+$ in Fig.~\ref{fig:coil_reg}(b).  The system now must
+generate a large gradient in the $z$-direction.  This is achieved by
+generating roughly equal gradients $\partial B_x/\partial x$ and
+$\partial B_y/\partial y$ using the other four coils which then
+generates the required gradient $\partial B_z/\partial z$ according to
+Eq.~(\ref{eq:dbzdz}).
+
+I think an interesting point in this case is that, for this particular
+positioning of the perturbation coil, it would clearly be desirable
+for the system itself to be able to generate different currents in
+$C_z^+$ and $C_z^-$ if aiming to have the smallest changes in the
+currents.
+
+\begin{itemize}
+\item Some data with shield inside.
+\begin{enumerate}
+\item Something like $\bm{\Sigma}$ for the 5- and 6-coil.
+\item An example of the feedback system operating.
+\item Internal sensor perturbations (could appear in next section)
+\item Allan deviations (could appear in next section also) ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
+\end{enumerate}
+\end{itemize}
+
+
+%\fig{Images/5c_z_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z_all}}{S}
 
 
 
-\begin{table} [htb!]
-    \centering
-    \begin{tabular} { |c|c|c|c|c|c|} 
-        \hline
-        Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter, $r$}\\
-        \hline\hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
-        \hline
-        \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
-        \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.62 \\
-        \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
-        \hline
-        \makecell{$C_x^-$, $C_x^+$+$C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 2.97 & 1.14 & 3.6 \\
-        \hline
-        \makecell{$C_x^-$, $C_x^+$,$C_y^-$,\\ $C_y^+$+$C_z^-$ and $C_z^+$ } & 2.8 & 1.14 & 3.62 \\
-        \hline
-        \makecell{$C_x^-$+$C_y^-$, $C_x^+$,\\ $C_y^+$,$C_z^-$ and $C_z^+$ } & 25 & 1.69 & 3.06 \\
-        \hline
-        \makecell{$C_x^-$, $C_x^+$+$C_y^+$,\\ $C_y^-$, $C_z^-$ and $C_z^+$ } & 25 & 1.70 & 3.05 \\
-        \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^+$,\\ $C_y^-$+$C_z^-$ and $C_z^+$ } & 26.14 & 1.65 & 3.06 \\
-        \hline
-        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\$C_z^-$ and $C_z^+$ } & 440.57 & 1.79 & 2.54 \\
-        \hline
-        \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\ and $C_z^-$+$C_z^+$ } & 1.27 & 1.0 & 3.73 \\
-        \hline
-
-    \end{tabular}
-    % \vspace{4mm}
-    \caption[Properties for different coil configurations]{Matrix properties for different 6- and 5-coil configurations for fluxgate sensors at 1, 3, 6 and 8.}\label{table:mcond_coi2}
-\end{table}
+%\begin{table} [htb!]
+%    \centering \begin{tabular} { |c|c|c|c|c|c|} \hline Coils
+%    & \makecell{Matrix \\Condition Number} &\makecell{Inverse
+%    Matrix \\ Condition Number}
+%    & \makecell{Regularization \\Parameter,
+%    $r$}\\ \hline\hline \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\
+%    $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 &
+%    3.04 \\ \hline \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$
+%    and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\ \hline \makecell{$C_x^-$,
+%    $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 &
+%    3.62 \\ \hline \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and
+%    $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\ \hline \makecell{$C_x^-$,
+%    $C_x^+$+$C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 2.97 & 1.14 &
+%    3.6 \\ \hline \makecell{$C_x^-$, $C_x^+$,$C_y^-$,\\
+%    $C_y^+$+$C_z^-$ and $C_z^+$ } & 2.8 & 1.14 &
+%    3.62 \\ \hline \makecell{$C_x^-$+$C_y^-$, $C_x^+$,\\
+%    $C_y^+$,$C_z^-$ and $C_z^+$ } & 25 & 1.69 &
+%    3.06 \\ \hline \makecell{$C_x^-$, $C_x^+$+$C_y^+$,\\ $C_y^-$,
+%    $C_z^-$ and $C_z^+$ } & 25 & 1.70 &
+%    3.05 \\ \hline \makecell{$C_x^-$, $C_x^+$, $C_y^+$,\\
+%    $C_y^-$+$C_z^-$ and $C_z^+$ } & 26.14 & 1.65 &
+%    3.06 \\ \hline \makecell{$C_x^-$+$C_x^+$, $C_y^-$+
+%    $C_y^+$,\\$C_z^-$ and $C_z^+$ } & 440.57 & 1.79 &
+%    2.54 \\ \hline \makecell{$C_x^-$+$C_x^+$, $C_y^-$+ $C_y^+$,\\ and
+%    $C_z^-$+$C_z^+$ } & 1.27 & 1.0 & 3.73 \\ \hline
+%
+%    \end{tabular}
+%    % \vspace{4mm}
+%    \caption[Properties for different coil configurations]{Matrix properties for different 6- and 5-coil configurations for fluxgate sensors at 1, 3, 6 and 8.}\label{table:mcond_coi2}
+%\end{table}
 
 \section{Future Section ??}\label{sec:metrics_res}
 
-\subsection{Experimental Current Error and Remaining Fluctuation}
+\subsection{Experimental Current Error and Remaining Fluctuation... maybe change this into a discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible.}
 
 \begin{itemize}
 \item Basic message of Fig. 5.4 is that experiment and simulation kind of agree.
@@ -2329,7 +2489,32 @@ non-regularized $\bm{M^{-1}}$}
 
 \fig{Images/mont_exp}{width = \textwidth}{The effect of $r$ on (a) current error  and (b) remaining field fluctuations in experimental setup for $k_c^p=1.0$ for fluxgate signals from 1, 2 and 7. Here, 100 mA current has been supplied in the perturbation coil. For position of the fluxgates  and coil see Fig.~\ref{fig:coil}.\label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
 
-The effect of $r$ on the current error and remaining field fluctuations in experimental setup for fluxgate signals from 1, 2 and 7 are shown in Fig.~\ref{fig:mont_comp}. For position of the sensors please see Fig.~\ref{fig:coil}. For data measurement, for certain loops, PI control algorithm with $k_c^p=$1.0 and $k_c^i=$0.0 has been implemented for $r$ ranges from 0 to 6 in an increment of 0.29. For every measurements, signals from fluxgates at positions 1,2 and 7 are stored as $B_{\text{meas}}$ and uncompensated B field has been stored as $B_{\text{uncomp}}$ which is predicted by Eq.~\ref{eq:Buncomp}. The difference between maximum value of $B_{\text{uncomp}}$ and $B_{\text{uncomp}}$ will give the field fluctuation due to 100 mA supplied in rhe perturbation coil. Moreover, the difference between maximum value of $B_{\text{meas}}$ and $B_{\text{meas}}$ will give the amount of compensation of the field which when equal to field fluctuation indicates no compensation. The ratio of rms value of this to the field fluctuation will generate the remaining fluctuation $F$ which is shown for different $r$ in Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}. It is seen that for a particular filed perturbation, the remaining fluctuation is $\approx$0.45 which indicates that the maximum correction is $\mathbf{(1-0.45)\times100\%=55\%}$. Moreover, $\Delta I_c^{\text{exp}}(r)$ has been found using Eq.(\ref{eq:del_Is}) and the rms has been determined which is shown in  Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}. It is seen that around 100 mA rms of current array is required to compensate the perturbation which eventually vanishes with $r$ increment as expected.
+The effect of $r$ on the current error and remaining field
+fluctuations in experimental setup for fluxgate signals from 1, 2 and
+7 are shown in Fig.~\ref{fig:mont_comp}. For position of the sensors
+please see Fig.~\ref{fig:coil}. For data measurement, for certain
+loops, PI control algorithm with $k_c^p=$1.0 and $k_c^i=$0.0 has been
+implemented for $r$ ranges from 0 to 6 in an increment of 0.29. For
+every measurements, signals from fluxgates at positions 1,2 and 7 are
+stored as $B_{\text{meas}}$ and uncompensated B field has been stored
+as $B_{\text{uncomp}}$ which is predicted by Eq.~\ref{eq:Buncomp}. The
+difference between maximum value of $B_{\text{uncomp}}$ and
+$B_{\text{uncomp}}$ will give the field fluctuation due to 100 mA
+supplied in rhe perturbation coil. Moreover, the difference between
+maximum value of $B_{\text{meas}}$ and $B_{\text{meas}}$ will give the
+amount of compensation of the field which when equal to field
+fluctuation indicates no compensation. The ratio of rms value of this
+to the field fluctuation will generate the remaining fluctuation $F$
+which is shown for different $r$ in
+Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}. It is seen that for a
+particular filed perturbation, the remaining fluctuation is
+$\approx$0.45 which indicates that the maximum correction is
+$\mathbf{(1-0.45)\times100\%=55\%}$. Moreover, $\Delta
+I_c^{\text{exp}}(r)$ has been found using Eq.(\ref{eq:del_Is}) and the
+rms has been determined which is shown in
+Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}. It is seen that around
+100 mA rms of current array is required to compensate the perturbation
+which eventually vanishes with $r$ increment as expected.
 % We have studied the coil current response and magnetic fluctuation reduction in
 
 % In Section~\ref{sec:inv}, we have already talked about how the regularization parameter $r$ came into effect. Then, in Section~\ref{sec:mont}, regularization by random magnetic distribution method has been described which has been taken from Ref.~\cite{bea} where a suitable value of $r$ has been found which will give the best compromise between the magnetic field fluctuation and coil current fluctuation. We have generated a fluctuation by our perturbation coil. $r$ has been varied from 0 to 6 in an increment of 0.29 and for each $r$, PI control algorithm has been implemented for n measurements and for every measurements, signals from fluxgates at positions 1,2 and 7 are stored as $B_{\text{meas}}$ and uncompensated B field has been stored as $B_{\text{uncomp}}$ using  $B_{\text{meas}}-\bm{M}(I_c^n-I_c^0)$ where $I_c^n$ can be found using Eq.~(\ref{eq:I}). From those stored values,  Eq.~(\ref{eq:B_coils-sim}) has been found by $B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)$ and $B_s^\text{rand}$ has been found by $B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)$ and $\Delta I_c^{\text{exp}}(r)$ has been found using same as Eq.(\ref{eq:del_Is}). 
