@@ -2192,6 +2192,8 @@ each of the $x$ and $y$ directions.
 
 \textcolor{red}{Say that we also made a PI simulation and it worked better.  Should probably say this at the end of this section.}
 
+\textcolor{red}{Should I remove the numbers in parentheses in Table~\ref{table:mcond_coil}???}
+
 
 \begin{table} [htb!]
     \centering
@@ -2199,13 +2201,13 @@ each of the $x$ and $y$ directions.
         \hline
         Coils & \makecell{Matrix \\Condition Number} &\makecell{Inverse Matrix \\ Condition Number} & \makecell{Regularization \\Parameter $r$}\\
         \hline\hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 & 1.71 & 3.04 \\ 
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$, $C_z^-$ and $C_z^+$ } & 26.37 (25.96) & 1.71 (1.61) & 3.04 (2.96) \\ 
         \hline
-        \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 & 1.08 & 3.6 \\         
+        \makecell{$C_x^{\pm}$, $C_y^-$, $C_y^+$,\\ $C_z^-$ and $C_z^+$ } & 2.26 (2.05) & 1.08 (1.06) & 3.60 (3.57) \\         
         \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 & 1.09 & 3.62 \\
+        \makecell{$C_x^-$, $C_x^+$, $C_y^\pm$,\\ $C_z^-$ and $C_z^+$ } & 2.27 (2.04) & 1.09 (1.06) & 3.62 (3.54) \\
         \hline
-        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 & 1.10 & 3.56 \\
+        \makecell{$C_x^-$, $C_x^+$, $C_y^-$,\\ $C_y^+$ and $C_z^\pm$ } & 2.41 (2.09) & 1.10 (1.07) & 3.56 (3.50) \\
         \hline
 
     \end{tabular}
@@ -2236,9 +2238,9 @@ configurations gave essentially the same results for the condition
 number.
 
 Clearly, in the six-coil case, it is an absolute necessity to
-regularize the matrix.  As I discussed earlier this may be done by
+regularize the matrix.  As I discussed earlier, this may be done by
 adjusting the regularization parameter to minimize the condition
-number of the Tikhonov regularized pseudoinverse.  I decided also to
+number of the Tikhonov regularized pseudoinverse.  I also decided to
 study Tikhonov regularization for the five-coil case, to see if it had
 any impact on the PI feedback system.  Results of the Tikhonov
 regularization process are also displayed in
@@ -2256,7 +2258,7 @@ success of the five-coil method compared to the six-coil method.  In
 this case, I have compared the matrices with my regularization method,
 determining the best value of $r$ based on its ability to minimize the
 condition number of the resultant pseudoinverse (see
-Section~\ref{sec:new_study_r}).  Figs.~\ref{fig:coil_reg}(a) and (b)
+Section~\ref{sec:cond}).  Figs.~\ref{fig:coil_reg}\textcolor{blue}{(a)} and \textcolor{blue}{(b)}
 correspond to the settings described in the first two rows of
 Table~\ref{table:mcond_coil}.
 
@@ -2271,7 +2273,7 @@ Another clear success is that in the five-coil case, the coil $C_z^+$,
 which is {\it closest} to the perturbation coil, is the one that has
 the most current driven by the feedback algorithm.  Certainly this
 would be the expected result.  In the six-coil case,
-Fig.~\ref{fig:coil_reg}(a) demonstrates that the initial coil
+Fig.~\ref{fig:coil_reg}\textcolor{blue}{(a)} demonstrates that the initial coil
 responses are quite similar to the five-coil method (within the first
 $<1$~s), but then the current drifting problem sets in, and the
 currents grow in coils where one would expect them to be small.  The
@@ -2310,19 +2312,14 @@ Tikhonov regularization of the pseudoinverse.
 Fig.~\ref{fig:coil_pseudo} compares the six-coil and five-coil
 algorithms when no regularization is performed.  The five-coil case
 performs well, perhaps even better than the results displayed in
-Fig.~\ref{fig:coil_reg}(b) because the field fluctuations are smaller.
+Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)} because the field fluctuations are smaller.
 This might also indicate that the PI feedback parameters are not fully
 optimal, since more overshoot is also evident in
-Fig.~\ref{fig:coil_pseudo}(b) when compared to
-Fig.~\ref{fig:coil_reg}(b).  For this study, the feedback parameters
-were held constant, and in Section~\ref{sec:new_r} I showed that there
+Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} when compared to
+Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}.  For this study, the feedback parameters
+were held constant, and in Section~\ref{sec:new_study_r}, I showed that there
 is a relationship between these parameters.  Additional optimization
 is possible and could affect this conclusion.
-
-
-%\FloatBarrier
-%\subsection{Extra Data}
-%\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
 
 In general, I expect that the non-regularized solution is superior.
 Tikhonov regularization introduces additional constraints in order
@@ -2332,20 +2329,15 @@ rather than relying on Tikhonov regularization to solve the problem of
 ill-conditioning.  This is also one of the general conclusions of
 Ref.~\cite{rawlik}.
 
-
-
-
-%\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
-
-In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c} I
-showed the ideal simulation results.  The matrix measured
+In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c}, I
+showed the ideal simulation results of the matrix $\bm{M}$.  The matrix $\bm{M}$ measured
 experimentally is similar in its structure to these simulation
 results.
 
-\fig{Images/diag_comb}{width = \textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
-$\bm{M}$ for the available 12 fluxgate axes and for (left) 5 coils,
+\fig{Images/diag_comb}{width=\textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
+$\bm{M}$ for the available 12 fluxgate axes and for (a) 5 coils,
 where the the $C_x^\pm$ coils are required to carry the same current,
-and (right) 6 coils which, are permitted to carry any
+and (b) 6 coils which, are permitted to carry any
 current.\label{fig:diag_comb}}{Experimental results for the
 $\bm{\Sigma}$ matrix.}
 
@@ -2380,11 +2372,11 @@ by the rows of the $\bm{V^T}$ matrix.  The experimental results for
 the right singular vectors are presented in Fig.~\ref{fig:right_comb}
 and can be compared with the simulation results which were presented
 in Figs.~\ref{fig:right_patch_6c} and \ref{fig:right_patch_5c}.  In
-the right panel of Fig.~\ref{fig:right_comb}, the problematic mode
+Fig.~\ref{fig:right_comb}\textcolor{blue}{(b)}, the problematic mode
 corresponding to the smallest singular value can indeed be seen to
 result from opposing currents of nearly equal magnitude being
 generated in each of the six coils.  In the five-coil experimental
-results shown in the left panel, a similar pattern of singular vectors
+results shown in Fig.~\ref{fig:right_comb}\textcolor{blue}{(a)}, a similar pattern of singular vectors
 can be seen as for the simulated version presented in
 Fig.~\ref{fig:right_patch_5c}.  Row 1 corresponds to the uniform field
 in the $x$-direction.  Rows 2 and 5 appear to correspond to admixtures
@@ -2395,21 +2387,15 @@ the uniform field in the $z$-direction.  There is some admixture of
 the identities of the singular vectors which are likely due to some
 experimental geometrical imperfections.
 
-%\fig{Images/5c_x}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x}}{S}
 
-%\fig{Images/5c_x_all}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x_all}}{S}
- 
-%\fig{Images/5c_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$ . \label{fig:5c_y}}{S}
-
-%\fig{Images/5c_y_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_y_all}}{S}
 
 \fig{Images/5c_z}{width=\textwidth}{Five-coil feedback algorithm, where the the currents $C_z^+$ and $C_z^-$ are required to be a common current $C_z^\pm$.  Tikhonov regularization of the pseudoinverse has been done, although the results would be very similar even without this.  All other parameters are the same as for Fig.~\ref{fig:coil_reg}.\label{fig:5c_z}}{Five-coil feedback results for common $C_z^\pm$ configuration.}
 
-In Fig.~\ref{fig:coil_reg}(b), it was shown that the dominant current
+In Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}, it was shown that the dominant current
 response to the excitation coil was in the $C_z^+$ coil.  The reason
 for this is that the $C_z^+$ coil is located at the closest position
 and in the correct direction to cancel the field coming from the
-excitation coil.  For that study, the $C_x^\pm$ coils were required to
+excitation coil.  For that study, the $C_x^\pm$ coils were used to
 have a common current.  I was interested to study the effect on the
 five-coil feedback algorithm if common current was required in the
 $C_z^\pm$ coils instead.
@@ -2417,7 +2403,7 @@ $C_z^\pm$ coils instead.
 The results of this alternate choice are shown in Fig.~\ref{fig:5c_z}.
 Turning on the excitation coil indeed causes the common $C_z^\pm$
 current to become more positive with have the change of the previous
-result for $C_z^+$ in Fig.~\ref{fig:coil_reg}(b).  The system now must
+result for $C_z^+$ in Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}.  The system now must
 generate a large gradient in the $z$-direction.  This is achieved by
 generating roughly equal gradients $\partial B_x/\partial x$ and
 $\partial B_y/\partial y$ using the other four coils which then
@@ -2430,6 +2416,7 @@ for the system itself to be able to generate different currents in
 $C_z^+$ and $C_z^-$ if aiming to have the smallest changes in the
 currents.
 
+\subsection{Extra Data}
 \begin{itemize}
 \item Some data with shield inside.
 \begin{enumerate}
@@ -2440,7 +2427,39 @@ currents.
 \end{enumerate}
 \end{itemize}
 
+\fig{Images/matrix_comb_shield}{width = \textwidth}{.. \label{fig:matrix_comb_shield}}{S}
 
+\fig{Images/diag_comb_shield}{width=\textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
+$\bm{M}$ for the available 12 fluxgate axes and for (a) 5 coils,
+where the the $C_x^\pm$ coils are required to carry the same current,
+and (b) 6 coils which, are permitted to carry any
+current.\label{fig:diag_comb_shield}}{Experimental results for the
+$\bm{\Sigma}$ matrix.}
+
+
+\fig{Images/right_comb_shield}{width = \textwidth}{Experimentally determined right singular vectors, represented by the rows of the matrix $\bm{V^T}$ resulting from SVD of the experimentally measured matrix $\bm{M}$.\label{fig:right_comb_shield}}{Experimentally measured right singular vectors.}
+
+
+
+\fig{Images/6c_reg_shield}{width = \textwidth}{6c reg shield. \label{fig:6c_reg_shield}}{S}
+
+\fig{Images/6c_pseudo_shield}{width = \textwidth}{6c pseudo shield. \label{fig:6c_pseudo_shield}}{S}
+ 
+\fig{Images/5c_pseudo_shield_x}{width = \textwidth}{$C_x^\pm$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$ . \label{fig:5c_pseudo_shield_x}}{S}
+
+\fig{Images/5c_pseudo_shield_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_pseudo_shield_y}}{S}
+\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
+
+%\fig{Images/i_rm_comb}{width = \textwidth}{.. \label{fig:i_r_comb}}{S}
+%\fig{Images/matrix_comb}{width = \textwidth}{.. \label{fig:matrix_comb}}{S}
+
+%\fig{Images/5c_x}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x}}{S}
+
+%\fig{Images/5c_x_all}{width = \textwidth}{$C_x^{\pm}$, $C_y^-$, $C_y^+$, $C_z^-$ and $C_z^+$. \label{fig:5c_x_all}}{S}
+ 
+%\fig{Images/5c_y}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$ . \label{fig:5c_y}}{S}
+
+%\fig{Images/5c_y_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^\pm$, $C_z^-$ and $C_z^+$. \label{fig:5c_y_all}}{S}
 %\fig{Images/5c_z_all}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_z_all}}{S}
 
 
