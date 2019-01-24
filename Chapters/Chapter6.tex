@@ -3,16 +3,99 @@
 
 
 
-\section{Summary of the Thesis}
-This thesis started with reproducing the works of Ref.~\cite{bea}. While doing so we face problems in terms of slow current response in the compensation coils. We have done different experiments with different parameters for understanding the problem and figure out the solution. We have tried to make the system faster by increasing loop sampling frequency. To avoid high frequency noise we have built a $\mathbf{4^{th}}$ order low pass butterworth filter with 10 Hz corner frequency. The filter is one of the many achievements of this thesis. The filter is described in Section~\ref{sec:filter}. The effect  of the filter on increasing loop sampling frequency and noise reduction are discussed in Section~\ref{sec:freq}. We have used PI control algorithm to generate new current (Eq.~(\ref{eq:I})). The PI control algorithm requires a tuned proportional (P) term and a tuned integral (I) term. The tuning process is described in Section~\ref{sec:tune}. The general behaviour of P and I terms and their impact individually and combined are discussed in Section~\ref{sec:pi_behave} where it is seen that I term is necessary for prototype compensation. The impact of I term is significant on magnetic compensation compare to P term. It also reveals that I term is responsible for current unsettle problem in the coils. The previous studies does not help us understanding the current unsettle problem. We have added more fluxgates, change the positions of the fluxgates to understand the current unsettle problem which is discussed in Section~\ref{sec:flux_place}. Moreover, as the fluxgate placements study does not give us any clue we have removed the passive shield to see if that makes any difference but removing shield makes no difference . As our different studies are failing to discover the solution of slow current response we become motivate to build a simulation of the prototype. The simulation of the prototype integrating PI algorithm is discussed in Section~\ref{sec:pSim} where similarity between the experiment and simulation is shown. The PI simulation is another achievement for use. The simulation makes us generate new ideas to solve the current unsettle problem. As P and I term fail to solve the slow response problem, we change $r$ keeping P and I term fixed. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r} where it is discovered that lowering the value of $r$ can solve the slow current response but at the same time high frequency noise is induced. The author in Ref.~\cite{rawlik} introduces new ideas about the matrix should be well-conditioned before it takes part in the PI feedback loop which helps us look into matrix condition number in deep. While studying matrix condition number, we have realized that we can use the concept to find $r$ alternative to another method discussed in Section~\ref{sec:mont}. We propose new method of regularization where optimize $r$ is determined based on lowest matrix condition number the method is discussed in Section~\ref{sec:cond}. The author in Ref.~\cite{rawlik} also claims that for a perfectly conditioned matrix there is no need of PI algorithm which we prove wrong in Section~\ref{sec:style_pi}. While studying matrix condition number, we also realize that matrix is ill conditioned because one of of the current modes producing zero net current. We have improved the matrix condition number significantly which also eliminates our initial problem of current unsettle discussed in Section~\ref{sec:coil_config}.
+\section{Key Findings}
 
-\section{Directions for Future Students}
+\begin{itemize}
+\item I was given a kind-of working prototype and a copy of Bea's thesis, and I was told to ``make it work''.  It works, now.  Really, really well.  So, the project was a complete success.
+\item Along the way, I discovered a whole bunch of new problems.  I solved each problem and improved the system considerably each time.
+\item We need to list here the main important improvements and results.  It should mimic the list at the start of Chapter 5, probably.
+\end{itemize}
 
-The simulation of the prototype active compensation system is vital to demonstrate a full understanding of the experimental results. We have made simulation which can produce $M_{sc}$ elements for any number of the sensors placed in the prototype geometry. This will be a tool for the future students who are limited by sensor position and placing them correctly in their system to study in detail about the effect of $\bm{M}$ for any set of sensors.Simulation of a certain system integrating feedback algorithm is a unique work that has not been still published in any thesis related to active compensation. 
+
+This thesis started with reproducing the works of
+Ref.~\cite{bea}. While doing so we face problems in terms of slow
+current response in the compensation coils. We have done different
+experiments with different parameters for understanding the problem
+and figure out the solution. We have tried to make the system faster
+by increasing loop sampling frequency. To avoid high frequency noise
+we have built a $\mathbf{4^{th}}$ order low pass butterworth filter
+with 10 Hz corner frequency. The filter is one of the many
+achievements of this thesis. The filter is described in
+Section~\ref{sec:filter}. The effect of the filter on increasing loop
+sampling frequency and noise reduction are discussed in
+Section~\ref{sec:freq}. We have used PI control algorithm to generate
+new current (Eq.~(\ref{eq:I})). The PI control algorithm requires a
+tuned proportional (P) term and a tuned integral (I) term. The tuning
+process is described in Section~\ref{sec:tune}. The general behaviour
+of P and I terms and their impact individually and combined are
+discussed in Section~\ref{sec:pi_behave} where it is seen that I term
+is necessary for prototype compensation. The impact of I term is
+significant on magnetic compensation compare to P term. It also
+reveals that I term is responsible for current unsettle problem in the
+coils. The previous studies does not help us understanding the current
+unsettle problem. We have added more fluxgates, change the positions
+of the fluxgates to understand the current unsettle problem which is
+discussed in Section~\ref{sec:flux_place}. Moreover, as the fluxgate
+placements study does not give us any clue we have removed the passive
+shield to see if that makes any difference but removing shield makes
+no difference . As our different studies are failing to discover the
+solution of slow current response we become motivate to build a
+simulation of the prototype. The simulation of the prototype
+integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
+similarity between the experiment and simulation is shown. The PI
+simulation is another achievement for use. The simulation makes us
+generate new ideas to solve the current unsettle problem. As P and I
+term fail to solve the slow response problem, we change $r$ keeping P
+and I term fixed. The effect of changing $r$ is discussed in
+Section~\ref{sec:new_study_r} where it is discovered that lowering the
+value of $r$ can solve the slow current response but at the same time
+high frequency noise is induced. The author in Ref.~\cite{rawlik}
+introduces new ideas about the matrix should be well-conditioned
+before it takes part in the PI feedback loop which helps us look into
+matrix condition number in deep. While studying matrix condition
+number, we have realized that we can use the concept to find $r$
+alternative to another method discussed in Section~\ref{sec:mont}. We
+propose new method of regularization where optimize $r$ is determined
+based on lowest matrix condition number the method is discussed in
+Section~\ref{sec:cond}. The author in Ref.~\cite{rawlik} also claims
+that for a perfectly conditioned matrix there is no need of PI
+algorithm which we prove wrong in Section~\ref{sec:style_pi}. While
+studying matrix condition number, we also realize that matrix is ill
+conditioned because one of of the current modes producing zero net
+current. We have improved the matrix condition number significantly
+which also eliminates our initial problem of current unsettle
+discussed in Section~\ref{sec:coil_config}.
+
+\section{Recommendations on Design for TUCAN nEDM Experiment}
+
+\begin{enumerate}
+\item discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible
+\item Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_z^\pm$ data.
+\item discussion on simulation and simulating the system ``fully'' (including the PI loop) using the tools you developed before beginning to build it.  Should make the point that we now know enough to do a good job a priori.
+\end{enumerate}
+
+The simulation of the prototype active compensation system is vital to
+demonstrate a full understanding of the experimental results. We have
+made simulation which can produce $M_{sc}$ elements for any number of
+the sensors placed in the prototype geometry. This will be a tool for
+the future students who are limited by sensor position and placing
+them correctly in their system to study in detail about the effect of
+$\bm{M}$ for any set of sensors.Simulation of a certain system
+integrating feedback algorithm is a unique work that has not been
+still published in any thesis related to active compensation.
 
 
 
-\section{Implementation at TUCAN nEDM Experiment}
+
+\section{Implementation in the TUCAN nEDM Experiment}
+
+\begin{itemize}
+\item Requirements... we need 'em.  Cite PSI conference proceeding which says we ``might'' implement such a system in n2EDM.  Trade-offs of active vs.~passive shielding and the decision on the dividing line between the two.  History of the PSI system.
+\item Engineering statements...  we have to be able to build it and make it fit
+\item ...
+\end{itemize}
+
+
 % \subsubsection{Effect of changing only P term}
 % Here, the effect of changing proportional gain term (P) or $k_c^p$ of Eq.~(\ref{eq:I}) will be discussed.
 
