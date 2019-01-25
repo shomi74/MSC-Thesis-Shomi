@@ -2540,8 +2540,16 @@ shield was present.
 \item Allan deviations ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
 \item Internal sensor perturbations (related to previous section).
 \end{enumerate}
+\subsection{Internal Sensor Perturbations}
 
+\fig{Images/center_6c_reg_sNs}{width = \textwidth}{6coils, shield, no shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, Regularized pseudo-inverse of $\bm{M^_1}$. \label{fig:center_6c_reg}}{S}
+\fig{Images/center_6c_pseudo_sNs}{width = \textwidth}{6coils, shield, no shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:center_6c_pseudo}}{S}
 
+\fig{Images/center_pseudo_perturb_5c_x}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:center_pseudo_5c_x}}{S}
+
+\fig{Images/center_5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (left),$C_z^\pm$ (right), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:center_5c_pseudo_s_xz}}{S}
+
+\fig{Images/5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (a),$C_z^\pm$ (b), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:5c_pseudo_s_xz}}{S}
 
 
 %\subsection{Experimental Current Error and Remaining Fluctuation... maybe change this into a discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible.}
@@ -2621,6 +2629,15 @@ shield was present.
 
 % The above results in Fig.~\ref{fig:mont_comp}, where simulation results are similar to experimental one justify the simulation method described in Section~\ref{sec:mont}. The upcoming Section is all about P and I term (see Eq.~(\ref{eq:I}) ) behaviour. 
 % \fig{Images/sf6p}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig:coil}.\label{fig:adev}}{Short}
+
+\subsection{Allan Deviation Results}
+\fig{Images/sf_5c_pseudo_perturb_x}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:sf_5c_pseudo_x}}{S}
+
+\fig{Images/sf_5c_pseudo_perturb_x2}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:sf_5c_pseudo_x2}}{S}
+
+\fig{Images/sf_5c_pseudo_perturb_x_34mA}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 34~mA perturbation, $k_c^p=0.0$, $k_c^i=0.8$, non-regularized pseudo-inverse of $\bm{M^_1}$.. \label{fig:sf_5c_pseudo_x_34}}{S}
+
+
 \fig{Images/sf6sr}{width = \textwidth}{Allan deviation and shielding factor for fluxgate positions 1, 3, 6 and 8. For position of fluxgate sensors see Fig.~\ref{fig:coil}.\label{fig:adev}}{Allan deviation and shielding factor.}
 
 \fig{Images/center}{width = \textwidth}{The effect on the control sensors signal fluctuations for PI control algorithm at fluxgate positions 1, 3, 6 and 8. For position of fluxgate sensors see Fig.~\ref{fig:coil}.\label{fig:center}}{The effect on the control sensors signal fluctuations.}
