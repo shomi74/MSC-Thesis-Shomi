@@ -2650,7 +2650,7 @@ I have also studied in case of five coils configuration which also give similar 
 
 The goal of the prototype is to reduce $\sim 200$ nT filed change. Fig.~\ref{fig:5c_pseudo_s_xz} shows the magnetic compensation result due to twelve compensation fluxgate sensors.  It is seen that the prototype is successfully reduce the $\sim 200$ nT filed change.
 
-\FloatBarrier
+%\FloatBarrier
 
 \subsection{Allan Deviation Results}
 
@@ -2660,6 +2660,18 @@ The Allan standard deviation and shielding factor were discussed in Section~\ref
 \fig{Images/sf_ramp_x}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_rampo_x}}{S}
 
 Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the Allan deviation of the compensated and uncompensated field change , and (c) the corresponding shielding factor. The PI algorithm introduces the high frequency noise in the feedback system which makes the shielding factor$<1$. To improve the result , the value of $k_c^p$ and $k_c^i$ terms can be lowered. For Fig.~\ref{fig:sf_rampo_x} , the value of $k_c^p$ is lowered to 0.1 compared to the tuned value of 0.6.
+
+\begin{itemize}
+\item Acquire ``natural'' fluctuations examples, with no perturbations.
+\begin{itemize}
+\item Feedback off.  This should give an idea of some ``typical'' fluctuations and typical Allan Deviations in nT.
+\item Feedback on.  The shielding factor doesn't have to always be greater than one.  In fact it might be good to compare a ``noisy'' case to a ``quiet'' case.  It is possible that in some extremely quiet case you might do better by not doing anything.
+\end{itemize}
+\item For the current ramping example, show all the currents, including the perturbation coil current if possible.
+\item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
+\end{itemize}
+
+
 % \fig{Images/sf_np_x}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_np_x}}{S}
 
 % \fig{Images/sf_5c_pseudo_perturb_x2}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_5c_pseudo_x2}}{S}
