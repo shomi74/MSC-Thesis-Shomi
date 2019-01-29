@@ -2660,7 +2660,24 @@ The Allan standard deviation and shielding factor were discussed in Section~\ref
 \fig{Images/sf_ramp_x}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_rampo_x}}{S}
 
 Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the Allan deviation of the compensated and uncompensated field change , and (c) the corresponding shielding factor. The PI algorithm introduces the high frequency noise in the feedback system which makes the shielding factor$<1$. To improve the result , the value of $k_c^p$ and $k_c^i$ terms can be lowered. For Fig.~\ref{fig:sf_rampo_x} , the value of $k_c^p$ is lowered to 0.1 compared to the tuned value of 0.6.
-\fig{Images/c_ramp_x}{width = \textwidth}{.\label{fig:c_ramp_x}}{S}
+\begin{figure}
+     \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x}
+        \caption{p10i37,ramp.}
+        \label{fig:0_1}
+    \end{subfigure}\\[1ex]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x}
+        \caption{p10i37,ramp, c}
+        \label{fig:0_2}
+    \end{subfigure}
+\caption[S]{S.}
+    \label{fig:p10_i37_ramp_x}
+\end{figure}
+
+% \fig{Images/c_ramp_x}{width = \textwidth}{.\label{fig:c_ramp_x}}{S}
 \begin{itemize}
 \item Acquire ``natural'' fluctuations examples, with no perturbations.
 \begin{itemize}
