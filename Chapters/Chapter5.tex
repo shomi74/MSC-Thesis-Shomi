@@ -2531,7 +2531,7 @@ shield was present.
 
 
 
-\section{Other metrics of feedback system performance}\label{sec:metrics_res}
+
 
 
 %\subsection{Extra Data} % (copied from previous Section)
@@ -2616,6 +2616,7 @@ shield was present.
 % The above results in Fig.~\ref{fig:mont_comp}, where simulation results are similar to experimental one justify the simulation method described in Section~\ref{sec:mont}. The upcoming Section is all about P and I term (see Eq.~(\ref{eq:I}) ) behaviour. 
 % \fig{Images/sf6p}{width = \textwidth}{p127, 100mA stimulus,p0.7,r3.5,Simulation result for one set of $B_s^{\text{rand}}$ for the Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc} are shown in (a), (b) and (c) and corresponding experimental results are in (d), (e) and (f). For the description of the figures see the text in Fig.~\ref{fig:Isim}, Fig.~\ref{fig:fluc-sim} and Fig.~\ref{fig:I-fluc}. For position of fluxgate sensors see Fig.~\ref{fig:coil}.\label{fig:adev}}{Short}
 
+\section{Other metrics of feedback system performance}\label{sec:metrics_res}
 
 \begin{enumerate}
 \item Allan deviations ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
@@ -2657,25 +2658,10 @@ The goal of the prototype is to reduce $\sim 200$ nT filed change. Fig.~\ref{fig
 The Allan standard deviation and shielding factor were discussed in Section~\ref{sec:metrics}. 
 % \fig{Images/sf_5c_pseudo_perturb_x}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_5c_pseudo_x}}{S}
 
-\fig{Images/sf_ramp_x}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_rampo_x}}{S}
+% \fig{Images/sf_ramp_x2}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_ramp_x}}{S}
 
 Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the Allan deviation of the compensated and uncompensated field change , and (c) the corresponding shielding factor. The PI algorithm introduces the high frequency noise in the feedback system which makes the shielding factor$<1$. To improve the result , the value of $k_c^p$ and $k_c^i$ terms can be lowered. For Fig.~\ref{fig:sf_rampo_x} , the value of $k_c^p$ is lowered to 0.1 compared to the tuned value of 0.6.
-\begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x}
-        \caption{p10i37,ramp.}
-        \label{fig:0_1}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x}
-        \caption{p10i37,ramp, c}
-        \label{fig:0_2}
-    \end{subfigure}
-\caption[S]{S.}
-    \label{fig:p10_i37_ramp_x}
-\end{figure}
+
 
 % \fig{Images/c_ramp_x}{width = \textwidth}{.\label{fig:c_ramp_x}}{S}
 \begin{itemize}
@@ -2688,6 +2674,9 @@ Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the 
 \item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
 \end{itemize}
 
+
+
+\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{nc 24hrs.\label{fig:adev_nc}}{S}
 \begin{figure}
      \begin{subfigure}{\textwidth}
         \centering
@@ -2772,6 +2761,42 @@ Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the 
 \caption[S]{S.}
     \label{fig:np_x2}
 \end{figure}
+\fig{Images/sf_np_x3}{width = \textwidth}{np3 p10i37.\label{fig:np_x3}}{S}
+\fig{Images/sf_np_x4_i100}{width = \textwidth}{np4 p0i100.\label{fig:np_x4}}{S}
+
+\begin{figure}
+     \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x2}
+        \caption{p10i37,ramp.}
+        \label{fig:0_1}
+    \end{subfigure}\\[1ex]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x}
+        \caption{p10i37,ramp, c}
+        \label{fig:0_2}
+    \end{subfigure}
+\caption[S]{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.}
+    \label{fig:p10_i37_ramp_x}
+\end{figure}
+
+\begin{figure}
+     \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x2_2}
+        \caption{p10i37,ramp2.}
+        \label{fig:0_3}
+    \end{subfigure}\\[1ex]
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x2}
+        \caption{p10i37,ramp2, c}
+        \label{fig:0_4}
+    \end{subfigure}
+\caption[S]{S.}
+    \label{fig:p10_i37_ramp_x2}
+\end{figure}
 
 % \fig{Images/p10i37_x}{width = \textwidth}{p10i37.\label{fig:p10_i37_x}}{S}
 % \fig{Images/c_p10i37_x}{width = \textwidth}{p10i37, c zoomed.\label{fig:C_p60_i37_x}}{S}
@@ -2783,7 +2808,7 @@ Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the 
 % \fig{Images/c_np_x}{width = \textwidth}{np, c.\label{fig:c_np_x}}{S}
 % \fig{Images/sf_np_x2}{width = \textwidth}{np2.\label{fig:sf_np_x2}}{S}
 % \fig{Images/c_np_x2}{width = \textwidth}{np2, c.\label{fig:c_np_x2}}{S}
-\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{nc 24hrs.\label{fig:adev_nc}}{S}
+
 % \fig{Images/sf_np_x}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_np_x}}{S}
 
 % \fig{Images/sf_5c_pseudo_perturb_x2}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_5c_pseudo_x2}}{S}
