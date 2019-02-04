@@ -1,16 +1,18 @@
 
-\chapter{Magnetic field inside the bulk of a mu-metal shield}
-\lhead{\emph{Magnetic field inside the bulk of a mu-metal shield}}
-% \newpage
-% \label{chap:appendix_bustamante}
-% \section{Magnetic field inside the bulk of a mu-metal shield}
-\section{Analytic solution assuming linear permeability}
-\subsection{General solution for an applied zonal field}
-\subsubsection{Using Scalar Potential}
-% \lhead{\emph{Magnetic field inside the bulk of a mu-metal shield}}
+\chapter{Magnetic field inside the bulk of a spherical mu-metal shield}
+\lhead{\emph{Magnetic field inside the bulk of a spherical mu-metal shield}}
 
-% \subsubsection{Using Scalar Potential}
-Let us, place a spherical shell of thickness, t=b-a, which is made of material of permeability $\mu_r$, in a uniform magnetic field, \(\bm B_{\rm ext}=\bm{B_o}= \muo \bm H_o\) \cite{jackson}.
+The TUCAN nEDM experiment will be carried out inside the bulk
+of a large mu-metal shield ($\sim 3$ m diameter). The magnetic environment around the experiment will be challenging because of the closeness of the experiment to the TRIUMF cyclotron ($\bm{B}\sim 350 - 400$ $\mu$T 'which is almost one order of magnitude larger than usual background fields') and the changing environment with iron. It is important to know the magnetic field (magnitude and distribution) within the bulk of a large mu-metal shield sitting in $\sim 350 - 400$ $\mu$T 
+fringe field of the TRIUMF cyclotron. For the purpose of studying that we have calculated the magnetic field inside the bulk of a spherical mu-metal shield analytically assuming linear permeability.
+
+
+\section{General solution for an applied zonal field}
+\subsection{Using Scalar Potential}
+The magnetic field calculation using scalar potential due to presence of a spherical mu-metal shield in a uniform magnetic field \(\bm{B_o}= \muo \bm H_o\) has been discussed in Section~\textcolor{blue}{5.12} of Ref.~\cite{jackson}. We will extend the derivation of that Section here.
+\fig{Images/sphere_1}{width = \textwidth}{Spherical shell in a uniform magnetic field.\label{fig:sphere_ns}}{Spherical shell in a uniform magnetic field.}
+
+Fig.~\ref{fig:sphere_ns} shows an example of placing a spherical shell of thickness t in a uniform magnetic field, $\bm B_o$. The shell is made of material of permeability $\mu_r$.
 
 We know, \(\bm{\nabla}\times\bm{H}=\bm{J}\). But, we are considering no free current. So, \(\bm{J}_f=\bm{K}_f=0\). Thus, we get , \(\bm{\nabla}\times\bm{H}=0\) everywhere which implies that there exists a magnetic scalar potential \(\Phi_m\) that is everywhere continuous and
 \begin{equation}\label{H}
@@ -298,7 +300,7 @@ Finally,
 
 
 
-\subsubsection{Using Equivalent Bound Surface Currents}
+\subsection{Using Equivalent Bound Surface Currents}
 
 In general, any surface current bound to a sphere , and its resulting magnetic field, can be written in terms of spherical harmonics of order $m$ and degree $n$~\cite{CB1, smythe}.One can show , however, that the resulting equations arising from the boundary conditions on the tangential components of the magnetic field (i.e., $B_\theta$  and $B_\phi$) are independent of the order $m$ of the spherical harmonic. Without loss of generality, then, we can restrict the analysis of spherical shields to zonal surface currents and field only (i.e. $\phi$-independent,$m=0$). This also means that the following results can be applied to cases where tesseral components ($m > 0$) do exist in the fields and currents, which is extremely valuable from the point of view of coil design, where the general spherical harmonics can be used as ``building blocks" to produce a desire magnetic field.
 
@@ -320,7 +322,7 @@ where $P_n^1(u)$ is the associated Legendre function of order 1 and degree $n$, 
 
 Consider a spherical $\mu_r$-metal shield of inner radius $r_1=R$ and outer radius $r_2=R+t$, and permeability $\mu_r$ centered on the origin and exposed to the general zonal field ($\it{i.e.}$ axisymmetric or $\phi$-independent) of order $n$~\cite{CB1, smythe} in the presence of an externally applied magnetic field. 
 \begin{equation}\label{bo}
-\bm B_{\rm ext} = \bm{B_o} = G_n r^{n-1} (n+1)[n P_n(u) \bm{\hat{r}} -  P_n^1(u)  \bm{\hat{\theta}} ] 
+\bm B_o = \bm{B_o} = G_n r^{n-1} (n+1)[n P_n(u) \bm{\hat{r}} -  P_n^1(u)  \bm{\hat{\theta}} ] 
 % \label{BextS}
 \end{equation}
 where the magnitude $G_n$ is in units of $T/m^{n-1}$.
