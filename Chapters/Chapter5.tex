@@ -2618,44 +2618,116 @@ shield was present.
 
 \section{Other metrics of feedback system performance}\label{sec:metrics_res}
 
-\begin{enumerate}
-\item Allan deviations ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
-\item Internal sensor perturbations (related to previous section).
-\end{enumerate}
- 
-In Section~\ref{sec:metrics}, some quantitative measure of the magnetic compensation performance were discussed based on the previous studies on Refs.~\cite{bea,lins,rawlik}. In this section the effect on the internal sensors based on the feedback algorithm will be discussed. The Allan standard deviation for compensating ramp perturbation and corresponding shielding factor result will also be discussed.
+%\begin{enumerate}
+%\item Allan deviations ... possibly with different or no excitation coil.  (slow ramp?  step function? ...)
+%\item Internal sensor perturbations (related to previous section).
+%\end{enumerate}
+
+In Section~\ref{sec:metrics}, I introduced a some additional
+quantitative measures of the magnetic compensation performance.  These
+metrics had been used in the previous studies of
+Refs.~\cite{bea,lins,rawlik}.  The two metrics I will discuss further in this section are
+\begin{itemize}
+\item the readings of central internal sensors when the compensation system is used, and
+\item the Allan standard deviation, which is used to gauge the effectiveness of corrections over long timescales.
+\end{itemize}
+The general conclusion of these studies is that they are in
+qualitative agreement with the previous works of others.  I also
+believe that one of the main limiting factors relates to the need for
+more advanced coil design, which I discuss further in
+Chapter~\ref{ch:final}.
+
 
 \subsection{Internal Sensor Perturbations}
-So far the magnetic field fluctuation reduction due to 12 fluxgate sensors are shown. The magnetic compensation also reduce the filed fluctuation on the central sensors that are placed in the origin of the coil cube and do not involve in the feedback algorithm. 
 
-\fig{Images/center_6c_reg_sNs}{width = \textwidth}{6coils, shield, no shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, Regularized pseudo-inverse of $\bm{M^{-1}}$. \label{fig:center_6c_reg}}{S}
+Most of the results that I showed so far related to the magnetic field
+measured by 12 fluxgate sensors positioned within the coil cube just
+outside the region of interest.  Normally when these data were taken,
+I simultaneously acquired data for two additional fluxgate axes placed
+centrally within the coil cube.  These sensors were not used in the
+feedback algorithm.  The idea was to used these as a way to estimate
+average feedback system performance within the region of interest.
 
-Fig.~\ref{fig:center_6c_reg} shows the magnetic fluctuation reduction on the central sensors in $z$, and $x$ axis for 6 coils configuration discussed in the previous Section with shield (left) and without shield (right). Aside from the vertical axis, the results are similar both with shield and no shield. The magnetic field changes are reduced by 0.5 nT in case of with shield with the uncompensated field change is 1.25 nT and 15 nT in case without shield with the uncompensated field change is 37 nT in $z$ axis. It is also seen that there is hardly any changes in $x$  due to perturbation.
+\fig{Images/center_6c_reg_sNs}{width = \textwidth}{Central magnetic field in
+the $z$ (blue) and $x$ (red) directions.  The 6-coil feedback
+algorithm was used.  The left graphs show the case when the magnetic
+shield (the outermost layer of the 4-shell system) is present.  The
+right graphs show the case when no magnetic shield is present.  A
+current of 10 mA was applied to the perturbation coil.
+\label{fig:center_6c_reg}}{Central magnetic field in
+the $z$ and $x$ directions, 6-coil feedback algorithm.}
 
-Similar effect can also be seen in case of non-regularized pseudo-inverse of $\bm{M^{-1}}$ in Fig.~\ref{fig:center_6c_pseudo}.
+Fig.~\ref{fig:center_6c_reg} shows the magnetic fluctuation reduction
+on the central sensors in $z$, and $x$ axis for the 6-coil feedback
+algorithm discussed in the previous Section.  Results are compared
+when the outermost magnetic shield of the four-shell magnetic
+shielding system is present.  The presence of the magnetic shield
+reduces the perturbation of the central field by a factor of 25.
+Otherwise the results are quite comparable, showing a similar
+fractional reduction of the effect of the perturbation, which is
+dominantly in the $z$ direction.  The central field in the $z$
+direction is reduced by a factor $\sim 2/3$.
+
+%without shield (right). Aside from the vertical axis, the results are
+%similar both with shield and no shield. The magnetic field changes are
+%reduced by 0.5 nT in case of with shield with the uncompensated field
+%change is 1.25 nT and 15 nT in case without shield with the
+%uncompensated field change is 37 nT in $z$ axis. It is also seen that
+%there is hardly any changes in $x$ due to perturbation.
+
+%Similar effect can also be seen in case of non-regularized pseudo-inverse of $\bm{M^{-1}}$ in Fig.~\ref{fig:center_6c_pseudo}.
 
 
-\fig{Images/center_6c_pseudo_sNs}{width = \textwidth}{6coils, shield, no shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:center_6c_pseudo}}{S}
+%\fig{Images/center_6c_pseudo_sNs}{width = \textwidth}{6coils, shield, no shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:center_6c_pseudo}}{S}
 
-\fig{Images/center_pseudo_perturb_5c_x}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:center_pseudo_5c_x}}{S}
+\fig{Images/center_pseudo_perturb_5c_x}{width = \textwidth}{Central magnetic field in
+the $z$ (blue) and $x$ (red) directions.  The 5-coil feedback
+algorithm was used, with the currents $C_x^\pm$ being constrained to
+be equal.  The outermost layer of the magnetic shielding system was
+placed around the sensors and within the coil
+cube.\label{fig:center_pseudo_5c_x}}{S}
 
-\fig{Images/center_5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (left),$C_z^\pm$ (right), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:center_5c_pseudo_s_xz}}{S}
+The results are virtually identical if the 5-coil feedback algorithm
+is used (Fig.~\ref{fig:center_pseudo_5c_x}).  This is not surprising
+because generally the magnetic field results were often quite similar
+for the 5- and 6-coil algorithms when properly tuned, despite the
+currents in the 6-coil algorithm experiencing the current drifting
+problem.
+
+%\fig{Images/center_5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (left),$C_z^\pm$ (right), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:center_5c_pseudo_s_xz}}{S}
 
 
-I have also studied in case of five coils configuration which also give similar results as can be seen by Fig.~\ref{fig:center_pseudo_5c_x} and Fig.~\ref{fig:center_5c_pseudo_s_xz}.
+%I have also studied in case of five coils configuration which also
+%give similar results as can be seen by
+%Fig.~\ref{fig:center_pseudo_5c_x} and
+%Fig.~\ref{fig:center_5c_pseudo_s_xz}.
+
+I also did various other trials varying the feedback system
+parameters, and adjusting the current applied to the perturbation
+coil, both with and without the magnetic shield present.  In general
+the reduction in the central $z$ field was similar.
+
+While it is not a large reduction, the result is relatively consistent
+with my results for the general reduction in the field at the external
+sensor sites when the feedback system is used to correct the effect of
+the perturbation coil (see the previous Section).  In that case also,
+the general reduction in the field at the external sensor sites was
+also by a factor of roughly 1/2 to 2/3 on average.
+
+%\fig{Images/5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (a),$C_z^\pm$ (b), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:5c_pseudo_s_xz}}{S}
 
 
-
-\fig{Images/5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (a),$C_z^\pm$ (b), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:5c_pseudo_s_xz}}{S}
-
-
-The goal of the prototype is to reduce $\sim 200$ nT filed change. Fig.~\ref{fig:5c_pseudo_s_xz} shows the magnetic compensation result due to twelve compensation fluxgate sensors.  It is seen that the prototype is successfully reduce the $\sim 200$ nT filed change.
+%The goal of the prototype is to reduce $\sim 200$ nT filed change. Fig.~\ref{fig:5c_pseudo_s_xz} shows the magnetic compensation result due to twelve compensation fluxgate sensors.  It is seen that the prototype is successfully reduce the $\sim 200$ nT filed change.
 
 %\FloatBarrier
 
 \subsection{Allan Deviation Results}
 
-The Allan standard deviation and shielding factor were discussed in Section~\ref{sec:metrics}. 
+The definition of the Allan standard deviation and the ``shielding
+factor'' were discussed in Section~\ref{sec:metrics}.  Recall that the
+shielding factor is the ratio of the estimated uncompensated Allan
+deviation to the Allan deviation of the measured external fluxgate
+sensors.
 % \fig{Images/sf_5c_pseudo_perturb_x}{width = \textwidth}{5coils, $C_x^\pm$ , shield, 10 mA perturbation, $k_c^p=0.0$, $k_c^i=1.0$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_5c_pseudo_x}}{S}
 
 % \fig{Images/sf_ramp_x2}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_ramp_x}}{S}
