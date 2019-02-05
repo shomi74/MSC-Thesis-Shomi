@@ -2,19 +2,21 @@
 \chapter{Analytic solutions to a spherical mu-metal shell in multi-pole field}
 \lhead{\emph{Analytic solutions to a spherical mu-metal shell in multi-pole field}}
 
-The TUCAN nEDM experiment will be carried out inside the bulk
-of a large mu-metal shield ($\sim 3$ m diameter). The magnetic environment around the experiment will be challenging because of the closeness of the experiment to the TRIUMF cyclotron ($\bm{B}\sim 350 - 400$ $\mu$T 'which is almost one order of magnitude larger than usual background fields') and the changing environment with iron. It is important to know the magnetic field (magnitude and distribution) within the bulk of a large mu-metal shield sitting in $\sim 350 - 400$ $\mu$T 
-fringe field of the TRIUMF cyclotron. For the purpose of studying that we have calculated the magnetic field inside the bulk of a spherical mu-metal shield analytically assuming linear permeability.
+The TUCAN nEDM experiment will be carried out inside the large magnetically shielded room that is roughly 3~m in diameter.  The magnetic environment around the experiment will be challenging because of the closeness of the experiment to the TRIUMF cyclotron, which generates a background field of $\sim 350 - 400$ $\mu$T.
+%'which is almost one order of magnitude larger than usual background fields') and the changing environment with iron. 
+As a result, it is important to gain an understanding of the magnitude and distribution of the field inside  the bulk of a large mu-metal shield located in such an external field. For the purpose of studying this we derive here analytic solutions of the magnetic field inside the bulk of a spherical mu-metal shield that serves as a model of our MSR in the TRIUMF cyclotron field.  For simplicity, we assume a linear magnetic permeability for the shield.
 
 
 \section{General solution for an applied zonal field}
+In this section we present two different methods for solving this problem.  The first using the equivalent bound surface current and the second is via the magnetic scalar potential.  We also show that the two methods are equivalent, of course.
+
 \subsection{Using Equivalent Bound Surface Currents}
 
-In general, any surface current bound to a sphere , and its resulting magnetic field, can be written in terms of spherical harmonics of order $m$ and degree $l$~\cite{CB1, smythe}. One can show , however, that the resulting equations arising from the boundary conditions on the tangential components of the magnetic field (i.e., $B_\theta$  and $B_\phi$) are independent of the order $m$ of the spherical harmonic. Without loss of generality, then, we can restrict the analysis of spherical shields to zonal surface currents and field only (i.e. $\phi$-independent,$m=0$). This also means that the following results can be applied to cases where tesseral components ($m > 0$) do exist in the fields and currents, which is extremely valuable from the point of view of coil design, where the general spherical harmonics can be used as ``building blocks" to produce a desire magnetic field.
+In general, any surface current bound to a sphere, and its resulting magnetic field, can be written in terms of spherical harmonics of order $m$ and degree $l$~\cite{CB1, smythe}. One can show , however, that the resulting equations arising from the boundary conditions on the tangential components of the magnetic field (i.e., $B_\theta$  and $B_\phi$) are independent of the order $m$ of the spherical harmonic. Without loss of generality, then, we can restrict the analysis of spherical shields to zonal surface currents and field only (i.e. $\phi$-independent, $m=0$). This also means that the following results can be applied to cases where tesseral components ($m > 0$) do exist in the fields and currents, which is extremely valuable from the point of view of coil design, where the general spherical harmonics can be used as ``building blocks" to produce a desire magnetic field.
 
-From ~\cite{CB1, smythe}, the zonal surface current
+From References.~\cite{CB1, smythe}, the zonal surface current
 \begin{equation}\label{i}
-I_\phi=\bm{K}=KP_l^1(u)\bm{\hat{\phi}}
+\bm{K}=KP_l^1(u)\bm{\hat{\phi}}
 \end{equation}
 bound to a spherical surface $r=a$ gives rise to the vector potential
 \begin{equation}\label{a}
@@ -28,17 +30,24 @@ bound to a spherical surface $r=a$ gives rise to the vector potential
 \end{equation}
 where $P_l^1(u)$ is the associated Legendre function of order 1 and degree $l$,  $u=cos\theta$, and the coefficient $\mathcal{K}={\muo K}/{(2l+1)a^{l-1}}$ has units $T/m^{l-1}$.
 
-\fig{Images/sphere_1}{width = \textwidth}{Spherical shell in a uniform magnetic field.\label{fig:sphere_ls}}{Spherical shell in a uniform magnetic field.}
+\fig{Images/sphere_1}{width = 0.8\textwidth}{Spherical shell in a uniform magnetic field.\label{fig:sphere_ls}}{Spherical shell of .... shown here in the presence of uniform magnetic field (i.e. $l=1$).}
 
-Consider a spherical mu-metal shield of inner radius $r_1=a=R$ and outer radius $r_2=b=R+t$, and permeability $\mu_r$ centered on the origin and exposed to the general zonal field ($\it{i.e.}$ axisymmetric or $\phi$-independent) of order $l$ in the presence of an externally applied magnetic field as shown in Fig.~\ref{fig:sphere_ls}. The external magnetic filed can be written as~\cite{CB1, smythe} -
+We consider a spherical mu-metal shield of inner radius $r_1=a=R$ and outer radius $r_2=b=R+t$, and permeability $\mu_r$ centered on the origin and exposed to the general zonal field (\textit{i.e.}
+%axisymmetric or $\phi$-independent) 
+$m=0$)
+of order $l$ %in the presence of an externally applied magnetic field 
+as shown in Fig.~\ref{fig:sphere_ls}. The general external magnetic filed can be written as~\cite{CB1, smythe} -
 \begin{equation}\label{bo}
 \bm{B_o} = G_l r^{l-1} (l+1)[l P_l(u) \bm{\hat{r}} -  P_l^1(u)  \bm{\hat{\theta}} ] 
 % \label{BextS}
 \end{equation}
-where the magnitude $G_l$ is in units of $T/m^{l-1}$.
-The magnetic fields arising from Eq.~(\ref{a}) are
+where the magnitude $G_l$ is in units of $T/m^{l-1}$.  
+The response of the permeable sphere  results in bound surface currents $\mathcal{K}_1$ and $\mathcal{K}_1$ on radius $a$ amd $b$, respectively, that give rise to the following contributions to the net magneti field:
+%The magnetic fields arising from Eq.~(\ref{a}) are
 \begin{equation}\label{r=R}
-\lim_{r\to R}\bm B =\mathcal{K}_1
+%\lim_{r\to R}
+\bm B_{\mathcal{K}_1} =
+\mathcal{K}_1
 \left \{
   \begin{tabular}{ccc}
   $r^{l-1}(l+1)[l P_l(u)\bm{\hat{r}} -  P_l^1(u) \bm{\hat{\theta}} ]$ &  & $r< R$  \\
@@ -49,7 +58,8 @@ l[(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]$ &  & $r> R$
 \end{equation}
 
 \begin{equation}\label{r=R+t}
-\lim_{r\to R+t}\bm B =\mathcal{K}_2
+%\lim_{r\to R+t}\bm B =
+\bm B_{\mathcal{K}_2} =\mathcal{K}_2
 \left \{
   \begin{tabular}{ccc}
   $r^{l-1} (l+1)[l P_l(u)\bm{\hat{r}} -  P_l^1(u)\bm{\hat{\theta}} ]$ &  & $r< R+t$  \\
@@ -58,19 +68,22 @@ l[(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]$ &  & $r> R$
 \right.
 \end{equation}
 
- The net field inside the shield ($\it{i.e.}\;r<R$) is 
+As result, using superposition, the net field inside the shield ($\it{i.e.}\;r<R$) is 
 \begin{equation}\label{r<R}
-\lim_{r\to R}\bm B = (\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}}
+%\lim_{r\to R}
+\bm B_1 = (\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} \, .
 \end{equation}
-
+%
 The net field  within the bulk of the shield (\textit{i.e.} $R<r<R+t$)  is 
 \begin{multline}\label{R<r<R+t}
-\lim_{r\to R<r<R+t}\bm B= \mathcal{K}_1 \, l\, \frac{R^{2l+1}}{r^{l+2}} \,[(l+1) P_l(u) \, \bm{\hat{r}} +  P_l^1(u)  \, \bm{\hat{\theta}} ] \, \\ +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} ]
+%\lim_{r\to R<r<R+t}
+\bm B_2 = \mathcal{K}_1 \, l\, \frac{R^{2l+1}}{r^{l+2}} \,[(l+1) P_l(u) \, \bm{\hat{r}} +  P_l^1(u)  \, \bm{\hat{\theta}} ] \, \\ +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} ] \, .
 \end{multline}
-
-The net field  outside the shield (\textit{i.e.}, $r>R+t$) is
+%
+Whereas, the net field  outside the shield (\textit{i.e.}, $r>R+t$) is
 \begin{multline}\label{r>R}
-\lim_{r\to r>R+t}\bm B=\frac{\mathcal{K}_1R^{2l+1} + \mathcal{K}_2 (R+t)^{2l+1} }{r^{l+2}} n [(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]  \\+ G_l (l+1) r^{l-1} [n P_l(u) \bm{\hat{r}} - P_l^1(u)  \bm{\hat{\theta}} ]
+%\lim_{r\to r>R+t}\bm 
+B_3 =\frac{\mathcal{K}_1R^{2l+1} + \mathcal{K}_2 (R+t)^{2l+1} }{r^{l+2}} n [(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]  \\+ G_l (l+1) r^{l-1} [n P_l(u) \bm{\hat{r}} - P_l^1(u)  \bm{\hat{\theta}} ]
 \end{multline}
 
 To find \(\mathcal{K}_1\) and \(\mathcal{K}_2\) , we have to apply the boundary condition for the tangential component of the magnetic field i.e.
@@ -165,7 +178,7 @@ Adding Eqs.~(\ref{es1}), and (\ref{es2}) and using the value of $\mathcal{K}_2$ 
 \mathcal{K}_1=-\frac{\mu_r(\mu_r-\muo)(l+1) (2l+1)G_l}{[\mu_r(l+1)+\muo l)][\mu_r l+\muo(l+1)]-(\mu_r-\muo)^2 l(l+1)\left(\dfrac{R}{R+t}\right)^{2l+1}}
 \end{equation}
 
-\fig{Images/sphere_s}{width = \textwidth}{Shielding effect of spherical shell in a uniform magnetic field.\label{fig:sphere_s}}{Shielding effect of spherical shell in a uniform magnetic field.}
+\fig{Images/sphere_s}{width = 0.8\textwidth}{Shielding effect of spherical shell in a uniform magnetic field.\label{fig:sphere_s}}{Shielding effect of spherical shell in a uniform magnetic field.}
 
 The net field  within the bulk of the shield (\textit{i.e.}, $R<r<R+t$) (see Eq.~(\ref{R<r<R+t}))  is 
 % \begin{multline*}
@@ -265,7 +278,7 @@ r<a\;\;\;\;\;\;\;\;\;\;\;\Phi_1=\sum_{l=0}^{\infty} \delta r^l P_l(\cos\theta)
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b1}) at $r=b$ :
 
 % The boundary conditions at $r=a$, and $r=b$ are that $H_\theta$ and $B_r$ be continuous
-$$\frac{\delta \Phi_3}{\delta \theta}(b)=\frac{\delta \Phi_2}{\delta \theta}(b)$$
+$$\frac{\partial \Phi_3}{\partial \theta}(b)=\frac{\delta \Phi_2}{\partial \theta}(b)$$
 
 Using Eqs.~(\ref{r>b}), and (\ref{a<r<b}) :
 % $$-Hb^l\frac{\delta}{\delta \theta}(P_l(\cos\theta))+\frac{\alpha}{r^{l+1}}\frac{\delta}{\delta \theta}(P_l(\cos\theta))=\left(\beta b^l+\frac{\gamma}{b^{l+1}}\right)\frac{\delta}{\delta \theta}(P_l(\cos\theta))$$
@@ -275,7 +288,7 @@ Using Eqs.~(\ref{r>b}), and (\ref{a<r<b}) :
 
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b1}) at $r=a$ :
 
-$$\frac{\delta \Phi_2}{\delta \theta}(a)=\frac{\delta \Phi_1}{\delta \theta}(a)$$
+$$\frac{\partial \Phi_2}{\partial \theta}(a)=\frac{\partial \Phi_1}{\partial \theta}(a)$$
 
 Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
 % $$\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)\frac{\delta}{\delta \theta}(P_l(\cos\theta))=\delta a^l \frac{\delta}{\delta \theta}(P_l(\cos\theta))$$
@@ -285,7 +298,7 @@ Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
 
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b2}) at $r=b$ :
 
-$$\muo\frac{\delta \Phi_3}{\delta r}(b)=\mu_r\frac{\delta \Phi_2}{\delta r}(b)$$
+$$\muo\frac{\partial \Phi_3}{\partial r}(b)=\mu_r\frac{\partial \Phi_2}{\partial r}(b)$$
 
 Using Eqs.~(\ref{r>b}), and (\ref{a<r<b}):
 % $$\muo\left[-Hlb^{l-1}+\frac{-(l+1)\alpha}{b^{l+2}}\right]P_l(\cos\theta)=\mu_r\left[\beta l b^{l-1}+\frac{-(l+1)\gamma}{b^{l+2}}\right]P_l(\cos\theta)$$
@@ -295,7 +308,7 @@ Using Eqs.~(\ref{r>b}), and (\ref{a<r<b}):
 
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b2}) at $r=a$ :
 
-$$\mu_r\frac{\delta \Phi_2}{\delta r}(a)=\muo\frac{\delta \Phi_1}{\delta r}(a)$$
+$$\mu_r\frac{\partial \Phi_2}{\partial r}(a)=\muo\frac{\partial \Phi_1}{\partial r}(a)$$
 
 Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
 % $$\frac{\mu_r}{\muo}\left[\beta l a^{l-1}+\frac{-(l+1)\gamma}{a^{l+2}}\right]P_l(\cos\theta)=\delta l a^{l-1} P_l(\cos\theta)$$
@@ -439,7 +452,7 @@ Using Eq.~(\ref{H}) in Eq.~(\ref{p}) :
 % So we get,
 \begin{equation}\label{Hr}
 \begin{split}
-    H_r &=-\frac{\delta \Phi}{\delta r}\\
+    H_r &=-\frac{\partial \Phi}{\partial r}\\
       &=\frac{(2l+1)}{\mu_r}r^{l-1}BP_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
 \end{split}
 \end{equation}
@@ -459,7 +472,7 @@ Similarly,
 % So we get,
 \begin{equation}\label{Ht}
 \begin{split}
- H_\theta &=-\frac{1}{r}\frac{\delta \Phi}{\delta \theta}\\
+ H_\theta &=-\frac{1}{r}\frac{\partial \Phi}{\partial \theta}\\
          & =-\frac{(2l+1)}{\mu_rl}Br^{l-1}P_l^1(u)\left[
          \frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}
          {1-\left(\frac{a}{b}\right)^{2l+1}}
@@ -487,7 +500,7 @@ For comparing two methods discussed in previous Sections, the following boundary
 
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b3}) at $r=a$ :
 % $$-\mu_r \frac{1}{r}\frac{\delta \Phi_2}{\delta \theta}(a)+\muo \frac{1}{r}\frac{\delta \Phi_1}{\delta \theta}(a)=\muo\bm{K_1}  $$
-$$\frac{1}{r}\frac{\delta \Phi_1}{\delta \theta}(a)-\frac{1}{r}\mu'_r\frac{\delta \Phi_2}{\delta \theta}(a)=\bm{K_1}  $$
+$$\frac{1}{r}\frac{\partial \Phi_1}{\partial \theta}(a)-\frac{1}{r}\mu'_r\frac{\partial \Phi_2}{\partial \theta}(a)=\bm{K_1}  $$
 
 Using Eqs.~(\ref{a<r<b}), and (\ref{r<a})
 $$\frac{1}{a}\left[\delta a^l-\mu'_r\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)\right]\frac{\delta}{\delta \theta}(P_l(\cos\theta))= \bm{K_1}$$
