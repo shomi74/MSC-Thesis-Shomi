@@ -2712,7 +2712,10 @@ with my results for the general reduction in the field at the external
 sensor sites when the feedback system is used to correct the effect of
 the perturbation coil (see the previous Section).  In that case also,
 the general reduction in the field at the external sensor sites was
-also by a factor of roughly 1/2 to 2/3 on average.
+also by a factor of roughly 1/2 to 2/3 on average.  I expect that in
+order to provide better overall compensation results, the chief
+improvement will be in coil design, which was beyond the scope of this
+thesis.
 
 %\fig{Images/5c_pseudo_s_xz}{width = \textwidth}{5coils, $C_x^\pm$ (a),$C_z^\pm$ (b), shield, 44 mA perturbation, $k_c^p=0.0$, $k_c^i=0.6$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.. \label{fig:5c_pseudo_s_xz}}{S}
 
@@ -2732,7 +2735,7 @@ sensors.
 
 % \fig{Images/sf_ramp_x2}{width = \textwidth}{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.\label{fig:sf_ramp_x}}{S}
 
-Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the Allan deviation of the compensated and uncompensated field change , and (c) the corresponding shielding factor. The PI algorithm introduces the high frequency noise in the feedback system which makes the shielding factor$<1$. To improve the result , the value of $k_c^p$ and $k_c^i$ terms can be lowered. For Fig.~\ref{fig:sf_rampo_x} , the value of $k_c^p$ is lowered to 0.1 compared to the tuned value of 0.6.
+%Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the Allan deviation of the compensated and uncompensated field change , and (c) the corresponding shielding factor. The PI algorithm introduces the high frequency noise in the feedback system which makes the shielding factor$<1$. To improve the result , the value of $k_c^p$ and $k_c^i$ terms can be lowered. For Fig.~\ref{fig:sf_rampo_x} , the value of $k_c^p$ is lowered to 0.1 compared to the tuned value of 0.6.
 
 
 % \fig{Images/c_ramp_x}{width = \textwidth}{.\label{fig:c_ramp_x}}{S}
@@ -2746,77 +2749,107 @@ Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the 
 \item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
 \end{itemize}
 
-\fig{Images/adev_test}{width = \textwidth}{\label{fig:px}}{S}
+%\fig{Images/adev_test}{width = \textwidth}{\label{fig:px}}{S}
 
-\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs without feedback algorithm, (b) Corresponding Allan deviation.\label{fig:adev_nc}}{S}
+This Section presents my results for Allan deviation measurements
+under two conditions:
+\begin{itemize}
+\item ``Natural'' fluctuations with feedback on.  In this case I tried to compensate typical changes in the laboratory at U.~Winnipeg.
+\item Simulated drift, where I slowly ramped the current in the perturbation coil over a long time, to see how well the feedback system could correct a linear drift.
+\end{itemize}
+In each case the feedback system provided superior result where the
+shielding factor (ratio of uncorrected to feedback-corrected Allan
+deviations) was larger than one.
+
+\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{S}
+
+Fig.~\ref{fig:adev_nc} shows a measurement of fluxgate readings over a
+24-hour period with the feedback system switched off.  This gives an
+impression of the overal scale of the fluctuations that the feedback
+algorithm must correct.  It was based on measurements like this that
+feedback system was designed with a dynamic range capable of
+correcting a few hundred nT in the fluxgate readings.  The Allan
+deviation shown in Fig.~\ref{fig:adev_nc}(b) rises with typically a
+$\tau^{1/2}$-$\tau^{1/3}$ dependence, which is similar to a 1D random
+walk.
+
 
 \begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/p10i37_x}
-        \caption{p10i37.}
-        \label{fig:1}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/c_p10i37_x}
-        \caption{p10i37, c zoomed}
-        \label{fig:2}
-    \end{subfigure}
-\caption[S]{(a)5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels, (b) zoomed coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+     \begin{subfigure}{\textwidth} \centering \includegraphics[width=\textwidth,
+        height=7
+        cm]{Images/p10i37_x} \caption{}  \label{fig:1} \end{subfigure}\\[1ex] \begin{subfigure}{\textwidth} \centering \includegraphics[width=\textwidth,
+        height=7 cm]{Images/c_p10i37_x} \caption{} \label{fig:2} \end{subfigure}
+\caption[S]{(a) 5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ required to be a common current $C_x^\pm$. Coil currents are shown in the left panel while magnetic field changes are shown  in the right panel, (b) zoomed coil currents near the time when the perturbation coil is engaged. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
     \label{fig:p10_i37_x}
 \end{figure}
 
-\begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/p60i37_x}
-        \caption{p60i37.}
-        \label{fig:3}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/c_p60i37_x}
-        \caption{p60i37, c zoomed}
-        \label{fig:4}
-    \end{subfigure}
-\caption[S]{(a)5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels, (b) zoomed coil currents. The feedback parameters are $k_c^p=0.6$ and $k_c^i=0.37$.}
-    \label{fig:p60_i37_x}
-\end{figure}
+In order to ensure that the feedback system will not induce noise at
+higher frequencies, I retuned the PI parameters, resulting in
+reasonable values of $k_c^p=0.1$ and $k_c^i=0.37$.  The reponse of the
+system to a step perturbation with this retuning is shown in
+Fig.~\ref{fig:p10_i37_x}.  The main feature to be observed is the the
+coil currents do not experience and overshoot and appear more like a
+critically damped solution than in the previous sections.  This does
+not have much effect on the long-time behavior of the system, and
+keeps the noise at higher frequencies (near the loop correction
+frequency of 6~Hz) suppressed.  In this way the shielding factor
+(ratio of Allan deviations) at 1~s is always $\gtrsim 1$.
 
-\begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/p0_i100_x}
-        \caption{p0i100.}
-        \label{fig:5}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/c_p0_i100_x}
-        \caption{p0i100, c zoomed}
-        \label{fig:6}
-    \end{subfigure}
-\caption[S]{(a)5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels, (b) zoomed coil currents. The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.}
-    \label{fig:p0_i100_x}
-\end{figure}
+
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth, height=7 cm]{Images/p60i37_x}
+%        \caption{p60i37.}
+%        \label{fig:3}
+%    \end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth, height=7 cm]{Images/c_p60i37_x}
+%        \caption{p60i37, c zoomed}
+%        \label{fig:4}
+%    \end{subfigure}
+%\caption[S]{(a)5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels, (b) zoomed coil currents. The feedback parameters are $k_c^p=0.6$ and $k_c^i=0.37$.}
+%    \label{fig:p60_i37_x}
+%\end{figure}
+
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth, height=7 cm]{Images/p0_i100_x}
+%        \caption{p0i100.}
+%        \label{fig:5}
+%    \end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%        \centering
+%        \includegraphics[width=\textwidth, height=7 cm]{Images/c_p0_i100_x}
+%        \caption{p0i100, c zoomed}
+%        \label{fig:6}
+%    \end{subfigure}
+%\caption[S]{(a)5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Coil currents are shown in the left panels while magnetic field changes are shown  in the right panels, (b) zoomed coil currents. The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.}
+%    \label{fig:p0_i100_x}
+%\end{figure}
 
 \begin{figure}
      \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=7 cm]{Images/sf_np_x}
-        \caption{np.}
+        \caption{}
         \label{fig:7}
     \end{subfigure}\\[1ex]
     \begin{subfigure}{\textwidth}
         \centering
         \includegraphics[width=\textwidth, height=7 cm]{Images/c_np_x}
-        \caption{np, c}
+        \caption{}
         \label{fig:8}
     \end{subfigure}
-\caption[S]{(a)5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Magnetic field changes $\Delta B$ are shown in the left panels while corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels, (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+\caption[S]{(a) 5-coil feedback algorithm for ``natural'' fluctuations.  Magnetic field changes $\Delta B$ are shown in the left panel while the corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels.  Grey curves show the results for the estimated uncorrected field values.  (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
     \label{fig:np_x}
 \end{figure}
+
+The feedback algorithm corrects the natural field fluctuations well.
+Fig.~\ref{np_x} shows the results of a run over a 4096~s period (just
+over an hour).  In general 
 
 \begin{figure}
      \begin{subfigure}{\textwidth}
@@ -2835,7 +2868,7 @@ Fig.~\ref{fig:sf_rampo_x} shows (a) the magnetic field change reduction, () the 
     \label{fig:np_x2}
 \end{figure}
 \fig{Images/sf_np_x3}{width = \textwidth}{np3 p10i37. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.\label{fig:np_x3}}{S}
-\fig{Images/sf_np_x4_i100}{width = \textwidth}{np4 p0i100. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.\label{fig:np_x4}}{S}
+%\fig{Images/sf_np_x4_i100}{width = \textwidth}{np4 p0i100. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.\label{fig:np_x4}}{S}
 
 \begin{figure}
      \begin{subfigure}{\textwidth}
