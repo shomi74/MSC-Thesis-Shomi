@@ -121,7 +121,7 @@ the design goal of $\gtrsim 6$~Hz.
 
 \fig{Images/filtering2}{width=\textwidth}{Filtering effect on the magnetic field signal measured at the 1x position.  For this measurement, the PI control system was switched off so that it would not affect the noise.  Vertical axis represent $\Delta B$ (see Eq.~(\ref{eq:del_B})) found from the measurement of sensor (a) without filter, (b) with Bartington's SCU1 (Signal Conditioning Unit) and (c) with our filter. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.  The current supplied on perturbation coil was 100~mA and resolution index 1 was used for the ADC. The loop sampling frequency for (a), (b) and (c) are shown in Hz and is limited by the polling time for the 14 sensors.\label{fig:filtering}}{Filtering effect on the magnetic field signals.}
 
-Fig.~\ref{fig:filtering} shows an example of the importance of using
+Figure~\ref{fig:filtering} shows an example of the importance of using
 the filter, comparing an unfiltered signal to one filtered by
 Bartington's SCU1 10 Hz low pass filter, and comparing with our
 filter.  For this study the fastest effective sampling rate
@@ -181,7 +181,7 @@ reduce the noise.
 
 \fig{Images/samp_freq_iteration}{width=\textwidth,height=8cm}{Magnetic field at sensor position 1y using resolution index 1 with 50 software averages per cycle (left) and resolution index 12 (right) when the active magnetic compensation system is switched on.  Blue curves:  measured field change $\Delta B$.  Red curves:  predicted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_iteration}}{Active magnetic field compensation at sensor position 1y.}
 
-Fig.~\ref{fig:samp_freq_iteration} shows an example of using the
+Figure~\ref{fig:samp_freq_iteration} shows an example of using the
 filters with the active compensation system switched on (left).  Only
 one of the 14 sensors being used in the system has been displayed.  In
 this case, 50 software averages could also be conducted, achieving a
@@ -213,7 +213,7 @@ driven by the compensation system.
 
 \fig{Images/samp_freq_time}{width=\textwidth,height=8cm}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 8x for various resolution indices.  The resolution indices are represented by 1, 6, 7, 8 and 9 with the corresponding loop sampling frequencies indicated.  In each case, 50 software averages were done in the loop as well.  Vertical dashed lines indicate the perturbation coil state. \label{fig:samp_freq_example_time}}{Compensation behaviour for various resolution indices.}
 
-Fig.~\ref{fig:samp_freq_example_time} shows an active compensation
+Figure~\ref{fig:samp_freq_example_time} shows an active compensation
 result displaying the current in one of the 6 coils and the field in
 one of the 14 fluxgate axes, when the resolution index is changed.
 For each case, 50 software averages have always been done in the
@@ -232,7 +232,7 @@ noisy, and smoother over longer periods of time as well.
 
 Another option is to run with fewer averages than 50 and at higher
 resolution index, while still achieving the 6 Hz loop rate design
-goal.  Fig.~\ref{fig:samp_freq_same} shows a study where, as the
+goal.  Figure~\ref{fig:samp_freq_same} shows a study where, as the
 resolution index is increased, the number of software averages is
 decreased, so as to maintain nearly the same $\sim 6$~Hz loop cycle
 rate.  As expected, they all have a similar effect on the magnetic
@@ -784,18 +784,18 @@ from within the coil cube.
 % After that we decided to use the fastest sampling frequency of our ADC for which we have to build the filters.  Now, due to this the current response time has increased but that was not the solution of the current unsettle problem. Finally, we have realized that in addition to fastest response we have to also consider the matrix condition number and if the condition number is large then we have to lower the value of optimized $r$ (see Section~\ref{sec:new_study_r}). Here, we will talk about the the studies we have done on fluxgate placements.
 \fig{Images/shield_noShield}{width=\textwidth,height=12cm}{Magnetic compensation results (a) with shield and (b) without shield within the coil cube.  The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.8$.  The current supplied to the perturbation coil was 25  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:shield_noShield}}{Comparison of magnetic compensation results with and without the magnetic shield present.}
 
-Fig.~\ref{fig:shield_noShield} compares the response of the system
+Figure~\ref{fig:shield_noShield} compares the response of the system
 with the outermost magnetic shield layer inside the coil cube, to the
-response when no magnetic shields are present within the coil cube.  When the
-shield is removed, it changes the matrix elements significantly. The
-matrix was therefore remeasured and the regularization process redone.
-It was possible to get satisfactory results for the inversion of both
-matrices (shield and no shield) using $r=2.8$.
-Fig.~\ref{fig:shield_noShield} demonstrates that removal of the
-magnetic shield, while having a significant impact on the matrix
-elements, does not have much impact on the effectiveness of the system
-to compensate the field.  It also has no impact on the current
-drifting problem, although the pattern of currents has changed
+response when no magnetic shields are present within the coil cube.
+When the shield is removed, it changes the matrix elements
+significantly. The matrix was therefore remeasured and the
+regularization process redone.  It was possible to get satisfactory
+results for the inversion of both matrices (shield and no shield)
+using $r=2.8$.  Figure~\ref{fig:shield_noShield} demonstrates that
+removal of the magnetic shield, while having a significant impact on
+the matrix elements, does not have much impact on the effectiveness of
+the system to compensate the field.  It also has no impact on the
+current drifting problem, although the pattern of currents has changed
 somewhat, because of the change in the matrix elements.
 
 Another difference between Fig.~\ref{fig:shield_noShield} and
@@ -884,7 +884,7 @@ coils, the module uses the Biot-Savart integral equation.
 
 \doublefig{Images/shield2}{width=\textwidth,height=8cm}{\label{fig:shield_opera}}{Images/noShield}{width=\textwidth,height=8cm}{\label{fig:noShield_opera}}{{Geometry in OPERA simulation (a) with passive shielding, and (b) without passive shielding.  The square in the back, appearing in both drawings, is the perturbation coil. The direction of each of the three axes may be seen in (b).} \label{fig:opera_setup}}{Prototype geometry in OPERA simulation}
 
-Fig.~\ref{fig:opera_setup} shows the geometry as defined in OPERA,
+Figure~\ref{fig:opera_setup} shows the geometry as defined in OPERA,
 both with and without the magnetic shields present.  The dimensions of
 the prototype passive shielding layers and the stove pipe were given
 in Table~\ref{table:mu-metal}.  These were implemented using simple
@@ -1469,11 +1469,11 @@ treating it on a more equal footing with the PI parameters.
 
 \fig{Images/rp_i}{width=\textwidth,height=8cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ for sensor 8x (right) with $k_c^p=0.6$, $r=3.04$ and different values of $k_c^i$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:rp_i}}{Single magnetic field compensation results for fixed $k_c^p$ and $r$ and different values of $k_c^i$.}
 
-Fig.~\ref{fig:rp_i} shows an example of the impact of changing $k_c^i$
-when $k_c^p$ is held fixed and the regularization parameter $r$ is set
-to its best value.  Only the current in one coil and the field
-measured in one fluxgate axis are shown so that the impact of changing
-$k_c^i$ can be observed.
+Figure~\ref{fig:rp_i} shows an example of the impact of changing
+$k_c^i$ when $k_c^p$ is held fixed and the regularization parameter
+$r$ is set to its best value.  Only the current in one coil and the
+field measured in one fluxgate axis are shown so that the impact of
+changing $k_c^i$ can be observed.
 
 It is seen that there is no current drifting problem if $k_c^i=0.0$ is
 used, but that the field error is consequently larger.  If $k_c^i=0.8$
@@ -1492,12 +1492,11 @@ most of the effect.
 
 
 I then tried changing $r$ while keeping $k_c^i$ and $k_c^p$ terms
-fixed.  Fig.~\ref{fig:pi_r} shows the active compensation for same
+fixed.  Figure~\ref{fig:pi_r} shows the active compensation for same
 fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
 $k_c^i=0.37$, and this time for different values of $r$. The
 observation is that for decreasing $r$, the current drifting problem
-disappears, but the feedback system introduces high frequency
-noise.
+disappears, but the feedback system introduces high frequency noise.
 
 It is natural that $r$ should affect the PI control, because the error
 function involves $\bm{M^{-1}}$ and therefore $r$ (see
@@ -1669,7 +1668,7 @@ condition number of $\bm{M}$ itself.  The minimum value of the
 condition number is 3.2 which is a factor of 17 reduction.  Recall
 that the ideal value of the condition number is unity.
 
-Fig.~\ref{fig:cond}\textcolor{blue}{(b)} shows the same matrix being
+Figure~\ref{fig:cond}\textcolor{blue}{(b)} shows the same matrix being
 analyzed using the random field fluctuation method of
 Section~\ref{sec:mont} and Ref.~\cite{bea}, where current fluctuations
 are traded off against field control.  In this study, the ``best''
@@ -1929,10 +1928,10 @@ to particular values. It is interesting that the particular tuning
 $k_c^p=0$ and $k_c^i=1$ (integral control) does seem to be fairly optimal
 for this particular system.
 
-Ref.~\cite{rawlik} further mentions that due to time delays in their
-active magnetic compensation system, it was logically more correct to
-use the current from three steps prior to make the correction for the
-$n+1$ step
+Reference~\cite{rawlik} further mentions that due to time delays in
+their active magnetic compensation system, it was logically more
+correct to use the current from three steps prior to make the
+correction for the $n+1$ step
 \begin{equation}\label{eq:I_raw_delay}
     \vec{I^{n+1}}= \vec{I^{n-2}}+\bm{M^{-1}} \Delta \vec{B^{n-2}}
 \end{equation}
@@ -2000,7 +1999,7 @@ of a cube of side-length 1.24~m, and the fluxgates are placed in the
 eight corners of a smaller cube of side-length
 1.20~m.\label{fig:matrix_patch_6c}}{Matrix for 6 coils.}
 
-Fig.~\ref{fig:matrix_patch_6c} shows an example of a matrix $\bm{M}$
+Figure~\ref{fig:matrix_patch_6c} shows an example of a matrix $\bm{M}$
 generated by the code.  The magnetic fields generated by the code were
 cross-checked in multiple ways, since the code uses only one formula
 for the field due to a straight line segment of current.
@@ -2172,7 +2171,7 @@ Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
 $\bm{M}$ for 24 fluxgate axes and 5
 coils. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
 
-Fig.~\ref{fig:diag_patch_5c} displays the $\bm{\Sigma}$ matrix
+Figure~\ref{fig:diag_patch_5c} displays the $\bm{\Sigma}$ matrix
 resulting from singular value decomposition.  This results in five
 singular values, one for each coil mode.  Most importantly, the
 singular value which was zero has been removed from the matrix.  The
@@ -2253,14 +2252,15 @@ $k_c^i=1.0$.\label{fig:coil_reg}}{Coil currents with field change
 $\Delta B$ for different coil configurations in regularized
 $\bm{M^{-1}}$}
 
-Fig.~\ref{fig:coil_reg} shows experimental data which demonstrate the
-success of the five-coil method compared to the six-coil method.  In
-this case, I have compared the matrices with my regularization method,
-determining the best value of $r$ based on its ability to minimize the
-condition number of the resultant pseudoinverse (see
-Section~\ref{sec:cond}).  Figs.~\ref{fig:coil_reg}\textcolor{blue}{(a)} and \textcolor{blue}{(b)}
-correspond to the settings described in the first two rows of
-Table~\ref{table:mcond_coil}.
+Figure~\ref{fig:coil_reg} shows experimental data which demonstrate
+the success of the five-coil method compared to the six-coil method.
+In this case, I have compared the matrices with my regularization
+method, determining the best value of $r$ based on its ability to
+minimize the condition number of the resultant pseudoinverse (see
+Section~\ref{sec:cond}).
+Figs.~\ref{fig:coil_reg}\textcolor{blue}{(a)}
+and \textcolor{blue}{(b)} correspond to the settings described in the
+first two rows of Table~\ref{table:mcond_coil}.
 
 The main success is that in the five-coil algorithm, the currents
 settle rapidly after the excitation coil has been switched on, and
@@ -2309,17 +2309,18 @@ $\bm{M^{-1}}$.}
 
 The five-coil algorithm can even be operated without the need for
 Tikhonov regularization of the pseudoinverse.
-Fig.~\ref{fig:coil_pseudo} compares the six-coil and five-coil
+Figure~\ref{fig:coil_pseudo} compares the six-coil and five-coil
 algorithms when no regularization is performed.  The five-coil case
 performs well, perhaps even better than the results displayed in
-Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)} because the field fluctuations are smaller.
-This might also indicate that the PI feedback parameters are not fully
-optimal, since more overshoot is also evident in
-Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} when compared to
-Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}.  For this study, the feedback parameters
-were held constant, and in Section~\ref{sec:new_study_r}, I showed that there
-is a relationship between these parameters.  Additional optimization
-is possible and could affect this conclusion.
+Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)} because the field
+fluctuations are smaller.  This might also indicate that the PI
+feedback parameters are not fully optimal, since more overshoot is
+also evident in Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} when
+compared to Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}.  For this
+study, the feedback parameters were held constant, and in
+Section~\ref{sec:new_study_r}, I showed that there is a relationship
+between these parameters.  Additional optimization is possible and
+could affect this conclusion.
 
 In general, I expect that the non-regularized solution is superior.
 Tikhonov regularization introduces additional constraints in order
@@ -2441,7 +2442,7 @@ carry the same current, and (b) 6 coils which, are permitted to carry
 any current.\label{fig:diag_comb_shield}}{Experimental results for the
 $\bm{\Sigma}$ matrix with the magnetic shield in place.}
 
-Fig.~\ref{fig:diag_comb_shield} shows the results for the
+Figure~\ref{fig:diag_comb_shield} shows the results for the
 $\bm{\Sigma}$ matrix when the magnetic shield is in place.  The
 general trends in the singular values are very similar as in the case
 without the magnetic shield.  As reported in
@@ -2657,10 +2658,10 @@ current of 10 mA was applied to the perturbation coil.
 \label{fig:center_6c_reg}}{Central magnetic field in
 the $z$ and $x$ directions, 6-coil feedback algorithm.}
 
-Fig.~\ref{fig:center_6c_reg} shows the magnetic fluctuation reduction
-on the central sensors in $z$, and $x$ axis for the 6-coil feedback
-algorithm discussed in the previous Section.  Results are compared
-when the outermost magnetic shield of the four-shell magnetic
+Figure~\ref{fig:center_6c_reg} shows the magnetic fluctuation
+reduction on the central sensors in $z$, and $x$ axis for the 6-coil
+feedback algorithm discussed in the previous Section.  Results are
+compared when the outermost magnetic shield of the four-shell magnetic
 shielding system is present.  The presence of the magnetic shield
 reduces the perturbation of the central field by a factor of 25.
 Otherwise the results are quite comparable, showing a similar
@@ -2739,22 +2740,22 @@ sensors.
 
 
 % \fig{Images/c_ramp_x}{width = \textwidth}{.\label{fig:c_ramp_x}}{S}
-\begin{itemize}
-\item Acquire ``natural'' fluctuations examples, with no perturbations.
-\begin{itemize}
-\item Feedback off.  This should give an idea of some ``typical'' fluctuations and typical Allan Deviations in nT.
-\item Feedback on.  The shielding factor doesn't have to always be greater than one.  In fact it might be good to compare a ``noisy'' case to a ``quiet'' case.  It is possible that in some extremely quiet case you might do better by not doing anything.
-\end{itemize}
-\item For the current ramping example, show all the currents, including the perturbation coil current if possible.
-\item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
-\end{itemize}
+%\begin{itemize}
+%\item Acquire ``natural'' fluctuations examples, with no perturbations.
+%\begin{itemize}
+%\item Feedback off.  This should give an idea of some ``typical'' fluctuations and typical Allan Deviations in nT.
+%\item Feedback on.  The shielding factor doesn't have to always be greater than one.  In fact it might be good to compare a ``noisy'' case to a ``quiet'' case.  It is possible that in some extremely quiet case you might do better by not doing anything.
+%\end{itemize}
+%\item For the current ramping example, show all the currents, including the perturbation coil current if possible.
+%\item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
+%\end{itemize}
 
 %\fig{Images/adev_test}{width = \textwidth}{\label{fig:px}}{S}
 
 This Section presents my results for Allan deviation measurements
 under two conditions:
 \begin{itemize}
-\item ``Natural'' fluctuations with feedback on.  In this case I tried to compensate typical changes in the laboratory at U.~Winnipeg.
+\item ``Natural'' fluctuations with feedback on.  In this case I tried to compensate typical environmental changes in the magnetic field in the laboratory at U.~Winnipeg.
 \item Simulated drift, where I slowly ramped the current in the perturbation coil over a long time, to see how well the feedback system could correct a linear drift.
 \end{itemize}
 In each case the feedback system provided superior result where the
@@ -2763,8 +2764,8 @@ deviations) was larger than one.
 
 \fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{S}
 
-Fig.~\ref{fig:adev_nc} shows a measurement of fluxgate readings over a
-24-hour period with the feedback system switched off.  This gives an
+Figure~\ref{fig:adev_nc} shows a measurement of fluxgate readings over
+a 24-hour period with the feedback system switched off.  This gives an
 impression of the overal scale of the fluctuations that the feedback
 algorithm must correct.  It was based on measurements like this that
 feedback system was designed with a dynamic range capable of
@@ -2830,79 +2831,158 @@ frequency of 6~Hz) suppressed.  In this way the shielding factor
 %    \label{fig:p0_i100_x}
 %\end{figure}
 
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
 \begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/sf_np_x}
-        \caption{}
-        \label{fig:7}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/c_np_x}
-        \caption{}
-        \label{fig:8}
-    \end{subfigure}
-\caption[S]{(a) 5-coil feedback algorithm for ``natural'' fluctuations.  Magnetic field changes $\Delta B$ are shown in the left panel while the corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels.  Grey curves show the results for the estimated uncorrected field values.  (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
-    \label{fig:np_x}
+\centering
+\includegraphics[width=\textwidth]{Images/sf_np_x}
+\caption{5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+\label{fig:7}
+%\end{figure}
+%\end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%\begin{figure}
+%\centering
+\includegraphics[width=0.7\textwidth]{Images/c_np_x}
+\caption{Coil currents for the run shown in Fig.~\ref{fig:7}.}
+\label{fig:8}
 \end{figure}
+%    \end{subfigure}
+%\caption[S]{(a) 5-coil feedback algorithm for ``natural'' fluctuations.  Magnetic field changes $\Delta B$ are shown in the left panel while the corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels.  Grey curves show the results for the estimated uncorrected field values.  (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+%    \label{fig:np_x}
+%\end{figure}
 
 The feedback algorithm corrects the natural field fluctuations well.
-Fig.~\ref{np_x} shows the results of a run over a 4096~s period (just
-over an hour).  In general 
+Figure~\ref{fig:7} shows the results of a run over a 4096~s period
+(just over an hour).  In Fig.~\ref{fig:7}(a), it can be seen that in
+general the fluctuations in the fluxgate readings are reduced compared
+to their expected values.  This is also seen in the Allan deviations
+shown in Fig.~\ref{fig:7}(b), where the uncorrected readings (shown in
+grey) are seen generally to have a larger Allan deviation than the
+corrected readings (shown by the colored curves).  In
+Fig.~\ref{fig:7}(c), the ratio of Allan deviations
+(uncorrected/corrected), which is defined as the shielding factor, is
+shown.  In general the shielding factor is larger than one and less
+than about 2.  For longer times one of the fluxgate axes drops below
+one, indicating that over long times, the feedback algorithm did not
+stabilize that particular axis better than as if the feedback
+algorithm had been switched off.  However, on average the feedback
+system improved the fluxgate reading stability over time.  For the
+longest times $\tau\gtrsim 100$~s, there is also some increased
+statistical fluctuation in the data.
 
+Figure~\ref{fig:8} shows the behavior of the coil currents for this
+run over time.  It can be seen that the currents are indeed responding
+to changes seen in the magnetic field, for example the step feature
+near $t=3500$~s.
+
+Over these shorter, hour-long runs, a common feature is that the
+excursions in the magnetic field are generally smaller than over a
+24~h period.
+
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
 \begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/sf_np_x2}
-        \caption{np2.}
+\centering
+        \includegraphics[width=\textwidth]{Images/sf_np_x2}
+        \caption{Second example run of 5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
         \label{fig:9}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7 cm]{Images/c_np_x2}
-        \caption{np2, c}
+%\end{figure}
+%    \end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%\begin{figure}
+%\centering
+        \includegraphics[width=.85\textwidth]{Images/c_np_x2}
+        \caption{Coil currents for the run shown in Fig.~\ref{fig:9}.}
         \label{fig:10}
-    \end{subfigure}
-\caption[S]{(a)5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Magnetic field changes $\Delta B$ are shown in the left panels while corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels, (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
-    \label{fig:np_x2}
 \end{figure}
-\fig{Images/sf_np_x3}{width = \textwidth}{np3 p10i37. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.\label{fig:np_x3}}{S}
+
+%    \end{subfigure}
+%\caption[S]{(a)5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. Magnetic field changes $\Delta B$ are shown in the left panels while corresponding Allan deviation (top) and shielding factor (bottom)  are shown in the right panels, (b) Coil currents. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+%    \label{fig:np_x2}
+%\end{figure}
+
+%\fig{Images/sf_np_x3}{width = \textwidth}{np3 p10i37. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.\label{fig:np_x3}}{S}
 %\fig{Images/sf_np_x4_i100}{width = \textwidth}{np4 p0i100. 5-coil feedback algorithm for ``natural'' fluctuations with the currents $C_x^+$ and $C_x^-$ are required to be a common current $C_x^\pm$. (a) Magnetic field changes $\Delta B$ , corresponding (b) Allan deviation, and (c) shielding factor. The feedback parameters are $k_c^p=0.0$ and $k_c^i=1.0$.\label{fig:np_x4}}{S}
 
+
+The results of another similar hour-long sample run are shown in
+Figs.~\ref{fig:9} and~\ref{fig:10}.  The general observations are
+similar.  This run had some increased noise which begins at about
+$t=2500$~s.  Nonetheless the feedback algorithm keeps the shielding
+factor generally above one.
+
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
 \begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x2}
-        \caption{p10i37,ramp.}
-        \label{fig:0_1}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x}
-        \caption{p10i37,ramp, c}
+\centering
+\includegraphics[width=\textwidth]{Images/sf_ramp_x2}
+\caption{Correcting a slowly ramped current in the perturbation coil.  (a)
+ Magnetic field changes $\Delta B$ over time (b) Allan deviation, and
+ (c) shielding factor.  Grey curves show the results for the estimated
+ uncorrected field values.}  \label{fig:0_1}
+%\end{figure}
+%\begin{figure}[h]
+%    \end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%        \centering
+        \includegraphics[width=.7\textwidth]{Images/c_ramp_x}
+        \caption{Coil currents for the run shown in Fig.~\ref{fig:0_1}.}
         \label{fig:0_2}
-    \end{subfigure}
-\caption[S]{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.}
-    \label{fig:p10_i37_ramp_x}
+\end{figure}
+%\end{subfigure}
+%\caption[S]{(a)$\Delta B$ with feedback loop, (b) Allan Deviation, (c) Shielding Factor,5coils, $C_x^\pm$ , shield, ramping at an increment of $9.77 \mu A$ over 4096~s., $k_c^p=0.1$, $k_c^i=0.37$, non-regularized pseudo-inverse of $\bm{M^{-1}}$.}
+%    \label{fig:p10_i37_ramp_x}
+%\end{figure}
+
+In order to induce a long-term drift in the fluxgate signals, I also
+conducted runs where I slowly ramped the current in the perturbation
+coil over the 4096~s measurement period.  The results of one such run
+are shown in Figs.~\ref{fig:0_1} and~\ref{fig:0_2}.  In
+Fig.~\ref{fig:0_1}, it can be seen that all the fluxgate signals ramp
+slowly over time, in addition to experiencing the usual smaller
+environmental changes.  Otherwise, in terms of the Allan deviation,
+the feedback system performs similarly to before.  The different form
+of the long-term drift in the perturbation manifests itself as a
+linear dependence of the Allan deviation at long times, as can be seen
+in Fig.~\ref{fig:0_1}(b).  But the shielding factor
+(Fig.~\ref{fig:0_1}(c)) is generally still with the range of 1 to 3.
+Figure~\ref{fig:0_2} shows that the perturbation coil generally
+affects the current $C_z^+$ in the coil closest to the perturbation
+coil, as seen previously when a step in current is applied to the
+perturbation coil and when using this 5-coil feedback system
+configuration.
+
+%\begin{figure}
+%     \begin{subfigure}{\textwidth}
+\begin{figure}
+\centering
+        \includegraphics[width=\textwidth]{Images/sf_ramp_x2_2} \caption{Second
+        example run correcting a slowly ramped current in the
+        perturbation coil.  (a) Magnetic field changes $\Delta B$ over
+        time (b) Allan deviation, and (c) shielding
+        factor.}  \label{fig:0_3}
+%\end{figure}
+%    \end{subfigure}\\[1ex]
+%    \begin{subfigure}{\textwidth}
+%\begin{figure}[h]
+%\centering
+        \includegraphics[width=.9\textwidth]{Images/c_ramp_x2} \caption{Coil
+        currents for the run shown in
+        Fig.~\ref{fig:0_3}.}  \label{fig:0_4}
+%    \end{subfigure}
+%\caption[S]{S.}
+%    \label{fig:p10_i37_ramp_x2}
 \end{figure}
 
-\begin{figure}
-     \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/sf_ramp_x2_2}
-        \caption{p10i37,ramp2.}
-        \label{fig:0_3}
-    \end{subfigure}\\[1ex]
-    \begin{subfigure}{\textwidth}
-        \centering
-        \includegraphics[width=\textwidth, height=7.5 cm]{Images/c_ramp_x2}
-        \caption{p10i37,ramp2, c}
-        \label{fig:0_4}
-    \end{subfigure}
-\caption[S]{S.}
-    \label{fig:p10_i37_ramp_x2}
-\end{figure}
+Figs.~\ref{fig:0_3} and \ref{fig:0_4} show another example run where
+the current in the perturbation coil was ramped.  This run is somewhat
+unique in that it experienced very little environmental noise over the
+course of the run.  This is seen through the Allan deviation in
+Fig.~\ref{fig:0_3}(b) which rises more slowly than usual, smoothly
+transitioning to a linear dependence at long times because of the
+drift induced by the ramping of the perturbation coil.  Otherwise the
+behavior is quite similar to the previous example.
 
 % \fig{Images/p10i37_x}{width = \textwidth}{p10i37.\label{fig:p10_i37_x}}{S}
 % \fig{Images/c_p10i37_x}{width = \textwidth}{p10i37, c zoomed.\label{fig:C_p60_i37_x}}{S}
