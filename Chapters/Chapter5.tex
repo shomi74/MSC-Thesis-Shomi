@@ -828,7 +828,7 @@ behavior of the multidimensional PI control loop:
 \begin{enumerate}
 \item the quasi-static magnetic response of the magnetic shield to Earth's field
 \item the magnetic response of the magnetic shield to changes in coil-cube currents (in turn enabling us to determine $\bm{M}$), and
-\item the magnetic response of the magnetic shield to the perturbation coil (in turn allowing us to simulate the PI system response to this pertubation.
+\item the magnetic response of the magnetic shield to the perturbation coil (in turn allowing us to simulate the PI system response to this perturbation.
 \end{enumerate}
 \item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into {\it e.g.}~the matrix $\bm{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
 \item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed me to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
@@ -2478,7 +2478,7 @@ the non-regularized pseudoinverse has been used.  For
 Fig.~\ref{fig:5c_pseudo_shield_y}, the $C_y^+$ and $C_y^-$ coils have
 been required to carry a common current $C_y^\pm$ while the other five
 coils may be adjusted freely.  Even with the magnetic shield present,
-the results are very similar to Fig.~\ref{fig:coil_pseudo}(b) where no
+the results are very similar to Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} where no
 shield was present.
 
 %\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
@@ -2636,7 +2636,7 @@ The general conclusion of these studies is that they are in
 qualitative agreement with the previous works of others.  I also
 believe that one of the main limiting factors relates to the need for
 more advanced coil design, which I discuss further in
-Chapter~\ref{ch:final}.
+Chapter~\ref{ch:conclusion}.
 
 
 \subsection{Internal Sensor Perturbations}
@@ -2686,7 +2686,8 @@ the $z$ (blue) and $x$ (red) directions.  The 5-coil feedback
 algorithm was used, with the currents $C_x^\pm$ being constrained to
 be equal.  The outermost layer of the magnetic shielding system was
 placed around the sensors and within the coil
-cube.\label{fig:center_pseudo_5c_x}}{S}
+cube.\label{fig:center_pseudo_5c_x}}{The 5-coil feedback
+algorithm}
 
 The results are virtually identical if the 5-coil feedback algorithm
 is used (Fig.~\ref{fig:center_pseudo_5c_x}).  This is not surprising
@@ -2762,7 +2763,7 @@ In each case the feedback system provided superior result where the
 shielding factor (ratio of uncorrected to feedback-corrected Allan
 deviations) was larger than one.
 
-\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{S}
+\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{Field change $\Delta B$ for 24 hrs with feedback algorithm switched off.}
 
 Figure~\ref{fig:adev_nc} shows a measurement of fluxgate readings over
 a 24-hour period with the feedback system switched off.  This gives an
@@ -2770,7 +2771,7 @@ impression of the overal scale of the fluctuations that the feedback
 algorithm must correct.  It was based on measurements like this that
 feedback system was designed with a dynamic range capable of
 correcting a few hundred nT in the fluxgate readings.  The Allan
-deviation shown in Fig.~\ref{fig:adev_nc}(b) rises with typically a
+deviation shown in Fig.~\ref{fig:adev_nc}\textcolor{blue}{(b)} rises with typically a
 $\tau^{1/2}$-$\tau^{1/3}$ dependence, which is similar to a 1D random
 walk.
 
@@ -2780,7 +2781,7 @@ walk.
         height=7
         cm]{Images/p10i37_x} \caption{}  \label{fig:1} \end{subfigure}\\[1ex] \begin{subfigure}{\textwidth} \centering \includegraphics[width=\textwidth,
         height=7 cm]{Images/c_p10i37_x} \caption{} \label{fig:2} \end{subfigure}
-\caption[S]{(a) 5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ required to be a common current $C_x^\pm$. Coil currents are shown in the left panel while magnetic field changes are shown  in the right panel, (b) zoomed coil currents near the time when the perturbation coil is engaged. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+\caption[5-coil feedback algorithm with zoomed coil currents]{(a) 5-coil feedback algorithm with the currents $C_x^+$ and $C_x^-$ required to be a common current $C_x^\pm$. Coil currents are shown in the left panel while magnetic field changes are shown  in the right panel, (b) zoomed coil currents near the time when the perturbation coil is engaged. The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
     \label{fig:p10_i37_x}
 \end{figure}
 
@@ -2836,7 +2837,7 @@ frequency of 6~Hz) suppressed.  In this way the shielding factor
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Images/sf_np_x}
-\caption{5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+\caption[5-coil feedback algorithm for ``natural'' fluctuations]{5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
 \label{fig:7}
 %\end{figure}
 %\end{subfigure}\\[1ex]
@@ -2854,13 +2855,13 @@ frequency of 6~Hz) suppressed.  In this way the shielding factor
 
 The feedback algorithm corrects the natural field fluctuations well.
 Figure~\ref{fig:7} shows the results of a run over a 4096~s period
-(just over an hour).  In Fig.~\ref{fig:7}(a), it can be seen that in
+(just over an hour).  In Fig.~\ref{fig:7}\textcolor{blue}{(a)}, it can be seen that in
 general the fluctuations in the fluxgate readings are reduced compared
 to their expected values.  This is also seen in the Allan deviations
-shown in Fig.~\ref{fig:7}(b), where the uncorrected readings (shown in
+shown in Fig.~\ref{fig:7}\textcolor{blue}{(b)}, where the uncorrected readings (shown in
 grey) are seen generally to have a larger Allan deviation than the
 corrected readings (shown by the colored curves).  In
-Fig.~\ref{fig:7}(c), the ratio of Allan deviations
+Fig.~\ref{fig:7}\textcolor{blue}{(c)}, the ratio of Allan deviations
 (uncorrected/corrected), which is defined as the shielding factor, is
 shown.  In general the shielding factor is larger than one and less
 than about 2.  For longer times one of the fluxgate axes drops below
@@ -2885,7 +2886,7 @@ excursions in the magnetic field are generally smaller than over a
 \begin{figure}
 \centering
         \includegraphics[width=\textwidth]{Images/sf_np_x2}
-        \caption{Second example run of 5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
+        \caption[Second example run of 5-coil feedback algorithm for ``natural'' fluctuations]{Second example run of 5-coil feedback algorithm for ``natural'' fluctuations.  (a) Magnetic field changes $\Delta B$ over time (b) Allan deviation, and (c) shielding factor.  Grey curves show the results for the estimated uncorrected field values.  The feedback parameters are $k_c^p=0.1$ and $k_c^i=0.37$.}
         \label{fig:9}
 %\end{figure}
 %    \end{subfigure}\\[1ex]
@@ -2917,7 +2918,7 @@ factor generally above one.
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Images/sf_ramp_x2}
-\caption{Correcting a slowly ramped current in the perturbation coil.  (a)
+\caption[Correcting a slowly ramped current in the perturbation coil.]{Correcting a slowly ramped current in the perturbation coil.  (a)
  Magnetic field changes $\Delta B$ over time (b) Allan deviation, and
  (c) shielding factor.  Grey curves show the results for the estimated
  uncorrected field values.}  \label{fig:0_1}
@@ -2945,8 +2946,8 @@ environmental changes.  Otherwise, in terms of the Allan deviation,
 the feedback system performs similarly to before.  The different form
 of the long-term drift in the perturbation manifests itself as a
 linear dependence of the Allan deviation at long times, as can be seen
-in Fig.~\ref{fig:0_1}(b).  But the shielding factor
-(Fig.~\ref{fig:0_1}(c)) is generally still with the range of 1 to 3.
+in Fig.~\ref{fig:0_1}\textcolor{blue}{(b)}.  But the shielding factor
+(Fig.~\ref{fig:0_1}\textcolor{blue}{(c)}) is generally still with the range of 1 to 3.
 Figure~\ref{fig:0_2} shows that the perturbation coil generally
 affects the current $C_z^+$ in the coil closest to the perturbation
 coil, as seen previously when a step in current is applied to the
@@ -2957,7 +2958,9 @@ configuration.
 %     \begin{subfigure}{\textwidth}
 \begin{figure}
 \centering
-        \includegraphics[width=\textwidth]{Images/sf_ramp_x2_2} \caption{Second
+        \includegraphics[width=\textwidth]{Images/sf_ramp_x2_2} \caption[Second
+        example run correcting a slowly ramped current in the
+        perturbation coil.]{Second
         example run correcting a slowly ramped current in the
         perturbation coil.  (a) Magnetic field changes $\Delta B$ over
         time (b) Allan deviation, and (c) shielding
@@ -2979,7 +2982,7 @@ Figs.~\ref{fig:0_3} and \ref{fig:0_4} show another example run where
 the current in the perturbation coil was ramped.  This run is somewhat
 unique in that it experienced very little environmental noise over the
 course of the run.  This is seen through the Allan deviation in
-Fig.~\ref{fig:0_3}(b) which rises more slowly than usual, smoothly
+Fig.~\ref{fig:0_3}\textcolor{blue}{(b)} which rises more slowly than usual, smoothly
 transitioning to a linear dependence at long times because of the
 drift induced by the ramping of the perturbation coil.  Otherwise the
 behavior is quite similar to the previous example.

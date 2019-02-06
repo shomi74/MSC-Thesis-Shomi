@@ -93,7 +93,7 @@ where, $M_{sc}$ are the elements of the matrix $\bm{M}$ and $I_c^n$ is the curre
         \hline        
     \end{tabular}
     % \vspace{4mm}
-    \caption[Definition of different indices to indicate sensor, coil and no. of iteration in the feedback loop]{Definition of different indices to indicate sensor, coil and no. of iteration in the feedback loop where $s$ or $S$ (if control sensors are included) can be taken different labels based on how the sensor position has been specified. For example- it could start with center-$x$ or 3$x$ which means the first sensor is at position center or 3 as specified in Section~ \ref{sec:cube} in $x$-axis respectively. Similarly, $c$ started with $C_x^-$ means the first coil is $C_x^-$ as defined again in Section~ \ref{sec:cube}. The index $n$ denotes the iteration number of the PI feedback control algorithm. }\label{table:index}
+    \caption[Definition of different indices to indicate sensor, coil and no. of iteration]{Definition of different indices to indicate sensor, coil and no. of iteration in the feedback loop where $s$ or $S$ (if control sensors are included) can be taken different labels based on how the sensor position has been specified. For example- it could start with center-$x$ or 3$x$ which means the first sensor is at position center or 3 as specified in Section~ \ref{sec:cube} in $x$-axis respectively. Similarly, $c$ started with $C_x^-$ means the first coil is $C_x^-$ as defined again in Section~ \ref{sec:cube}. The index $n$ denotes the iteration number of the PI feedback control algorithm. }\label{table:index}
 \end{table}
 
 %\FloatBarrier
@@ -267,7 +267,7 @@ where, $\Sigma_{11},..,\Sigma_{nn}=\sigma_{n}$ are diagonal values of $\bm{\Sigm
 
 The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its invert. That is   $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
 \begin{equation}\label{eq:sigma_inv}
-\frac{1}{\bm{\Sigma}} = \begin{bmatrix} 
+\bm{\Sigma^{-1}=}\frac{1}{\bm{\Sigma}} = \begin{bmatrix} 
 \frac{1}{\Sigma_{11}} &  &  & 0 \\
   & . &  &  \\
   &   & . &  \\
@@ -291,39 +291,33 @@ The pseudoinverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}
 
 % In earlier Section we have discussed a matrix $\bm{M}$ which is shown in Fig.~\ref{fig:m}. $\bm{M^T}$ is the transpose of that matrix. $\bm{M^T}$ has been decomposed via SVD in $\bm{U}$ , $\bm{\Sigma}$ and $\bm{V^T}$ which are shown in Fig.~\ref{fig:6c_U}, Fig.~\ref{fig:v} and Fig.~\ref{fig:6c_Vt} respectively. The $\bm{\Sigma}$ in Fig.~\ref{fig:v} shows that except diagonal values all are zero with the diagonal values are arranged from $\Sigma_{11}$ to $\Sigma_{nn}$ in a decreasing order each having non-negative values. 
 
-From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
- \begin{equation}\label{eq:cond}
-     cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
- \end{equation}
+% From those values the condition number of $\bm{M^T}$  can be found. The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of $\bm{M^T}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
+%  \begin{equation}\label{eq:cond}
+%      cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
+%  \end{equation}
  
-Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
-
-But I found that matrix $\bm{M}$ has some small singular values {\it e.g} small $\sigma_n$. The diagonal elements $\sigma_n$ of $\bm{\Sigma}$ represent eigenvalues. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. A large $\Sigma_{11}$ represents a coil mode where a small change in current gives rise to a large change in field. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
+% Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
+Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$. It is seen that except diagonal elements $\sigma_n$, all are zero with the $\sigma_n$ are arranged from $\Sigma_{11}$ to $\Sigma_{66}$ in a decreasing order each having non-negative values. The diagonal elements $\sigma_n$ represent eigenvalues of $\bm{M}$. It is also noticeable that $\Sigma_{66}$ is very small compare to $\Sigma_{11}$. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set.  If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. The reason can be explained by representing the Eq.~(\ref{eq:del_I}) in vector form.
 
 \begin{equation}\label{eq:del_I_pseudo}
-    \Vec{\Delta I} \approx\bm{M^{-1}}\Vec{\Delta B}=\bm{V \Sigma^{-1} U^T}\Vec{\Delta B}=\sum_{n=1}^{rank(\bm{M})}\frac{v_n u_n^T \Vec{\Delta B}}{ \sigma_n}
+    \Vec{\Delta I} \approx\bm{M^{-1}}\Vec{\Delta B}=\bm{V \Sigma^{-1} U^T}\Vec{\Delta B}=\sum_{n=1}^{rank(\bm{M})}v_n\frac{u_n^T \Vec{\Delta B}}{ \sigma_n}
 \end{equation}
-where, rank of $\bm{M}$ is equal to the number of positive singular values.
-
-It is seen that $\Vec{\Delta I}$ is dominated by the singular vectors $v_n$ due to small $\sigma_n$.
+where, rank of $\bm{M}$ is equal to the number of positive singular values. It is seen that $\Vec{\Delta I}$ for smaller $\sigma_n$ will be much larger compare to large $\sigma_n$ for same scale of field change $\Vec{\Delta B}$. In other-words, $\Vec{\Delta I}$ is dominated by right singular vectors $v_n$ due to small $\sigma_n$. The quantities $\frac{u_n^T \Vec{\Delta B}}{ \sigma_n}$ are the expansion coefficients for the basis vectors $v_n$. When these quantities are small in magnitude, the $\Vec{\Delta I}$ has very little contribution from $v_n$. But dividing by a small $\sigma_n$ greatly magnify the corresponding error component, $u_n^T \Vec{\Delta B}$, which in turn contributes a large multiple of the high-frequency information contained in $v_n$ to compute $\Vec{\Delta I}$. Due to this, the coil currents as well as magnetic field changes are dominated by by high frequencies, which will be shown later in Fig.~\ref{fig:6c_pseudo_shield} . The above discussion is based on the similar problem faced while deblurring image which is explained nicely in Section~\textcolor{blue}{1.4} of Chapter~\textcolor{blue}{1} of Ref.~\cite{svd4}.
 
 % The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field.
-In Section~\ref{sec:coil_config} we analyzed this effect further in both simulation and experiment. 
-For now, we present the strategy of Ref.~\cite{bea} which we followed initially and it involved regularization.
+In Section~\ref{sec:coil_config}, we analyzed this effect further in both simulation and experiment. For now, I present the strategy of Ref.~\cite{bea} which I followed initially and it involved regularization.
 
- 
-Regularization methods help to reduce the dominance $v_n$. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which solves the problem as 
+Regularization methods help to reduce the dominance $v_n$ corresponding to small $\sigma_n$. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which solves the problem as 
 
 \begin{equation}
     ||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2^2+{\alpha}^2||\Vec{\Delta I}||_2^2
 \end{equation}
-
-
-which modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
+where $||\cdot ||_2$ is the Euclidean norm. The aim of the feedback algorithm is to make $||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2$ equal to zero. But making it zero will regenerate the original problem of larger $\Vec{\Delta I}$ for smaller $\sigma_n$ as explained above and by Eq.~(\ref{eq:del_I_pseudo}). Tikhnov regularization tries to compromise $||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2$ and $|\Vec{\Delta I}||_2$ so that both of them are smaller. Tikhnov regularization makes that possible by introducing a filter $\alpha$ to avoid high frequency error dominated $v_n$. The filter $\alpha$ modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
 
 \begin{equation}\label{eq:minvR}
     \frac{1}{\sigma_n} \rightarrow \frac{\sigma_n}{\sigma_n^2+\alpha^2} 
 \end{equation}
+
 Tikhonov regularization has been further modified by defining $\alpha=10^r$ as in the previous study \cite{bea}) where, $r$ is called the regularization parameter. If  $r \rightarrow - \infty$, Eq.~(\ref{eq:minvR}) becomes the same as Eq.~(\ref{eq:sigma_inv}) hence no regularization whereas $r \rightarrow + \infty$ results in $\bm{M^{-1}} \rightarrow 0$ i.e. no control. Generally, $r$ should be of order $\mathbf{log}(\sigma_{d})$ in order for regularization to have its desired effect of making the diagonal values of $\bm{\Sigma^{-1}}$ more equal. Example : suppose $\sigma_1$=100 and $\sigma_n$=1 and $\alpha$=10.
 
 \begin{equation*}
@@ -405,7 +399,7 @@ The function $F(r)$ would be zero for a perfectly compensated system and unity f
 \fig{Images/6c_f}{width = \textwidth,height =9.5cm}{The effect of $r$ on horizontal axis on the compensation due to the field produced by $ \Delta I_c^{\text{sim}}(r)$ to counteract $B_s^{\text{rand}}$ indicated by $F(r)$ on vertical axis. The different curves indicate 30 different sets of $B_s^{\text{rand}}$ with the distribution describes earlier. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
 
 %\FloatBarrier
-It is seen from the Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with the increase of $r$, current fluctuations are decreasing but field fluctuations are increasing step. Ref.~\cite{bea} suggested a compromise between them be struck to determine the value of $r$, $\it i.e.$ that reducing current fluctuations ($r \rightarrow + \infty$) be traded off against reducing magnetic field fluctuations ($r \rightarrow - \infty$). to decide the value of $r$, $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized as
+It is seen from Fig.~\ref{fig:Isim} and Fig.~\ref{fig:fluc-sim} that with the increase of $r$, current fluctuations are decreasing but field fluctuations are increasing step. Ref.~\cite{bea} suggested a compromise between them be struck to determine the value of $r$, $\it i.e.$ that reducing current fluctuations ($r \rightarrow + \infty$) be traded off against reducing magnetic field fluctuations ($r \rightarrow - \infty$). to decide the value of $r$, $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized as
 
 \begin{equation}\label{eq:Inorm}
     \overline{\Delta I_{\text{RMS}}^{\text{sim}}}(r)=\frac{\Delta I_{\text{RMS}}^{\text{sim}}(r)}{\Delta I_{\text{RMS}}^{\text{sim}}(r\rightarrow - \infty)} \;\mathbf{,\;and}
@@ -450,7 +444,7 @@ In Ref.~\cite{tuning_formula}, it is also mentioned that $k_c^i=(k_c^p/T_i)$ whi
 
 \fig{Images/p134c1}{width = \textwidth}{Zoomed current behaviour in coil $C_x^+$ with $k_c^p$ =1.34 and $k_c^i$=0. Vertical axis represent the currents in coil $C_x^+$ with initial current being 100 mA. For position of the coil see Fig.~\ref{fig:coil}. \label{fig:tuning}}{Zoomed current behaviour in coil $C_x^+$.}
 % in response to the perturbation coils
-\FloatBarrier
+%\FloatBarrier
 Fig.~\ref{fig:tuning} shows the first step in the tuning process for the prototype. At $k_c^p$=1.34 and $k_c^i$=0, the current in the coils oscillates allowing us to identify $G_u$=1.34. For simplicity, zoomed version of the current in coil $C_x^+$ for $G_u$=1.34 is shown only. The ultimate period $T_u$ is obtained to be $T_u$=0.287 s. Now, according to Table~\ref{table:tuning}, the proportional gain and integral reset are
 
 \begin{equation}
@@ -473,7 +467,7 @@ They can be further tuned for the individual coil currents if necessary. In gene
 % 
 
 % Fig.\ref{fig:bt} shows the compensation over time with applied perturbation. \newpage
-\FloatBarrier
+%\FloatBarrier
 
 
 
@@ -489,7 +483,18 @@ For every system, there are some metrics, which quantitatively determine the sys
 
 \end{itemize}
 \subsection{Condition Number}
-The condition number of a matrix and its relation to the regularization parameter have already been discussed in Section~\ref{sec:inv}. Recall that the condition number of a matrix is $\geq$1, where low condition number indicates a well-conditioned matrix while large indicates a ill-conditioned matrix.  The condition number can be influenced by the dimension of a matrix. But, the change in condition number in case of  well-conditioned matrix is incomparably smaller than that in a ill-conditioned matrix~\cite{cond_m_size}. However, there is no upper bound that indicates the limit of well-conditioned matrix. So, there is no definite answer about how small is considered as well-conditioned matrix. For the active compensation system, the goal is to have matrix condition number as close to 1 as possible so that compensating a certain scale of change in magnetic field requires less change in current and also the compensation system does not loose its effect on all the sensors while making the condition number less. The results with well and ill-conditioned matrix are discussed in Chapter~\ref{ch:quantification}.
+
+The condition number of a matrix measures the change in the output for a small change in input. Large condition number indicates ill-conditioned matrix while small condition number indicates well-conditioned matrix. The condition number of the matrix $\bm{M}$ can be determined from the diagonal matrix $\bm{\Sigma}$ as 
+ \begin{equation}\label{eq:cond}
+     cond(\bm{M})=\frac{max(\sigma_n)}{min(\sigma_n)}
+ \end{equation}
+
+The condition number of a matrix is $\geq$1, where low condition number indicates a well-conditioned matrix while large indicates a ill-conditioned matrix.
+
+The diagonal elements $\sigma_n$ were shown in Fig.~\ref{fig:v}. Using Eq.~(\ref{eq:cond}), the condition number of the corresponding $\bm{M}=5448.0/184.0=29.61$ which indicates an ill-conditioned matrix. So having a very small $\sigma_n$ indicates an ill-conditioned matrix. Larger condition number also indicates that the $\Vec{\Delta I}$ is very sensitive to perturbation and rounding errors $u_n^T \Vec{\Delta B}$ (see Eq.~(\ref{eq:del_I_pseudo})).
+% The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field.
+
+The condition number can be influenced by the dimension of a matrix. But, the change in condition number in case of  well-conditioned matrix is incomparably smaller than that in a ill-conditioned matrix~\cite{cond_m_size}. However, there is no upper bound that indicates the limit of well-conditioned matrix. So, there is no definite answer about how small is considered as well-conditioned matrix. For the active compensation system, the goal is to have matrix condition number as close to 1 as possible so that compensating a certain scale of change in magnetic field requires less change in current and also the compensation system does not loose its effect on all the sensors while making the condition number less. Tikhonov regularization discussed in Section~\ref{sec:inv} tries to fulfill the goal of reducing the condition number closer to 1 but later I discovered that having a well-conditioned matrix is way better and correct one than reducing the condition number of an ill-conditioned matrix by Tikhonov regularization. The results with well and Tikhonov regularized version of ill-conditioned matrix are discussed in Section~\ref{sec:coil_config}.
 
 % The main aim is to make the prototype well-conditioned by determining the best compromise between current and field fluctuations which will lead us to the optimized $r$. It has been also explored to determine whether the optimized $r$ is giving the best result or not. If not, additional parameters have been tuned to get the best possible result.
 
@@ -499,14 +504,17 @@ Active magnetic field compensation come into play in the first place to make the
 
 
 \subsection{PI Behavior to Stimulus}
+
+\fig{Images/bt-mod}{width =\textwidth,height=10cm}{Magnetic field reductions from some of the sensor positions closer to the perturbation coil. For positions of the sensors please see Fig.~\ref{fig:coil}. Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:bt_mod}}{Magnetic field reductions from some of the sensor positions.} 
+
 Tuning is one of the main factor of PI control feedback algorithm. After going through all the steps, it needs to have a suitable value of PI parameters which can be obtained by tuning the prototype as discussed in section \ref{sec:tune}. Moreover, PI behavior has been also monitored for step response in the perturb electromagnet coil. As the main concern is about the experiment which will be carried inside the passive shielding, the response has been specially studied on the central sensors. Some of the responses have been shown in Fig. \ref{fig:bt_mod}. It is seen that without the compensation system (red colors) there are $\sim$+20 nT step responses in  1x and 1y sensor positions and $\sim$-30 nT step responses in 1z, 8x and 8y sensor positions. The magnetic field without the compensation effect i.e. uncompensated magnetic field is predicted by
 \begin{equation}\label{eq:Buncomp}
      B_s^n(\text{uncompensated})=B_s^n(\text{measured})- B_s^n(\text{coils})
 \end{equation}
 where, $B_s^n(\text{measured})$ is the actual measurement from coming the fluxgate sensors with $n$=(1,...N) is the no of measurements taken and $B_s^n(coils)$ is determined using Eq.~(\ref{eq:B_coils}). The active compensation can fully eliminate the step response in 1x sensor position and to some levels in other positions indicated by blue, green and cyan colors. Moreover, the last one named 'center-Z' predicts the response in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of step response level. We are considering the good results if the system response time is fastest without any overshoot and also reduces the step response levels as much as possible. The results are considered bad if the there is very slow response of the system.
 
-\fig{Images/bt-mod}{width =\textwidth,height=10cm}{Magnetic field reductions from some of the sensor positions closer to the perturbation coil. For positions of the sensors please see Fig.~\ref{fig:coil}. Vertical axis represents the $\Delta B_s$ (see Eq~(\ref{eq:del_B})) and the horizontal axis represent the time. All the colors has been discussed in the text. The 'ON' and 'OFF' vertical dashed lines indicate the time of the perturbation coil being turned 'ON' and 'OFF' respectively. \label{fig:bt_mod}}{Magnetic field reductions from some of the sensor positions.}
-\FloatBarrier
+
+%\FloatBarrier
  
  \subsection{Allan Deviations and Shielding Factor}
  
@@ -516,10 +524,12 @@ Allan standard deviation \cite{allan} is usually applied to the time series to d
 \end{equation}
 where, $\overline{B_l}(\tau)$ is the average magnetic field for a sub sample $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ is the total measurement time and $N$ is total number of sub samples. The largest integration time for total measurement time $T$ is $\tau_{\text{max}}=T/2$ and for that the total number of sub sample is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. So, $\sigma_{Adev}(\tau_{\text{max}})$ is negligible since there is only one difference value of sub sample as seen by Eq.~(\ref{eq:adev}). Moreover, $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ indicates random noise, $\sigma_{Adev}\approx \sqrt{\tau}$ indicates random walk and $\sigma_{Adev}\approx \tau$ indicates linear drift. 
 
-The Allan deviation calculation of $\Delta B$ found by measuring 8x without any feedback loop for tau=100 s has been shown in Fig.~\ref{fig:sf_mod}\textcolor{blue}{(a)}. The Fig.~\ref{fig:sf_mod}\textcolor{blue}{(b)} shows the Allan deviation of the same $\Delta B$ for different taus.  It is seen that $\sigma_{Adev}\approx \sqrt{\tau}$ which indicates random walk when there is no compensation system is running. For the prototype, $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ considers as good result while $\sigma_{Adev}\approx \sqrt{\tau}$ or $\approx \tau$ consider to be bad. That is the Allan deviation of the magnetic field due to compensation should be always less than the Allan deviation of the uncompensated magnetic field which indicates that the magnetic field is less fluctuated i.e. more stable during compensation than without compensation in time. 
+\fig{Images/sf_b}{width =\textwidth,height=12cm}{$\Delta B$ without feedback loop in sensor position 8x (top) and the Allan standard deviation for that $\Delta B$ (bottom). Red horizontal lines represent $\overline{B_l}(\tau)$ for 8 sub-samples over integration time $\tau=128$~s, and vertical dashed lines indicate the upper limit of each sub sample. The Allan deviation of $\Delta B$ in for different taus are shown in bottom graph. \label{fig:sf_mod}}{The Allan deviation.}
+
+
+The Allan deviation calculation of $\Delta B$ found by measuring 8x without any feedback loop for $\tau=128$~s has been shown in Fig.~\ref{fig:sf_mod}\textcolor{blue}{(a)}. Figure~\ref{fig:sf_mod}\textcolor{blue}{(b)} shows the Allan deviation of the same $\Delta B$ for different taus.  It is seen that $\sigma_{Adev}\approx \sqrt{\tau}$ which indicates random walk when there is no compensation system is running. For the prototype, $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ considers as good result while $\sigma_{Adev}\approx \sqrt{\tau}$ or $\approx \tau$ consider to be bad. That is the Allan deviation of the magnetic field due to compensation should be always less than the Allan deviation of the uncompensated magnetic field which indicates that the magnetic field is less fluctuated i.e. more stable during compensation than without compensation in time. 
 % \fig{Images/sf_mod}{width =\textwidth,height=12cm}{The Allan deviation (top) and shielding factor (bottom) for signals from some fluxgate sensors. Top vertical axis indicates the Allan deviation while bottom indicates shielding factor. Horizontal axis indicates the integration time. The different colors in top and bottom have been discussed in text.  \label{fig:sf_mod}}{The Allan deviation.}
 
-\fig{Images/sf_b}{width =\textwidth,height=12cm}{$\Delta B$ without feedback loop in sensor position 8x (top) and the Allan standard deviation for that $\Delta B$ (bottom). Red horizontal lines represent $\overline{B_l}(\tau)$ for 8 sub-samples over integration time $\tau=64~s$, and vertical dashed lines indicate the upper limit of each sub sample. The Allan deviation of $\Delta B$ in for different taus are shown in bottom graph.. \label{fig:sf_mod}}{The Allan deviation.}
 
 
 Moreover, to determine the factor by which the magnetic field is more stable in compensation than uncompensated at a given $\tau$, the shielding factor~\cite{bea} has been calculated as

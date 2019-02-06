@@ -11,6 +11,23 @@
 \item We need to list here the main important improvements and results.  It should mimic the list at the start of Chapter 5, probably.
 \end{itemize}
 
+% On the course of making the prototype work we have discovered some unique points which were not present in the previous studies on active compensation system. They are 
+\begin{enumerate}
+\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  We have designed 12 filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU!. The filters will be a useful tool for any types of future studies requiring to reduce high frequency noise. The filters can be improved by designing them in multi-gain pattern instead of constant gain that we have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In our case, to acquire the fluxgate signals placed inside the shield within the coil cube, we have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by our ADC.  
+
+\item {\bf Prototype PI control simulation.}  The simulation of the prototype active compensation system is vital to
+demonstrate a full understanding of the experimental results. We have
+made simulation which can produce $M_{sc}$ elements for any number of
+the sensors placed in the prototype geometry. This will be a tool for
+the future students who are limited by sensor position and placing
+them correctly in their system to study in detail about the effect of
+$\bm{M}$ for any set of sensors. Simulation of a certain system
+integrating feedback algorithm is a unique work that has not been
+still published in any thesis related to active compensation.
+
+\item {\bf Coil current modes based on coil configuration.}  Understanding the coil current pattern for different coil configuration was the breakthrough of this thesis. We have discovered that while using 6~coil feedback algorithm there is one mode which cancels current coming out of other coils essentially makes the system ineffective. We have discovered the problem via our coil patch simulation and started to wire up two coils to make the prototype run on 5~coil feedback algorithm. It was then we realized we don't need to regularize the system if our system is well conditioned in the first place. As coil designing is beyond the scope of this thesis, I will suggest future researchers interested to work on active compensation is that make the system well conditioned by studying different coil design or discover new coil design before anyone want to use the feedback algorithm.
+\end{enumerate}
+
 
 This thesis started with reproducing the works of
 Ref.~\cite{bea}. While doing so we face problems in terms of slow
@@ -74,15 +91,6 @@ discussed in Section~\ref{sec:coil_config}.
 \item discussion on simulation and simulating the system ``fully'' (including the PI loop) using the tools you developed before beginning to build it.  Should make the point that we now know enough to do a good job a priori.
 \end{enumerate}
 
-The simulation of the prototype active compensation system is vital to
-demonstrate a full understanding of the experimental results. We have
-made simulation which can produce $M_{sc}$ elements for any number of
-the sensors placed in the prototype geometry. This will be a tool for
-the future students who are limited by sensor position and placing
-them correctly in their system to study in detail about the effect of
-$\bm{M}$ for any set of sensors.Simulation of a certain system
-integrating feedback algorithm is a unique work that has not been
-still published in any thesis related to active compensation.
 
 
 
