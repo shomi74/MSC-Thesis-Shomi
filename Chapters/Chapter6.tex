@@ -11,9 +11,15 @@
 \item We need to list here the main important improvements and results.  It should mimic the list at the start of Chapter 5, probably.
 \end{itemize}
 
-% On the course of making the prototype work we have discovered some unique points which were not present in the previous studies on active compensation system. They are 
+My MSc thesis work was initiated with the goal of establishing a
+working multi-dimensional PID control system for magnetic fields.  It
+has been very successful in achieving this goal and in going beyond.
+In the process of developing the system I discovered a host of new
+challenges, to which I found innovative solutions.  Below I least the
+key improvements made to the system and the results of those
+improvements.  They are:
 \begin{enumerate}
-\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  We have designed 12 filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU!. The filters will be a useful tool for any types of future studies requiring to reduce high frequency noise. The filters can be improved by designing them in multi-gain pattern instead of constant gain that we have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In our case, to acquire the fluxgate signals placed inside the shield within the coil cube, we have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by our ADC.  
+\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  I designed 12 active filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU!. The filters will be a useful tool for any types of future studies requiring to reduce high frequency noise. The filters can be improved by designing them in multi-gain pattern instead of constant gain that we have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In our case, to acquire the fluxgate signals placed inside the shield within the coil cube, we have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by our ADC.  
 
 \item {\bf Prototype PI control simulation.}  The simulation of the prototype active compensation system is vital to
 demonstrate a full understanding of the experimental results. We have
@@ -24,8 +30,25 @@ them correctly in their system to study in detail about the effect of
 $\bm{M}$ for any set of sensors. Simulation of a certain system
 integrating feedback algorithm is a unique work that has not been
 still published in any thesis related to active compensation.
+\begin{itemize}
+\item OPERA part (static)
+\item PI part (dynamic)
+\item Putting them together gives very good results compared to experiment.
+\item Main proposal for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
+\item Many problems observed in the data, e.g. the current driftin problem, could have been found before ever using the system if this simulation had existed a priori.
+\item Even simulation in free space (not requiring OPERA) would have shown many of the same issues.
+\end{itemize}
+
+\item {\bf Better understanding of matrix inversion, PI parameters, and tuning.}
+\begin{itemize}
+\item Bea did matrix inversion.  I realized there's a relationship between the matrix regularization and PI parameters and studied this in more details.
+\item Rawlik proposed a new feedback algorithm apparently not based on PI.  I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow for more flexibility in the tuning than proposed by Rawlik.
+\end{itemize}
 
 \item {\bf Coil current modes based on coil configuration.}  Understanding the coil current pattern for different coil configuration was the breakthrough of this thesis. We have discovered that while using 6~coil feedback algorithm there is one mode which cancels current coming out of other coils essentially makes the system ineffective. We have discovered the problem via our coil patch simulation and started to wire up two coils to make the prototype run on 5~coil feedback algorithm. It was then we realized we don't need to regularize the system if our system is well conditioned in the first place. As coil designing is beyond the scope of this thesis, I will suggest future researchers interested to work on active compensation is that make the system well conditioned by studying different coil design or discover new coil design before anyone want to use the feedback algorithm.
+\begin{itemize}
+\item Agreement with Rawlik on low condition number as a measure of good system performance.  This will be another recommendation for future work on coil design:  to make sure the condition number is reasonable.
+\end{itemize}
 \end{enumerate}
 
 
@@ -87,8 +110,10 @@ discussed in Section~\ref{sec:coil_config}.
 
 \begin{enumerate}
 \item discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible
-\item Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_z^\pm$ data.
-\item discussion on simulation and simulating the system ``fully'' (including the PI loop) using the tools you developed before beginning to build it.  Should make the point that we now know enough to do a good job a priori.
+\item Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_x^\pm$ data.
+\item Small condition number is not the most important thing.  We can get small condition number if only three coils are used.  But this system will only be able to cancel uniform fields.
+\item Use spherical harmonics to the desired order and use coils or restricted combinations of coils to mimic those spherical harmonics.  The restricted set of coil currents should then be well-conditioned.  Rawlik went beyond this and suggested rewiring patch coils to generate spherical harmonics more efficiently.
+\item Discussion on simulation and simulating the system ``fully'' (including the PI loop) using the tools you developed before beginning to build it.  Should make the point that we now know enough to do a good job a priori.
 \end{enumerate}
 
 
@@ -101,6 +126,12 @@ discussed in Section~\ref{sec:coil_config}.
 \item Requirements... we need 'em.  Cite PSI conference proceeding which says we ``might'' implement such a system in n2EDM.  Trade-offs of active vs.~passive shielding and the decision on the dividing line between the two.  History of the PSI system.
 \item Engineering statements...  we have to be able to build it and make it fit
 \item ...
+\item Other applications of active shield:
+\begin{itemize}
+\item Saturation?
+\item Providing a somewhat smaller field when the door to the room is opened?
+\item Somewhat smaller field to prepare components for the room?
+\end{itemize}
 \end{itemize}
 
 
