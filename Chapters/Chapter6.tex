@@ -5,18 +5,19 @@
 
 \section{Key Findings}
 
-\begin{itemize}
-\item I was given a kind-of working prototype and a copy of Bea's thesis, and I was told to ``make it work''.  It works, now.  Really, really well.  So, the project was a complete success.
-\item Along the way, I discovered a whole bunch of new problems.  I solved each problem and improved the system considerably each time.
-\item We need to list here the main important improvements and results.  It should mimic the list at the start of Chapter 5, probably.
-\end{itemize}
+%\begin{itemize}
+%\item I was given a kind-of working prototype and a copy of Bea's thesis, and I was told to ``make it work''.  It works, now.  Really, really well.  So, the project was a complete success.
+%\item Along the way, I discovered a whole bunch of new problems.  I solved each problem and improved the system considerably each time.
+%\item We need to list here the main important improvements and results.  It should mimic the list at the start of Chapter 5, probably.
+%\end{itemize}
 
 My MSc thesis work was initiated with the goal of establishing a
-working multi-dimensional PID control system for magnetic fields.  It
-has been very successful in achieving this goal and in going beyond.
-In the process of developing the system I discovered a host of new
-challenges, to which I found innovative solutions.  Below I least the
-key improvements made to the system and the results of those
+working multi-dimensional PID control system for magnetic fields,
+based on the work of Refs.~\cite{bea} and~\cite{lins}.  This goal was
+successfully achieved and the work went beyond the goal in several
+respects.  In the process of developing the system I discovered a host
+of new challenges, to which I found innovative solutions.  Below I
+least the key improvements made to the system and the results of those
 improvements.  They are:
 \begin{enumerate}
 \item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  I designed 12 active filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU. The filters will be important for any types of future studies with high frequency noise issue. The filters can be improved by designing them in multi-gain pattern instead of constant gain that I have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In my case, to acquire the fluxgate signals placed inside the shield within the coil cube, I have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by our ADC.  
@@ -24,29 +25,29 @@ improvements.  They are:
 \item {\bf Prototype PI control simulation.}  The simulation of the prototype active compensation system is vital to demonstrate a full understanding of the experimental results. The static part of the simulation involves FEA simulation in OPERA to produce field maps within the coil cube to generate the matrix $\bm{M}$ and the field change $\Delta B$ due to perturbation coil for any number of the sensors placed within the coil cube. This will be a very handy tool for the future students as they will have the freedom to use thousands of sensors within their respective cube dimension and most importantly they do not have to worry about placing the sensors correctly in their system to study in detail about the effect of $\bm{M}$ for any set of sensors. The dynamic part of the simulation involves time dependent PI feedback algorithm in Python. Implementing the values of static part in dynamic part generates a real time PI control simulation which gives very good results compared to experiment (see Fig.~\ref{fig:exp_sim}).  Simulation of a certain system integrating feedback algorithm is a unique work that has not been still published in any thesis related to active compensation. I could have avoided many problems observed in the data, {\it e.g.} the current drifting problem, before ever using the system if this simulation had existed a priori. Even the simulation in free space (not requiring OPERA) would have shown many of the same issues. The strong message for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
 
 
-\begin{itemize}
-\item OPERA part (static)
-\item PI part (dynamic)
-\item Putting them together gives very good results compared to experiment.
-\item Main proposal for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
-\item Many problems observed in the data, e.g. the current drifting problem, could have been found before ever using the system if this simulation had existed a priori.
-\item Even simulation in free space (not requiring OPERA) would have shown many of the same issues.
-\end{itemize}
+%\begin{itemize}
+%\item OPERA part (static)
+%\item PI part (dynamic)
+%\item Putting them together gives very good results compared to experiment.
+%\item Main proposal for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
+%\item Many problems observed in the data, e.g. the current drifting problem, could have been found before ever using the system if this simulation had existed a priori.
+%\item Even simulation in free space (not requiring OPERA) would have shown many of the same issues.
+%\end{itemize}
 
 \item {\bf Better understanding of matrix inversion, PI parameters, and tuning.} The author in Ref.\cite{bea} proposed a matrix inversion with Tikhonov regularization which I have blindly followed initially. But I have realized later that there is more to the story than just having matrix inversion and PI tuning {\it i.e.} there is a relationship between the regularization parameter $r$ and PI parameters and studied this in more details. I came to the conclusion that no amount of PI tuning can reduce the current drifting problem even though $r$ is optimized properly.  However, the current drifting problem can be reduced by adjusting $r$ and PI parameters treating $r$ more-or-less another free parameter. But this introduces high frequency noise which gave me the clear understanding to describe Eqs.~(\ref{eq:del_I_pseudo}), and ~(\ref{eq:tikhonov}). Moreover, I also a propose a new method to find $r$ based on the condition number of the matrix which I think more robust than the method described by the author in Ref.\cite{bea}. Eventually, I have realized that implementing regularized matrix inversion is a waste of time. I will strongly suggest to avoid an ill-conditioned matrix which I should say that I have been somewhat advised by Ref.~\cite{rawlikpriv} in a conversation while attending nEDM workshop in 2017. 
 
-Although I have got some good advice from Ref.~\cite{rawlikpriv}, but I was not sure about the author's proposal of a new feedback algorithm not based on PI (really ??) which the author claimed in Ref.~\cite{rawlik}. I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow more flexibility in the tuning than feedback algorithm proposed by the author in Ref.~\cite{rawlik}.
+Although I have got some good advice from Ref.~\cite{rawlikpriv}, but I was not sure about the author's proposal of a new feedback algorithm not based on PI which the author claimed in Ref.~\cite{rawlik}. I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow more flexibility in the tuning than feedback algorithm proposed by the author in Ref.~\cite{rawlik}.
 
 
-\begin{itemize}
-\item Bea did matrix inversion.  I realized there's a relationship between the matrix regularization and PI parameters and studied this in more details.
-\item Rawlik proposed a new feedback algorithm apparently not based on PI.  I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow for more flexibility in the tuning than proposed by Rawlik.
-\end{itemize}
+%\begin{itemize}
+%\item Bea did matrix inversion.  I realized there's a relationship between the matrix regularization and PI parameters and studied this in more details.
+%\item Rawlik proposed a new feedback algorithm apparently not based on PI.  I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow for more flexibility in the tuning than proposed by Rawlik.
+%\end{itemize}
 
 \item {\bf Coil current modes based on coil configuration.}  Solving the current drifting problem was the breakthrough of this thesis. Because while searching for the solution, I have built very efficient filters and realized that passive shield has no impact on final active compensation result, and regularization is a waste of time, made an useful tool {\it i.e.} simulation to test the system and finally able to solve by understanding the coil current pattern for different coil configuration. The simulation in free space found to be very effective understanding the problem. I have discovered that while using 6~coil feedback algorithm there is one mode which cancels current coming out of other coils essentially makes the system ineffective producing closer to zero singular value $\sigma_n$ of $\bm{M}$. That is why the system is always ill-conditioned {\it i.e.} large condition number of $\bm{M}$. I then  wired up two coils to make the prototype run on 5~coil feedback algorithm which cancels the bad coil current mode producing close to one condition number of $\bm{M}$ forcing the system well-conditioned. It was then I realized I did not need to regularize the system if the system is well conditioned in the first place. So, I strongly agree with the author in Ref.~\cite{rawlik} on low condition number as a measure of good system performance. As coil designing is beyond the scope of this thesis, I will suggest future researchers interested to work on active compensation is that make the system well conditioned by studying different coil design or discover new coil design before anyone want to use the feedback algorithm.
-\begin{itemize}
-\item Agreement with Rawlik on low condition number as a measure of good system performance.  This will be another recommendation for future work on coil design:  to make sure the condition number is reasonable.
-\end{itemize}
+%\begin{itemize}
+%\item Agreement with Rawlik on low condition number as a measure of good system performance.  This will be another recommendation for future work on coil design:  to make sure the condition number is reasonable.
+%\end{itemize}
 \end{enumerate}
 
 \subsection{Where will I use this ??}
@@ -107,6 +108,7 @@ discussed in Section~\ref{sec:coil_config}.
 \section{Recommendations on Design for TUCAN nEDM Experiment}
 
 \begin{enumerate}
+\item Take the attitude that you are supervising the next person to work on this.  What is the first thing they should do?  The next thing?  How to bring the design process to a conclusion so that the system could be built.
 \item discussion on better ideas beyond regularization, such as spherical harmonics, patch coils, and how this can lead to a properly regularized system that is more flexible
 \item Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_x^\pm$ data.
 \item Small condition number is not the most important thing.  We can get small condition number if only three coils are used.  But this system will only be able to cancel uniform fields.
