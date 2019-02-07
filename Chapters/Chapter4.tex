@@ -309,7 +309,7 @@ In Section~\ref{sec:coil_config}, we analyzed this effect further in both simula
 
 Regularization methods help to reduce the dominance $v_n$ corresponding to small $\sigma_n$. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is one of the most commonly used regularization methods which solves the problem as 
 
-\begin{equation}
+\begin{equation}\label{eq:tikhonov}
     ||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2^2+{\alpha}^2||\Vec{\Delta I}||_2^2
 \end{equation}
 where $||\cdot ||_2$ is the Euclidean norm. The aim of the feedback algorithm is to make $||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2$ equal to zero. But making it zero will regenerate the original problem of larger $\Vec{\Delta I}$ for smaller $\sigma_n$ as explained above and by Eq.~(\ref{eq:del_I_pseudo}). Tikhnov regularization tries to compromise $||\Vec{\Delta B}-\bm{M}\Vec{\Delta I}||_2$ and $|\Vec{\Delta I}||_2$ so that both of them are smaller. Tikhnov regularization makes that possible by introducing a filter $\alpha$ to avoid high frequency error dominated $v_n$. The filter $\alpha$ modifies the diagonal elements of $\Sigma^{-1}$ from Eq.~(\ref{eq:psMinv}) as
