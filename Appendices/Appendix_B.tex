@@ -4,45 +4,104 @@
 
 The TUCAN nEDM experiment will be carried out inside the large magnetically shielded room that is roughly 3~m in diameter.  The magnetic environment around the experiment will be challenging because of the closeness of the experiment to the TRIUMF cyclotron, which generates a background field of $\sim 350 - 400$ $\mu$T.
 %'which is almost one order of magnitude larger than usual background fields') and the changing environment with iron. 
-As a result, it is important to gain an understanding of the magnitude and distribution of the field inside  the bulk of a large mu-metal shield located in such an external field. For the purpose of studying this we derive here analytic solutions of the magnetic field inside the bulk of a spherical mu-metal shield that serves as a model of our MSR in the TRIUMF cyclotron field.  For simplicity, we assume a linear magnetic permeability for the shield.
+As a result, it is important to gain an understanding of the magnitude and distribution of the field inside  the bulk of a large mu-metal shield located in such an external field. For the purpose of studying this, we derive here analytic solutions of the magnetic field inside the bulk of a spherical mu-metal shield that serves as a model of our MSR in the TRIUMF cyclotron field.  For simplicity, we assume a linear magnetic permeability for the shield.
 
 
 \section{General solution for an applied zonal field}
-In this section we present two different methods for solving this problem.  The first using the equivalent bound surface current and the second is via the magnetic scalar potential.  We also show that the two methods are equivalent, of course.
+The boundary conditions between two regions satisfying $\bm{B}=\mu \bm{H}$ with $\mu$ being  magnetic permeability are :
+
+% The normal components and tangential components of the msgnetic field on either side of the boundary between two media satisfying $\bm{B}=\mu \bm{H}$ is given in Eqs.~\textcolor{blue}{(5.88)}~and~\textcolor{blue}{(5.89)} of Ref.\cite{jackson}. They are :
+
+\begin{equation}\label{b1}   
+\left.
+  \begin{tabular}{ccc}
+  $B_2^\bot=B_1^\bot$\\
+  or \\
+  $H_2^\bot=\frac{\mu_{1}}{\mu_{2}}H_1^\bot$
+  \end{tabular}
+ \right\}
+\end{equation}
+where, $B_1^\bot$ and $B_2^\bot$ are the normal components of magnetic flux density $\bm{B}$ immediately inside region 1 and region 2 respectively.
+
+% {\it i.e.} the component of the magnetic flux density $\bm{B}$ perpendicular to the material change is continuous across the boundary of region 1 and region 2.
+\begin{equation}\label{b2}   
+\left.
+  \begin{tabular}{ccc}
+  $H_2^\parallel=H_1^\parallel$\\
+  or \\
+  $\frac{1}{\mu_2}B_2^\parallel=\frac{1}{\mu_1}B_1^\parallel$
+  \end{tabular}
+ \right\}
+\end{equation}
+where, $H_1^\parallel$ and $H_2^\parallel$ are the tangential components of magnetic field $\bm{H}$ immediately inside region 1 and region 2 respectively.
+% \begin{equation}\label{b1_0}   
+% \B_2\cdot \bm{n}=\B_1\cdot \bm{n}
+% \end{equation}
+
+% \begin{equation}\label{b2_0}   
+% \B_2\times \bm{n} = \frac{\mu_{2}}{\mu_{1}}\B_1\times \bm{n}  
+% \end{equation}
+
+% \begin{equation}\label{b1}   
+% \H_2\cdot \bm{n}=\frac{\mu_{1}}{\mu_{2}}\H_1\cdot \bm{n}
+% \end{equation}
+
+% \begin{equation}\label{b2}   
+% \H_2\times \bm{n} = \H_1\times \bm{n}  
+% \end{equation}
+% where, $\bm{n}$ is a unit vector pointing from region 1 into region 2 and $\mu$ is the magnetic permeability in different regions distinguished by subscript. 
+In the limit $\mu_1/\mu_2\rightarrow\infty$, the magnetic field will be vanished in the cavity of region 1 and such a reduction in field is known as magnetic shielding due to high permeable material. The MSR for TUCAN nEDM experiment will be built using this concept of magnetic shielding. 
+
+For a magnetic shielding system with $n$ number of shielding layers, there are $2n$ number of distinct surface currents contributing to the net magnetic field in each regions as presented by Ref.~\cite{CB1} whereas the net magnetic field is determined by $4n$ simultaneous equations while using the magnetic scalar potential which is presented by Ref.~\cite{jackson}.
+
+In this section, we present those two different methods for solving the magnetic field inside the bulk of a spherical mu-metal shield in the presence of an applied zonal field. 
+
+% The first using the equivalent bound surface current and the second is via the magnetic scalar potential.  We also show that the two methods are equivalent, of course.
+
 
 \subsection{Using Equivalent Bound Surface Currents}
 
-In general, any surface current bound to a sphere, and its resulting magnetic field, can be written in terms of spherical harmonics of order $m$ and degree $l$~\cite{CB1, smythe}. One can show , however, that the resulting equations arising from the boundary conditions on the tangential components of the magnetic field (i.e., $B_\theta$  and $B_\phi$) are independent of the order $m$ of the spherical harmonic. Without loss of generality, then, we can restrict the analysis of spherical shields to zonal surface currents and field only (i.e. $\phi$-independent, $m=0$). This also means that the following results can be applied to cases where tesseral components ($m > 0$) do exist in the fields and currents, which is extremely valuable from the point of view of coil design, where the general spherical harmonics can be used as ``building blocks" to produce a desire magnetic field.
+The spherical harmonics of order $l$ and degree $m$ can be used to represent any surface current bound to a sphere and the resulting field due to the surface current~\cite{CB1,smythe}. The magnetic field calculation using zonal surface current due to presence of a spherical mu-metal shield in a multi-pole field has been discussed in Ref.~\cite{CB1}. We have shown the intermediate steps of the derivation to find out the magnetic field inside the bulk of a spherical mu-metal shield.
+% and compared with the bound surface current method discussed in previous Section considering the same mu-metal as shown in Fig.~\ref{fig:sphere_ls}.
+% In general, any surface current bound to a sphere, and its resulting magnetic field, can be written in terms of spherical harmonics of order $m$ and degree $l$~\cite{CB1, smythe}. One can show , however, that the resulting equations arising from the boundary conditions on the tangential components of the magnetic field (i.e., $B_\theta$  and $B_\phi$) are independent of the order $m$ of the spherical harmonic. Without loss of generality, then, we can restrict the analysis of spherical shields to zonal surface currents and field only (i.e. $\phi$-independent, $m=0$). This also means that the following results can be applied to cases where tesseral components ($m > 0$) do exist in the fields and currents, which is extremely valuable from the point of view of coil design, where the general spherical harmonics can be used as ``building blocks" to produce a desire magnetic field.
 
-From References.~\cite{CB1, smythe}, the zonal surface current
-\begin{equation}\label{i}
-\bm{K}=KP_l^1(u)\bm{\hat{\phi}}
-\end{equation}
-bound to a spherical surface $r=a$ gives rise to the vector potential
-\begin{equation}\label{a}
-\bm A =\mathcal{K} 
-\left \{
-  \begin{tabular}{ccc}
-  $r^l \bm{\hat{\phi}}$ &  & $r< a$  \\
-  $\frac{a^{2l+1}}{r^{l+1}}$ &  & $r> a$ 
-  \end{tabular}
- \right.
-\end{equation}
-where $P_l^1(u)$ is the associated Legendre function of order 1 and degree $l$,  $u=cos\theta$, and the coefficient $\mathcal{K}={\muo K}/{(2l+1)a^{l-1}}$ has units $T/m^{l-1}$.
+% The spherical harmonics of order $m$ and degree $l$ can be used to represent any surface current bound to a sphere and the resulting field due to the surface current~\cite{CB1, smythe}. 
+
+% From References.~\cite{CB1, smythe}, the zonal surface current bound to a spherical surface $r=a$ is
+% % From References.~\cite{CB1, smythe}, the zonal surface current
+% \begin{equation}\label{i}
+% \bm{K}=KP_l^1(u)\bm{\hat{\phi}}
+% \end{equation}
+% where $P_l^1(u)$ is the associated Legendre function of order 1 and degree $l$,  $u=cos\theta$.
+% The zonal surface current $\bm{K}$ of Eq.~(\ref{i}) gives rise to the vector potential
+% \begin{equation}\label{a}
+% \bm A =\mathcal{K} 
+% \left \{
+%   \begin{tabular}{ccc}
+%   $r^l \bm{\hat{\phi}}$ &  & $r< a$  \\
+%   $\frac{a^{2l+1}}{r^{l+1}}$ &  & $r> a$ 
+%   \end{tabular}
+%  \right.
+% \end{equation}
+% where, $\mathcal{K}={\muo K}/{(2l+1)a^{l-1}}$.
 
 \fig{Images/sphere_1}{width = 0.8\textwidth}{Spherical shell of inner radius ``a" and outer radius ``b" with a thickness ``t" in the presence of uniform magnetic field (i.e. $l=1$).\label{fig:sphere_ls}}{Spherical shell in a uniform magnetic field}
 
-We consider a spherical mu-metal shield of inner radius $r_1=a$ and outer radius $r_2=b$, and permeability $\mu_r$ centered on the origin and exposed to the general zonal field (\textit{i.e.}
+We consider a spherical mu-metal shield of inner radius $r_1=a$ and outer radius $r_2=b$, and permeability $\mu$ centered on the origin and exposed to the general zonal field (\textit{i.e.}
 %axisymmetric or $\phi$-independent) 
 $m=0$)
 of order $l$ %in the presence of an externally applied magnetic field 
-as shown in Fig.~\ref{fig:sphere_ls}. The general external magnetic filed can be written as~\cite{CB1, smythe} -
+as shown in Fig.~\ref{fig:sphere_ls}. The general external magnetic field can be written as~\cite{CB1} :
 \begin{equation}\label{bo}
-\bm{B_o} = G_l r^{l-1} (l+1)[l P_l(u) \bm{\hat{r}} -  P_l^1(u)  \bm{\hat{\theta}} ] 
+\bm{B_0} = G_l r^{l-1} (l+1)[l P_l(u) \bm{\hat{r}} -  P_l^1(u)  \bm{\hat{\theta}} ] 
 % \label{BextS}
 \end{equation}
-where the magnitude $G_l$ is in units of $T/m^{l-1}$.  
-The response of the permeable sphere  results in bound surface currents $\mathcal{K}_1$ and $\mathcal{K}_1$ on radius $a$ amd $b$, respectively, that give rise to the following contributions to the net magneti field:
+where the magnitude $G_l$ is in units of $T/m^{l-1}$, $P_l^1(u)$ is the associated Legendre function of order 1 and degree $l$, and $u=\cos\theta$.  
+ The response of the permeable sphere  results in bound surface currents $\mathcal{K}_1$ and $\mathcal{K}_1$ on radius $a$ and $b$, respectively, that give rise to the following contributions to the net magnetic field:
+
+% The response of the permeable sphere  results in bound surface currents $\mathcal{K}_1$ and $\mathcal{K}_2$ on radius $a$ and $b$, respectively. 
+
+% Using the Eq.~(\ref{a}) and the relation $\bm{B}=\nabla\times\bm{A}$, the net magnetic field contributions due to $\mathcal{K}_1$ and $\mathcal{K}_2$ are:
 %The magnetic fields arising from Eq.~(\ref{a}) are
 \begin{equation}\label{r=R}
 %\lim_{r\to R}
@@ -67,130 +126,166 @@ l[(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]$ &  & $r>a$
   \end{tabular}
 \right.
 \end{equation}
+where, $\mathcal{K}_1={\muo K_1}/{(2l+1)a^{l-1}}$,~and~$\mathcal{K_2}_2={\muo K}/{(2l+1)b^{l-1}}$ are the modified surface currents of $K_1$ and $K_2$ respectively.
 
-As result, using superposition, the net field inside the shield ($\it{i.e.}\;r<a$) is 
-\begin{equation}\label{r<R}
+The net field in different regions superposing bound surface currents and external fields are : 
+
+% As aresult, using superposition, the net field inside the shield ($\it{i.e.}\;r<a$) is 
+\begin{align}
 %\lim_{r\to R}
-\bm B_1 = (\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} \, .
-\end{equation}
+    \bm B_1 &=(\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} \, ] && \mathrm{r<a}\label{r<R}\\[15pt]
+    % \begin{split}
+    \bm B_2 &=\mathcal{K}_1 \, l\, \frac{a^{2l+1}}{r^{l+2}} \,[(l+1) P_l(u) \, \bm{\hat{r}} +  P_l^1(u)  \, \bm{\hat{\theta}} ]\notag\\
+&\quad +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} ] &&\mathrm{a<r<b}\label{R<r<R+t}\\[15pt]
+    % \end{split}\\
+    % \begin{split}\label{r>R}
+    \bm B_3 &= \frac{\mathcal{K}_1a^{2l+1} + \mathcal{K}_2 b^{2l+1} }{r^{l+2}} n [(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]  \notag\\
+&\quad  + G_l (l+1) r^{l-1} [n P_l(u) \bm{\hat{r}} - P_l^1(u)  \bm{\hat{\theta}} ]&& \mathrm{r>b}\label{r>R}
+    % \end{split}
+\end{align}
+% \begin{equation}\label{r<R}
+% %\lim_{r\to R}
+% \bm B_1 = (\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} \, ]
+% \end{equation}
 %
-The net field  within the bulk of the shield (\textit{i.e.} $a<r<b$)  is 
-\begin{multline}\label{R<r<R+t}
-%\lim_{r\to R<r<R+t}
-\bm B_2 = \mathcal{K}_1 \, l\, \frac{a^{2l+1}}{r^{l+2}} \,[(l+1) P_l(u) \, \bm{\hat{r}} +  P_l^1(u)  \, \bm{\hat{\theta}} ] \, \\ +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} ] \, .
-\end{multline}
+% The net field  within the bulk of the shield (\textit{i.e.} $a<r<b$)  is 
+% \begin{multline}\label{R<r<R+t}
+% %\lim_{r\to R<r<R+t}
+% \bm B_2 = \mathcal{K}_1 \, l\, \frac{a^{2l+1}}{r^{l+2}} \,[(l+1) P_l(u) \, \bm{\hat{r}} +  P_l^1(u)  \, \bm{\hat{\theta}} ] \, \\ +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1} \, [l P_l(u) \, \bm{\hat{r}} -  P_l^1(u)  \, \bm{\hat{\theta}} ] \, .
+% \end{multline}
 %
-Whereas, the net field  outside the shield (\textit{i.e.}, $r>b$) is
-\begin{multline}\label{r>R}
-%\lim_{r\to r>R+t}\bm 
-\bm B_3 =\frac{\mathcal{K}_1a^{2l+1} + \mathcal{K}_2 b^{2l+1} }{r^{l+2}} n [(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]  \\+ G_l (l+1) r^{l-1} [n P_l(u) \bm{\hat{r}} - P_l^1(u)  \bm{\hat{\theta}} ]
-\end{multline}
+% Whereas, the net field  outside the shield (\textit{i.e.}, $r>b$) is
+% \begin{multline}\label{r>R}
+% %\lim_{r\to r>R+t}\bm 
+% \bm B_3 =\frac{\mathcal{K}_1a^{2l+1} + \mathcal{K}_2 b^{2l+1} }{r^{l+2}} n [(l+1) P_l(u) \bm{\hat{r}} +  P_l^1(u)  \bm{\hat{\theta}} ]  \\+ G_l (l+1) r^{l-1} [n P_l(u) \bm{\hat{r}} - P_l^1(u)  \bm{\hat{\theta}} ]
+% \end{multline}
 
-To find \(\mathcal{K}_1\) and \(\mathcal{K}_2\) , we have to apply the boundary condition for the tangential component of the magnetic field \textit{i.e.}
+The boundary condition of Eq.~(\ref{b2}) has been applied to the tangential compenetnents $B_\theta$ of different regions to find \(\mathcal{K}_1\) and \(\mathcal{K}_2\) \textit{i.e.}
+The boundary condition for $r=a$ with region 1 and region 2 is
 \begin{equation}\label{bk}
-\frac{1}{\muo} B_{1\theta}=  \frac{1}{\mu_r} B_{2\theta}  
+\frac{1}{\muo} B_{1\theta}=  \frac{1}{\mu} B_{2\theta}  
 \end{equation}
 
 Using Eqs.~(\ref{r<R}), and (\ref{R<r<R+t}) in (\ref{bk}):
-% $$\(\mu_r B_{1\theta}=\muo B_{2\theta}\)$$
+% $$\(\mu B_{1\theta}=\muo B_{2\theta}\)$$
 
-% $$\(\mu_r[(\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1}(-  P_l^1(u))\ ]=\muo[\mathcal{K}_1 \, n\, \frac{R^{2l+1}}{r^{l+2}}P_l^1(u) \,  +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1}( -  P_l^1(u))]\)$$
+% $$\(\mu[(\mathcal{K}_1+\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1}(-  P_l^1(u))\ ]=\muo[\mathcal{K}_1 \, n\, \frac{R^{2l+1}}{r^{l+2}}P_l^1(u) \,  +\, (\mathcal{K}_2+G_l) \, (l+1)\, r^{l-1}( -  P_l^1(u))]\)$$
 
 % \begin{multline*}
-% -\mu_r \mathcal{K}_1 r^{l-1}(l+1) P_l^1(u)-\mu_r (\mathcal{K}_2+G_l)r^{l-1}(l+1) P_l^1(u)\\=\muo \mathcal{K}_1 n \frac{R^{2l+1}}{r^{l+2}}P_l^1(u)-\muo (\mathcal{K}_2+G_l)r^{l-1}(l+1) P_l^1(u)
+% -\mu \mathcal{K}_1 r^{l-1}(l+1) P_l^1(u)-\mu (\mathcal{K}_2+G_l)r^{l-1}(l+1) P_l^1(u)\\=\muo \mathcal{K}_1 n \frac{R^{2l+1}}{r^{l+2}}P_l^1(u)-\muo (\mathcal{K}_2+G_l)r^{l-1}(l+1) P_l^1(u)
 % \end{multline*}
 
-% $$\([\mu_r r^{l-1}(l+1)+\muo n \frac{R^{2l+1}}{r^{l+2}}]P_l^1(u)\mathcal{K}_1+(\mu_r-\muo)r^{l-1}(l+1)P_l^1(u)\mathcal{K}_2=-(\mu_r-\muo)r^{l-1}(l+1)P_l^1(u)G_l\)$$
+% $$\([\mu r^{l-1}(l+1)+\muo n \frac{R^{2l+1}}{r^{l+2}}]P_l^1(u)\mathcal{K}_1+(\mu-\muo)r^{l-1}(l+1)P_l^1(u)\mathcal{K}_2=-(\mu-\muo)r^{l-1}(l+1)P_l^1(u)G_l\)$$
 % Excluding $r^{l-1}(l+1)P_l^1(u)$ from both sides we get,
 
-$$[\mu_r+\muo\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}]\mathcal{K}_1 +(\mu_r-\muo)\mathcal{K}_2=-(\mu_r-\muo)G_l$$
+% $$[\mu+\muo\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}]\mathcal{K}_1 +(\mu-\muo)\mathcal{K}_2=-(\mu-\muo)G_l$$
 
-At $r=a$ :
+% At $r=a$ :
 \begin{equation}\label{es1}
-[\mu_r+\muo\frac{l}{l+1}]\mathcal{K}_1 +(\mu_r-\muo)\mathcal{K}_2=-(\mu_r-\muo)G_l
+[\mu+\muo\frac{l}{l+1}]\mathcal{K}_1 +(\mu-\muo)\mathcal{K}_2=-(\mu-\muo)G_l
 \end{equation}
-
-Similarly, using Eqs.~(\ref{R<r<R+t}), and (\ref{r>R}) in Eq.~(\ref{bk}):
-% $$\(\frac{1}{\mu_r} B_{2\theta}=\frac{1}{\muo} B_{3\theta}\)$$
-% $$\muo B_{2\theta}=\mu_r B_{3\theta}$$
+\begin{equation}\label{k2}
+\mathcal{K}_2=-G_l-\frac{\mu(l+1)+\muo l}{(\mu-\muo)(l+1)}\mathcal{K}_1
+\end{equation}
+Similarly, the boundary condition for $r=b$ with region 2 and region 3 is 
+\begin{equation}\label{bk2}
+    \frac{1}{\mu} B_{2\theta}=\frac{1}{\muo}B_{3\theta}
+\end{equation}
+% $$\muo B_{2\theta}=\mu B_{3\theta}$$
+Using Eqs.~(\ref{R<r<R+t}), and (\ref{r>R}) in Eq.~(\ref{bk2}):
+% $$\(\frac{1}{\mu} B_{2\theta}=\frac{1}{\muo} B_{3\theta}\)$$
+% $$\muo B_{2\theta}=\mu B_{3\theta}$$
 
 % Using eq. , (\ref{R<r<R+t}), (\ref{r>R}) we get,
 % \begin{multline*}
-% \muo\left[\mathcal{K}_1 n\left(\frac{R^{2l+1}}{r^{l+2}}\right)P_l^1(u)+ (\mathcal{K}_2+G_l)(l+1)r^{l-1}\left(-P_l^1(u)\right)\right]\\= \mu_r\left[\frac{\mathcal{K}_1R^{2l+1} + \mathcal{K}_2 b^{2l+1} }{r^{l+2}}n P_l^1(u) +G_l (l+1) r^{l-1}\left(-  P_l^1(u)\right)\right ]
+% \muo\left[\mathcal{K}_1 n\left(\frac{R^{2l+1}}{r^{l+2}}\right)P_l^1(u)+ (\mathcal{K}_2+G_l)(l+1)r^{l-1}\left(-P_l^1(u)\right)\right]\\= \mu\left[\frac{\mathcal{K}_1R^{2l+1} + \mathcal{K}_2 b^{2l+1} }{r^{l+2}}n P_l^1(u) +G_l (l+1) r^{l-1}\left(-  P_l^1(u)\right)\right ]
 % \end{multline*}
 
 % \begin{multline*}
-% (\mu_r-\muo)n\left(\frac{R^{2l+1}}{r^{l+2}}\right)P_l^1(u)\mathcal{K}_1+\left[\mu_r n\frac{b^{2l+1}}{r^{l+2}}+\muo(l+1)r^{l-1}\right]P_l^1(u)\mathcal{K}_2 \\= (\mu_r-\muo)r^{l-1}(l+1)P_l^1(u)G_l
+% (\mu-\muo)n\left(\frac{R^{2l+1}}{r^{l+2}}\right)P_l^1(u)\mathcal{K}_1+\left[\mu n\frac{b^{2l+1}}{r^{l+2}}+\muo(l+1)r^{l-1}\right]P_l^1(u)\mathcal{K}_2 \\= (\mu-\muo)r^{l-1}(l+1)P_l^1(u)G_l
 % \end{multline*}
 % Excluding $r^{l-1}(l+1)P_l^1(u)$ from both sides we get,
-$$(\mu_r-\muo)\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}\mathcal{K}_1+[\mu_r\frac{l}{l+1}\left(\dfrac{b}{r}\right)^{2l+1}+\muo]\mathcal{K}_2=(\mu_r-\muo)G_l$$
+% $$(\mu-\muo)\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}\mathcal{K}_1+[\mu\frac{l}{l+1}\left(\dfrac{b}{r}\right)^{2l+1}+\muo]\mathcal{K}_2=(\mu-\muo)G_l$$
 
-At $r=b$ :
+% At $r=b$ :
 \begin{equation}\label{es2}
-(\mu_r-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}\mathcal{K}_1+[\mu_r\frac{l}{l+1}+\muo]\mathcal{K}_2=(\mu_r-\muo)G_l
+(\mu-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}\mathcal{K}_1+[\mu\frac{l}{l+1}+\muo]\mathcal{K}_2=(\mu-\muo)G_l
 \end{equation}
 
-From Eq. (\ref{es1}) :
-% $$\(\frac{[\mu_r+\muo\frac{l}{l+1}]}{(\mu_r-\muo)}\mathcal{K}_1 +\mathcal{K}_2=-G_l\)$$
-\begin{equation}\label{k2}
-\mathcal{K}_2=-G_l-\frac{\mu_r(l+1)+\muo l}{(\mu_r-\muo)(l+1)}\mathcal{K}_1
-\end{equation}
+% From Eq. (\ref{es1}) :
+% % $$\(\frac{[\mu+\muo\frac{l}{l+1}]}{(\mu-\muo)}\mathcal{K}_1 +\mathcal{K}_2=-G_l\)$$
+% \begin{equation}\label{k2}
+% \mathcal{K}_2=-G_l-\frac{\mu(l+1)+\muo l}{(\mu-\muo)(l+1)}\mathcal{K}_1
+% \end{equation}
 
 Adding Eqs.~(\ref{es1}), and (\ref{es2}) and using the value of $\mathcal{K}_2$ from Eq.~(\ref{k2}):
 % \begin{multline*}
-% \left[\mu_r+\muo\frac{l}{l+1}\right]\mathcal{K}_1 +(\mu_r-\muo)\mathcal{K}_2+(\mu_r-\muo)G_l+(\mu_r-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}\mathcal{K}_1\\+\left[\mu_r\frac{l}{l+1}+\muo\right]\mathcal{K}_2-(\mu_r-\muo)G_l=0
+% \left[\mu+\muo\frac{l}{l+1}\right]\mathcal{K}_1 +(\mu-\muo)\mathcal{K}_2+(\mu-\muo)G_l+(\mu-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}\mathcal{K}_1\\+\left[\mu\frac{l}{l+1}+\muo\right]\mathcal{K}_2-(\mu-\muo)G_l=0
 % \end{multline*}
 % \begin{multline*}
-% [\mu_r+\muo\frac{l}{l+1}+(\mu_r-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1 +[\mu_r-\muo+\mu_r\frac{l}{l+1}+\muo]\mathcal{K}_2=0
+% [\mu+\muo\frac{l}{l+1}+(\mu-\muo)\frac{l}{l+1}\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1 +[\mu-\muo+\mu\frac{l}{l+1}+\muo]\mathcal{K}_2=0
 % \end{multline*}
 % Multiplying by $(l+1)$ we get,
 % \begin{multline*}
-% \left[\mu_r(l+1)+\muo{n}+(\mu_r-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1 +\mu_r (2l+1)\mathcal{K}_2=0
+% \left[\mu(l+1)+\muo{n}+(\mu-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1 +\mu (2l+1)\mathcal{K}_2=0
 % \end{multline*}
 % Putting the value of \(\mathcal{K}_2\) from Eq.(\ref{k2}) we get,
 % \begin{multline*}
-% \left[\mu_r(l+1)+\muo{n}+(\mu_r-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1 \\+\mu_r (2l+1) \left[-G_l-\frac{\mu_r(l+1)+\muo n}{(\mu_r-\muo)(l+1)}\mathcal{K}_1\right]=0
+% \left[\mu(l+1)+\muo{n}+(\mu-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1 \\+\mu (2l+1) \left[-G_l-\frac{\mu(l+1)+\muo n}{(\mu-\muo)(l+1)}\mathcal{K}_1\right]=0
 % \end{multline*}
 
 % \begin{multline*}
-% \left[\frac{\mu_r^2 (l+1) (2l+1)+\muo\mu_r n(2l+1)}{(\mu_r-\muo)(l+1)}-\mu_r(l+1)-\muo{n}-(\mu_r-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1\\=-\mu_r (2l+1)G_l
+% \left[\frac{\mu^2 (l+1) (2l+1)+\muo\mu n(2l+1)}{(\mu-\muo)(l+1)}-\mu(l+1)-\muo{n}-(\mu-\muo){n}\left(\dfrac{a}{b}\right)^{2l+1}\right]\mathcal{K}_1\\=-\mu (2l+1)G_l
 % \end{multline*}
 
 % \begin{multline*}
-% [\mu_r^2 (l+1) (2l+1)+\muo\mu_r n(2l+1)-\mu_r^2(l+1)^2+\muo\mu_r(l+1)^2-\muo\mu_r n(l+1)
-% +\muo^2 n(l+1)\\-(\mu_r-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1=-\mu_r (\mu_r-\muo)(l+1)(2l+1)G_l
+% [\mu^2 (l+1) (2l+1)+\muo\mu n(2l+1)-\mu^2(l+1)^2+\muo\mu(l+1)^2-\muo\mu n(l+1)
+% +\muo^2 n(l+1)\\-(\mu-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1=-\mu (\mu-\muo)(l+1)(2l+1)G_l
 % \end{multline*}
 
 
 % \begin{multline*}
-% [\mu_r^2(2n^2+2n+l+1-n^2-2l-1)+\muo\mu_r (2n^2+n-n^2-n)+\muo\mu_r(l+1)^2+\muo^2 n(l+1)\\-(\mu_r-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1=-\mu_r(\mu_r-\muo)(l+1) (2l+1)G_l
+% [\mu^2(2n^2+2n+l+1-n^2-2l-1)+\muo\mu (2n^2+n-n^2-n)+\muo\mu(l+1)^2+\muo^2 n(l+1)\\-(\mu-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1=-\mu(\mu-\muo)(l+1) (2l+1)G_l
 % \end{multline*}
 
 % \begin{multline*}
-% [\mu_r^2 n(l+1)+\muo\mu_r n^2+\muo\mu_r(l+1)^2+\muo^2 n(l+1)-(\mu_r-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1\\=-\mu_r(\mu_r-\muo)(l+1) (2l+1)G_l
+% [\mu^2 n(l+1)+\muo\mu n^2+\muo\mu(l+1)^2+\muo^2 n(l+1)-(\mu-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1\\=-\mu(\mu-\muo)(l+1) (2l+1)G_l
 % \end{multline*}
 
 % \begin{multline*}
-% [\mu_r n(\mu_r(l+1)+\muo n)+\muo(l+1)(\mu_r(l+1)+\muo n)-(\mu_r-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1\\=-\mu_r(\mu_r-\muo)(l+1) (2l+1)G_l
+% [\mu n(\mu(l+1)+\muo n)+\muo(l+1)(\mu(l+1)+\muo n)-(\mu-\muo)^2 n(l+1)\left(\dfrac{a}{b}\right)^{2l+1}]\mathcal{K}_1\\=-\mu(\mu-\muo)(l+1) (2l+1)G_l
 % \end{multline*}
 
 \begin{equation}\label{k1}
-\mathcal{K}_1=-\frac{\mu_r(\mu_r-\muo)(l+1) (2l+1)G_l}{[\mu_r(l+1)+\muo l)][\mu_r l+\muo(l+1)]-(\mu_r-\muo)^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}
+\mathcal{K}_1=-\frac{\mu(\mu-\muo)(l+1) (2l+1)G_l}{[\mu(l+1)+\muo l)][\mu l+\muo(l+1)]-(\mu-\muo)^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}
 \end{equation}
 
 \fig{Images/sphere_s}{width = 0.8\textwidth}{Shielding effect of spherical shell in a uniform magnetic field.\label{fig:sphere_s}}{Shielding effect of spherical shell in a uniform magnetic field.}
 
-The net field  within the bulk of the shield (\textit{i.e.}, $a<r<b$) (see Eq.~(\ref{R<r<R+t}))  is 
+% The net field  within the bulk of the shield (\textit{i.e.}, $a<r<b$) (see Eq.~(\ref{R<r<R+t})) is 
 % \begin{multline*}
 % \bm B_2= \left[\mathcal{K}_1 n(l+1)\frac{R^{2l+1}}{r^{l+2}}+(\mathcal{K}_2+G_l)n(l+1) r^{l-1}\right] P_l(u) \bm{\hat{r}}\\ + \left[\mathcal{K}_1 n\frac{R^{2l+1}}{r^{l+2}}-(\mathcal{K}_2+G_l)(l+1) r^{l-1}\right] P_l^1(u) \bm{\hat{\theta}}
 % \end{multline*}
-\begin{multline}\label{B2}
-\bm B= l(l+1)r^{l-1}\left[\mathcal{K}_1 \left(\dfrac{a}{r}\right)^{2l+1}+(\mathcal{K}_2+G_l)\right] P_l(u) \bm{\hat{r}} \\+r^{l-1} \left[\mathcal{K}_1 l\left(\dfrac{a}{r}\right)^{2l+1}-(\mathcal{K}_2+G_l)(l+1) \right] P_l^1(u) \bm{\hat{\theta}}
-\end{multline}
+% \begin{multline}\label{B2}
+% \bm B_2= l(l+1)r^{l-1}\left[\mathcal{K}_1 \left(\dfrac{a}{r}\right)^{2l+1}+(\mathcal{K}_2+G_l)\right] P_l(u) \bm{\hat{r}} \\+r^{l-1} \left[\mathcal{K}_1 l\left(\dfrac{a}{r}\right)^{2l+1}-(\mathcal{K}_2+G_l)(l+1) \right] P_l^1(u) \bm{\hat{\theta}}
+% \end{multline}
+
+For $\mu\gg\muo$, Eqs.~(\ref{k2}),~and~(\ref{k1}) reduced to
+\begin{align}
+    \begin{split}\label{k12}
+        \mathcal{K}_1 & \approx-\frac{\mu^2(l+1) (2l+1)G_l}{\mu^2 l(l+1)-\mu^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}\\
+        & \approx-\frac{(2l+1)G_l}{l-l\left(\dfrac{a}{b}\right)^{2l+1}}
+    \end{split}\\
+    \begin{split}\label{k12}
+        \mathcal{K}_2 & \approx-G_l-\frac{\mu(l+1)}{\mu(n+1}\mathcal{K}_1\\
+        & \approx-G_l-\mathcal{K}_1
+% $$\mathcal{K}_2^\infty+G_l=-\mathcal{K}_1^\infty$$
+    \end{split}
+\end{align}
 
 
-
-Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}):
+The net field  within the bulk of the shield (\textit{i.e.}, $a<r<b$) (see Eq.~(\ref{R<r<R+t})) for \(\mu\gg\muo\) is 
+% Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}):
 % \begin{align*}
 % &\bm B_2= n(l+1)r^{l-1}[\mathcal{K}_1 \left(\dfrac{a}{r}\right)^{2l+1}-\mathcal{K}_1] P_l(u) \bm{\hat{r}} +r^{l-1} [\mathcal{K}_1 n\left(\dfrac{a}{r}\right)^{2l+1}+\mathcal{K}_1(l+1) ] P_l^1(u) \bm{\hat{\theta}}\\
 % &\bm B_2= n(l+1)r^{l-1}\mathcal{K}_1[\left(\dfrac{a}{r}\right)^{2l+1}-1] P_l(u) \bm{\hat{r}} +r^{l-1} \mathcal{K}_1[n\left(\dfrac{a}{r}\right)^{2l+1}+(l+1) ] P_l^1(u) \bm{\hat{\theta}}
@@ -209,23 +304,25 @@ Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}):
 % \end{multline*}
 
 % Therefore,
-
-$$\bm B= (l+1)(2l+1)r^{l-1}G_l\left[\left[\frac{1-\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l(u) \bm{\hat{r}} -\frac{1}{n}\left[\frac{1+\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l^1(u) \bm{\hat{\theta}}\right]$$
+\begin{multline}\label{B2}
+    \bm B= (l+1)(2l+1)r^{l-1}G_l\\\left[\left[\frac{1-\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l(u) \bm{\hat{r}} -\frac{1}{l}\left[\frac{1+\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l^1(u) \bm{\hat{\theta}}\right]
+\end{multline}
+% $$\bm B= (l+1)(2l+1)r^{l-1}G_l\left[\left[\frac{1-\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l(u) \bm{\hat{r}} -\frac{1}{n}\left[\frac{1+\frac{l}{l+1}\left(\dfrac{a}{r}\right)^{2l+1}}{1-\left(\dfrac{a}{b}\right)^{2l+1}}\right] P_l^1(u) \bm{\hat{\theta}}\right]$$
 
 
 
 \subsection{Using Scalar Potential}
-The magnetic field calculation using scalar potential due to presence of a spherical mu-metal shield in a uniform magnetic field \(\bm{B_o}= \muo \bm H_o\) has been discussed in Section~\textcolor{blue}{5.12} of Ref.~\cite{jackson}. We will extend the derivation of that Section to find out the magnetic field inside the bulk of a spherical mu-metal shield and compare with the bound surface current method discussed in previous Section considering the same mu-metal as shown in Fig.~\ref{fig:sphere_ls}.
+The magnetic field calculation using scalar potential due to presence of a spherical mu-metal shield in a uniform magnetic field has been discussed in Section~\textcolor{blue}{5.12} of Ref.~\cite{jackson}. We have extended the derivation of that Section to find out the magnetic field inside the bulk of a spherical mu-metal shield in a multi-pole field \(\bm{B_0}= \muo \bm H_0\) of order l and compared with the bound surface current method discussed in previous Section considering the same mu-metal as shown in Fig.~\ref{fig:sphere_ls}.
 % \fig{Images/sphere_1}{width = \textwidth}{Spherical shell in a uniform magnetic field.\label{fig:sphere_ls}}{Spherical shell in a uniform magnetic field.}
 
-% Fig.~\ref{fig:sphere_ls} shows an example of placing a spherical shell of thickness t in a uniform magnetic field, $\bm B_o$. The shell is made of material of permeability $\mu_r$.
+% Fig.~\ref{fig:sphere_ls} shows an example of placing a spherical shell of thickness t in a uniform magnetic field, $\bm B_0$. The shell is made of material of permeability $\mu$.
 
 Ampere's law relates the magnetic field $\bm{H}$ to the current density $\bm{J}$ as \(\bm{\nabla}\times\bm{H}=\bm{J}\). As there is no free currents presents $\it{i.e.}$ \(\bm{J}_f=\bm{K}_f=0\) , so \(\bm{\nabla}\times\bm{H}=0\) everywhere. It implies that there exists a magnetic scalar potential \(\Phi\) that is continuous  everywhere and the  magnetic field $\bm{H}$ is derivable as -
 \begin{equation}\label{H}
 \bm{H}=-\bm{\nabla}\Phi
 \end{equation} 
 
-According to Maxwell's equation, the magnetic field $\bm{B}$ has divergence equal to zero $\it{i.e.}$ \(\bm{\nabla}\cdot\bm{B}=0\). Since \(\bm{B}=\mu_r\bm{H}\), magnetic field $\bm{H}$ also has divergence equal to zero $\it{i.e.}$
+According to Maxwell's equation, the magnetic field $\bm{B}$ has divergence equal to zero $\it{i.e.}$ \(\bm{\nabla}\cdot\bm{B}=0\). Since \(\bm{B}=\mu\bm{H}\), magnetic field $\bm{H}$ also has divergence equal to zero $\it{i.e.}$
 \begin{equation}\label{nablaH}
 \bm{\nabla}\cdot\bm{H}=0
 \end{equation}
@@ -247,74 +344,74 @@ The general solution is -
 \Phi(r,\theta, \phi)=\sum_{l=0}^{\infty}\sum_{m=-l}^l [A_{lm}r^l+B_{lm}r^{-(l+1)}]Y_{lm}(\theta, \phi)
 \end{equation}
 
-For physical situations with complete rotational symmetry about the $z$-axis $\it{i.e.}$ azimuthal symmetry, the general solution $\Phi$ is independent of $\phi$ $\it{i.e.}\;m=0$. Then the solution will be reduced to -
+The problem has complete rotational symmetry about the $z$-axis $\it{i.e.}$ azimuthal symmetry. So, the general solution $\Phi$ is independent of $\phi$ $\it{i.e.}\;m=0$ is reduced to :
 \begin{equation}
 \Phi(r,\theta)=\sum_{l=0}^{\infty} [A_lr^l+B_lr^{-(l+1)}]P_l(\cos\theta)
 \end{equation}
-The co-coefficients $A_l$ and $B_l$ are determined by the following boundary conditions at $r=a$, and $r=b$.
-\begin{equation}\label{b1}   
-\bm{H}_2\times \bm{n} = \bm{H}_1\times \bm{n}  
-\end{equation}
 
-\begin{equation}\label{b2}   
-\bm{H}_2\cdot \bm{n}=\frac{\mu_{1}}{\mu_{2}}\bm{H}_1\cdot \bm{n}
-\end{equation}
+The scalar potential at different regions are then : 
 
-
-To give the uniform field, $\bm{H}=\bm{H}_o$, at large distances, $\Phi$ must be
+% \begin{align}
+%     \Phi_1=-H_0 r^l P_l(\cos\theta)+\frac{\alpha}{r^{l+1}}P_l(\cos\theta)\;\;\;\;\;\;\;r>b \label{r>b} \\
+%     \Phi_2=\left(\beta r^l+\frac{\gamma}{r^{l+1}}\right)P_l(\cos\theta)\;\;\;\;\;\;\;\;\;\;\;\;a<r<b \label{a<r<b} \\
+%     \Phi_3=\delta r^l P_l(\cos\theta)\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;r<a \label{r<a} 
+% \end{align}
 
 \begin{align}
-    \Phi_1=-Hr^lP_l(\cos\theta)+\sum_{l=0}^{\infty}\frac{\alpha}{r^{l+1}}P_l(\cos\theta)\;\;\;\;\;\;\;r>b \label{r>b} \\
-    \Phi_2=\sum_{l=0}^{\infty} \left(\beta r^l+\frac{\gamma}{r^{l+1}}\right)P_l(\cos\theta)\;\;\;\;\;\;\;\;\;\;\;\;a<r<b \label{a<r<b} \\
-    \Phi_3=\sum_{l=0}^{\infty} \delta r^l P_l(\cos\theta)\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;r<a \label{r<a} 
+    \Phi_1 &= \delta r^l P_l(\cos\theta) && \mathrm{r<a} \label{r<a} \\
+    \Phi_2 &= \left(\beta r^l+\frac{\gamma}{r^{l+1}}\right)P_l(\cos\theta) && \mathrm{a<r<b} \label{a<r<b} \\
+    \Phi_3 &= -H_0 r^l P_l(\cos\theta)+\frac{\alpha}{r^{l+1}}P_l(\cos\theta) && \mathrm{r>b} \label{r>b} 
 \end{align}
+The co-coefficients $\delta$,~$\beta$,~$\gamma$~and~$\alpha$ for different regions are determined by boundary conditions (Eqs.~(\ref{b1})~and~(\ref{b2})) at $r=a$, and $r=b$.
 
+Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b1}): 
 
-Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b1}) at $r=b$ :
+% At $r=a$ :
 
-% The boundary conditions at $r=a$, and $r=b$ are that $H_\theta$ and $B_r$ be continuous
-$$\frac{\partial \Phi_3}{\partial \theta}(b)=\frac{\partial \Phi_2}{\partial \theta}(b)$$
+$$\frac{\partial \Phi_2}{\partial \theta}\Bigr|_{\substack{r=a}}=\frac{\partial \Phi_1}{\partial \theta}\Bigr|_{\substack{r=a}}$$
 
-Using the values from Eqs.~(\ref{r>b}), and (\ref{a<r<b}) :
-% $$-Hb^l\frac{\delta}{\delta \theta}(P_l(\cos\theta))+\frac{\alpha}{r^{l+1}}\frac{\delta}{\delta \theta}(P_l(\cos\theta))=\left(\beta b^l+\frac{\gamma}{b^{l+1}}\right)\frac{\delta}{\delta \theta}(P_l(\cos\theta))$$
-\begin{equation}\label{e01}
--Hb^l+\frac{\alpha}{b^{l+1}}=\beta b^l+\frac{\gamma}{b^{l+1}}
-\end{equation}
-
-Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b1}) at $r=a$ :
-
-$$\frac{\partial \Phi_2}{\partial \theta}(a)=\frac{\partial \Phi_1}{\partial \theta}(a)$$
-
-Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
+Using the values from Eqs.~(\ref{r<a}), and~(\ref{a<r<b}):
 % $$\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)\frac{\delta}{\delta \theta}(P_l(\cos\theta))=\delta a^l \frac{\delta}{\delta \theta}(P_l(\cos\theta))$$
-\begin{equation}\label{e02}
+\begin{equation}\label{e01}
 \beta a^l+\frac{\gamma}{a^{l+1}}=\delta a^l
 \end{equation}
 
-Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b2}) at $r=b$ :
+% At $r=b$ :
+% The boundary conditions at $r=a$, and $r=b$ are that $H_\theta$ and $B_r$ be continuous
+$$\frac{\partial \Phi_3}{\partial \theta}\Bigr|_{\substack{r=b}}=\frac{\partial \Phi_2}{\partial \theta}\Bigr|_{\substack{r=b}}$$
 
-$$\muo\frac{\partial \Phi_3}{\partial r}(b)=\mu_r\frac{\partial \Phi_2}{\partial r}(b)$$
-
-Using Eqs.~(\ref{r>b}), and (\ref{a<r<b}):
-% $$\muo\left[-Hlb^{l-1}+\frac{-(l+1)\alpha}{b^{l+2}}\right]P_l(\cos\theta)=\mu_r\left[\beta l b^{l-1}+\frac{-(l+1)\gamma}{b^{l+2}}\right]P_l(\cos\theta)$$
-\begin{equation}\label{e03}
--Hlb^{l-1}-\frac{(l+1)\alpha}{b^{l+2}}=\frac{\mu_r}{\muo}\left[\beta l b^{l-1}-\frac{(l+1)\gamma}{b^{l+2}}\right]
+Using the values from Eqs.~(\ref{a<r<b}), and~(\ref{r>b}):
+% $$-H_0b^l\frac{\delta}{\delta \theta}(P_l(\cos\theta))+\frac{\alpha}{r^{l+1}}\frac{\delta}{\delta \theta}(P_l(\cos\theta))=\left(\beta b^l+\frac{\gamma}{b^{l+1}}\right)\frac{\delta}{\delta \theta}(P_l(\cos\theta))$$
+\begin{equation}\label{e02}
+-H_0b^l+\frac{\alpha}{b^{l+1}}=\beta b^l+\frac{\gamma}{b^{l+1}}
 \end{equation}
 
-Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b2}) at $r=a$ :
 
-$$\mu_r\frac{\partial \Phi_2}{\partial r}(a)=\muo\frac{\partial \Phi_1}{\partial r}(a)$$
 
-Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
-% $$\frac{\mu_r}{\muo}\left[\beta l a^{l-1}+\frac{-(l+1)\gamma}{a^{l+2}}\right]P_l(\cos\theta)=\delta l a^{l-1} P_l(\cos\theta)$$
+Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b2}):
+
+$$\mu \frac{\partial \Phi_2}{\partial r}\Bigr|_{\substack{r=a}}=\muo\frac{\partial \Phi_1}{\partial r}\Bigr|_{\substack{r=a}}$$
+
+Using the values from Eqs.~(\ref{r<a}), and~(\ref{a<r<b}), and  $\mu'=\mu/\muo$:
+% $$\mu'\left[\beta l a^{l-1}+\frac{-(l+1)\gamma}{a^{l+2}}\right]P_l(\cos\theta)=\delta l a^{l-1} P_l(\cos\theta)$$
+\begin{equation}\label{e03}
+\delta l a^{l-1}=\mu'\left[\beta l a^{l-1}-\frac{(l+1)\gamma}{a^{l+2}}\right]
+\end{equation}
+
+% at $r=b$ :
+
+$$\muo\frac{\partial \Phi_3}{\partial r}\Bigr|_{\substack{r=b}}=\mu\frac{\partial \Phi_2}{\partial r}\Bigr|_{\substack{r=b}}$$
+
+Using the values from Eqs.~(\ref{a<r<b}), and~(\ref{r>b}):
+% $$\muo\left[-H_0lb^{l-1}+\frac{-(l+1)\alpha}{b^{l+2}}\right]P_l(\cos\theta)=\mu\left[\beta l b^{l-1}+\frac{-(l+1)\gamma}{b^{l+2}}\right]P_l(\cos\theta)$$
 \begin{equation}\label{e04}
-\delta l a^{l-1}=\mu_r'\left[\beta l a^{l-1}-\frac{(l+1)\gamma}{a^{l+2}}\right]
+-H_0lb^{l-1}-\frac{(l+1)\alpha}{b^{l+2}}=\mu'\left[\beta l b^{l-1}-\frac{(l+1)\gamma}{b^{l+2}}\right]
 \end{equation}
 
 % Eq.~(\ref{e01}) can be reduced to -
-% % $$-Hb^l+\frac{\alpha}{b^{l+1}}=\beta b^l+\frac{\gamma}{b^{l+1}}$$
-% % $$\frac{-Hb^{2l+1}+\alpha}{b^{l+1}}=\frac{\beta b^{2l+1}+\gamma}{b^{l+1}}$$
-% % $$-Hb^{2l+1}+\alpha=\beta b^{2l+1}+\gamma$$
+% % $$-H_0b^l+\frac{\alpha}{b^{l+1}}=\beta b^l+\frac{\gamma}{b^{l+1}}$$
+% % $$\frac{-H_0b^{2l+1}+\alpha}{b^{l+1}}=\frac{\beta b^{2l+1}+\gamma}{b^{l+1}}$$
+% % $$-H_0b^{2l+1}+\alpha=\beta b^{2l+1}+\gamma$$
 % \begin{equation}
 % \alpha- b^{2l+1}\beta-\gamma=b^{2l+1}H
 % \end{equation}
@@ -327,140 +424,146 @@ Using Eqs.~(\ref{a<r<b}), and (\ref{r<a}):
 % \end{equation}
 
 % Eq.~(\ref{e03}) can be reduced to -
-% % $$-Hlb^{l-1}-\frac{(l+1)\alpha}{b^{l+2}}=\mu_r'\left[\beta l b^{l-1}-\frac{(l+1)\gamma}{b^{l+2}}\right]$$
-% % $$\frac{-Hlb^{2l+1}-(l+1)\alpha}{b^{l+2}}=\mu_r'\left[\frac{\beta l b^{2l+1}-(l+1)\gamma}{b^{l+2}}\right]$$
+% % $$-H_0lb^{l-1}-\frac{(l+1)\alpha}{b^{l+2}}=\mu'\left[\beta l b^{l-1}-\frac{(l+1)\gamma}{b^{l+2}}\right]$$
+% % $$\frac{-H_0lb^{2l+1}-(l+1)\alpha}{b^{l+2}}=\mu'\left[\frac{\beta l b^{2l+1}-(l+1)\gamma}{b^{l+2}}\right]$$
 % \begin{equation}
-% (l+1)\alpha+\mu_r' l b^{2l+1}\beta-\mu_r'(l+1)\gamma=-lb^{2l+1}H
+% (l+1)\alpha+\mu' l b^{2l+1}\beta-\mu'(l+1)\gamma=-lb^{2l+1}H
 % \end{equation}
 
 % Eq.~(\ref{e04}) can be reduced to -
-% % $$\delta l a^{l-1}=\mu_r'\left[\beta l a^{l-1}-\frac{(l+1)\gamma}{a^{l+2}}\right]$$
-% % $$\delta l a^{l-1}=\mu_r'\left[\frac{\beta l a^{2l+1}-(l+1)\gamma}{a^{l+2}}\right]$$
-% % $$\delta l a^{2l+1}=\mu_r'\beta l a^{2l+1}-\mu_r'(l+1)\gamma$$
+% % $$\delta l a^{l-1}=\mu'\left[\beta l a^{l-1}-\frac{(l+1)\gamma}{a^{l+2}}\right]$$
+% % $$\delta l a^{l-1}=\mu'\left[\frac{\beta l a^{2l+1}-(l+1)\gamma}{a^{l+2}}\right]$$
+% % $$\delta l a^{2l+1}=\mu'\beta l a^{2l+1}-\mu'(l+1)\gamma$$
 % \begin{equation}
-% \mu_r'l a^{2l+1}\beta -\mu_r'(l+1)\gamma- l a^{2l+1}\delta=0
+% \mu'l a^{2l+1}\beta -\mu'(l+1)\gamma- l a^{2l+1}\delta=0
 % \end{equation}
 
 Eqs.~(\ref{e01}),~(\ref{e02}),~(\ref{e03}), and ~(\ref{e04}) can be reduced to -
 \begin{equation}\label{e1}
-\alpha- b^{2l+1}\beta-\gamma=b^{2l+1}H
+\alpha- b^{2l+1}\beta-\gamma=b^{2l+1}H_0
 \end{equation}
 \begin{equation}\label{e2}
  a^{2l+1}\beta+\gamma-a^{2l+1}\delta =0
 \end{equation}
 \begin{equation}\label{e3}
-(l+1)\alpha+\mu_r' l b^{2l+1}\beta-\mu_r'(l+1)\gamma=-lb^{2l+1}H
+(l+1)\alpha+\mu' l b^{2l+1}\beta-\mu'(l+1)\gamma=-lb^{2l+1}H_0
 \end{equation}
 \begin{equation}\label{e4}
-\mu_r'l a^{2l+1}\beta -\mu_r'(l+1)\gamma- l a^{2l+1}\delta=0
+\mu'l a^{2l+1}\beta -\mu'(l+1)\gamma- l a^{2l+1}\delta=0
 \end{equation}
 
 Subtracting Eq.~(\ref{e2}) from Eq.(\ref{e4})/$l$ -
-% $$\mu_r' a^{2l+1}\beta -\left(\frac{l+1}{l}\right)\mu_r'\gamma- a^{2l+1}\delta-a^{2l+1}\beta-\gamma+a^{2l+1}\delta=0$$
-% $$ \beta a^{2l+1}(\mu_r'-1) -\gamma\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]=0$$
+% $$\mu' a^{2l+1}\beta -\left(\frac{l+1}{l}\right)\mu'\gamma- a^{2l+1}\delta-a^{2l+1}\beta-\gamma+a^{2l+1}\delta=0$$
+% $$ \beta a^{2l+1}(\mu'-1) -\gamma\left[\left(\frac{l+1}{l}\right)\mu'+1\right]=0$$
 % So we get,
 \begin{equation}\label{g1}
-\gamma=\beta \left[\frac{a^{2l+1}(\mu_r'-1)}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]
+\gamma=\beta \left[\frac{a^{2l+1}(\mu'-1)}{\left(\frac{l+1}{l}\right)\mu'+1}\right]
 \end{equation}
 
 Subtracting Eq.~(\ref{e1})$*(l+1)$ from Eq.~(\ref{e3}) and using the value of Eq.(\ref{g1})
-% $$(l+1)\alpha+\mu_r' l b^{2l+1}\beta-\mu_r'(l+1)\gamma+lb^{2l+1}H-(l+1)\alpha+(l+1) b^{2l+1}\beta+(l+1)\gamma+(l+1)b^{2l+1}H$$
-% $$(\mu_r'l+l+1) b^{2l+1}\beta+(1-\mu_r')(l+1)\gamma=-(l+1+l)b^{2l+1}H$$
+% $$(l+1)\alpha+\mu' l b^{2l+1}\beta-\mu'(l+1)\gamma+lb^{2l+1}H-(l+1)\alpha+(l+1) b^{2l+1}\beta+(l+1)\gamma+(l+1)b^{2l+1}H$$
+% $$(\mu'l+l+1) b^{2l+1}\beta+(1-\mu')(l+1)\gamma=-(l+1+l)b^{2l+1}H$$
 % Putting the value of eq.[\ref{g1}] we get,
-% $$(\mu_r'l+l+1) b^{2l+1}\beta+(l+1)a^{2l+1}\beta \left[\frac{(1-\mu_r')(\mu_r'-1)}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]=-(2l+1)b^{2l+1}H$$
-% $$\beta(\mu_r'l+l+1) -\beta(l+1)\left(\frac{a}{b}\right)^{2l+1} \left[\frac{(\mu_r'-1)^2}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]=-(2l+1)H$$
-% $$\beta\left[(\mu_r'l+l+1) -(l+1)\left(\frac{a}{b}\right)^{2l+1} \left[\frac{(\mu_r'-1)^2}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]\right]=-(2l+1)H$$
-% $$\beta\left[\frac{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]=-(2l+1)H$$
+% $$(\mu'l+l+1) b^{2l+1}\beta+(l+1)a^{2l+1}\beta \left[\frac{(1-\mu')(\mu'-1)}{\left(\frac{l+1}{l}\right)\mu'+1}\right]=-(2l+1)b^{2l+1}H$$
+% $$\beta(\mu'l+l+1) -\beta(l+1)\left(\frac{a}{b}\right)^{2l+1} \left[\frac{(\mu'-1)^2}{\left(\frac{l+1}{l}\right)\mu'+1}\right]=-(2l+1)H$$
+% $$\beta\left[(\mu'l+l+1) -(l+1)\left(\frac{a}{b}\right)^{2l+1} \left[\frac{(\mu'-1)^2}{\left(\frac{l+1}{l}\right)\mu'+1}\right]\right]=-(2l+1)H$$
+% $$\beta\left[\frac{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}{\left(\frac{l+1}{l}\right)\mu'+1}\right]=-(2l+1)H$$
 % So we get,
 \begin{equation}\label{bt1}
-\beta=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu_r'+1\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H
+\beta=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu'+1\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H_0
 \end{equation}
 
-% For $\mu_r\gg\muo \Rightarrow \mu_r/\muo\gg 1 \Rightarrow \mu_r'\gg 1$ -
-% % $$\beta\approx-\left[\frac{\left[\frac{(2l+1)(l+1)}{l}\right]\mu_r'}{(l+1)\mu_r'^2-(l+1)\left(\frac{a}{b}\right)^{2l+1}\mu_r'^2}\right]H$$
-% % $$\beta\approx-\left[\frac{(2l+1)(l+1)\mu_r'}{l(l+1)\mu_r'^2\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]H$$
+% For $\mu\gg\muo \Rightarrow \mu/\muo\gg 1 \Rightarrow \mu'\gg 1$ -
+% % $$\beta\approx-\left[\frac{\left[\frac{(2l+1)(l+1)}{l}\right]\mu'}{(l+1)\mu'^2-(l+1)\left(\frac{a}{b}\right)^{2l+1}\mu'^2}\right]H$$
+% % $$\beta\approx-\left[\frac{(2l+1)(l+1)\mu'}{l(l+1)\mu'^2\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]H$$
 % % So we get,
 
 % \begin{equation}\label{bt2}
-% \beta\approx-\left[\frac{(2l+1)\muo}{l\mu_r\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]\right]H
+% \beta\approx-\left[\frac{(2l+1)\muo}{l\mu\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]\right]H
 % \end{equation}
 
 Putting the value of Eq.~(\ref{bt1}) in Eq.~(\ref{g1}):
-% $$\gamma=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu_r'+1\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right] \left[\frac{a^{2l+1}(\mu_r'-1)}{\left(\frac{l+1}{l}\right)\mu_r'+1}\right]H$$
+% $$\gamma=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu'+1\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right] \left[\frac{a^{2l+1}(\mu'-1)}{\left(\frac{l+1}{l}\right)\mu'+1}\right]H$$
 \begin{equation}\label{g2}
-\gamma=-\left[\frac{(2l+1)a^{2l+1}(\mu_r'-1)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right] H    
+\gamma=-\left[\frac{(2l+1)a^{2l+1}(\mu'-1)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right] H_0    
 \end{equation}
 
 
-% For \(\mu_r'\gg 1\) :
-% % $$\gamma\approx-\left[\frac{(2l+1)a^{2l+1}\mu_r'}{\mu_r'^2(l+1)-(l+1)\left(\frac{a}{b}\right)^{2l+1}\mu_r'^2}\right] H$$
-% % $$\gamma\approx-\left[\frac{(2l+1)a^{2l+1}\mu_r'}{\mu_r'^2(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H$$
+% For \(\mu'\gg 1\) :
+% % $$\gamma\approx-\left[\frac{(2l+1)a^{2l+1}\mu'}{\mu'^2(l+1)-(l+1)\left(\frac{a}{b}\right)^{2l+1}\mu'^2}\right] H$$
+% % $$\gamma\approx-\left[\frac{(2l+1)a^{2l+1}\mu'}{\mu'^2(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H$$
 % % So, we get,
 % \begin{equation}\label{g2}
-% \gamma\approx-\left[\frac{(2l+1)a^{2l+1}\muo}{\mu_r(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H
+% \gamma\approx-\left[\frac{(2l+1)a^{2l+1}\muo}{\mu(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H
 % \end{equation}
-Using Eqs.~(\ref{g2}), and (\ref{bt1}) in Eq.~(\ref{e2}) we get,
-% $$\delta =\beta+\frac{\gamma}{a^{2l+1}}$$
-% $$\delta =-\left[\frac{1}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]$$ $$\left[(2l+1)\left(\left(\frac{l+1}{l}\right)\mu_r'+1\right)+(2l+1)(\mu_r'-1)\right]H$$
-% $$\delta =-\left[\frac{(2l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1+\mu_r'-1\right]}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H$$
-% $$\delta =-\left[\frac{(2l+1)\left[\mu_r'\left(\frac{l+1}{l}+1\right)\right]}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H$$
-% So we get,
-\begin{equation}\label{dt1}
-\delta =-\left[\frac{\frac{(2l+1)^2}{l}\mu_r'}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H    
-\end{equation}
+% Using Eqs.~(\ref{g2}), and (\ref{bt1}) in Eq.~(\ref{e2}) we get,
+% % $$\delta =\beta+\frac{\gamma}{a^{2l+1}}$$
+% % $$\delta =-\left[\frac{1}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]$$ $$\left[(2l+1)\left(\left(\frac{l+1}{l}\right)\mu'+1\right)+(2l+1)(\mu'-1)\right]H$$
+% % $$\delta =-\left[\frac{(2l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1+\mu'-1\right]}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H$$
+% % $$\delta =-\left[\frac{(2l+1)\left[\mu'\left(\frac{l+1}{l}+1\right)\right]}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H$$
+% % So we get,
+% \begin{equation}\label{dt1}
+% \delta =-\left[\frac{\frac{(2l+1)^2}{l}\mu'}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H    
+% \end{equation}
 
 
 % Therefore,
 
 % \begin{equation}\label{bt1}
-% \beta=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu_r'+1\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H
+% \beta=-\left[\frac{(2l+1)\left(\left(\frac{l+1}{l}\right)\mu'+1\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H
 % \end{equation}
 % \begin{equation}\label{g1}
-% \gamma=-\left[\frac{(2l+1)a^{2l+1}(\mu_r'-1)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right] H    
+% \gamma=-\left[\frac{(2l+1)a^{2l+1}(\mu'-1)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right] H    
 % \end{equation}
 % \begin{equation}\label{dt1}
-% \delta =-\left[\frac{\frac{(2l+1)^2}{l}\mu_r'}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H    
+% \delta =-\left[\frac{\frac{(2l+1)^2}{l}\mu'}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H    
 % \end{equation}
+For $\mu'\gg 1$, Eqs.~(\ref{bt1}),~and~(\ref{g2}) reduced to -
+\begin{equation}\label{bt2}
+\beta\approx-\left[\frac{2l+1}{\mu'l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\right]H_0
+\end{equation}
+
+\begin{equation}\label{g3}
+\gamma\approx-\left[\frac{(2l+1)a^{2l+1}}{\mu'(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H_0
+\end{equation}
 
 
-
-For \(a\textless r\textless b \) from Eq.~(\ref{a<r<b}) :
+Using the values from Eqs.~(\ref{bt2}),~and~(\ref{g3}), and $u=\cos\theta$ in Eq.~(\ref{a<r<b}) :
 
 
 
 % $$\Phi=\left(\beta r^l+\frac{\gamma}{r^{l+1}}\right)P_l(\cos\theta)$$
-% $$\Phi=\left[-r^l\left[\frac{(2l+1)\muo}{l\mu_r\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]H-\frac{r^l}{r^{2l+1}}\left[\frac{(2l+1)a^{2l+1}\muo}{\mu_r(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H}\right]P_l(\cos\theta)$$
-% $$\Phi=-\frac{(2l+1)Hr^lP_l(\cos\theta)}{\mu_r\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]}\left[\frac{\muo}{l}+\left(\frac{a}{r}\right)^{2l+1}\left(\frac{\muo}{l+1}\right)\right]$$
-% $$\Phi=-\frac{(2l+1)(\muo H)r^lP_l(\cos\theta)}{\mu_r(l+1)}\left[\frac{\frac{l+1}{l}+\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]$$
-% $$\Phi=-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu_r(l+1)}\left[\frac{\frac{l+1}{l}+\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]$$
+% $$\Phi=\left[-r^l\left[\frac{(2l+1)\muo}{l\mu\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]H-\frac{r^l}{r^{2l+1}}\left[\frac{(2l+1)a^{2l+1}\muo}{\mu(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H}\right]P_l(\cos\theta)$$
+% $$\Phi=-\frac{(2l+1)Hr^lP_l(\cos\theta)}{\mu\left[1-\left(\frac{a}{b}\right)^{2l+1}}\right]}\left[\frac{\muo}{l}+\left(\frac{a}{r}\right)^{2l+1}\left(\frac{\muo}{l+1}\right)\right]$$
+% $$\Phi=-\frac{(2l+1)(\muo H)r^lP_l(\cos\theta)}{\mu(l+1)}\left[\frac{\frac{l+1}{l}+\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]$$
+% $$\Phi=-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu(l+1)}\left[\frac{\frac{l+1}{l}+\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]$$
 \begin{equation}\label{p}
-\Phi=-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu_r l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
+\Phi_2=-\frac{(2l+1)B_0r^lP_l(u)}{\mu l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
 \end{equation}
 % From Eq.[\ref{H}] we know,
 % $$\bm{H}=-\bm{\nabla}\Phi$$
 % $$H_r=-\frac{\delta \Phi}{\delta r}$$
-Using Eq.~(\ref{H}) in Eq.~(\ref{p}) :
-% $$H_r=-\frac{\delta}{\delta r}\left[-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu_r l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]$$
-% $$H_r=\frac{(2l+1)BP_l(u)}{\mu_r l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\frac{\delta}{\delta r}\left[r^l+\frac{l}{l+1}a^{2l+1}r^{-2l-1+l}\right]$$
-% $$H_r=\frac{(2l+1)BP_l(u)}{\mu_r l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\left[l r^{l-1}+\frac{l}{l+1}a^{2l+1}\frac{(-l-1)}{r^{l+2}}\right]$$
-% $$H_r=\frac{(2l+1)BP_l(u)l r^{l-1}}{\mu_r l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\left[1-\left(\frac{a}{r}\right)^{2l+1}\right]$$
+% $$H_r=-\frac{\delta}{\delta r}\left[-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]$$
+% $$H_r=\frac{(2l+1)BP_l(u)}{\mu l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\frac{\delta}{\delta r}\left[r^l+\frac{l}{l+1}a^{2l+1}r^{-2l-1+l}\right]$$
+% $$H_r=\frac{(2l+1)BP_l(u)}{\mu l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\left[l r^{l-1}+\frac{l}{l+1}a^{2l+1}\frac{(-l-1)}{r^{l+2}}\right]$$
+% $$H_r=\frac{(2l+1)BP_l(u)l r^{l-1}}{\mu l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\left[1-\left(\frac{a}{r}\right)^{2l+1}\right]$$
 % So we get,
+Using the value from Eq.~(\ref{p}):
 \begin{equation}\label{Hr}
 \begin{split}
     H_r &=-\frac{\partial \Phi}{\partial r}\\
-      &=\frac{(2l+1)}{\mu_r}r^{l-1}BP_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
+      &=\frac{(2l+1)}{\mu}r^{l-1}B_0P_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
 \end{split}
 \end{equation}
-Therefore,
+
 \begin{equation}\label{Br}
-B_r=(2l+1)r^{l-1}BP_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
+B_r=(2l+1)r^{l-1}B_0P_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
 \end{equation}
 
-Similarly,
 % \begin{equation*}
 % \begin{split}
 % H_\theta &=-\frac{1}{r}\frac{\delta \Phi}{\delta \theta}\\
-%         & =-\frac{1}{r}\frac{\delta}{\delta \theta}\left[-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu_r l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]
+%         & =-\frac{1}{r}\frac{\delta}{\delta \theta}\left[-\frac{(2l+1)Br^lP_l(\cos\theta)}{\mu l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]\right]
 % \end{split}
 % \end{equation*}
 
@@ -468,21 +571,24 @@ Similarly,
 \begin{equation}\label{Ht}
 \begin{split}
  H_\theta &=-\frac{1}{r}\frac{\partial \Phi}{\partial \theta}\\
-         & =-\frac{(2l+1)}{\mu_rl}Br^{l-1}P_l^1(u)\left[
+         & =-\frac{(2l+1)}{\mu l}B_0r^{l-1}P_l^1(u)\left[
          \frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}
          {1-\left(\frac{a}{b}\right)^{2l+1}}
          \right]
 \end{split}
 \end{equation}
 
-Therefore,
 \begin{equation}\label{Bt}
-B_\theta=-\frac{(2l+1)}{l}Br^{l-1}P_l^1(u)\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
+B_\theta=-\frac{(2l+1)}{l}B_0r^{l-1}P_l^1(u)\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]
 \end{equation}
 
 Finally, the magnetic field inside the bulk of a spherical mu-metal shield is
+% \begin{multline}\label{B}
+% \bm{B_2}=(2l+1)r^{l-1}B_0 P_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right] \hat{r} \\ -\frac{(2l+1)}{l}B_0 r^{l-1}P_l^1(u)\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right] \hat{\theta}
+% \end{multline}
 \begin{multline}\label{B}
-\bm{B}=(2l+1)r^{l-1}B_o P_l(u)\left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right] \hat{r} \\ -\frac{(2l+1)}{l}B_o r^{l-1}P_l^1(u)\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right] \hat{\theta}
+\bm{B_2}=(2l+1)r^{l-1} B_0  \\
+\left[ \left[\frac{1-\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right]P_l(u) \hat{r} -\frac{1}{l}\left[\frac{1+\frac{l}{l+1}\left(\frac{a}{r}\right)^{2l+1}}{1-\left(\frac{a}{b}\right)^{2l+1}}\right] P_l^1(u)\hat{\theta} \right]
 \end{multline}
 
 
@@ -494,8 +600,8 @@ For comparing two methods discussed in previous Sections, the following boundary
 \end{equation}
 
 Using Eq.~(\ref{H}) and the boundary condition from Eq.~(\ref{b3}) at $r=a$ :
-% $$-\mu_r \frac{1}{r}\frac{\delta \Phi_2}{\delta \theta}(a)+\muo \frac{1}{r}\frac{\delta \Phi_1}{\delta \theta}(a)=\muo\bm{K_1}  $$
-$$\frac{1}{r}\frac{\partial \Phi_1}{\partial \theta}(a)-\frac{1}{r}\mu'_r\frac{\partial \Phi_2}{\partial \theta}(a)=\bm{K_1}  $$
+% $$-\mu \frac{1}{r}\frac{\delta \Phi_2}{\delta \theta}\Bigr|_{\substack{r=a}}+\muo \frac{1}{r}\frac{\delta \Phi_1}{\delta \theta}\Bigr|_{\substack{r=a}}=\muo\bm{K_1}  $$
+$$\frac{1}{r}\frac{\partial \Phi_1}{\partial \theta}\Bigr|_{\substack{r=a}}-\frac{1}{r}\mu'_r\frac{\partial \Phi_2}{\partial \theta}\Bigr|_{\substack{r=a}}=\bm{K_1}  $$
 
 Using Eqs.~(\ref{a<r<b}), and (\ref{r<a})
 $$\frac{1}{a}\left[\delta a^l-\mu'_r\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)\right]\frac{\partial}{\partial \theta}(P_l(\cos\theta))= \bm{K_1}$$
@@ -504,21 +610,21 @@ $$a K_1=\mu'_r\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)-\delta a^l$$
 $$\frac{(2l+1)a^{l-1+1}\mathcal{K}_1}{\muo}=\mu'_r\left(\beta a^l+\frac{\gamma}{a^{l+1}}\right)-\delta a^l$$
 $$\frac{(2l+1)a^l\mathcal{K}_1}{\muo}=a^l\left[\mu'_r\left(\beta +\frac{\gamma}{a^{2l+1}}\right)-\delta \right]$$
 Using Eq.~(\ref{bt1}), (\ref{g2}), and (\ref{dt1}):
-% $$\frac{(2l+1)\mathcal{K}_1}{\muo}=-\left[\frac{2l+1}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]$$ $$\left[\mu'_r\left(\left(\frac{l+1}{l}\right)\mu_r'+1+\mu_r'-1\right)-\frac{(2l+1)}{l}\mu_r'}\right]H$$
-% $$\frac{\mathcal{K}_1}{\muo}=-\left[\frac{\mu'_r\left(\left(\frac{l+1}{l}\right)\mu_r'+\mu_r'-\frac{2l+1}{l}\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H$$
-% $$\frac{\mathcal{K}_1}{\muo}=-\left[\frac{\mu'_r\left(\frac{\mu_r'l+\mu_r'+\mu_r'l-2l-1}{l}\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H$$
-% $$\frac{\mathcal{K}_1}{\muo}=-\frac{1}{l}\left[\frac{\mu'_r\left(\mu_r'(2l+1)-1(2l+1)\right)}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]H$$
+% $$\frac{(2l+1)\mathcal{K}_1}{\muo}=-\left[\frac{2l+1}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]$$ $$\left[\mu'_r\left(\left(\frac{l+1}{l}\right)\mu'+1+\mu'-1\right)-\frac{(2l+1)}{l}\mu'}\right]H$$
+% $$\frac{\mathcal{K}_1}{\muo}=-\left[\frac{\mu'_r\left(\left(\frac{l+1}{l}\right)\mu'+\mu'-\frac{2l+1}{l}\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H$$
+% $$\frac{\mathcal{K}_1}{\muo}=-\left[\frac{\mu'_r\left(\frac{\mu'l+\mu'+\mu'l-2l-1}{l}\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H$$
+% $$\frac{\mathcal{K}_1}{\muo}=-\frac{1}{l}\left[\frac{\mu'_r\left(\mu'(2l+1)-1(2l+1)\right)}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H$$
 % So we get,
 \begin{equation}\label{k1s}
-\mathcal{K}_1=-\frac{\muo H}{l}\left[\frac{(2l+1)(\mu_r'-1)\mu'_r}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]
+\mathcal{K}_1=-\frac{\muo H}{l}\left[\frac{(2l+1)(\mu'-1)\mu'_r}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]
 \end{equation}
 Eq.~(\ref{k1}) can be written as
-% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu_r-\muo)\mu_r}{[\mu_r(l+1)+\muo l)][\mu_r l+\muo(l+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}(\mu_r-\muo)^2}$$
-% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu_r'-1)\muo\mu_r}{[\muo(\mu_r' l+\mu_r'+ l)\muo(\mu_r' l+l+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}\muo^2(\mu_r'-1)^2}$$
-% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu_r'-1)\mu_r'}{[(\mu_r' l+\mu_r'+ l)l(\mu_r'( 1+\frac{1}{l})+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}$$
+% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu-\muo)\mu}{[\mu(l+1)+\muo l)][\mu l+\muo(l+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}(\mu-\muo)^2}$$
+% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu'-1)\muo\mu}{[\muo(\mu' l+\mu'+ l)\muo(\mu' l+l+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}\muo^2(\mu'-1)^2}$$
+% $$\mathcal{K}_1=-\frac{G_l(2l+1)(l+1)(\mu'-1)\mu'}{[(\mu' l+\mu'+ l)l(\mu'( 1+\frac{1}{l})+1)]-l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}(\mu'-1)^2}$$
 % So we get,
 \begin{equation}\label{k1b}
-\mathcal{K}_1=-\frac{G_l (l+1)}{l}\left[\frac{(2l+1)(\mu_r'-1)\mu'_r}{(\mu_r'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu_r'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu_r'-1)^2}\right]
+\mathcal{K}_1=-\frac{G_l (l+1)}{l}\left[\frac{(2l+1)(\mu'-1)\mu'_r}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]
 \end{equation}
 
 Comparing Eqs.~(\ref{k1s}), and (\ref{k1b})
@@ -530,16 +636,16 @@ So, if Eq.~(\ref{g}) is correct, then we are getting same result using scalar po
 
 \section{Magnetic field with uniform background (l=1)}
 
-For \(\mu_r\gg\muo\) in Eq.(\ref{k1}):
+For \(\mu\gg\muo\) in Eq.(\ref{k1}):
 \begin{equation}\label{k12}
 \begin{split}
-\mathcal{K}_1\rightarrow\mathcal{K}_1^\infty & =-\frac{\mu_r^2(l+1) (2l+1)G_l}{\mu_r^2 l(l+1)-\mu_r^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}\\
+\mathcal{K}_1\rightarrow\mathcal{K}_1^\infty & =-\frac{\mu^2(l+1) (2l+1)G_l}{\mu^2 l(l+1)-\mu^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}\\
 & =-\frac{3 G_1}{1-\left(\dfrac{a}{b}\right)^{3}}
 \end{split}
 \end{equation}
 
-For \(\mu_r\gg\muo\) in Eq.(\ref{k2}):
-% $$\(\mathcal{K}_2^\infty=-G_l-\frac{\mu_r(l+1)}{\mu_r(l+1}\mathcal{K}_1^\infty\)$$
+For \(\mu\gg\muo\) in Eq.(\ref{k2}):
+% $$\(\mathcal{K}_2^\infty=-G_l-\frac{\mu(l+1)}{\mu(l+1}\mathcal{K}_1^\infty\)$$
 % $$\(\mathcal{K}_2^\infty=-G_l-\mathcal{K}_1^\infty\)$$
 \begin{equation}\label{k22}
 \mathcal{K}_2\rightarrow\mathcal{K}_2^\infty=-G_l-\mathcal{K}_1^\infty
@@ -552,12 +658,12 @@ Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}):
 
 At $\theta=0$ :
 \begin{equation}
-    \bm{B}=3\;B_o\;\frac{1-\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}
+    \bm{B}=3\;B_0\;\frac{1-\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}
 \end{equation}
 
 At $\theta=\pi/2$ :
 \begin{equation}
-    \bm{B}=\frac{3}{2}\;B_o\;\frac{2+\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}\approx \frac{3}{2}\;B_o\frac{a}{t}\bm{\hat{z}}
+    \bm{B}=\frac{3}{2}\;B_0\;\frac{2+\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}\approx \frac{3}{2}\;B_0\frac{a}{t}\bm{\hat{z}}
 \end{equation}
 
 \subsection{Comparison with simulation}
@@ -575,7 +681,7 @@ At $\theta=\pi/2$ :
         \hline
         Thickness, t (mm) & 4 \\ 
         \hline
-        $\mu_r$  & 20,000 \\ 
+        $\mu$  & 20,000 \\ 
         \hline
 
     \end{tabular}

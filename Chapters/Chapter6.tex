@@ -15,12 +15,12 @@ My MSc thesis work was initiated with the goal of establishing a
 working multi-dimensional PID control system for magnetic fields,
 based on the work of Refs.~\cite{bea} and~\cite{lins}.  This goal was
 successfully achieved and the work went beyond the goal in several
-respects.  In the process of developing the system I discovered a host
+respects.  In the process of developing the system, I discovered a host
 of new challenges, to which I found innovative solutions.  Below I
 least the key improvements made to the system and the results of those
 improvements.  They are:
 \begin{enumerate}
-\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  I designed 12 active filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU. The filters will be important for any types of future studies with high frequency noise issue. The filters can be improved by designing them in multi-gain pattern instead of constant gain that I have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In my case, to acquire the fluxgate signals placed inside the shield within the coil cube, I have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by our ADC.  
+\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter.}  I designed 12 active filters which are excellent in reducing high frequency noise even slightly better than the low pass filter (LPF) of Bartington's SCU. The filters will be important for any types of future studies with high frequency noise issue. The filters can be improved by designing them in multi-gain pattern instead of constant gain that I have built. The advantage of multi-gain is that if the signal is very small (smaller than the lowest that an ADC can read) then the signal can be read by multiplying it with a larger gain. In my case, to acquire the fluxgate signals placed inside the shield within the coil cube, I have used LPF of Bartington's SCU with gain of 100 which boost the signal 100 times so that can be easily read by the ADC.  
 
 \item {\bf Prototype PI control simulation.}  The simulation of the prototype active compensation system is vital to demonstrate a full understanding of the experimental results. The static part of the simulation involves FEA simulation in OPERA to produce field maps within the coil cube to generate the matrix $\bm{M}$ and the field change $\Delta B$ due to perturbation coil for any number of the sensors placed within the coil cube. This will be a very handy tool for the future students as they will have the freedom to use thousands of sensors within their respective cube dimension and most importantly they do not have to worry about placing the sensors correctly in their system to study in detail about the effect of $\bm{M}$ for any set of sensors. The dynamic part of the simulation involves time dependent PI feedback algorithm in Python. Implementing the values of static part in dynamic part generates a real time PI control simulation which gives very good results compared to experiment (see Fig.~\ref{fig:exp_sim}).  Simulation of a certain system integrating feedback algorithm is a unique work that has not been still published in any thesis related to active compensation. I could have avoided many problems observed in the data, {\it e.g.} the current drifting problem, before ever using the system if this simulation had existed a priori. Even the simulation in free space (not requiring OPERA) would have shown many of the same issues. The strong message for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
 
@@ -34,7 +34,7 @@ improvements.  They are:
 %\item Even simulation in free space (not requiring OPERA) would have shown many of the same issues.
 %\end{itemize}
 
-\item {\bf Better understanding of matrix inversion, PI parameters, and tuning.} The author in Ref.\cite{bea} proposed a matrix inversion with Tikhonov regularization which I have blindly followed initially. But I have realized later that there is more to the story than just having matrix inversion and PI tuning {\it i.e.} there is a relationship between the regularization parameter $r$ and PI parameters and studied this in more details. I came to the conclusion that no amount of PI tuning can reduce the current drifting problem even though $r$ is optimized properly.  However, the current drifting problem can be reduced by adjusting $r$ and PI parameters treating $r$ more-or-less another free parameter. But this introduces high frequency noise which gave me the clear understanding to describe Eqs.~(\ref{eq:del_I_pseudo}), and ~(\ref{eq:tikhonov}). Moreover, I also a propose a new method to find $r$ based on the condition number of the matrix which I think more robust than the method described by the author in Ref.\cite{bea}. Eventually, I have realized that implementing regularized matrix inversion is a waste of time. I will strongly suggest to avoid an ill-conditioned matrix which I should say that I have been somewhat advised by Ref.~\cite{rawlikpriv} in a conversation while attending nEDM workshop in 2017. 
+\item {\bf Better understanding of matrix inversion, PI parameters, and tuning.} The author in Ref.\cite{bea} proposed a matrix inversion with Tikhonov regularization which I have blindly followed initially. But I have realized later that there is more to the story than just having matrix inversion and PI tuning {\it i.e.} there is a relationship between the regularization parameter $r$ and PI parameters and studied this in more details. I came to the conclusion that no amount of PI tuning can reduce the current drifting problem even though $r$ is optimized properly.  However, the current drifting problem can be reduced by adjusting $r$ and PI parameters treating $r$ more-or-less another free parameter. But this introduces high frequency noise which gave me the clear understanding to describe Eqs.~(\ref{eq:del_I_pseudo}), and ~(\ref{eq:tikhonov}). Moreover, I have also proposed a new method to find $r$ based on the condition number of the matrix which I think more robust than the method described by the author in Ref.\cite{bea}. Eventually, I have realized that implementing regularized matrix inversion is a waste of time. I will strongly suggest to avoid an ill-conditioned matrix which I should say that I have been somewhat advised by Ref.~\cite{rawlikpriv} in a conversation while attending nEDM workshop in 2017. 
 
 Although I have got some good advice from Ref.~\cite{rawlikpriv}, but I was not sure about the author's proposal of a new feedback algorithm not based on PI which the author claimed in Ref.~\cite{rawlik}. I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow more flexibility in the tuning than feedback algorithm proposed by the author in Ref.~\cite{rawlik}.
 
@@ -50,60 +50,7 @@ Although I have got some good advice from Ref.~\cite{rawlikpriv}, but I was not 
 %\end{itemize}
 \end{enumerate}
 
-\subsection{Where will I use this ??}
-This thesis started with reproducing the works of
-Ref.~\cite{bea}. While doing so we face problems in terms of slow
-current response in the compensation coils. We have done different
-experiments with different parameters for understanding the problem
-and figure out the solution. We have tried to make the system faster
-by increasing loop sampling frequency. To avoid high frequency noise
-we have built a $\mathbf{4^{th}}$ order low pass Butterworth filter
-with 10 Hz corner frequency. The filter is one of the many
-achievements of this thesis. The filter is described in
-Section~\ref{sec:filter}. The effect of the filter on increasing loop
-sampling frequency and noise reduction are discussed in
-Section~\ref{sec:freq}. We have used PI control algorithm to generate
-new current (Eq.~(\ref{eq:I})). The PI control algorithm requires a
-tuned proportional (P) term and a tuned integral (I) term. The tuning
-process is described in Section~\ref{sec:tune}. The general behaviour
-of P and I terms and their impact individually and combined are
-discussed in Section~\ref{sec:pi_behave} where it is seen that I term
-is necessary for prototype compensation. The impact of I term is
-significant on magnetic compensation compare to P term. It also
-reveals that I term is responsible for current unsettle problem in the
-coils. The previous studies does not help us understanding the current
-unsettle problem. We have added more fluxgates, change the positions
-of the fluxgates to understand the current unsettle problem which is
-discussed in Section~\ref{sec:flux_place}. Moreover, as the fluxgate
-placements study does not give us any clue we have removed the passive
-shield to see if that makes any difference but removing shield makes
-no difference . As our different studies are failing to discover the
-solution of slow current response we become motivate to build a
-simulation of the prototype. The simulation of the prototype
-integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
-similarity between the experiment and simulation is shown. The PI
-simulation is another achievement for use. The simulation makes us
-generate new ideas to solve the current unsettle problem. As P and I
-term fail to solve the slow response problem, we change $r$ keeping P
-and I term fixed. The effect of changing $r$ is discussed in
-Section~\ref{sec:new_study_r} where it is discovered that lowering the
-value of $r$ can solve the slow current response but at the same time
-high frequency noise is induced. The author in Ref.~\cite{rawlik}
-introduces new ideas about the matrix should be well-conditioned
-before it takes part in the PI feedback loop which helps us look into
-matrix condition number in deep. While studying matrix condition
-number, we have realized that we can use the concept to find $r$
-alternative to another method discussed in Section~\ref{sec:mont}. We
-propose new method of regularization where optimize $r$ is determined
-based on lowest matrix condition number the method is discussed in
-Section~\ref{sec:cond}. The author in Ref.~\cite{rawlik} also claims
-that for a perfectly conditioned matrix there is no need of PI
-algorithm which we prove wrong in Section~\ref{sec:style_pi}. While
-studying matrix condition number, we also realize that matrix is ill
-conditioned because one of of the current modes producing zero net
-current. We have improved the matrix condition number significantly
-which also eliminates our initial problem of current unsettle
-discussed in Section~\ref{sec:coil_config}.
+
 
 \section{Recommendations on Design for TUCAN nEDM Experiment}
 
@@ -117,12 +64,12 @@ discussed in Section~\ref{sec:coil_config}.
 \end{enumerate}
 
 
-I strongly recommend that do not waste time regularized an ill-conditioned system (large condition number) rather spend time on building a well-conditioned system (small condition number). The author in Ref.~\cite{rawlik} is also vocal on small condition number. However,
-small condition number is not the most unique thing to consider. Because, small condition number can be easily generated if only three coils are used. But this system will be then restricted to cancel uniform fields only ignoring gradients. I will suggest to use spherical harmonics to the desired order and use coils or restricted combinations of coils to mimic those spherical harmonics. The restricted set of coil currents should then be well-conditioned. I have already showed the restricted set of coil currents in Section~\ref{sec:coil_config} which decreases the condition number for my system significantly. The author in Ref.~\cite{rawlik} went beyond this and suggested rewiring patch coils to generate spherical harmonics more efficiently and described a coil design method in Ref.~\cite{rawlik_paper_coil}. A well conditioned system is more flexible as it does not have to worry about regularization and it exactly knows what values coil currents can eliminate what field and which direction??.
+% I strongly recommend that do not waste time regularized an ill-conditioned system (large condition number) rather spend time on building a well-conditioned system (small condition number). The author in Ref.~\cite{rawlik} is also vocal on small condition number. 
+As discussed in Chapter~\ref{ch:magnetics}, the TUCAN nEDM experiment is located next to TRIUMF cyclotron with $\sim400~\mu$T background, $\sim100$~nT fluctuations, and $100~\mu$T/m gradients. Moreover, the 50 ton crane in the experimental site can also induces very large changes. The perturbations must be quantified properly. I recommend to build a well-conditioned system where the perturbation can be used as an input to the design process. I discourage to justify the design process by considering having small condition number only. Because, small condition number can easily be generated if only three coils are used but then the system having three coils will be restricted to cancel only uniform fields ignoring gradients. Hence, I rather suggest to use spherical harmonics to the desired order and use coils or restricted combinations of coils to mimic those spherical harmonics. The restricted set of coil currents should then be well-conditioned. I have already showed the restricted set of coil currents in Section~\ref{sec:coil_config} which decreases the condition number for my system significantly. The author in Ref.~\cite{rawlik} went beyond this and suggested rewiring patch coils to generate spherical harmonics more efficiently and described a coil design method in Ref.~\cite{rawlik_paper_coil}. A well conditioned system is more flexible as it does not have to worry about regularization and it exactly knows the value coil currents to eliminate a certain field in certain direction.
 
-\textcolor{red}{Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_x^\pm$ data.}
+% \textcolor{red}{Designing the system for the known perturbations... at TRIUMF, what are they?  This can be used as an input to the design process.  Relate back to the $C_x^\pm$ data.  }
 
-Having the system defined properly by improved coil design based on spherical harmonics and defining the known perturbation, I recommend to make the simulation of the system integrating the PI feedback algorithm using the tools that I developed before beginning to build it. The simulation will give the full picture of what is expected and what the system is offering and if that are not aligned make sure to correct the design and confirm again via simulation before building the system. Making a simulation beforehand should make the point that thes system has been understood and tested enough to do a good job a priori.
+Having the system defined properly by improved coil design based on spherical harmonics and known perturbation, I recommend to make the simulation of the system integrating the PI feedback algorithm using the tools that I developed before beginning to build it. The simulation will give the full picture of what is expected and what the system is offering and if that are not aligned make sure to correct the design and confirm again via simulation before building the system. Making a simulation beforehand should make the point that thes system has been understood and tested enough to do a good job a priori.
 % Discussion on simulation and simulating the system ``fully'' (including the PI loop) using the tools you developed before beginning to build it.  Should make the point that we now know enough to do a good job a priori.
 
 
@@ -144,13 +91,24 @@ Having the system defined properly by improved coil design based on spherical ha
 \end{itemize}
 \end{itemize}
 
+
+
 The first and foremost question is to be answered is that whether we need active compensation system or not. PSI group has already commissioned an active compensation system~\cite{bea_paper} for their previous nEDM experiment in 2013 because of having the experiment closer to facilities generating strong magnetic fields which induce $\Delta B$ at the experiment location of up to tens of $\mu$T on time scales from minutes to hours. Their present experiment namely ``n2EDM'' is also located around the same place and the n2EDM experimental volume is shielded from these perturbations by the MSR, but they ``might be left with measurable changes in the magnetic field of the experiment'' as quoted in Ref.~\cite{psi_n2edm_PPNS-workshop}. They are developing an active compensation system as an additional shielding layer and ''might be installed after initial characterization measurements'' quoted in same Ref.~\cite{psi_n2edm_PPNS-workshop}. 
 
-The TUCAN nEDM experiment will be in fringe field of TRIUMF cyclotron, at a location where the fringe could be as large as eight times the magnetic field of the earth ($\sim\;400\;\mu T$) with fluctuations $\sim\;100\;nT$ due to external magnetic sources such as nearby beam line magnets or the displacement of large magnetic objects ({\it e.g.} the crane in the Meson Hall). As to decide the need of active compensation for TUCAN nEDM experiment, it is first required to analyze the following statements :
+\fig{Images/active_scheme}{width = 0.8\textwidth}{Schematic diagram for the TUCAN nEDM magnetics. From inside out: The UCN and the co-magnetometers followed by the internal coil system ($\bm{B_0}$ and $\bm{B_1}$ coils) to generate the magnetic fields for the Ramsey cycle. Outside to that there are four layers of passive shielding which made the magnetically shielded room (MSR). The active compensation system which needs to be designed is just outside the MSR.\label{fig:msr_zoomed}}{Schematic diagram for the TUCAN nEDM magnetics 2}
+
+%  At large fields, saturation of the passive magnetic shielding system can be a concern, which would seriously impact its effectiveness. Furthermore, when accessing the experiment, the door to the MSR must be opened. If presented with a large external field, the innermost layer of the passive shielding system could themselves become magnetized, necessitating degaussing and additional experimental down time with these factors in mind. The proposed plan is to nullify and stabilize the magnetic field environment at TRIUMF to ($\sim\;1\;\mu T$) using dedicated large bucking coils and also to reduce the fluctuations upto a factor of 100 using a separate set of coils by supplying currents to them  where the fluctuations will be measured by fluxgate sensors in a continuous feedback loop.
+
+
+
+As to decide the need of active compensation for TUCAN nEDM experiment, it is first required to analyze the following statements :
 \begin{enumerate}
-    \item {\bf Trade-offs of active vs.~passive shielding and the decision on the dividing line between the two.}
-    \item {\bf Saturation?}
-    \item {\bf Providing a somewhat smaller field when the door to the room is opened?}
+    \item {\bf Trade-offs of active vs.~passive shielding and the decision on the dividing line between the two.} Both the active and passive shielding are expensive, but it’s not clear as of yet what costs more, an additional layer of mu-metal or a compensation coil system. Advantage of coils: allows to compensate DC magnetic fields which improves the performance of MSR and long term stability of $\bm{B_0}$ field inside the MSR; disadvantage: complex system which requires a lot of development and constant monitoring and analysis until proven to operate stably as good as possible.
+    \item {\bf Saturation.} At large fields, saturation of the passive magnetic shielding system comprising the MSR as shown in Fig.~\ref{fig:msr_zoomed} can be a concern, which would seriously impact its effectiveness. The companies that offer MSR will not give a written specification that the equipment delivered by them will perform the same when in a field significantly larger than earth fields. The performance of MSR must be tested first and we should be satisfied fully that the MSR's performance will not be hampered in the field conditions more larger than the MSR has been specified for.
+    
+    % So looking at it from a legal point of view, it would probably be a good idea for the case we ever wanted to complain about the performance of the MSR that we can show that we operate it in the conditions it has been specified for.
+
+    \item {\bf Providing a somewhat smaller field when the door to the room is opened.} When accessing the experiment, the door to the MSR must be opened. If presented with a large external field, the innermost layer of the passive shielding system could themselves become magnetized, necessitating degaussing and additional experimental down time with these factors in mind.
     \item {\bf Somewhat smaller field to prepare components for the room?}
     \item {\bf Engineering statements.} From engineering point of view, it should clearly states about the possibility of building it and making it in the experimental site.
 \end{enumerate}

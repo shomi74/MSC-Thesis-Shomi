@@ -4,18 +4,10 @@
 %\documentclass[11pt,one side,final]{Thesis}
 \usepackage[section]{placeins}
 \usepackage{epsfig,bm,epsf,float}
-% \usepackage{graphicx}
 \usepackage{cite}
-%use 'cite' for the bibliography
-%use natbib for the bibliography
-%\usepackage[square,--]{natbib}
-%  \usepackage[numbers,sort&compress]{natbib}
-
-% \usepackage[tbtags]{amsmath}
 \usepackage{layouts}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[font=singlespacing]{caption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Image Macros
 % Single figure macro
 \newcommand{\fig}[4]{\begin{figure}[!htb]
@@ -24,7 +16,6 @@
 \caption[#4]{#3}
 %\caption{#3}
 \end{figure}}
-
 
 % Double figure, side by side macro
 \newcommand{\doublefig}[8]{\begin{figure}[!htb]
@@ -43,12 +34,6 @@
 \caption[#8]{#7}
 \end{figure}}
 
-% % Standard figure sizes
-% \newcommand{\Allanstdexample}{0.7}
-% \newcommand{\AllanStdPlot}{0.7275}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
    bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,filecolor=magenta,colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={red},
@@ -61,13 +46,12 @@
 \usepackage{makecell}
 %%%%%%%%%%%%
 \usepackage{amsmath,paralist,amssymb,multirow}
-%\usepackage{tgbonum}
 \usepackage{amsthm,framed,enumitem}
-\usepackage{lineno,hyperref,amssymb,graphicx}
+\usepackage{lineno,amssymb,graphicx}
 %%%%%%%%%%%%
 \usepackage{bm}% bold math
 
- \newcommand{\muo}{ \mu_{\scriptscriptstyle 0}}
+\newcommand{\muo}{ \mu_{\scriptscriptstyle 0}}
 %%%%%%%%%%%%%%%%%%%%%%
 \usepackage{pgfplots}
 \usepackage{algorithmic}
@@ -100,7 +84,7 @@
  \include{Chapters/Chapter2}
  \include{Chapters/Chapter3}
  \include{Chapters/Chapter4}
-%  \include{Chapters/Chapter5}
+ \include{Chapters/Chapter5}
  \include{Chapters/Chapter6}
 
 
@@ -119,6 +103,7 @@
 
 
 %% ----------------------------------------------------------------
+
 \label{Bibliography}
 \lhead{\emph{Bibliography}} 
 \bibliographystyle{unsrt}
@@ -127,5 +112,5 @@
 
 \bibliography{Bibliography}
 % \bibliography{Bibliography} \addcontentsline{toc}{chapter}{\bibname}
-
+% \bibliography{url}
 \end{document}

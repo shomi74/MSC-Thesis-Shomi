@@ -1,6 +1,59 @@
 
 \lhead{\emph{Quantification of AMC Prototype}}
-
+% \subsection{Where will I use this ??}
+% This thesis started with reproducing the works of
+% Ref.~\cite{bea}. While doing so we face problems in terms of slow
+% current response in the compensation coils. We have done different
+% experiments with different parameters for understanding the problem
+% and figure out the solution. We have tried to make the system faster
+% by increasing loop sampling frequency. To avoid high frequency noise
+% we have built a $\mathbf{4^{th}}$ order low pass Butterworth filter
+% with 10 Hz corner frequency. The filter is one of the many
+% achievements of this thesis. The filter is described in
+% Section~\ref{sec:filter}. The effect of the filter on increasing loop
+% sampling frequency and noise reduction are discussed in
+% Section~\ref{sec:freq}. We have used PI control algorithm to generate
+% new current (Eq.~(\ref{eq:I})). The PI control algorithm requires a
+% tuned proportional (P) term and a tuned integral (I) term. The tuning
+% process is described in Section~\ref{sec:tune}. The general behaviour
+% of P and I terms and their impact individually and combined are
+% discussed in Section~\ref{sec:pi_behave} where it is seen that I term
+% is necessary for prototype compensation. The impact of I term is
+% significant on magnetic compensation compare to P term. It also
+% reveals that I term is responsible for current unsettle problem in the
+% coils. The previous studies does not help us understanding the current
+% unsettle problem. We have added more fluxgates, change the positions
+% of the fluxgates to understand the current unsettle problem which is
+% discussed in Section~\ref{sec:flux_place}. Moreover, as the fluxgate
+% placements study does not give us any clue we have removed the passive
+% shield to see if that makes any difference but removing shield makes
+% no difference . As our different studies are failing to discover the
+% solution of slow current response we become motivate to build a
+% simulation of the prototype. The simulation of the prototype
+% integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
+% similarity between the experiment and simulation is shown. The PI
+% simulation is another achievement for use. The simulation makes us
+% generate new ideas to solve the current unsettle problem. As P and I
+% term fail to solve the slow response problem, we change $r$ keeping P
+% and I term fixed. The effect of changing $r$ is discussed in
+% Section~\ref{sec:new_study_r} where it is discovered that lowering the
+% value of $r$ can solve the slow current response but at the same time
+% high frequency noise is induced. The author in Ref.~\cite{rawlik}
+% introduces new ideas about the matrix should be well-conditioned
+% before it takes part in the PI feedback loop which helps us look into
+% matrix condition number in deep. While studying matrix condition
+% number, we have realized that we can use the concept to find $r$
+% alternative to another method discussed in Section~\ref{sec:mont}. We
+% propose new method of regularization where optimize $r$ is determined
+% based on lowest matrix condition number the method is discussed in
+% Section~\ref{sec:cond}. The author in Ref.~\cite{rawlik} also claims
+% that for a perfectly conditioned matrix there is no need of PI
+% algorithm which we prove wrong in Section~\ref{sec:style_pi}. While
+% studying matrix condition number, we also realize that matrix is ill
+% conditioned because one of of the current modes producing zero net
+% current. We have improved the matrix condition number significantly
+% which also eliminates our initial problem of current unsettle
+% discussed in Section~\ref{sec:coil_config}.
 
 \chapter{Quantification of Active Magnetic Compensation Prototype}\label{ch:quantification}
 

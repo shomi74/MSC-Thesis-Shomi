@@ -406,29 +406,31 @@
   \thispagestyle{plain}
     \@mkboth{\abstractname}{\abstractname}
   \addcontentsline{toc}{section}{Abstract}
-    \vspace*{-.8in}
+    \vspace*{-0.8in}
     \noindent Thesis Advisor and Co-advisor \hfill Author \\
-    \noindent {\bf \@advisor} \hfill {\bf \@author} \\[.4in]
+    \noindent {\bf \@advisor} \hfill {\bf \@author} 
+    \vspace*{0.3in}
  \begin{center}
         {\large\bf {\@title}}
-    \end{center} \vspace*{.4in}
+    \end{center} \vspace*{.3in}
   {\centerline{\bf {\LARGE Abstract}}}
+  \vspace*{0.1in}
 }
 {}
 
-\newenvironment{sspabstract}
-{
-  \newpage
-  \thispagestyle{empty}
-    \@mkboth{\abstractname}{\abstractname}
-  \addcontentsline{toc}{section}{Abstract}
-    \vspace*{-.7in}
-    \noindent Thesis Advisor and Co-advisor \hfill Author \\
-    \noindent {\bf \@advisor} \hfill {\bf \@author} \\[.5in]
-    \centerline{\large \bf {\@title}} \\[.5in]
-  {\centerline{\bf {\LARGE Abstract}}} \\[0.3in]
-}
-{}
+% \newenvironment{sspabstract}
+% {
+%   \newpage
+%   \thispagestyle{plain}
+%     \@mkboth{\abstractname}{\abstractname}
+%   \addcontentsline{toc}{section}{Abstract}
+%     \vspace*{-.7in}
+%     \noindent Thesis Advisor and Co-advisor \hfill Author \\
+%     \noindent {\bf \@advisor} \hfill {\bf \@author} \\[.5in]
+%     \centerline{\large \bf {\@title}} \\[.5in]
+%   {\centerline{\bf {\LARGE Abstract}}} \\[0.3in]
+% }
+% {}
 
 % Quote
 %
