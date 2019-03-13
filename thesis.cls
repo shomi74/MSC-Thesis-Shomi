@@ -914,6 +914,8 @@
 %%               as it says in the comment in latex.tex
 %% RmS 92/01/14: Set \p@enumiv to {} and \theenumiv to \arabic{enumiv}
 %%               to get correct references
+
+
 \def\thebibliography#1{\chapter*{\bibname\@mkboth
   {\uppercase{\bibname}}{\uppercase{\bibname}}}
    \addcontentsline{toc}{chapter}{\bibname}

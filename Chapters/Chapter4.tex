@@ -157,7 +157,7 @@ Here, $M^{-1}_{cs}$ are the elements of the inverse of the matrix $\bm{M}$. The 
 \end{equation}
 where, $I^0_c$ indicates the initial value of current for the set of the coils when the setpoint has been set (100 mA). $\Delta I_c^n$ is the error found using Eq.~(\ref{eq:del_I}) and the sum is over iterations $n$. The term $k^p_c$ is the proportional gain (P) and $k^i_c$ is the integral reset (I) for a particular coil. The gains $k^p_c$ and $k^i_c$ terms need to be tuned properly as will be explained in Section~\ref{sec:tune}. The index $c$ in $k^p_c$ and $k^i_c$ terms represents that the P and I value for for each coil could in principle be different. But throughout the thesis, I have used same values of $k_c^p$ and $k_c^i$ in all six coils. We found derivative term (D) in a typical PID scheme was unnecessary because it relates to optimizing fast response and our chief concern is long-term stability.
 
-\fig{Images/1s1c1zc1}{width = \textwidth}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 1z with $k_c^p=1.0$, and $k_c^i=0.0$. Green curve:  measured field change $\Delta B$.  Red curve: predicted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:1s1c1zc1} }{The compensation effect on single sensor due to single coil.}
+\fig{Images/1s1c1zc1}{width =0.9\textwidth}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 1z with $k_c^p=1.0$, and $k_c^i=0.0$. Green curve:  measured field change $\Delta B$.  Red curve: predicted uncompensated field (Eq.~(\ref{eq:Buncomp})) change . Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:1s1c1zc1} }{The compensation effect on single sensor due to single coil.}
 
 Fig.~\ref{fig:1s1c1zc1} shows a simple one-dimensional control example implementing PI control algorithm. It is seen that the magnetic field change on sensor position 1z  has been compensated successfully due to coil current $C_x^-$. 
 
@@ -270,11 +270,11 @@ where, $\Sigma_{11},..,\Sigma_{nn}$ are diagonal values of $\bm{\Sigma}$ with $\
 The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its inverse. That is $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
 \begin{equation}\label{eq:sigma_inv}
 \bm{\Sigma^{-1}=}\frac{1}{\bm{\Sigma}} = \begin{bmatrix} 
-\frac{1}{\Sigma_{11}} &  &  &  &  &  & 0\\
-  & . &  &  & & &\\
-  &   & . & & & & \\
+\frac{1}{\Sigma_{11}} &  &  &  &  &  & & &0\\
+  & . &  &  & & & & &\\
+  &   & . & & & & & &\\
 
-0 &  &  & \frac{1}{\Sigma_{nn}} &  &  & 0 \\
+0 &  &  & \frac{1}{\Sigma_{nn}} &  &  & & &0 \\
  \end{bmatrix}
 \end{equation}
 
@@ -287,7 +287,7 @@ The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma
 % ${\rm I\!R}$
 %  \fig{Images/6c_U_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{U}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{U}$ is orthonormal eigenvectors of $\bm{M}\bm{M^T}$ in sensors$\times$sensors dimension for 12 sensors signals (nT). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_U}}{Color map of $\bm{U}$.}
 
- \fig{Images/V_30}{width = \textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\bm{\Sigma}$}
+ \fig{Images/V_30}{width =0.8\textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate near zero values. \label{fig:v}}{Color map of $\bm{\Sigma}$}
 
 %  \fig{Images/6c_Wt_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{V^T}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{V^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils currents (A). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_Vt}}{Color map of $\bm{V^T}$.}
 
@@ -302,16 +302,16 @@ The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma
 Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$ for our measured $\bm{M}$. It is a diagonal with the singular values arranged from $\Sigma_{11}$ to $\Sigma_{66}$ in a decreasing order, each having a non-negative value. It is also noticeable that $\Sigma_{66}$ is very small compare to $\Sigma_{11}$. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as represent modes of the coil set. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
 
 
-\textcolor{red}{\bf{*************Need to Modify***************}}
+% \textcolor{red}{\bf{*************Need to Modify***************}}
 
-The reason can be explained by representing the Eq.~(\ref{eq:del_I}) in vector form.
+% The reason can be explained by representing the Eq.~(\ref{eq:del_I}) in vector form.
 
-\begin{equation}\label{eq:del_I_pseudo}
-    \Delta\Vec{I} \approx\bm{M^{-1}}\Delta\Vec{B}=\bm{V \Sigma^{-1} U^T}\Delta\Vec{B}=\sum_{i=1}^{n}v_i\frac{u_i^T \Delta\Vec{B}}{ \Sigma_{ii}}
-\end{equation}
-where, rank of $\bm{M}$ is equal to the number of positive singular values. It is seen that $\Delta\Vec{I}$ for smaller $\Sigma_{ii}$ will be much larger compare to large $\Sigma_{ii}$ for same scale of field change $\Delta\Vec{B}$. In other-words, $\Delta\Vec{I}$ is dominated by right singular vectors $v_i$ due to small $\Sigma_{ii}$. The quantities $\frac{u_i^T \Delta\Vec{B}}{ \Sigma_{ii}}$ are the expansion coefficients for the basis vectors $v_i$. When these quantities are small in magnitude, the $\Delta\Vec{I}$ has very little contribution from $v_i$. But dividing by a small $\Sigma_{ii}$ greatly magnify the corresponding error component, $u_i^T \Delta\Vec{B}$, which in turn contributes a large multiple of the high-frequency information contained in $v_i$ to compute $\Delta\Vec{I}$. Due to this, the coil currents as well as magnetic field changes are dominated by high frequencies, which will be shown later in Fig.~\ref{fig:6c_pseudo_shield}. The above discussion is based on the similar problem faced while deblurring image which is explained nicely in Section~\textcolor{blue}{1.4} of Chapter~\textcolor{blue}{1} of Ref.~\cite{svd4}.
+% \begin{equation}\label{eq:del_I_pseudo}
+%     \Delta\Vec{I} \approx\bm{M^{-1}}\Delta\Vec{B}=\bm{V \Sigma^{-1} U^T}\Delta\Vec{B}=\sum_{i=1}^{n}v_i\frac{u_i^T \Delta\Vec{B}}{ \Sigma_{ii}}
+% \end{equation}
+% where, rank of $\bm{M}$ is equal to the number of positive singular values. It is seen that $\Delta\Vec{I}$ for smaller $\Sigma_{ii}$ will be much larger compare to large $\Sigma_{ii}$ for same scale of field change $\Delta\Vec{B}$. In other-words, $\Delta\Vec{I}$ is dominated by right singular vectors $v_i$ due to small $\Sigma_{ii}$. The quantities $\frac{u_i^T \Delta\Vec{B}}{ \Sigma_{ii}}$ are the expansion coefficients for the basis vectors $v_i$. When these quantities are small in magnitude, the $\Delta\Vec{I}$ has very little contribution from $v_i$. But dividing by a small $\Sigma_{ii}$ greatly magnify the corresponding error component, $u_i^T \Delta\Vec{B}$, which in turn contributes a large multiple of the high-frequency information contained in $v_i$ to compute $\Delta\Vec{I}$. Due to this, the coil currents as well as magnetic field changes are dominated by high frequencies, which will be shown later in Fig.~\ref{fig:6c_pseudo_shield}. The above discussion is based on the similar problem faced while deblurring image which is explained nicely in Section~\textcolor{blue}{1.4} of Chapter~\textcolor{blue}{1} of Ref.~\cite{svd4}.
 
-\textcolor{red}{\bf{********************End************************}}
+% \textcolor{red}{\bf{********************End************************}}
 
 % The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field.
 In Section~\ref{sec:coil_config}, I analyze this effect further in both simulation and experiment. For now, I present the strategy of Ref.~\cite{bea} which I followed initially which involves matrix regularization.
@@ -390,7 +390,7 @@ This is calculated as a function of $r$ for different sets of $B_s^{\text{rand}}
 
 % $ \Delta I_{\text{RMS}}^{\text{sim}}(r)$ as indicated by vertical axis over $r$ as indicated by horizontal axis has been shown for 30 different sets of $B_s^{\text{rand}}$. The distribution $B_s^{\text{rand}}$ is randomly chosen with center of distribution and standard deviation is discussed earlier. 
 
-\fig{Images/6c_I}{width = \textwidth,height =9.5cm}{The effect of $r$ on the coil currents for 30 different sets of $B_s^{\text{rand}}$ generated according to the normal distribution with a central value of 0 and standard deviation 1.5 nT. The horizontal axis represents $r$ while the vertical axis shows $\Delta I_{\text{RMS}}^{\text{sim}}$. \label{fig:Isim}}{The effect of $r$ on the coil currents.}
+\fig{Images/6c_I}{width=0.8\textwidth}{The effect of $r$ on the coil currents for 30 different sets of $B_s^{\text{rand}}$ generated according to the normal distribution with a central value of 0 and standard deviation 1.5 nT. The horizontal axis represents $r$ while the vertical axis shows $\Delta I_{\text{RMS}}^{\text{sim}}$. \label{fig:Isim}}{The effect of $r$ on the coil currents.}
 
 %\FloatBarrier
 The field produced by $ \Delta I_c^{\text{sim}}$ can be calculated using Eq.~(\ref{eq:B_coils}). The total field at each sensor $s$ will be the superposition of $B_s^{\text{rand}}$ and the response produced by $ \Delta I_c^{\text{sim}}(r)$ 
@@ -403,7 +403,7 @@ For a perfectly compensated system, the field produced by $ \Delta I_c^{\text{si
 \end{equation}
 The function $F(r)$ would be zero for a perfectly compensated system and unity for an uncompensated system. In Ref.~\cite{bea}, $F(r)$ is called the ``remaining noise". The values of $F(r)$ shown in Fig.~\ref{fig:fluc-sim} are for the same sets of $B_s^{\text{rand}}$ used in Fig.~\ref{fig:Isim}. It is seen that with the increase of $r$, the field produced by $\Delta I_c^{\text{sim}}$ to compensate $B_s^{\text{rand}}$  are increasing resulting in more field fluctuations. It is also noticeable that the system cannot be fully compensated because $F(r)$ never goes to zero. The lowest $F(r)$ is 0.45, indicating the system will not be terribly successful at correcting random fluctuations. We think this is mainly due to the limited coil design used for this prototype, which was designed instead to focus on issues in multi-dimensional PI control.
 
-\fig{Images/6c_f}{width = \textwidth,height =9.5cm}{The effect of $r$ on the effectiveness of field compensation indicated by the remaining fluctuation $F(r)$. The different curves indicate 30 different sets of $B_s^{\text{rand}}$. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
+\fig{Images/6c_f}{width =0.8\textwidth}{The effect of $r$ on the effectiveness of field compensation indicated by the remaining fluctuation $F(r)$. The different curves indicate 30 different sets of $B_s^{\text{rand}}$. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
 
 %\FloatBarrier
 It is seen from Figs.~\ref{fig:Isim} and \ref{fig:fluc-sim} that with the increase of $r$, current fluctuations decrease but field fluctuations increase. Ref.~\cite{bea} suggested a compromise between them be struck to determine the value of $r$, $\it i.e.$ that reducing current fluctuations ($r \rightarrow + \infty$) be traded off against reducing magnetic field fluctuations ($r \rightarrow - \infty$). To decide the value of $r$, $\Delta I_{\text{RMS}}^{\text{sim}}(r)$ and $F(r)$ were normalized to make their range extend from 0 to 1 using
@@ -413,7 +413,7 @@ It is seen from Figs.~\ref{fig:Isim} and \ref{fig:fluc-sim} that with the increa
     \overline{F}(r) &= \frac{F(r)- F(r\rightarrow - \infty)}{F(r\rightarrow \infty)- F(r\rightarrow - \infty)}\label{eq:flucNorm}
 \end{align}
 
-\fig{Images/6c_I-fluc2}{width = \textwidth,height=9cm}{The normalized $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ for 30 sets of $B_s^{\text{rand}}$. The red line indicates the 0.5 level.\label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
+\fig{Images/6c_I-fluc2}{width =0.8\textwidth}{The normalized $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ for 30 sets of $B_s^{\text{rand}}$. The red line indicates the 0.5 level.\label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
 
 %\FloatBarrier
 The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ is shown in Fig.~\ref{fig:I-fluc}. With an increase in $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier.
@@ -450,7 +450,7 @@ The PI parameters can be tuned using various methods~\cite{tuning}. A common tun
 
 The quantity $\Delta t$ in Table~\ref{table:tuning} is the time to complete one feedback loop iteration.
 
-\fig{Images/p134c1}{width = \textwidth}{Zoomed current behaviour in coil $C_x^+$ with $k_c^p$ =1.34 and $k_c^i$=0. Vertical axis represent the currents in coil $C_x^+$ with initial current being 100 mA. For position of the coil see Fig.~\ref{fig:coil}. \label{fig:tuning}}{Zoomed current behaviour in coil $C_x^+$.}
+\fig{Images/p134c1}{width =0.9\textwidth}{Zoomed current behaviour in coil $C_x^+$ with $k_c^p$ =1.34 and $k_c^i$=0. Vertical axis represent the currents in coil $C_x^+$ with initial current being 100 mA. For position of the coil see Fig.~\ref{fig:coil}. \label{fig:tuning}}{Zoomed current behaviour in coil $C_x^+$.}
 % in response to the perturbation coils
 %\FloatBarrier
 Figure~\ref{fig:tuning} shows the first step in the tuning process. For simplicity, zoomed version of the current in coil $C_x^+$ is shown only. At $k_c^p$=1.34 and $k_c^i$=0, the current in the coils oscillates allowing us to identify $G_u$=1.34.  The ultimate period is $T_u$=0.287~s. Now, according to Table~\ref{table:tuning}, the proportional gain and integral reset are
@@ -482,12 +482,11 @@ They can be further tuned for the individual coil currents if necessary but we e
 
 \section{Quantitative Measures of Magnetic Compensation Performance\label{sec:metrics}}
 % For every system, there are some metrics, which quantitatively determine the system's performance. The success of the prototype has been claimed similarly. 
-I considered four main four metrics, which are based on previous studies of others~\cite{bea,lins,rawlik}. They are:
+I considered four main three metrics, which are based on previous studies of others~\cite{bea,lins,rawlik}. They are:
 
 \begin{enumerate}
     \item Condition Number,
-    \item Reduction of Magnetic Field Fluctuation,
-    \item PI Behavior to Stimulus, and
+    \item Reduction of Magnetic Field Fluctuation and PI Behavior upon Stimulus, and
     \item Allan Deviations and Shielding Factor
 \end{enumerate}
 
@@ -508,7 +507,7 @@ The condition number of a matrix is $\geq$1 by definition. Low condition number 
 
 % The condition number can be influenced by the dimension of a matrix. But, the change in condition number in case of  well-conditioned matrix is incomparably smaller than that in a ill-conditioned matrix~\cite{cond_m_size}. However, there is no upper bound that indicates the limit of well-conditioned matrix. So, there is no definite answer about how small is considered as well-conditioned matrix. so that compensating a certain scale of change in magnetic field requires less change in current and also the compensation system does not loose its effect on all the sensors while making the condition number less.
 
-In testing the active compensation system, the goal is to have matrix condition number as close to 1 as possible. If $\Sigma_{nn}$ is small (e.g. zero), it means that the $B_s$ never change no matter what the current for that mode. Consequently, on inverting, large currents are driven for that mode with practically no change in the $B_s$. Tikhonov regularization is one method of reducing the condition number closer to 1 but later I discovered that designing a well-conditioned system is a better method. A comparison of those methods is discussed in Section~\ref{sec:coil_config}.
+In testing the active compensation system, the goal is to have matrix condition number as close to 1 as possible. If $\Sigma_{nn}$ is small ({\it e.g.} zero), it means that the $B_s$ never change no matter what the current for that mode. Consequently, on inverting, large currents are driven for that mode with practically no change in the $B_s$. Tikhonov regularization is one method of reducing the condition number closer to 1 but later I discovered that designing a well-conditioned system is a better method. A comparison of those methods is discussed in Section~\ref{sec:coil_config}.
 
 % The main aim is to make the prototype well-conditioned by determining the best compromise between current and field fluctuations which will lead us to the optimized $r$. It has been also explored to determine whether the optimized $r$ is giving the best result or not. If not, additional parameters have been tuned to get the best possible result.
 
@@ -516,19 +515,48 @@ In testing the active compensation system, the goal is to have matrix condition 
 
 % Active magnetic field compensation come into play in the first place to make the surrounding magnetic fluctuations as small as possible. So, prototype response for magnetic fluctuations has been studied in terms of its capabilities as reduction or amplification. We have already shown in Fig.~\ref{fig:fluc-sim} that the lowest remaining fluctuations due to several random fluctuations is 0.45. Ideally, the remaining fluctuations should be zero. The system is completely unsuccessful if the remaining fluctuation is found to be 1. Our goal for the prototype is to get remaining fluctuation at least 0.5.
 
-\textcolor{red}{Define/ review Bcomp, Buncomp. Calculte F in light of those definitions.}
-
-\fig{Images/bt-mod}{width =\textwidth,height=10cm}{Magnetic field reduction at some of the sensors closer to the perturbation coil and the central position. Color curves: measured field change. Red curves: extracted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:bt_mod}}{Magnetic field reduction at some of the sensor positions.} 
-
-The PI feedback and control system can be tested by its response to a step the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod}. The color curves in Fig.~\ref{fig:bt_mod} requested the magnetic field measured by the compensation system, $B_s^n(\text{measured})$.  
-
-
-
-The magnetic field without the compensation effect referred to as the uncompensated magnetic field. It is estimated using 
+For active magnetic compensation, the measured field by the fluxgate sensors $B_s^n(\text{meas})$ is the superposition of the the uncompensated field and the field created by the compensation coils $B_s^n(\text{coils})$ at the sensor positions for $n$=(1,...,N) number of measurements. The uncompensated field is thus estimated to be the the magnetic field without the compensation effect by subtracting the $B_s^n(\text{coils})$ from the $B_s^n(\text{meas})$ {\it i.e.}
+% The magnetic field without the compensation effect referred to as the uncompensated magnetic field. It is estimated using 
 \begin{equation}\label{eq:Buncomp}
-     B_s^n(\text{uncompensated})=B_s^n(\text{measured})- B_s^n(\text{coils})
+     B_s^n(\text{uncomp})=B_s^n(\text{meas})- B_s^n(\text{coils})
 \end{equation}
-where, $B_s^n(\text{measured})$ is the actual measurement from coming the fluxgate sensors with $n$=(1,...N) is the no of measurements taken and $B_s^n(\text{coils})$ is determined using Eq.~(\ref{eq:B_coils}). The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also reduced somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
+where, $B_s^n(\text{coils})$ is determined using Eq.~(\ref{eq:B_coils}).
+
+
+The measured field and uncompensated field for a particular $r$ experimentally can be found as
+\begin{align}
+    B_{\text{meas}}(r) &= 
+    B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)\label{eq:bmeas_r}\\
+    B_{\text{uncomp}}(r) &= B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)\label{eq:buncomp_r}
+\end{align}
+where, the superscripts ``max'', and ``min'' refer the maximum and minimum measured and uncompensated field at all sensors positions for $n$ measurements with particular value of $r$. To find the RMS of current error experimentally, simulated Eqs.~(\ref{eq:del_Is}) and (\ref{eq:delta_Isim_rms}) are then replaced as
+
+\begin{align}
+    \Delta I_c^{\text{exp}}(r) &= \sum_{s=1}^{12} M^{-1}_{cs}(r) (-B_{\text{uncomp}}(r))\label{eq:del_Is_exp}\\
+     \Delta I_{\text{RMS}}^{\text{exp}}(r) &= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{exp}}(r))^2}\label{eq:delta_Iexp_rms}
+\end{align}
+Furthermore, to find the remaining fluctuations experimentally, simulated Eq.~(\ref{eq:fluc}) is replaced as
+\begin{equation}\label{eq:fluc_exp}
+   F'(r)=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_{\text{meas}}(r))^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_{\text{uncomp}}(r))^2}}
+\end{equation}
+
+\fig{Images/mont_exp}{width =0.9\textwidth}{The effect of $r$ on (left) current error  and (right) remaining field fluctuations in experimental setup for $k_c^p=1.0$, and $k_c^i=0.0$ for fluxgate signals from 1, 2 and 7. Here, 100 mA current has been supplied in the perturbation coil and $r$ ranges from 0 to 6 in an increment of 0.29. \label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
+
+
+An example of the effect of $r$ on the current error and remaining field
+fluctuations in the PI feedback and control system for a particular perturbation is shown in Fig.~\ref{fig:mont_comp}. It is seen that around 100~mA rms of current array is required to compensate the perturbation
+which eventually vanishes with $r$ increment as expected (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}). Furthermore, the remaining fluctuation is
+$\approx$0.45 (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}) which indicates that the maximum correction is $(1-0.45)\times100\%=55\%$.
+
+
+
+
+
+\fig{Images/bt-mod}{width=0.9\textwidth}{Magnetic field reduction at some of the sensors closer to the perturbation coil and the central position. Color curves: measured field change. Red curves: extracted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:bt_mod}}{Magnetic field reduction at some of the sensor positions.} 
+
+% 
+
+Moreover, the PI feedback and control system can be tested by its response to a step the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod}. The color curves in Fig.~\ref{fig:bt_mod} requested the magnetic field measured by the compensation system, $B_s^n(\text{meas})$.  The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also reduced somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
 
 % position and to some levels in other positions indicated by blue, green and cyan colors. Moreover, the last one named 'center-Z' predicts the response in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of step response level. We are considering the good results if the system response time is fastest without any overshoot and also reduces the step response levels as much as possible. The results are considered bad if the there is very slow response of the system.
 
@@ -541,12 +569,14 @@ The Allan standard deviation \cite{allan} is used to test the time stability of 
 \begin{equation}\label{eq:adev}
     \sigma_{Adev} (\tau)=\sqrt{\frac{1}{2(N-1)}\sum_{l=1}^{N-1} \left(\overline{B_{l+1}}(\tau)-\overline{B_l}(\tau)\right)^2}
 \end{equation}
-where, $\overline{B_l}(\tau)$ is the average magnetic field for a subset $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ the total measurement time, and $N$ the total number of subsets. The largest integration time over which $\sigma_{Adev}$ can be determined is $\tau_{\text{max}}=T/2$ when the total number of subsets is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. In this limit, $\sigma_{Adev}(\tau_{\text{max}})$ possesses a large statistical error since there is only one subtraction in Eq.~(\ref{eq:adev}). The $\sigma_{Adev}$'s dependence on $\tau$: $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ indicates the data are statistically distributed with the same mean in the values, $\sigma_{Adev}\approx \sqrt{\tau}$ indicates a random walk in the values, and $\sigma_{Adev}\approx \tau$ indicates a linear drift. 
+where, $\overline{B_l}(\tau)$ is the average magnetic field for a subset $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ the total measurement time, and $N$ the total number of subsets. The $\sigma_{Adev}$'s dependence on $\tau$: $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ indicates the data are statistically distributed with the same mean in the values, $\sigma_{Adev}\approx \sqrt{\tau}$ indicates a random walk in the values, and $\sigma_{Adev}\approx \tau$ indicates a linear drift~\cite{allan_tau}. 
 
-\fig{Images/sf_b}{width =\textwidth,height=12cm}{ (top) Field fluctuations $\Delta B$ for sensor 8x with the feedback switched off, (bottom) corresponding Allan standard deviation. Red horizontal lines represent $\overline{B_l}(\tau)$ for 8 subsets over integration time $\tau=128$~s separated by the vertical dashed lines. \label{fig:sf_mod}}{The Allan deviation.}
+\fig{Images/sf_b}{width =0.9\textwidth}{ (top) Field fluctuations $\Delta B$ for sensor 8x with the feedback switched off, (bottom) corresponding Allan standard deviation. Red horizontal lines represent $\overline{B_l}(\tau)$ for 8 subsets over integration time $\tau=128$~s separated by the vertical dashed lines. \label{fig:sf_mod}}{The Allan deviation.}
 
 
-An example of the process of calculating the Allan deviation for magnetic field data is shown in Fig.~\ref{fig:sf_mod}. In this example, the feedback system was switched off. The top panel in Fig.~\ref{fig:sf_mod} demonstrates the division of the time series into eight $\tau$: 128~s-long subsets. \textcolor{red}{The largest integration time over which $\sigma_{Adev}$ can be determined is $\tau_{\text{max}}=T/2$ when the total number of subsets is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. In this limit, $\sigma_{Adev}(\tau_{\text{max}})$ possesses a large statistical error since there is only one subtraction in Eq.~(\ref{eq:adev}). }The red line indicate the average of each subset $B_l^{\tau}$. The Allan deviation formula (Eq.~(\ref{eq:adev})) is applied to these averages to arrive at the data point at $\tau=128$~s in the bottom panel's Allan deviation plot in Fig.~\ref{fig:sf_mod}.  It is seen that $\sigma_{Adev}$ rises by about one decade for every two decades in $\tau$. This indicates that $\sigma_{Adev}\approx \sqrt{\tau}$ which refers random walk in the field values when there is no compensation system is running. 
+An example of the process of calculating the Allan deviation for magnetic field data is shown in Fig.~\ref{fig:sf_mod}. In this example, the feedback system was switched off. The top panel in Fig.~\ref{fig:sf_mod} demonstrates the division of the time series into eight $\tau$: 128~s-long subsets. The red line indicate the average of each subset $B_l^{\tau}$. The Allan deviation formula (Eq.~(\ref{eq:adev})) is applied to these averages to arrive at the data point at $\tau=128$~s in the bottom panel's Allan deviation plot in Fig.~\ref{fig:sf_mod}.  It is seen that $\sigma_{Adev}$ rises by about one decade for every two decades in $\tau$. This indicates that $\sigma_{Adev}\approx \sqrt{\tau}$ which refers random walk in the field values when there is no compensation system is running. The largest integration time over which $\sigma_{Adev}$ can be determined is $\tau_{\text{max}}=T/2$ as can be seen from the horizontal axes of Fig.~\ref{fig:sf_mod}. The total number of subsets for $\tau_{\text{max}}$ is $N = \frac{T}{\tau_{\text{max}}}=\frac{T}{T/2}=2$. 
+
+% However, $\sigma_{Adev}(\tau_{\text{max}})$ is statistically insignificant while comparing the allan deviation measurements (measured and uncompensated), since there is only one subtraction in Eq.~(\ref{eq:adev}) and thus $\sigma_{Adev}(\tau_{\text{max}})$ will be neglected in such case.
 
 
 % \fig{Images/sf_mod}{width =\textwidth,height=12cm}{The Allan deviation (top) and shielding factor (bottom) for signals from some fluxgate sensors. Top vertical axis indicates the Allan deviation while bottom indicates shielding factor. Horizontal axis indicates the integration time. The different colors in top and bottom have been discussed in text.  \label{fig:sf_mod}}{The Allan deviation.}
@@ -555,9 +585,9 @@ An example of the process of calculating the Allan deviation for magnetic field 
 
 The goal of the active compensation system is to reduce the the Allan deviation to be less than the Allan deviation of the uncompensated magnetic field. This would indicate that the magnetic field is more stable with compensation than without. The shielding factor~\cite{bea} is defined as the ratio of Alllan deviations.
 \begin{equation}\label{eq:sf}
-    \text{sf} (\tau)=\frac{\sigma_{\text{Adev}}^{\text{uncompensated}}(\tau)}{\sigma_{\text{Adev}}^{\text{measured}}(\tau)}
+    \text{sf} (\tau)=\frac{\sigma_{\text{Adev}}^{\text{uncomp}}(\tau)}{\sigma_{\text{Adev}}^{\text{meas}}(\tau)}
 \end{equation}
-The shielding factor $\text{sf} (\tau)>1$ indicates that the magnetic environment was improved. The shielding factor is discussed further in Section~\ref{sec:adev_res}.
+The shielding factor $\text{sf} (\tau)>1$ indicates that the magnetic environment was improved. $\sigma_{Adev}(\tau_{\text{max}})$ will be neglected for calculating the $\text{sf} (\tau)$ . Because $\sigma_{Adev}(\tau_{\text{max}})$ is statistically insignificant while comparing the Allan deviation measurements since there is only one subtraction in Eq.~(\ref{eq:adev}). The shielding factor is discussed further in Section~\ref{sec:adev_res}.
  
 
 %\fig{Images/sf}{width = 0.5 \textwidth}{Allan Deviation and Shielding Factor \label{fig:sf}}

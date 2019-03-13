@@ -37,7 +37,7 @@ The passive magnetic shielding is composed of thin multi-layer shields with mate
 \fig{Images/passive2}{width =0.95\textwidth}{Prototype passive shielding at University of Winnipeg~\cite{mammei_presentation}.\label{fig: passive}}{Prototype passive shielding at University of Winnipeg}
 
 
-In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625 inch has been used for the layers,  which is an 79\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps in each cylinder with a 7.5~cm diameter in the central hole. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
+In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625 inch has been used for the layers,  which is an 80\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps in each cylinder with a 7.5~cm diameter in the central hole. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
 
 \begin{table} [!htb]
     \centering
@@ -112,7 +112,7 @@ A fluxgate sensor is a piece of magnetic material, within a sensing winding used
         \hline\hline
         Measure Range ($\mu$T) & $\pm$70 & $\pm$100 \\ 
         \hline
-        \makecell{Noise Level \\($\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at 1 Hz)} & $<$6 & 10$-<$20 \\ 
+        \makecell{Noise Level \\($\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at 1~Hz)} & $<6$ & $10~-<20$ \\ 
         \hline
         Bandwidth (kHz) & 3 & 1 \\ 
         \hline
@@ -130,7 +130,7 @@ For the prototype, I have used four 3-axis fluxgate sensors (2 Bartington Mag-03
 
 \fig{Images/noise}{width =0.8\textwidth}{Average Spectral Density for Mag690. \label{fig:noise}}{Average Spectral Density for Mag690.}
 
-According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ and $\mathrm{10}-\mathrm{<20}$~$\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for Mag-03 and Mag690 respectively. I measured the noise levels of the fluxgate and found they matched the manufacturer's specification. For my test, data was taken by placing each fluxgate inside the shield and field data recorded. The data was processed in Mathematica~\cite{Mathematica} to estimate the power spectral density using a Discrete Fourier Transform (DFT)~\cite{dft}. Figure~\ref{fig:noise} shows that the noise level is $\sim\mathrm{16~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for the Mag690. This also confirms that the ADC (Section~\ref{sec:DAQ}) doesn't present any substantial noise beyond the fundamental noise of the fluxgate.
+According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ and $\mathrm{10}-\mathrm{<20}$~$\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for Mag-03 and Mag690 respectively. I measured the noise levels of the fluxgate and found they matched the manufacturer's specification. For my test, data was taken by placing each fluxgate inside the shield and field data recorded. The data was processed in Mathematica~\cite{Mathematica} to estimate the power spectral density using a Discrete Fourier Transform (DFT)~\cite{dft}. Figure~\ref{fig:noise} shows that the noise level is $\sim\mathrm{16~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for the Mag690. This also confirms that the ADC (Section~\ref{sec:DAQ}) doesn't present any substantial noise beyond the fundamental noise of the fluxgate.
 
 
 
@@ -149,15 +149,19 @@ The signals that are measured by fluxgate sensors are separated into $x$, $y$ an
 % For example, an ADC with 16 bit resolution can record $\mathrm{2^16=65536}$ discrete voltages and for an input range of 10 V, the smallest change in the voltages will be $\mathrm{10}$ V$\mathrm{/2^16=0.153}$ mV. But it is just theoretical prediction considering no channel noise. But in reality, in addition to noise of the ADC itself, there are noises from the power source and the fluxgates which contribute to the channel resolution and that resolution is called effective resolution which is lower than ideal resolution.
 
 
-In addition to the standard 16-bit ADC with range $\pm10~\mathrm{V}$, the LabJack T7-Pro is equipped with a 24-bit sigma-delta ADC. The effective resolution can be varied from 16 to 19.1~bits when analog conversions occur on the 16-bit ADC and for 24-bit it is from 19.6 to 21.8 bits with gain 1~\cite{T7}. For testing, I used a short jumper to connect a test channel with ground and 512 successive reading and mean of those readings were stored. The root mean square of the differences between the mean of the readings with each reading was calculated and termed as $\mathrm{noise_{rms}}$. Depend on the 16-bit or 24-bit ADC with their input range, $\mathrm{noise_{rms}}$ had been converted into ADC counts which transformed into bits by multiplying with $\mathrm{log_2}$ and termed as $\mathrm{noise_{bits}}$. The effective resolution was finally calculated by subtracting $\mathrm{noise_{bits}}$ from either  16 bits or 24 bits resolution depend on the type of ADC. For example, for a 16-bit ADC with $\pm$10~V range, the noise in terms of bits and thus effective resolution:
-\begin{equation}\label{eq:adc_mean}
-    \mathrm{noise_{bits}=log_2 \times \left(\frac{noise_{rms}\times 2^{16}}{20}\right)}
-\end{equation}
-
+In addition to the standard 16-bit ADC with range $\pm10~\mathrm{V}$, the LabJack T7-Pro is equipped with a 24-bit sigma-delta ADC. The effective resolution can be varied from 16 to 19.1~bits when analog conversions occur on the 16-bit ADC and for 24-bit it is from 19.6 to 21.8 bits with gain 1~\cite{T7}. For testing, I used a short jumper to connect a test channel with ground and 512 successive reading and mean of those readings were stored. The root mean square calibrated voltage differences from the mean was calculated as $\mathrm{\Delta V_{rms}}$. This was converted to bits using
 \begin{equation}
-    \mathrm{Effective\;Resolution=16 - noise_{bits}}
+    \mathrm{Effective\;Resolution=log_2\left(\frac{\Delta V_{fsr}}{\Delta V_{rms}}\right)}
 \end{equation}
-% where, $\mathrm{noise_{s} (in\;ADC \;counts)]}$ has been described in Eq.~(\ref{eq:adc_mean}). 
+where, $\mathrm{\Delta V_{fsr}=20~V}$ is the ADC full-scale range for $\mathrm{gain=1}$ used for this study.
+% The root mean square of the differences between the mean of the readings with each reading was calculated and termed as $\mathrm{noise_{rms}}$. Depend on the 16-bit or 24-bit ADC with their input range, $\mathrm{noise_{rms}}$ had been converted into ADC counts which transformed into bits by multiplying with $\mathrm{log_2}$ and termed as $\mathrm{noise_{bits}}$. The effective resolution was finally calculated by subtracting $\mathrm{noise_{bits}}$ from either  16 bits or 24 bits resolution depend on the type of ADC. For example, for a 16-bit ADC with $\pm$10~V range, the noise in terms of bits and thus effective resolution:
+% \begin{equation}\label{eq:adc_mean}
+%     \mathrm{noise_{bits}=log_2 \times \left(\frac{noise_{rms}\times 2^{16}}{20}\right)}
+% \end{equation}
+
+% \begin{equation}
+%     \mathrm{Effective\;Resolution=16 - noise_{bits}}
+% \end{equation}. 
 
 \fig{Images/res_T7adc}{width =0.75\textwidth}{Effective resolution for different resolution index for gain 1 and $\pm 10\:V$ range. A higher resolution index will result in lower noise and higher effective resolution but increases sample times. \label{fig:res}}{Effective resolution for different resolution index for gain 1 and $\pm 10\:V$ range.}
 
