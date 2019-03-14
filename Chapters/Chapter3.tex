@@ -101,7 +101,7 @@ The compensation coils have been chosen to be single turn to have small resistan
 % The measured data from the fluxgate sensors are transferred to the computer via anlog to digital converter (ADC) of LabJack T7 Pro which will be discussed in the next section. But before coming to the ADC, the 3-axis of the fluxgates have to be separated and for that purpose we have build  2 breakout boxes. 
 
 % A breakout box was built to separate each of $x$, $y$ and $z$ axis in respective direction and provide power. 
-A fluxgate sensor is a piece of magnetic material, within a sensing winding used for measuring the magnitude and direction of DC or low-frequency AC magnetic fields. The magnetometer's sensitivity direction is the axis of the sensing winding. The magnetic material is periodically saturated by a source of excitation power. It is the transition of this material into magnetic saturation that creates the measurement signal.
+A fluxgate sensor is a piece of magnetic material, within a sensing winding used for measuring the magnitude and direction of DC or low-frequency AC magnetic fields. The magnetometer's sensitivity direction is the axis of the sensing winding. The magnetic material is periodically saturated by a source of excitation power. It is the transition of this material into magnetic saturation that creates the measurement signal~\cite{flux1,flux_sense}.
 
 
 \begin{table} [!htb]
@@ -423,7 +423,7 @@ The field fluctuation measurement is shown in Fig.~\ref{fig:fluc_24hrs} for one 
     \item $+z$ is vertically down.
 \end{itemize}
 % The nearest space weather station is in Brandon, MB, CA which is $\sim$215 km away from the prototype. We have measured the magnetic field around the prototype at UofW at 1pm on August 29, 2018 to 1pm on August 30, 2018. The field data given at space weather station is in Coordinated Universal Time (UTC) while we have measured in Central Standard Time (CST). So, we have downloaded the data from the Brandon space weather station by converting 1pm CST to UTC. The the fluctuations for our measured field and for the data from the Brandon space weather station have been determined using Eq.~(\ref{eq:fluc_meas_24}).
-The fluctuations for our measured field and for the data from the Brandon space weather station had the offset defined by one first data point subtracted.
+The fluctuations for our measured field and for the data from the Brandon space weather station had the offset defined by one first data point subtracted. The offsets are 10139~nT, 3048~nT, and 40358~nT for our case and 15108~nT, 1341~nT, and 54712~nT for the Brandon space weather station in $x$, $y$ and $z$ axis respectively.
 
 \fig{Images/bmeas_24hrs2}{width=\textwidth}{Comparison of fluctuations of the magnetic field measured at the University of Winnipeg (UW) for 24 hours with that from the Brandon, MB space weather station. The data was taken from 1pm CST on August 29, 2018 to 1pm CST on August 30, 2018.\label{fig:fluc_24hrs}}{Fluctuations of the magnetic field at UofW}
 

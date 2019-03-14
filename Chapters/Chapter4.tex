@@ -120,9 +120,9 @@ The color map of a matrix $\bm{M}$ measured in this fashion is shown in Fig.~\re
 %     B_s^n (measure) = B_s^n(environment)+ B_s^n(coils)
 % \end{equation}
 
-The typical magnetic field of the surroundings has been measured using a fluxgate and is reported in Table~\ref{table:Benvironment}. The values are similar in scale to Earth's magnetic field which is $\sim$45 $\mu$T in vertical downward direction. These are the typical scale of the setpoints.
+The typical magnetic field of the surroundings has been measured using a fluxgate and is reported in Table~\ref{table:Benvironment}. The values are similar in scale to Earth's magnetic field which is $\sim$42 $\mu$T in vertical downward direction. These are the typical scale of the setpoints.
 
-\begin{table} [htb!]
+\begin{table} 
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
@@ -149,15 +149,15 @@ For iteration $n=1$, Eq~(\ref{eq:del_B}) will give zero value as the first measu
 
 Using the relationship between the sensor readings and the coil currents as explained in Eq.~(\ref{eq:B_coils}) and the $\Delta B_s^n$ obtained from Eq.~(\ref{eq:del_B}), the error in terms of the current  will be
 \begin{equation}\label{eq:del_I}
-    \Delta I_c^n =\sum_{s=1}^{12} M^{-1}_{cs} \Delta B_s^n
+    \Delta I_c^n =\sum_{s=1}^{12} M^{-1}_{cs} \Delta B_s^n~\text{.}
 \end{equation}
-Here, $M^{-1}_{cs}$ are the elements of the inverse of the matrix $\bm{M}$. The inversion of the non-square matrix is a subtle problem and is discussed in Section~\ref{sec:inv}. $\Delta I_c^n$ is the error for $n^{\mathrm{th}}$ measurement on the basis of which the new set of currents will be calculated using a PI control algorithm. \textcolor{red}{That is the control variables in our case are the currents in the coils. The errors are also currents, those deduced from matrix inversion and magnetic sensors deviations from setpoints.} In the algorithm, the new current~\cite{bea} is
+Here, $M^{-1}_{cs}$ are the elements of the inverse of the matrix $\bm{M}$. The inversion of the non-square matrix is a subtle problem and is discussed in Section~\ref{sec:inv}. $\Delta I_c^n$ is the error for $n^{\mathrm{th}}$ measurement on the basis of which the new set of currents will be calculated using a PI control algorithm. That is, the control variables in our case are the currents in the coils. The errors are also currents, those deduced from matrix inversion and magnetic sensor deviations from setpoints. In the algorithm, the new current~\cite{bea} is
 \begin{equation}\label{eq:I}
     I^n_c=I^0_c+k^p_c \Delta I_c^n+k^i_c\sum_n \Delta I_c^n
 \end{equation}
 where, $I^0_c$ indicates the initial value of current for the set of the coils when the setpoint has been set (100 mA). $\Delta I_c^n$ is the error found using Eq.~(\ref{eq:del_I}) and the sum is over iterations $n$. The term $k^p_c$ is the proportional gain (P) and $k^i_c$ is the integral reset (I) for a particular coil. The gains $k^p_c$ and $k^i_c$ terms need to be tuned properly as will be explained in Section~\ref{sec:tune}. The index $c$ in $k^p_c$ and $k^i_c$ terms represents that the P and I value for for each coil could in principle be different. But throughout the thesis, I have used same values of $k_c^p$ and $k_c^i$ in all six coils. We found derivative term (D) in a typical PID scheme was unnecessary because it relates to optimizing fast response and our chief concern is long-term stability.
 
-\fig{Images/1s1c1zc1}{width =0.9\textwidth}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 1z with $k_c^p=1.0$, and $k_c^i=0.0$. Green curve:  measured field change $\Delta B$.  Red curve: predicted uncompensated field (Eq.~(\ref{eq:Buncomp})) change . Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:1s1c1zc1} }{The compensation effect on single sensor due to single coil.}
+\fig{Images/1s1c1zc1}{width =0.9\textwidth}{The $C_x^-$ coil current (left) and magnetic field $\Delta B$ (right) for sensor 1z with $k_c^p=1.0$, and $k_c^i=0.0$. Green curve:  measured field.  Red curve: predicted uncompensated field (Eq.~(\ref{eq:Buncomp})). Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:1s1c1zc1} }{The compensation effect on single sensor due to single coil.}
 
 Fig.~\ref{fig:1s1c1zc1} shows a simple one-dimensional control example implementing PI control algorithm. It is seen that the magnetic field change on sensor position 1z  has been compensated successfully due to coil current $C_x^-$. 
 
@@ -383,7 +383,7 @@ The array of the current errors  as function of $r$ due to the the change in fie
 \end{equation}
 To estimate the overall current response from the array, the root mean square (RMS) of $\Delta I_c^{\text{sim}}(r)$ is calculated as
 \begin{equation}\label{eq:delta_Isim_rms}
-     \Delta I_{\text{RMS}}^{\text{sim}}(r)= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{sim}}(r))^2}
+     \Delta I_{\text{RMS}}^{\text{sim}}(r)= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{sim}}(r))^2}~\text{.}
 \end{equation}
 This is calculated as a function of $r$ for different sets of $B_s^{\text{rand}}$ (Fig.~\ref{fig:Isim}). With the increase of $r$, the current fluctuations $\Delta I_{\text{RMS}}^{\text{sim}}$ vanish as expected.
 
@@ -410,14 +410,14 @@ It is seen from Figs.~\ref{fig:Isim} and \ref{fig:fluc-sim} that with the increa
 
 \begin{align}
     \overline{\Delta I_{\text{RMS}}^{\text{sim}}}(r) &= \frac{\Delta I_{\text{RMS}}^{\text{sim}}(r)}{\Delta I_{\text{RMS}}^{\text{sim}}(r\rightarrow - \infty)} \;\mathrm{,\;and}\label{eq:Inorm}\\
-    \overline{F}(r) &= \frac{F(r)- F(r\rightarrow - \infty)}{F(r\rightarrow \infty)- F(r\rightarrow - \infty)}\label{eq:flucNorm}
+    \overline{F}(r) &= \frac{F(r)- F(r\rightarrow - \infty)}{F(r\rightarrow \infty)- F(r\rightarrow - \infty)}~\text{.}\label{eq:flucNorm}
 \end{align}
 
 \fig{Images/6c_I-fluc2}{width =0.8\textwidth}{The normalized $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ for 30 sets of $B_s^{\text{rand}}$. The red line indicates the 0.5 level.\label{fig:I-fluc}}{The effect of $r$ on normalized current and remaining fluctuations.}
 
 %\FloatBarrier
 The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ is shown in Fig.~\ref{fig:I-fluc}. With an increase in $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier.
-Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($>>$30). The optimized $r$ in the example of Fig.~\ref{fig:I-fluc} is found to be 2.87.
+Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($=30$). The optimized $r$ in the example of Fig.~\ref{fig:I-fluc} is found to be 2.87.
 
 The calculation to find $r$ gives insight about the effect of regularization on current and field fluctuations, resulting in a compromise that adequately reduces both. With $r$ in hand, $\bm{M^{-1}}$ and thus the current error may be determined which is used in the PI algorithm.
 

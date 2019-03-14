@@ -63,50 +63,70 @@ simulation methods to understand the process have been described. The
 quantitative measures of the magnetic field compensation performance
 suggested by the Refs.\cite{bea,lins,rawlik} are also discussed
 there. While implementing the magnetic control process discussed in
-Chapter~\ref{ch:operation}, we have faced problems in terms of long
+Chapter~\ref{ch:operation}, I have faced problems in terms of long
 drift in the coil currents and also slower response of the prototype
-system. We have been able to make the system faster by introducing
-filter which enables us to change the sample frequency without adding
+system. I have been able to make the system faster by introducing
+filter which enables me to change the sample frequency without adding
 noise and will be discussed in Section~\ref{sec:freq}. In
-Section~\ref{sec:pi_behave}, we have discussed the studies to
+Section~\ref{sec:pi_behave}, I have discussed the studies to
 understand P and I term of PI control algorithm. But the coil current
-drifting problem is still there. We have then changed the fluxgate
-positions randomly to try to make condition number smaller and we have
+drifting problem is still there. I have then changed the fluxgate
+positions randomly to try to make condition number smaller and I have
 also removed the outermost passive shielding layer to see if there is
-any effect. For confirming the experimental coil current pattern, we
+any effect. For confirming the experimental coil current pattern, I
 have also made a simulation of the prototype. All the discussions
 about the different position of fluxgates and shield removal are in
-Section~\ref{sec:flux_place}. We have also implemented the new control
+Section~\ref{sec:flux_place}. I have also implemented the new control
 algorithm suggested by Ref.~\cite{rawlik} and compared with our
-existing one suggested by Ref.~\cite{bea}. While comparing those we
+existing one suggested by Ref.~\cite{bea}. While comparing those I
 came up with an interesting similarity in the control algorithms which
 is discussed in Section~\ref{sec:style_pi}. But the new algorithm sill
-had no answers for the current drifting problems which encouraged us
+had no answers for the current drifting problems which encouraged me
 to study the regularization parameter in different way that is
 discussed in Section~\ref{sec:new_study_r}. The current drifting
-problem can be solved but that introduced additional noise. We have
+problem can be solved but that introduced additional noise. I have
 then realized that coil configuration has a great impact on the
-current modes which we have discussed in
+current modes which I have discussed in
 Section~\ref{sec:coil_config}. Finally, the results of the metrics
 that has been discussed in Section~\ref{sec:metrics} are presented in
-Section~\ref{sec:metrics_res}. There are some unique points discussed
-here which are not explicitly present on previous studies on active
-compensation. These represent the principal improvements and
-innovations made in this thesis work.  They are: {\color{red}These
-should be made to sound impressive and potentially gathered together
-to make a smaller list.}
-\begin{itemize}
-    \item a new $\mathbf{4^{th}}$ order low pass Butterworth filter
-    \item PI tuning general behaviour on active compensation system 
-    \item $r$ behaviour on PI tuning.
-    \item Effect of $r$ on coil current response
-    \item Impact of shield on active compensation
-    \item Fluxgate placement suggestions.
-    \item Relation of $r$ with matrix condition number
-    \item Prototype PI control simulation
-    \item Relation of different PI control algorithm
-    \item Coil current modes based on coil configuration
-\end{itemize}
+Section~\ref{sec:metrics_res}. 
+
+
+% There are some unique points discussed
+% here which are not explicitly present on previous studies on active
+% compensation. These represent the principal improvements and
+% innovations made in this thesis work. They are: {\color{red}These
+% should be made to sound impressive and potentially gathered together
+% to make a smaller list.}
+% \begin{itemize}
+%     \item a new $\mathbf{4^{th}}$ order low pass Butterworth filter
+%     \item PI tuning general behaviour on active compensation system 
+%     \item $r$ behaviour on PI tuning.
+%     \item Effect of $r$ on coil current response
+%     \item Impact of shield on active compensation
+%     \item Fluxgate placement suggestions.
+%     \item Relation of $r$ with matrix condition number
+%     \item Prototype PI control simulation
+%     \item Relation of different PI control algorithm
+%     \item Coil current modes based on coil configuration
+% \end{itemize}
+
+
+% They are: {\color{red}These
+% should be made to sound impressive and potentially gathered together
+% to make a smaller list.}
+% \begin{itemize}
+%     \item a new $\mathbf{4^{th}}$ order low pass Butterworth filter
+%     \item PI tuning general behaviour on active compensation system 
+%     \item $r$ behaviour on PI tuning.
+%     \item Effect of $r$ on coil current response
+%     \item Impact of shield on active compensation
+%     \item Fluxgate placement suggestions.
+%     \item Relation of $r$ with matrix condition number
+%     \item Prototype PI control simulation
+%     \item Relation of different PI control algorithm
+%     \item Coil current modes based on coil configuration
+% \end{itemize}
 New directions for future studies are presented in
 Chapter~\ref{ch:conclusion}.
 
@@ -816,7 +836,7 @@ and my new method) agree.
 % The above discussion of the Table~\ref{table:flux-pos} shows that current goes crazy if the fluxgates are placed in the center of each of the coil faces and crazier if they are slightly moved inside or outside of the center. The corners position fluxgates shows normal behaviour compare to the center positions and surprisingly less sensors shows better compensation in the corners in exchange more more currents.
 
 
-\subsection{Impact of Passive Shield}
+\subsection{Impact of Passive Shield}\label{sec:shield_impact}
 
 Fluxgate placements failed to solve the slow coil current response.
 Another hypothesis developed around this time was that increasing
@@ -1205,7 +1225,7 @@ experiment compared to simulation.
 
 %\fig{Images/Mdiff_31}{width = \textwidth}{The RMS differences between the absolute experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
-\fig{Images/Mdiff2_31}{width = \textwidth}{Differences between absolute experimental and simulated matrix elements $\Delta|M_{sc}|$ (defined in the text).  Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$.\label{fig:Mdiff2}}{Comparison of experimental and simulated $\bm{M}$.}
+\fig{Images/Mdiff2_31}{width =0.8\textwidth}{Differences between absolute experimental and simulated matrix elements $\Delta|M_{sc}|$ (defined in the text).  Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$.\label{fig:Mdiff2}}{Comparison of experimental and simulated $\bm{M}$.}
 
 %\fig{Images/Mdev}{width = \textwidth}{Maximum variations in $M_{sc}$ elements for $\bm{M}$ measure in every 15 mins for 8 hours in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. \label{fig:Mdev}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
@@ -2045,7 +2065,7 @@ generally placed in the corners of a slightly smaller cube, or could
 alternately be placed in the middles of the faces of cube, much like
 the studies presented in Table~\ref{table:flux-pos}.
 
-\fig{Images/matrix_patch_6c}{width = \textwidth}{
+\fig{Images/matrix_patch_6c}{width =0.9\textwidth}{
 Color map of $M_{sc}$ elements for 24 fluxgate axes and 6 coils.  In
 the simulation, the six coils are wound on the edges of the six faces
 of a cube of side-length 1.24~m, and the fluxgates are placed in the
@@ -2069,7 +2089,7 @@ matrix $\bm{\Sigma}$ is a diagonal matrix whose elements are the
 positive square roots of the singular values of $\bm{M^T}\bm{M}$,
 sorted from largest to smallest.
 
-\fig{Images/Diag_patch_6c}{width = \textwidth}{
+\fig{Images/Diag_patch_6c}{width =0.9\textwidth}{
 Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
 $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil dimensions and
 fluxgate positions are given in
@@ -2092,7 +2112,7 @@ never make the smallest singular value larger than zero.
 %of the matrix condition number is infinity as because the minimum
 %diagonal element is zero.
 
-\fig{Images/Right_patch_6c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil
+\fig{Images/Right_patch_6c}{width =0.9\textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil
 dimensions and fluxgate positions are given in Fig.~\ref{fig:matrix_patch_6c}. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
 
 I then tried to understand the reason for the minimum diagonal element
@@ -2205,7 +2225,7 @@ $C_y^+$, $C_y^-$, and $C_z^\pm$.
 
 %\textcolor{red}{Is Fig.~\ref{fig:matrix_patch_5c} required ????}
 
-\fig{Images/matrix_patch_5c}{width = \textwidth}{
+\fig{Images/matrix_patch_5c}{width =0.9\textwidth}{
 Color map of $M_{sc}$ elements for 24 fluxgate axes and 5 coils. Coil
 dimensions and fluxgate positions are the same as for
 Fig.~\ref{fig:matrix_patch_6c}.\label{fig:matrix_patch_5c}}{Matrix for
@@ -2219,7 +2239,7 @@ the singular value decomposition, the differences become evident.
 
 
 
-\fig{Images/Diag_patch_5c}{width = \textwidth}{
+\fig{Images/Diag_patch_5c}{width =0.9\textwidth}{
 Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
 $\bm{M}$ for 24 fluxgate axes and 5
 coils. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
@@ -2233,7 +2253,7 @@ magnitude.  The condition number of the matrix is 2.01, which is a
 considerable improvement compared to the infinite condition number of
 the six-coil system.
 
-\fig{Images/Right_patch_5c}{width = \textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ 24 fluxgate axes and 5 coils. \label{fig:right_patch_5c}}{Orthogonal matrix $\bm{V^T}$ for 5 coils.}
+\fig{Images/Right_patch_5c}{width=0.9\textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ 24 fluxgate axes and 5 coils. \label{fig:right_patch_5c}}{Orthogonal matrix $\bm{V^T}$ for 5 coils.}
 
 The matrix of right singular vectors $\bm{V^T}$ is displayed in
 Fig.~\ref{fig:right_patch_5c}.  The uniform field modes are clearly
@@ -2241,10 +2261,6 @@ visible in rows 1, 3, and 4, corresponding to Helmholtz-like singular
 current modes.  Two gradient modes also appear in rows 2 and 5, which
 are different combinations of the anti-Helmholtz-like gradients in
 each of the $x$ and $y$ directions.
-
-\textcolor{red}{Say that we also made a PI simulation and it worked better.  Should probably say this at the end of this section.}
-
-\textcolor{red}{Should I remove the numbers in parentheses in Table~\ref{table:mcond_coil}???}
 
 
 \begin{table} [htb!]
@@ -2276,9 +2292,7 @@ were required to be equal and run in the same direction.
 The results of matrix measurement followed by singular value
 decomposition are shown in Table~\ref{table:mcond_coil}.  Since I
 could only instrument $4\times 3$ fluxgate axes, only such matrices
-are considered.  The measurements were done with no magnetic shield
-inside the coil cube~\textcolor{red}{and I think they'd be the same if
-we had a shield present, maybe.  Need to firm up this statement.}
+are considered.  The measurements shown inside and outside the parentheses were done with and without the magnetic shield within the coil cube. It is seen that they are similar as expected from the discussion in Section~\ref{sec:shield_impact}.
 
 Table~\ref{table:mcond_coil} shows that the condition number of the
 matrix is reduced by more than a factor of ten when comparing the
@@ -2532,7 +2546,8 @@ Fig.~\ref{fig:5c_pseudo_shield_y}, the $C_y^+$ and $C_y^-$ coils have
 been required to carry a common current $C_y^\pm$ while the other five
 coils may be adjusted freely.  Even with the magnetic shield present,
 the results are very similar to Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} where no
-shield was present.
+shield was present. The results were also compared with redid in PI simulations and similar behaviour were observed as expected.
+
 
 %\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
 

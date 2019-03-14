@@ -260,7 +260,6 @@ Adding Eqs.~(\ref{es1}), and (\ref{es2}) and using the value of $\mathcal{K}_2$ 
 \mathcal{K}_1=-\frac{\mu(\mu-\muo)(l+1) (2l+1)G_l}{[\mu(l+1)+\muo l)][\mu l+\muo(l+1)]-(\mu-\muo)^2 l(l+1)\left(\dfrac{a}{b}\right)^{2l+1}}
 \end{equation}
 
-\fig{Images/sphere_s}{width = 0.8\textwidth}{Shielding effect of spherical shell in a uniform magnetic field.\label{fig:sphere_s}}{Shielding effect of spherical shell in a uniform magnetic field.}
 
 % The net field  within the bulk of the shield (\textit{i.e.}, $a<r<b$) (see Eq.~(\ref{R<r<R+t})) is 
 % \begin{multline*}
@@ -518,13 +517,10 @@ Putting the value of Eqs.~(\ref{bt1}),~and~(\ref{g2}) in Eq.~(\ref{e2}) :
 % \delta =-\left[\frac{\frac{(2l+1)^2}{l}\mu'}{(\mu'l+l+1)\left[\left(\frac{l+1}{l}\right)\mu'+1\right]-(l+1)\left(\frac{a}{b}\right)^{2l+1}(\mu'-1)^2}\right]H    
 % \end{equation}
 For $\mu'\gg 1$, Eqs.~(\ref{bt1}),~and~(\ref{g2}) reduced to -
-\begin{equation}\label{bt2}
-\beta\approx-\left[\frac{2l+1}{\mu'l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\right]H_0
-\end{equation}
-
-\begin{equation}\label{g3}
-\gamma\approx-\left[\frac{(2l+1)a^{2l+1}}{\mu'(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H_0
-\end{equation}
+\begin{align}
+\beta &\approx-\left[\frac{2l+1}{\mu'l\left[1-\left(\frac{a}{b}\right)^{2l+1}\right]}\right]H_0\label{bt2}\\
+\gamma &\approx-\left[\frac{(2l+1)a^{2l+1}}{\mu'(l+1)\left(1-\left(\frac{a}{b}\right)^{2l+1}\right)}\right] H_0\label{g3}
+\end{align}
 
 
 Using the values from Eqs.~(\ref{bt2}),~and~(\ref{g3}), and $u=\cos\theta$ in Eq.~(\ref{a<r<b}) :
@@ -642,7 +638,11 @@ G_l(l+1)=\muo H
 So, if Eq.~(\ref{g}) is correct, then we are getting same result using scalar potential as we got from bound surface current method for $\mathcal{K}_1$. Similar approach can be taken for $\mathcal{K}_2$.
 
 
-\section{Magnetic field with uniform background (l=1)}
+\section{Magnetic field with uniform background (l=1)}\label{sec:uniform}
+
+\fig{Images/sphere_s}{width = 0.8\textwidth}{Shielding effect of spherical shell in a uniform magnetic field.\label{fig:sphere_s}}{Shielding effect of spherical shell in a uniform magnetic field.}
+
+In this Section, we will calculate the the magnetic field inside the bulk of a spherical mu-metal shield in a uniform magnetic field (l=1). Figure~\ref{fig:sphere_s} shows the shielding effect of spherical shell in a uniform magnetic field (l=1). 
 
 For \(\mu\gg\muo\) in Eq.(\ref{k11}):
 \begin{equation}\label{k12}
@@ -659,25 +659,19 @@ For \(\mu\gg\muo\) in Eq.(\ref{k21}):
 \mathcal{K}_2\approx-G_1-\mathcal{K}_1
 \end{equation}
 
-Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}):
+Using Eqs.~(\ref{k12}), and (\ref{k22}) in Eq.~(\ref{B2}), the magnetic field inside the bulk of a spherical mu-metal shield in a uniform magnetic field (l=1) is :
 \begin{equation}
     \bm{B}_2=6 G_1\frac{1-\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\cos\theta\;\bm{\hat{r}}-3 G_1\frac{2+\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\sin\theta\;\bm{\hat{\theta}}
 \end{equation}
 
-At $\theta=0$ :
-\begin{equation}
-    \bm{B}_2\Bigr|_{\substack{\theta=0}}=3\;B_0\;\frac{1-\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}
-\end{equation}
-
-At $\theta=\pi/2$ :
-\begin{equation}
-    \bm{B}_2\Bigr|_{\substack{\theta=\pi/2}}=\frac{3}{2}\;B_0\;\frac{2+\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}\approx \frac{3}{2}\;B_0\frac{a}{t}\bm{\hat{z}}
-\end{equation}
+At poles and equator the field is :
+\begin{align}
+    &\bm{B}_2\Bigr|_{\substack{\theta=0}} &=& 3\;B_0\;\frac{1-\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}&\mathrm{at~poles}&\\
+    &\bm{B}_2\Bigr|_{\substack{\theta=\pi/2}} &=& \frac{3}{2}\;B_0\;\frac{2+\left(\frac{a}{r}\right)^3}{1-\left(\frac{a}{b}\right)^3}\bm{\hat{z}}\approx \frac{3}{2}\;B_0\frac{a}{t}\bm{\hat{z}}&\mathrm{at~equator}&
+\end{align}
 
 \subsection{Comparison with simulation}
-\fig{Images/Contour}{width = \textwidth}{Color map of the spherical mu-metal shield in OPERA.\label{fig:sphere_contour}}{Color map of the spherical mu-metal shield in OPERA.}
-
-\begin{table} [!htb]
+\begin{table} [!tb]
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
@@ -691,13 +685,22 @@ At $\theta=\pi/2$ :
         \hline
         $\mu$  & 20,000 \\ 
         \hline
-
     \end{tabular}
     % \vspace{4mm}
-    \caption{Properties of the spherical mu-metal shield in OPERA.}\label{tablE:opera_sphere}
+    \caption{Properties of the spherical mu-metal shield in OPERA.}\label{table:opera_sphere}
 \end{table}
 
-\begin{table} [!htb]
+In this Section, the values obtained for uniform field in Section~\ref{sec:uniform} will be compared with simulated values. The simulation was performed in OPERA using the parameters of the mu-metal shield as shown in Table~\ref{table:opera_sphere} for a $400~\mu$T applied field in $y$-direction.
+
+\FloatBarrier
+
+\fig{Images/Contour}{width = \textwidth}{Color map of the spherical mu-metal shield in OPERA.\label{fig:sphere_contour}}{Color map of the spherical mu-metal shield in OPERA.}
+
+Figure~\ref{fig:sphere_contour} shows the color map of the spherical mu-metal shield in OPERA for the parameters in Table~\ref{table:opera_sphere} for the uniform applied field.
+
+
+
+\begin{table} [tb!]
     \centering
     \begin{tabular} { |c|c|c|c|c|c|} 
         \hline
@@ -714,6 +717,9 @@ At $\theta=\pi/2$ :
 
     \end{tabular}
     % \vspace{4mm}
-    \caption[Comparison of simulated $\bm{B}$ field with analytical one ]{Comparison of simulated $\bm{B}$ field with analytical one for a 400 $\mu$T applied field in $y$-direction.}\label{tablE:opera_analytical}
+    \caption[Comparison of simulated $\bm{B}$ field with analytical one ]{Comparison of simulated $\bm{B}$ field with analytical one for a 400 $\mu$T applied field in $y$-direction.}\label{table:opera_analytical}
 \end{table}
 
+\FloatBarrier
+
+Table~\ref{table:opera_analytical} shows the comparison of simulated $\bm{B}$ field with analytical one for a 400 $\mu$T applied field in $y$-direction. It is seen that the analytical values are in agreement with the simulated values.
