@@ -526,13 +526,13 @@ where, $B_s^n(\text{coils})$ is determined using Eq.~(\ref{eq:B_coils}).
 
 \fig{Images/bt-mod}{width=0.9\textwidth}{Magnetic field reduction at some of the sensors closer to the perturbation coil and the central position. Color curves: measured field change $=B_s^n(\text{meas})$. Red curves: extracted uncompensated field change $ B_s^n(\text{uncomp})$. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:bt_mod}}{Magnetic field reduction at some of the sensor positions.} 
 
-The PI feedback and control system can be tested by its response to a step the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod} where both $B_s^n(\text{meas})$ and $B_s^n(\text{uncomp})$ are shown.  The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also compensated somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
+The PI feedback and control system can be tested by its response to a step in the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod} where both $B_s^n(\text{meas})$ and $B_s^n(\text{uncomp})$ are shown.  The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also compensated somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
 
 % position and to some levels in other positions indicated by blue, green and cyan colors. Moreover, the last one named 'center-Z' predicts the response in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of step response level. We are considering the good results if the system response time is fastest without any overshoot and also reduces the step response levels as much as possible. The results are considered bad if the there is very slow response of the system.
 
 
 %\FloatBarrier
-The RMS current change and RMS field change for both the measurement and in the uncompensated case can be determined experimentally under application of perturbation coil current.
+The RMS current change and RMS field change for both the measurement and in the uncompensated case can be determined experimentally under application of the perturbation coil current.
 
 % \begin{align}
 %     \Delta I_c^{\text{exp}}(r) &= \sum_{s=1}^{12} M^{-1}_{cs}(r) (-B_{\text{uncomp}}(r))\label{eq:del_Is_exp}\\
@@ -550,14 +550,10 @@ where, $\Delta B_s(\text{meas})$ and $\Delta B_s(\text{uncomp})$ measured step c
 
 
 An example of the effect of $r$ on the RMS current change  and $F(\mathrm{exp})$ for a particular perturbation coil current step is shown in Fig.~\ref{fig:mont_comp}. It is seen that around 100~mA RMS of current array is required to compensate the perturbation
-which eventually vanishes with $r$ increment as expected (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}). Furthermore, field fluctuations are reduced to $50\%$ of their uncompensated values.
+which eventually vanishes with $r$ increment as expected (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}). Furthermore, field fluctuations are reduced to $50\%$ of their uncompensated values (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}).
 
 
 
-
-
-
- 
  \subsection{Allan Deviations and Shielding Factors}
  
 The Allan standard deviation \cite{allan} is used to test the time stability of clocks, amplifiers and oscillators. The same concept can be applied to time series of the magnetic field measurements. In this case, the Allan standard deviation is defined as~\cite{bea}
