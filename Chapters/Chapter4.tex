@@ -523,45 +523,40 @@ For active magnetic compensation, the measured field by the fluxgate sensors $B_
 where, $B_s^n(\text{coils})$ is determined using Eq.~(\ref{eq:B_coils}).
 
 
-The measured field and uncompensated field for a particular $r$ experimentally can be found as
-\begin{align}
-    B_{\text{meas}}(r) &= 
-    B_{\text{meas}}^{\text{max}}(r)-B_{\text{meas}}^{\text{min}}(r)\label{eq:bmeas_r}\\
-    B_{\text{uncomp}}(r) &= B_{\text{uncomp}}^{\text{max}}(r)-B_{\text{uncomp}}^{\text{min}}(r)\label{eq:buncomp_r}
-\end{align}
-where, the superscripts ``max'', and ``min'' refer the maximum and minimum measured and uncompensated field at all sensors positions for $n$ measurements with particular value of $r$. To find the RMS of current error experimentally, simulated Eqs.~(\ref{eq:del_Is}) and (\ref{eq:delta_Isim_rms}) are then replaced as
 
-\begin{align}
-    \Delta I_c^{\text{exp}}(r) &= \sum_{s=1}^{12} M^{-1}_{cs}(r) (-B_{\text{uncomp}}(r))\label{eq:del_Is_exp}\\
-     \Delta I_{\text{RMS}}^{\text{exp}}(r) &= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{exp}}(r))^2}\label{eq:delta_Iexp_rms}
-\end{align}
-Furthermore, to find the remaining fluctuations experimentally, simulated Eq.~(\ref{eq:fluc}) is replaced as
-\begin{equation}\label{eq:fluc_exp}
-   F'(r)=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_{\text{meas}}(r))^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_{\text{uncomp}}(r))^2}}
-\end{equation}
+\fig{Images/bt-mod}{width=0.9\textwidth}{Magnetic field reduction at some of the sensors closer to the perturbation coil and the central position. Color curves: measured field change $=B_s^n(\text{meas})$. Red curves: extracted uncompensated field change $ B_s^n(\text{uncomp})$. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:bt_mod}}{Magnetic field reduction at some of the sensor positions.} 
 
-\fig{Images/mont_exp}{width =0.9\textwidth}{The effect of $r$ on (left) current error  and (right) remaining field fluctuations in experimental setup for $k_c^p=1.0$, and $k_c^i=0.0$ for fluxgate signals from 1, 2 and 7. Here, 100 mA current has been supplied in the perturbation coil and $r$ ranges from 0 to 6 in an increment of 0.29. \label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
-
-
-An example of the effect of $r$ on the current error and remaining field
-fluctuations in the PI feedback and control system for a particular perturbation is shown in Fig.~\ref{fig:mont_comp}. It is seen that around 100~mA rms of current array is required to compensate the perturbation
-which eventually vanishes with $r$ increment as expected (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}). Furthermore, the remaining fluctuation is
-$\approx$0.45 (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(b)}) which indicates that the maximum correction is $(1-0.45)\times100\%=55\%$.
-
-
-
-
-
-\fig{Images/bt-mod}{width=0.9\textwidth}{Magnetic field reduction at some of the sensors closer to the perturbation coil and the central position. Color curves: measured field change. Red curves: extracted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.\label{fig:bt_mod}}{Magnetic field reduction at some of the sensor positions.} 
-
-% 
-
-Moreover, the PI feedback and control system can be tested by its response to a step the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod}. The color curves in Fig.~\ref{fig:bt_mod} requested the magnetic field measured by the compensation system, $B_s^n(\text{meas})$.  The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also reduced somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
+The PI feedback and control system can be tested by its response to a step the perturbation coil current. This can also be studied by monitoring the central sensors within the passive magnetic shielding system. An example of this is shown in Fig.~\ref{fig:bt_mod} where both $B_s^n(\text{meas})$ and $B_s^n(\text{uncomp})$ are shown.  The active compensation reduces the effect of the perturbation coil current in the sensors. The central sensor's response is also compensated somewhat. I expect the limitation in the correction is due to limitations in the coil design. 
 
 % position and to some levels in other positions indicated by blue, green and cyan colors. Moreover, the last one named 'center-Z' predicts the response in the center of the prototype in $z$ axis without actually being in the feedback loop and there is also improvement in terms of step response level. We are considering the good results if the system response time is fastest without any overshoot and also reduces the step response levels as much as possible. The results are considered bad if the there is very slow response of the system.
 
 
 %\FloatBarrier
+The RMS current change and RMS field change for both the measurement and in the uncompensated case can be determined experimentally under application of perturbation coil current.
+
+% \begin{align}
+%     \Delta I_c^{\text{exp}}(r) &= \sum_{s=1}^{12} M^{-1}_{cs}(r) (-B_{\text{uncomp}}(r))\label{eq:del_Is_exp}\\
+%      \Delta I_{\text{RMS}}^{\text{exp}}(r) &= \sqrt{\frac{1}{6}\sum_{c=1}^6 (\Delta I_c^{\text{exp}}(r))^2}\label{eq:delta_Iexp_rms}
+% \end{align}
+% Furthermore, to find 
+
+The remaining fluctuations can also be quantified experimentally
+\begin{equation}\label{eq:fluc_exp}
+   F(\mathrm{exp})=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} \Delta B_s(\text{meas})^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (\Delta B_s(\text{uncomp})^2}}
+\end{equation}
+where, $\Delta B_s(\text{meas})$ and $\Delta B_s(\text{uncomp})$ measured step changes in the measured and uncompensated magnetic fields, respectively, under application of the perturbation coil current.
+
+\fig{Images/mont_exp}{width =0.9\textwidth}{Experimentally determined effect of $r$ on (left) RMS current change  and (right) remaining field fluctuations $F(\mathrm{exp})$ for $k_c^p=1.0$ and $k_c^i=0.0$. Fluxgates were located at positions 1, 2 and 7 in this study, and 100~mA current was supplied in the perturbation coil. \label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
+
+
+An example of the effect of $r$ on the RMS current change  and $F(\mathrm{exp})$ for a particular perturbation coil current step is shown in Fig.~\ref{fig:mont_comp}. It is seen that around 100~mA RMS of current array is required to compensate the perturbation
+which eventually vanishes with $r$ increment as expected (Fig.~\ref{fig:mont_comp}\textcolor{blue}{(a)}). Furthermore, field fluctuations are reduced to $50\%$ of their uncompensated values.
+
+
+
+
+
+
  
  \subsection{Allan Deviations and Shielding Factors}
  
