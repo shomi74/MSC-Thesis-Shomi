@@ -27,7 +27,7 @@ Four 3-axis fluxgate sensors were placed at positions near the shield and coil s
 The fluxgates suffered from environmental noise dominated by 60~Hz electrical noise. Moreover, if the system has any potential of generating noise at $\sim8$~Hz in a $1~\mu$T field, it could induce changes in the $\mathrm{^{199}Hg}$ free precession. A $\mathrm{4^{th}}$-order low-pass Butterworth filter with corner frequency 10~Hz was built to reduce the noise. The filter details are prescribed in Section~\ref{sec:filter}. After filtering, the signals are transmitted to the computer via the analog to digital converter (ADC) of a LabJack T7 Pro~\cite{T7}. The required currents are calculated in a PC using a proportional-integral (PI) control algorithm. The computer uses digital to analog converters (DACs) to control six voltage controlled current sinks. The current sinks drive the six compensation coils.
 
 % \fig{Images/exp2}{width = 0.8\textwidth}{Schematic diagram of prototype active compensation system at University of Winnipeg.\label{fig: active}}
-I now discuss in more detail each component of the system.
+More details of each component is discussed in the following sections.
 
 \section{Mu-Metal Shields}\label{sec:shield}
 The passive magnetic shielding is composed of thin multi-layer shields with materials having high magnetic permeability (mu-metal). 
@@ -37,7 +37,7 @@ The passive magnetic shielding is composed of thin multi-layer shields with mate
 \fig{Images/passive2}{width =0.95\textwidth}{Prototype passive shielding at University of Winnipeg~\cite{mammei_presentation}.\label{fig: passive}}{Prototype passive shielding at University of Winnipeg}
 
 
-In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625 inch has been used for the layers,  which is an 80\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps in each cylinder with a 7.5~cm diameter in the central hole. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
+In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625 inch has been used for the layers,  which is an 80\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps in each cylinder with a hole of 7.5 cm diameter at the center. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
 
 \begin{table} [!htb]
     \centering
@@ -112,7 +112,7 @@ A fluxgate sensor is a piece of magnetic material, within a sensing winding used
         \hline\hline
         Measure Range ($\mu$T) & $\pm$70 & $\pm$100 \\ 
         \hline
-        \makecell{Noise Level \\($\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at 1~Hz)} & $<6$ & $10~-<20$ \\ 
+        \makecell{Noise Level \\($\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at 1~Hz)} & $<6$ & $\geq10$ to $<20$ \\ 
         \hline
         Bandwidth (kHz) & 3 & 1 \\ 
         \hline
@@ -130,7 +130,7 @@ For the prototype, I have used four 3-axis fluxgate sensors (2 Bartington Mag-03
 
 \fig{Images/noise}{width =0.8\textwidth}{Average Spectral Density for Mag690. \label{fig:noise}}{Average Spectral Density for Mag690.}
 
-According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ and $\mathrm{10}-\mathrm{<20}$~$\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for Mag-03 and Mag690 respectively. I measured the noise levels of the fluxgate and found they matched the manufacturer's specification. For my test, data was taken by placing each fluxgate inside the shield and field data recorded. The data was processed in Mathematica~\cite{Mathematica} to estimate the power spectral density using a Discrete Fourier Transform (DFT)~\cite{dft}. Figure~\ref{fig:noise} shows that the noise level is $\sim\mathrm{16~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for the Mag690. This also confirms that the ADC (Section~\ref{sec:DAQ}) doesn't present any substantial noise beyond the fundamental noise of the fluxgate.
+According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ and $\geq \mathrm{10}$ to $\mathrm{<20}$~$\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for Mag-03 and Mag690 respectively. The noise level of the fluxgates were measured to be found that they matched the manufacturer's specification. For my test, data was taken by placing each fluxgate inside the shield and field data recorded. The data was processed in Mathematica~\cite{Mathematica} to estimate the power spectral density using a Discrete Fourier Transform (DFT)~\cite{dft}. Figure~\ref{fig:noise} shows that the noise level is $\sim\mathrm{16~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for the Mag690. This also confirms that the ADC (Section~\ref{sec:DAQ}) doesn't present any substantial noise beyond the fundamental noise of the fluxgate.
 
 
 
@@ -140,7 +140,7 @@ According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_
 
 \section{Data Acquisition (DAQ) Module}\label{sec:DAQ}
 
-The signals from the fluxgates are all analog. An analog to digital converter (ADC) transfers information to the computer and a digital to analog converter (DAC) transfers information out of the computer. For that purpose, I used a LabJack T7 Pro Data Acquisition (DAQ) device~\cite{T7}.
+The signals from the fluxgates are all analog. An analog to digital converter (ADC) transfers information to the computer and a digital to analog converter (DAC) transfers information out of the computer. For that purpose, a LabJack T7 Pro Data Acquisition (DAQ) device~\cite{T7} was used.
 
 \subsubsection{ADC of LabJack T7 Pro}
 
@@ -260,7 +260,7 @@ Figure~\ref{fig:res} compares the manufacturer~\cite{T7} result (dashed red) wit
 \end{table}
 % For the prototype, by effective sampling frequency we meant that the number of signals of the fluxgate sensors that are going to the feedback algorithm via analog to digital converter (ADC) per second per measurement. But we are recording the time for a complete iteration which we call it as loop sampling frequency which includes the ADC effective sampling frequency plus rest of the loop frequency. 
 
-Table~\ref{table:t7freq2} reports sampling rate for each analog input. If more than one input is used , the overall sample rate suffers accordingly since the same ADC is used. In addition, there are computer delays. Including these delays results in a lower frequency which I call the loop sampling frequency (Table~\ref{table:t7freq}). For resolution index 1, it is found to be 3846.2~Hz, which is smaller than the effective sampling frequency 25000~Hz reported in Table~\ref{table:t7freq2} because of polling time which is typically 1~ms per channel read~\cite{T7}. The polling time includes LJM library overhead, Linux overhead, USB communication time, and device processing time. Table~\ref{table:t7freq} also shows the possible loop bandwidth for 14 fluxgate axes that I have used for active magnetic compensation. Possible software averaging is also shown in Table~\ref{table:t7freq} to meet the 6~Hz system design goal. Resolution index $1-9$ are acceptable to meet the design goal. Software averaging should give roughly the same noise performance which is discussed later (Chapter~\ref{ch:quantification}).
+Table~\ref{table:t7freq2} reports sampling rate for each analog input. If more than one input is used, the overall sample rate suffers accordingly since the same ADC is used. In addition, there are computer delays. Including these delays results in a lower frequency which I call the loop sampling frequency (Table~\ref{table:t7freq}). For resolution index 1, it is found to be 3846.2~Hz, which is smaller than the effective sampling frequency 25000~Hz reported in Table~\ref{table:t7freq2} because of polling time which is typically 1~ms per channel read~\cite{T7}. The polling time includes LJM library overhead, Linux overhead, USB communication time, and device processing time. Table~\ref{table:t7freq} also shows the possible loop bandwidth for 14 fluxgate axes that I have used for active magnetic compensation. Possible software averaging is also shown in Table~\ref{table:t7freq} to meet the 6~Hz system design goal. Resolution index $1-9$ are acceptable to meet the design goal. Software averaging should give roughly the same noise performance which is discussed later (Chapter~\ref{ch:quantification}).
 %\FloatBarrier
 % The above discussion shows that the effective resolution that the LabJack corporation has given in their website are pretty similar to our result (see Fig.~\ref{fig:res}) and if we want to sample faster we need a lower resolution index but that will increase noise. To get rid of that noise and to meet design goal we can use software averaging (see Table~\ref{table:t7freq}), and filters which will be discussed in the latter part of this chapter.
 
@@ -363,7 +363,7 @@ To make the ADC response time faster, I designed and built twelve $\mathrm{4^{th
 \end{table}
 
 %\FloatBarrier
-The circuit diagram of a $\mathrm{4^{th}}$-order low-pass Butterworth filter is shown in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(a)}. The filter has been designed online via Analog Filter Wizard tool~\cite{fWizard} to our specifications. Two $\mathrm{2^{nd}}$-order low-pass filter have been cascaded in series to form a $\mathrm{4^{th}}$-order low-pass filter. The $\mathrm{2^{nd}}$-order low-pass filters use Sallen-Key architecture which allows better passband gain without the use of the inductors. We also made a board to accommodate 3 filters (one for each axis of a fluxgate). A photograph of the implementation is shown in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(b)}. The front side (left in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(b)}) contains 3 input and output terminals.
+The circuit diagram of a $\mathrm{4^{th}}$-order low-pass Butterworth filter is shown in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(a)}. The filter has been designed online via Analog Filter Wizard tool~\cite{fWizard} to our specifications. Two $\mathrm{2^{nd}}$-order low-pass filter have been cascaded in series to form a $\mathrm{4^{th}}$-order low-pass filter. The $\mathrm{2^{nd}}$-order low-pass filters use Sallen-Key architecture which allows better passband gain without the use of the inductors. We also made a board to accommodate 3 filters (one for each axis of a fluxgate). Photographs of the implementation are shown in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(b)}. The front side (left in Fig.~\ref{fig:filter_ckt}\textcolor{blue}{(b)}) contains 3 input and output terminals.
 
 \fig{Images/filter_ckt}{width=0.95\textwidth}{$\mathrm{4^{th}}$-order low-pass Butterworth filter (a) circuit diagram of one filter, (b) photographs of three filter board. \label{fig:filter_ckt}}{$\mathrm{4^{th}}$-order low-pass Butterworth filter}
 

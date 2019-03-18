@@ -60,7 +60,7 @@ This chapter describes how the system works as a unit to provide magnetic field 
 % % \end{equation*}
 % On the basis of that, PI feedback algorithm will generate the required current that should be fed to the coils to compensate $\Delta B$. After certain period, a perturbation is also applied using an eletro-magnet coil to test how good the system is performing.  The above process is repeated as long as the compensation is running. 
 
-The goal of this Section is to tell the general idea of how the feedback system works, and to introduce the principles of operation.  It also introduces a few of the key issues faced when operating the system. 
+The goal of this Section is to introduce the general idea of how the feedback system works, and to introduce the principles of operation.  It also introduces a few of the key issues faced when operating the system. 
 
 Fluxgates measure the magnetic field. Each fluxgate axis has a setpoint. When the fluxgate signal drifts from the setpoint, the error grows. The fluxgates respond to changes in the coil currentsin a linear fashion and can therefore be described by a matrix. The inverse matrix describes how to correct the currents based on the errors from the consecutive fluxgate signals. A Proportional Integral (PI) control algorithm  is used in conjunction with the matrix inverse to correct currents based on the error signals. The matrix isn't square and its inverse has to be defined. A problem arises that the matrix can be ill-conditioned, and this problem must be dealt with. 
 
@@ -102,7 +102,7 @@ where, $M_{sc}$ are the elements of the matrix $\bm{M}$ and $I_c^n$ is the curre
 %\FloatBarrier
 
 
-The matrix defined in this way is easy to measure using the system.  Each coil $c$ is set to a current, with all other currents set to zero.  The change in the sensor reading $s$ then gives the matrix element $M_{sc}$. 
+The matrix defined in this way is easy to measure using the system.  Each coil $c$ is set to a unit current, with all other currents set to zero.  The change in the sensor reading $s$ then gives the matrix element $M_{sc}$. 
 
 
 \fig{Images/Mdiff3_31}{width =0.9\textwidth}{Color map of $\bm{M}$ measured using the scheme indicated in the text.  Horizontal axis indicates the various sensors, which are counted using the index $s$.  Vertical axis indicates the various coils, which are counted using the index $c$.  The color axis ($z$-axis) indicates the value of the matrix element.  Red elements indicate positive values while blue elements indicate negative values.  Elements that appear white are near zero in the matrix element.\label{fig:m}}{Color map of $\bm{M}$}
