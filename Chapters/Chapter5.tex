@@ -590,7 +590,7 @@ tuned values were found to be $k_c^p=0.60$ and $k_c^i=0.37$.
 
 
 
-% For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figure. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figure. But, we couldn't determine the effect of having both of them at a time. So, keeping $k_c^i$ as 0.52 and excluding P term i.e. $k_c^p$=0.0 we run the same measurement again and the results are shwon in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(b)}. As as matter of surprise, there is hardly any difference between the results in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(a)} and Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(b)}. Why is that so ? For the moment, the Fig.~\ref{fig:tuned_vs_i} suggests that may be we don't need P term at all or maybe we need different tuning methods. So, applying P and I term at a time raises question of the necessity of the P term or importance of the tuning method describe in Section~\ref{sec:tune}. Due to lack of time, we did not further go into other tuning methods. Rather we have tried to discover the differences in the work between Ref.~\cite{bea} and Ref.~\cite{rawlik}.
+% For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figure. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figure. But, we could not determine the effect of having both of them at a time. So, keeping $k_c^i$ as 0.52 and excluding P term i.e. $k_c^p$=0.0 we run the same measurement again and the results are shwon in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(b)}. As as matter of surprise, there is hardly any difference between the results in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(a)} and Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(b)}. Why is that so ? For the moment, the Fig.~\ref{fig:tuned_vs_i} suggests that may be we don't need P term at all or maybe we need different tuning methods. So, applying P and I term at a time raises question of the necessity of the P term or importance of the tuning method describe in Section~\ref{sec:tune}. Due to lack of time, we did not further go into other tuning methods. Rather we have tried to discover the differences in the work between Ref.~\cite{bea} and Ref.~\cite{rawlik}.
 
 
 
@@ -773,7 +773,7 @@ the unregularized and regularized pseudoinverse, they do not solve the
 problem of ill-conditioning: the matrix must still be regularized or
 the current fluctuations driven by the compensation system would be
 unacceptably large.  Even with significant changes in the fluxgate
-positions ({\it e.g.}~corners vs.~center faces) the condition number
+positions (for example~corners vs.~center faces) the condition number
 changes at most by a factor of three in the unregularized
 pseudoinverse and a factor of $<2$ for the regularized pseudoinverse.
 Interestingly, even if a large number of sensors are included ({\it
@@ -903,7 +903,7 @@ behavior of the multidimensional PI control loop:
 \item the magnetic response of the magnetic shield to changes in coil-cube currents (in turn enabling us to determine $\bm{M}$), and
 \item the magnetic response of the magnetic shield to the perturbation coil (in turn allowing us to simulate the PI system response to this perturbation.
 \end{enumerate}
-\item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into {\it e.g.}~the matrix $\bm{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
+\item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into for example~the matrix $\bm{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
 \item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed me to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
 \end{enumerate}
 As will be shown, these simulations were quite successful at
@@ -1017,7 +1017,7 @@ analysis, I used the TOSCA magnetostatic module of OPERA.  I set the
 numerical solution convergence tolerance to be $1\times10^{-13}$.
 
 Once the solution for a single energize coil was completed, the field
-map was outputted to a file using the the post-processor of OPERA.
+map was outputted to a file using the post-processor of OPERA.
 The unit of the magnetic field was set to be T, and I used the GRID
 command which evaluates the fields over a uniform 3D grid. The grid
 started from $-62$~cm in $x$, $y$ and $z$ co-ordinates with an
@@ -1509,7 +1509,7 @@ the correspondence between the two methods will be discussed.
 % \subsubsection{Condition Number Effect of changing PI term combined}
 % Finally, the Section~\ref{sec:pi_behave_m} will be ended here with the discussion of the condition number effect on changing P and I term at a time which will complete the Eq.~(\ref{eq:I}).
 
-% Here, first the P and I term have been tuned following the discussion on Section~\ref{sec:tune} which has generated $k_c^p$=0.43 and $k_c^i$=0.52 . The results by applying $k_c^p$ and $k_c^i$ as those tuned values are shown in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(a)}. For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figure. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figure. But, we couldn't determine the effect of having both of them at a time. So, keeping $k_c^i$ as 0.52 and excluding P term i.e. $k_c^p$=0.0 we run the same measurement again and the results are shwon in Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(b)}. The results of Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(a)} are similar to that of Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(b)} which is also true for low condition number as discussed in Section~\ref{sec:pi_behave}. 
+% Here, first the P and I term have been tuned following the discussion on Section~\ref{sec:tune} which has generated $k_c^p$=0.43 and $k_c^i$=0.52 . The results by applying $k_c^p$ and $k_c^i$ as those tuned values are shown in Fig.~\ref{fig:tuned_vs_i}\textcolor{blue}{(a)}. For simplicity instead of showing all the drift $\Delta B$ for all the fluxgate sensors for the positions given in the horizonatal axis of Fig.~\ref{fig:m}, only '1x' is shown on the right of the figure. And same as earlier the currents  that are being sent to the coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) shown on the left of the same figure. But, we could not determine the effect of having both of them at a time. So, keeping $k_c^i$ as 0.52 and excluding P term i.e. $k_c^p$=0.0 we run the same measurement again and the results are shwon in Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(b)}. The results of Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(a)} are similar to that of Fig.~\ref{fig:tuned_vs_i_m}\textcolor{blue}{(b)} which is also true for low condition number as discussed in Section~\ref{sec:pi_behave}. 
 
 % \doublefig{Images/p43i52}{width =\textwidth,height =8cm}{at $k_c^p$=0.43 and $k_c^i$=0.52. \label{fig:pi_tuned_m}}{Images/i52}{width = \textwidth,height =8cm}{at $k_c^p$=0.0 and $k_c^i$=0.52..\label{fig:i52m}}{{Currents (left vertical axis) in all six coil sides ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) with drift $\Delta B$ (right vertical axis) at sensor position '1x' for combine different values of $k_c^i$ and $k_c^p$ ( see Eq.~(\ref{eq:I}) ). Blue color curve denotes the actual drift in signal at position '1x' found by Eq.~(\ref{eq:del_B}), while the red curve denotes the drift that would have been without the compensation. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. For position of coils and fluxgate sensor see Fig.~\ref{fig:coil}.} \label{fig:tuned_vs_i_m}}{short}
 
@@ -1525,7 +1525,7 @@ the correspondence between the two methods will be discussed.
 % \item Consider showing a study where you change P\& I to try to compensate?
 % \item We tried this but it didn't work.  Data?  Or simulation?
 % \item Lower r seems better Fig.~5.13(a), but what I remember is that when we did that it made the B-noise worse.  Seems like an overcorrected system.  Setting P\& I lower to try to compensate the overcorrection I think made the system slower again (?)
-% \item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also doesn't help because it induces HF noise and setting PI large again induces slow response.
+% \item Basic conclusion:  If r or cond is bad (too big) then no amount of PI tuning will help speed up the current drifting.  If r set falsely low, it also does not help because it induces HF noise and setting PI large again induces slow response.
 % \end{itemize}
 
 The discussion on Section~\ref{sec:pi_behave} suggests that the
@@ -1573,7 +1573,7 @@ disappears, but the feedback system introduces high frequency noise.
 
 It is natural that $r$ should affect the PI control, because the error
 function involves $\bm{M^{-1}}$ and therefore $r$ (see
-{\it e.g.}~Eqs.~(\ref{eq:del_I}), (\ref{eq:I}), and (\ref{eq:minvR})).  If
+for example~Eqs.~(\ref{eq:del_I}), (\ref{eq:I}), and (\ref{eq:minvR})).  If
 $r$ is larger then $\bm{M^{-1}}$ generally gets small.  So, it would be
 reasonable to expect that if $r$ increases then we need to increase
 both $k_c^p$ and $k_c^i$ accordingly (see Eq.~(\ref{eq:I})).
@@ -1909,20 +1909,20 @@ compensation apparatus.
 
 The basis of the ``new'' feedback algorithm is presented in
 Ref.~\cite{rawlik} as providing an updated version of current
-$\vec{I^{n+1}}$ which is based on the current determined by the previous
-step $\vec{I^n}$.  The equation to be used to find the next current in the
+$\vec{I}^{n+1}$ which is based on the current determined by the previous
+step $\vec{I}^{n}$.  The equation to be used to find the next current in the
 new algorithm is
 \begin{equation}\label{eq:I_raw}
-    \vec{I^{n+1}}= \vec{I^n}+\bm{M^{-1}} (\vec{B_{\rm setpoint}}-\vec{B_{\rm
-    measure}^n})=\vec{I^n}+\bm{M^{-1}} \Delta \vec{B^n}
+    \vec{I}^{n+1}= \vec{I}^{n}+\bm{M^{-1}} (\vec{B}_{\rm setpoint}-\vec{B}_{\rm
+    measure}^n)=\vec{I}^{n}+\bm{M^{-1}} \Delta  \vec{B}^{n}
 \end{equation}
 which is taken directly from Eq.~\textcolor{blue}{(28)} in Section~\textcolor{blue}{5.5} of
-Ref.~\cite{rawlik}. In this equation, $\Delta \vec{B^n}$ is a vector of
+Ref.~\cite{rawlik}. In this equation, $\Delta  \vec{B}^{n}$ is a vector of
 magnetic field values measured in the given feedback step.  The
 dimension is equal to the number of fluxgate axes being used for
 control (12 in my case).  The quantity $\bm{M^{-1}}$ is the Moore-Penrose
 pseudoinverse (a $6\times 12$ non-square matrix, in my case).  The
-quantity $\vec{I^n}$ are a vector of currents (dimension 6, in my case).
+quantity $\vec{I}^{n}$ are a vector of currents (dimension 6, in my case).
 The index $n$ refers to the values as of the present feedback step.
 The index $n+1$ on the left-hand-side of the equation is indicating
 the next vector of currents that will be set based on this feedback
@@ -1942,7 +1942,7 @@ errors.
 %  or with
 %a delay like -
 %\begin{equation}\label{eq:I_raw_delay}
-%    \vec{I^{n+1}}= \vec{I^{n-2}}+\bm{M^{-1}} (B_{setpoint}-B_{measure}^n)=\vec{I^{n-2}}+\bm{M^{-1}} \Delta B^n
+%    \vec{I}^{n+1}= \vec{I^{n-2}}+\bm{M^{-1}} (B_{setpoint}-B_{measure}^n)=\vec{I^{n-2}}+\bm{M^{-1}} \Delta B^n
 %\end{equation}
 
 I implemented the new feedback algorithm into my code to test it.
@@ -1962,7 +1962,7 @@ results.
 
 In the case of $k_c^p=0$ and $k_c^i=1$, the PI feedback algorithm in Eq.~(\ref{eq:I}) can be written as
 \begin{equation}\label{eq:I_raw_eq}
-    \vec{I^{n+1}}= \vec{I^0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B^i}
+    \vec{I}^{n+1}= \vec{I}^{0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B}^{i}
 \end{equation}
 where the same matrix and vector notation is being used as in
 Eq.~(\ref{eq:I_raw}).
@@ -1974,15 +1974,15 @@ implementations are mathematically equivalent.
 Suppose that Eq.~(\ref{eq:I_raw_eq}) is true.  It will also have been
 true for the previous step $n\rightarrow n-1$
 \begin{equation}\label{eq:nminus1}
-    \vec{I^n}= \vec{I^0}+\sum_{i=0}^{n-1} \bm{M^{-1}}\Delta \vec{B^i}.
+    \vec{I}^{n}= \vec{I}^{0}+\sum_{i=0}^{n-1} \bm{M^{-1}}\Delta \vec{B}^{i}.
 \end{equation}
 Eq.~(\ref{eq:I_raw_eq}) can then be rewritten by removing the final
 term from its sum, then applying Eq.~(\ref{eq:nminus1}):
 \begin{equation}
 \begin{split}
-\vec{I^{n+1}}&=\vec{I^0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B^i}\\
-&=\vec{I^0}+\sum_{i=0}^{n-1}\bm{M^{-1}}\Delta \vec{B^i}+ \bm{M^{-1}}\Delta \vec{B^n}\\
-&=\vec{I^n}+ \bm{M^{-1}}\Delta \vec{\vec{B^n}}
+\vec{I}^{n+1}&=\vec{I}^{0}+\sum_{i=0}^n \bm{M^{-1}}\Delta \vec{B}^{i}\\
+&=\vec{I}^{0}+\sum_{i=0}^{n-1}\bm{M^{-1}}\Delta \vec{B}^{i}+ \bm{M^{-1}}\Delta  \vec{B}^{n}\\
+&=\vec{I}^{n}+ \bm{M^{-1}}\Delta \vec{B}^{n}
 \end{split}
 \end{equation}
 which is just Eq.~(\ref{eq:I_raw}).  This was further confirmed by
@@ -2006,7 +2006,7 @@ their active magnetic compensation system, it was logically more
 correct to use the current from three steps prior to make the
 correction for the $n+1$ step
 \begin{equation}\label{eq:I_raw_delay}
-    \vec{I^{n+1}}= \vec{I^{n-2}}+\bm{M^{-1}} \Delta \vec{B^{n-2}}
+    \vec{I}^{n+1}= \vec{I}^{n-2}+\bm{M^{-1}} \Delta \vec{B}^{n-2}
 \end{equation}
 (which is Eq.~\textcolor{blue}{(30)} in Section~\textcolor{blue}{5.5} of
 Ref.~\cite{rawlik}).  This could also be
@@ -2404,7 +2404,7 @@ results.
 
 \fig{Images/diag_comb}{width=\textwidth,height=5.5cm}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
 $\bm{M}$ for the available 12 fluxgate axes and for (a) 5 coils,
-where the the $C_x^\pm$ coils are required to carry the same current,
+where the $C_x^\pm$ coils are required to carry the same current,
 and (b) 6 coils which, are permitted to carry any
 current.\label{fig:diag_comb}}{Experimental results for the
 $\bm{\Sigma}$ matrix.}
@@ -2457,7 +2457,7 @@ experimental geometrical imperfections.
 
 
 
-\fig{Images/5c_z}{width=\textwidth}{Five-coil feedback algorithm, where the the currents $C_z^+$ and $C_z^-$ are required to be a common current $C_z^\pm$.  Tikhonov regularization of the pseudoinverse has been done, although the results would be very similar even without this.  All other parameters are the same as for Fig.~\ref{fig:coil_reg}.\label{fig:5c_z}}{Five-coil feedback results for common $C_z^\pm$ configuration.}
+\fig{Images/5c_z}{width=\textwidth}{Five-coil feedback algorithm, where the currents $C_z^+$ and $C_z^-$ are required to be a common current $C_z^\pm$.  Tikhonov regularization of the pseudoinverse has been done, although the results would be very similar even without this.  All other parameters are the same as for Fig.~\ref{fig:coil_reg}.\label{fig:5c_z}}{Five-coil feedback results for common $C_z^\pm$ configuration.}
 
 In Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}, it was shown that the dominant current
 response to the excitation coil was in the $C_z^+$ coil.  The reason
@@ -2504,7 +2504,7 @@ Not surprisingly, the conclusions were the same.
 \fig{Images/diag_comb_shield}{width=\textwidth,height=5.5cm}{Color map of diagonal matrix
 $\bm{\Sigma}$ with the magnetic shield in place found by SVD of
 experimentally measured $\bm{M}$ for the available 12 fluxgate axes
-and for (a) 5 coils, where the the $C_x^\pm$ coils are required to
+and for (a) 5 coils, where the $C_x^\pm$ coils are required to
 carry the same current, and (b) 6 coils which, are permitted to carry
 any current.\label{fig:diag_comb_shield}}{Experimental results for the
 $\bm{\Sigma}$ matrix with the magnetic shield in place.}
@@ -2813,7 +2813,7 @@ sensors.
 %\item Acquire ``natural'' fluctuations examples, with no perturbations.
 %\begin{itemize}
 %\item Feedback off.  This should give an idea of some ``typical'' fluctuations and typical Allan Deviations in nT.
-%\item Feedback on.  The shielding factor doesn't have to always be greater than one.  In fact it might be good to compare a ``noisy'' case to a ``quiet'' case.  It is possible that in some extremely quiet case you might do better by not doing anything.
+%\item Feedback on.  The shielding factor does not have to always be greater than one.  In fact it might be good to compare a ``noisy'' case to a ``quiet'' case.  It is possible that in some extremely quiet case you might do better by not doing anything.
 %\end{itemize}
 %\item For the current ramping example, show all the currents, including the perturbation coil current if possible.
 %\item For the same kpc and kpi, show what the response of the system is to step function in perturbation coil.
@@ -2857,7 +2857,7 @@ In order to ensure that the feedback system will not induce noise at
 higher frequencies, I retuned the PI parameters, resulting in
 reasonable values of $k_c^p=0.1$ and $k_c^i=0.37$.  The reponse of the
 system to a step perturbation with this retuning is shown in
-Fig.~\ref{fig:p10_i37_x}.  The main feature to be observed is the the
+Fig.~\ref{fig:p10_i37_x}.  The main feature to be observed is the
 coil currents do not experience and overshoot and appear more like a
 critically damped solution than in the previous sections.  This does
 not have much effect on the long-time behavior of the system, and
