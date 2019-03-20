@@ -64,27 +64,17 @@ current response in the compensation coils. We did different
 experiments with different parameters for understanding the problem
 and figure out the solution. The system was made faster by introducing
 filter which enabled us to change the sample frequency without adding
-noise. The effect of the filter on increasing loop
-sampling frequency and noise reduction are discussed in
+noise. The effect of the filter are discussed in
 Section~\ref{sec:freq}. The general behaviour
 of P and I terms and their impact are
 discussed in Section~\ref{sec:pi_behave}. The study
 revealed that I term is responsible for current unsettle problem in the
 coils. We added more fluxgates, change the positions
-of the fluxgates to understand the current unsettle problem which is
-discussed in Section~\ref{sec:flux_place}. As the fluxgate
-placements study did not give us any clue we removed the passive
-shield but that made no difference . We then motivated to build a
+of the fluxgates and also removed the passive shield but that made no difference. The studies are discussed in Section~\ref{sec:flux_place}. We then motivated to build a
 simulation of the prototype. The simulation of the prototype
 integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
 similarity between the experiment and simulation is shown. We changed $r$ keeping P
-and I term fixed. We discovered that the current drifting problem could be solved by lowering the value of $r$, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In
-Section~\ref{sec:cond}, an alternative to the method discussed in Section~\ref{sec:mont} is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with our existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms are discussed in Section~\ref{sec:style_pi}. We realized that matrix for the prototype was ill
-conditioned because one of of the current modes was producing zero net
-current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle
-discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics
-that have been discussed in Section~\ref{sec:metrics} are presented in
-Section~\ref{sec:metrics_res}. 
+and I term fixed. The current drifting problem could be solved by lowering the value of $r$, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms are discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
 
 New directions for future studies are presented in
 Chapter~\ref{ch:conclusion}.
