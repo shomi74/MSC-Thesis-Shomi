@@ -314,7 +314,7 @@ Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$ for our measured $\bm
 % \textcolor{red}{\bf{********************End************************}}
 
 % The condition number of $\bm{M}$ being large therefore indicates that problematic modes exist which will have practically no control on the magnetic field.
-In Section~\ref{sec:coil_config}, I analyze this effect further in both simulation and experiment. For now, I present the strategy of Ref.~\cite{bea} which I followed initially which involves matrix regularization.
+In Section~\ref{sec:coil_config}, this effect has been analyzed further in both simulation and experiment. For now, the strategy of Ref.~\cite{bea} is presented which I followed initially. The strategy involves matrix regularization.
 
 Regularization methods help to reduce the dominance of singular vectors corresponding to small singualr values. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is a commonly used regularization method which solves the problem by minimizing 
 
@@ -322,7 +322,7 @@ Regularization methods help to reduce the dominance of singular vectors correspo
 \begin{equation}\label{eq:tikhonov}
     ||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2+{\alpha}^2||\Delta\Vec{I}||_2^2
 \end{equation}
-where $||\cdot ||_2$ is the Euclidean norm rather than $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ as done by the Moore--Penrose pseudo-inverse. Tikhonov regularization tries to make a compromise between $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ and $||\Delta\Vec{I}||_2^2$ so that both of them are smaller. Tikhonov regularization makes that possible by introducing a filter $\alpha$ which sets the relative importance of the two terms. The filter $\alpha$ modifies the diagonal elements of $\bm{\Sigma^{-1}}$ from Eq.~(\ref{eq:psMinv}) as
+where,  $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ is due to the Moore--Penrose pseudo-inverse. Here, $||\cdot ||_2$ is the Euclidean norm. Tikhonov regularization tries to make a compromise between $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ and $||\Delta\Vec{I}||_2^2$ so that both of them are smaller. Tikhonov regularization makes that possible by introducing a filter $\alpha$ which sets the relative importance of the two terms. The filter $\alpha$ modifies the diagonal elements of $\bm{\Sigma^{-1}}$ from Eq.~(\ref{eq:psMinv}) as
 
 \begin{equation}\label{eq:minvR}
     \frac{1}{\Sigma_{ii}} \rightarrow \frac{\Sigma_{ii}}{\Sigma_{ii}^2+\alpha^2} 
@@ -341,7 +341,7 @@ and, the singular values thereby become equalized.
 The value of $r$ may be selected using several iterative methods. The obtained $r$ can be directly used in feedback algorithm to determine $\bm{M^{-1}}$. Because $\bm{M^{-1}}$ appears in the definition of the error in current (Eq.~(\ref{eq:del_I})), it has also an effect on the PI parameters. The PI parameters can be tuned in concert with $r$ by observing the effect on current response and this is studied further in Section~\ref{sec:r_pi}.
 
 
-An iterative method has been discussed in the previous study~\cite{bea} to find $r$. I applied this concept to my system which will be discussed next.
+An iterative method has been discussed in the previous study~\cite{bea} to find $r$. This concept was applied to our system which will be discussed next.
 
 % %\FloatBarrier
 
@@ -401,7 +401,7 @@ For a perfectly compensated system, the field produced by $ \Delta I_c^{\text{si
 \begin{equation}\label{eq:fluc}
     F(r)=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_s^{\text{sim}}(r))^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (B_s^{\text{rand}}(r))^2}}
 \end{equation}
-The function $F(r)$ would be zero for a perfectly compensated system and unity for an uncompensated system. In Ref.~\cite{bea}, $F(r)$ is called the ``remaining noise". The values of $F(r)$ shown in Fig.~\ref{fig:fluc-sim} are for the same sets of $B_s^{\text{rand}}$ used in Fig.~\ref{fig:Isim}. It is seen that with the increase of $r$, the field produced by $\Delta I_c^{\text{sim}}$ to compensate $B_s^{\text{rand}}$  are increasing resulting in more field fluctuations. It is also noticeable that the system cannot be fully compensated because $F(r)$ never goes to zero. The lowest $F(r)$ is 0.45, indicating the system will not be terribly successful at correcting random fluctuations. We think this is mainly due to the limited coil design used for this prototype, which was designed instead to focus on issues in multi-dimensional PI control.
+The function $F(r)$ would be zero for a perfectly compensated system and unity for an uncompensated system. In Ref.~\cite{bea}, $F(r)$ is called the ``remaining noise". The values of $F(r)$ shown in Fig.~\ref{fig:fluc-sim} are for the same sets of $B_s^{\text{rand}}$ used in Fig.~\ref{fig:Isim}. It is seen that with the increase of $r$, the field produced by $\Delta I_c^{\text{sim}}$ to compensate $B_s^{\text{rand}}$ increases, resulting in more field fluctuations. It is also noticeable that the system cannot be fully compensated because $F(r)$ never goes to zero. The lowest $F(r)$ is 0.45, indicating the system will not be terribly successful at correcting random fluctuations. We think this is mainly due to the limited coil design used for this prototype, which was designed instead to focus on issues in multi-dimensional PI control.
 
 \fig{Images/6c_f}{width =0.8\textwidth}{The effect of $r$ on the effectiveness of field compensation indicated by the remaining fluctuation $F(r)$. The different curves indicate 30 different sets of $B_s^{\text{rand}}$. \label{fig:fluc-sim}}{The effect of $r$ on remaining fluctuations.}
 
@@ -417,7 +417,9 @@ It is seen from Figs.~\ref{fig:Isim} and \ref{fig:fluc-sim} that with the increa
 
 %\FloatBarrier
 The effect of $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ and $\overline{F}$ is shown in Fig.~\ref{fig:I-fluc}. With an increase in $r$, $\overline{\Delta I_{\text{RMS}}^{\text{sim}}}$ decreases and $\overline{F}$ increases as expected from the discussion earlier.
-Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($=30$). The optimized $r$ in the example of Fig.~\ref{fig:I-fluc} is found to be 2.87.
+Two values of $r$ were then found for each $B_s^{\text{rand}}$ by alternatively setting $r$ on $\overline{\Delta I_{\text{RMS}}^{\text{sim}}(r)}$ and $\overline{F(r)}$=0.5. This is indicated schematically by the horizontal line in Fig.~\ref{fig:I-fluc}. The values of $r$ so determined are averaged over a large number of $B_s^{\text{rand}}$ ($=30$). The optimized $r$ in the example of Fig.~\ref{fig:I-fluc} is found to be 2.87.
+
+%  The values of $r$ so determined are averaged and in turn the averages are averaged over a large number of $B_s^{\text{rand}}$ ($=30$).
 
 The calculation to find $r$ gives insight about the effect of regularization on current and field fluctuations, resulting in a compromise that adequately reduces both. With $r$ in hand, $\bm{M^{-1}}$ and thus the current error may be determined which is used in the PI algorithm.
 
@@ -425,7 +427,10 @@ The calculation to find $r$ gives insight about the effect of regularization on 
 This section describes the tuning of the proportional gain $k_c^p$ and integral reset $k_c^i$ terms appearing in Eq.~(\ref{eq:I}) to compensate the changes in magnetic fields measured by the fluxgate sensors.
 
 % According to the type of system and the way the control loop for a particular system has been chosen, 
-The PI parameters can be tuned using various methods~\cite{tuning}. A common tuning method is Ziegler-Nichols closed tuning method~\cite{tuning_ZN}. I usually used this method as an initial guess for the PI parameters. In the Ziegler-Nichols method, $k_c^i$ is first set to zero and $k_c^p$ is increased until the currents in the coils start oscillating. The $k_c^p$ value for which the current in the coils start oscillating is denoted the ultimate gain $G_{u}$ and the period of the oscillation is denoted the ultimate oscillation period $T_u$. The value of $k_c^p$ and $k_c^i$ are then determined based on the PI row of Table~\ref{table:tuning}. Table~\ref{table:tuning} is a modified version of the Table~\textcolor{blue}{4} in Ref.~\cite{tuning_formula} where the formula for integral time $T_i=T_u/1.2$ has been used. 
+The PI parameters can be tuned using various methods~\cite{tuning}. A common tuning method is Ziegler-Nichols closed tuning method~\cite{tuning_ZN}. I usually used this method as an initial guess for the PI parameters. In the Ziegler-Nichols method, $k_c^i$ is first set to zero and $k_c^p$ is increased until the currents in the coils start oscillating. The $k_c^p$ value for which the current in the coils start oscillating is denoted the ultimate gain $G_{u}$ and the period of the oscillation is denoted the ultimate oscillation period $T_u$. The value of $k_c^p$ and $k_c^i$ are then determined based on the PI row of Table~\ref{table:tuning}. Table~\ref{table:tuning} is a modified version of the Table~\textcolor{blue}{4} in Ref.~\cite{tuning_formula} where the formula for integral time $T_i=T_u/1.2$ has been used. In Ref.~\cite{tuning_formula}, it is also mentioned that $k_c^i=(k_c^p/T_i)$ which for our case will be $k_c^i=(k_c^p/T_i)\Delta t$, where, $\Delta t$ is the time to complete one feedback loop iteration. So, the parameter $k_c^i$ derived of Ziegler-Nichlos tuning obtained for our case is 
+\begin{equation}
+    k_c^i=\left(\frac{k_c^p}{T_u/1.2}\right)\Delta t=\left(\frac{1.2\times0.45 G_u}{T_u}\right)\Delta t=\left(\frac{0.54 G_u}{T_u}\right)\Delta t~\text{.}
+\end{equation}
 
 \begin{table} [htb!]
     \centering
@@ -448,7 +453,7 @@ The PI parameters can be tuned using various methods~\cite{tuning}. A common tun
 %     k_c^i=\left(\frac{k_c^p}{T_u/1.2}\right)\Delta t=\left(\frac{1.2\times0.45 G_u}{T_u}\right)\Delta t=\left(\frac{0.54 G_u}{T_u}\right)\Delta t
 % \end{equation}
 
-The quantity $\Delta t$ in Table~\ref{table:tuning} is the time to complete one feedback loop iteration.
+% The quantity $\Delta t$ in Table~\ref{table:tuning} is the time to complete one feedback loop iteration.
 
 \fig{Images/p134c1}{width =0.9\textwidth}{Zoomed current behaviour in coil $C_x^+$ with $k_c^p$ =1.34 and $k_c^i$=0. Vertical axis represent the currents in coil $C_x^+$ with initial current being 100 mA. For position of the coil see Fig.~\ref{fig:coil}. \label{fig:tuning}}{Zoomed current behaviour in coil $C_x^+$.}
 % in response to the perturbation coils
@@ -458,7 +463,7 @@ Figure~\ref{fig:tuning} shows the first step in the tuning process. For simplici
 \begin{equation}
     k_c^p=0.45\times1.34=0.60\;\;\text{and}\;\; k_c^i=\left(\frac{0.54 \times1.34}{0.287}\right)\times0.146=0.37
 \end{equation}
-They can be further tuned for the individual coil currents if necessary but we elected not to study this. In general, we treated them as free parameters and studied the impact of changing them on system response. More about PI tuning will be discussed in the next chapter with compensation results.
+They can be further tuned for the individual coil currents if necessary but we chose not to study this. In general, we treated them as free parameters and studied the impact of changing them on system response. More about PI tuning will be discussed in the next chapter with compensation results.
 
 
 
@@ -482,7 +487,7 @@ They can be further tuned for the individual coil currents if necessary but we e
 
 \section{Quantitative Measures of Magnetic Compensation Performance\label{sec:metrics}}
 % For every system, there are some metrics, which quantitatively determine the system's performance. The success of the prototype has been claimed similarly. 
-I considered three main metrics, which are based on previous studies of others~\cite{bea,lins,rawlik}. They are the following:
+Three main metrics were considered, which are based on previous studies of others~\cite{bea,lins,rawlik}. They are the following:
 
 \begin{enumerate}
     \item Condition Number,
@@ -541,9 +546,9 @@ The RMS current change and RMS field change for both the measurement and in the 
 
 The remaining fluctuations can also be quantified experimentally
 \begin{equation}\label{eq:fluc_exp}
-   F(\mathrm{exp})=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} \Delta B_s(\text{meas})^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (\Delta B_s(\text{uncomp})^2}}
+   F(\mathrm{exp})=\frac{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (\Delta B_s(\text{meas}))^2}}{\sqrt{\frac{1}{12} \sum_{s=1}^{12} (\Delta B_s(\text{uncomp}))^2}}
 \end{equation}
-where, $\Delta B_s(\text{meas})$ and $\Delta B_s(\text{uncomp})$ measured step changes in the measured and uncompensated magnetic fields, respectively, under application of the perturbation coil current.
+where, $\Delta B_s(\text{meas})$ and $\Delta B_s(\text{uncomp})$ represent step changes in the measured and uncompensated magnetic fields, respectively, under application of the perturbation coil current.
 
 \fig{Images/mont_exp}{width =0.9\textwidth}{Experimentally determined effect of $r$ on (left) RMS current change  and (right) remaining field fluctuations $F(\mathrm{exp})$ for $k_c^p=1.0$ and $k_c^i=0.0$. Fluxgates were located at positions 1, 2 and 7 in this study, and 100~mA current was supplied in the perturbation coil. \label{fig:mont_comp}}{The effect of $r$ for experimental setup.}
 
@@ -559,7 +564,7 @@ The Allan standard deviation \cite{allan} is used to test the time stability of 
 \begin{equation}\label{eq:adev}
     \sigma_{Adev} (\tau)=\sqrt{\frac{1}{2(N-1)}\sum_{l=1}^{N-1} \left(\overline{B_{l+1}}(\tau)-\overline{B_l}(\tau)\right)^2}
 \end{equation}
-where, $\overline{B_l}(\tau)$ is the average magnetic field for a subset $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ the total measurement time, and $N$ the total number of subsets. The Allan standard deviation $\sigma_{Adev}$ depends on $\tau$ as follows: $\sigma_{Adev}\approx$1/$\sqrt{\tau}$ indicates the data are statistically distributed with the same mean in the values; $\sigma_{Adev}\approx \sqrt{\tau}$ indicates a random walk in the values; and $\sigma_{Adev}\approx \tau$ indicates a linear drift~\cite{allan_tau}. 
+where, $\overline{B_l}(\tau)$ is the average magnetic field for a subset $l$ over integration time $\tau$ and $\tau = \frac{T}{N}$ with $T$ the total measurement time, and $N$ the total number of subsets. \textcolor{red}{The Allan standard deviation $\sigma_{Adev}$ depends on $\tau$ as follows: $\sigma_{Adev}\propto$1/$\sqrt{\tau}$ indicates the data are statistically distributed with the same mean in the values; $\sigma_{Adev}\approx \sqrt{\tau}$ indicates a random walk in the values; and $\sigma_{Adev}\approx \tau$ indicates a linear drift~\cite{allan_tau}. }
 
 \fig{Images/sf_b}{width =0.9\textwidth}{ (top) Field fluctuations $\Delta B$ for sensor 8x with the feedback switched off, (bottom) corresponding Allan standard deviation. Red horizontal lines represent $\overline{B_l}(\tau)$ for 8 subsets over integration time $\tau=128$~s separated by the vertical dashed lines. \label{fig:sf_mod}}{The Allan deviation.}
 
