@@ -68,13 +68,13 @@ noise. The effect of the filter are discussed in
 Section~\ref{sec:freq}. The general behaviour
 of P and I terms and their impact are
 discussed in Section~\ref{sec:pi_behave}. The study
-revealed that I term is responsible for current unsettle problem in the
-coils. We added more fluxgates, change the positions
+revealed that I term was responsible for current unsettle problem in the
+coils. We added more fluxgates, changed the positions
 of the fluxgates and also removed the passive shield but that made no difference. The studies are discussed in Section~\ref{sec:flux_place}. We then motivated to build a
 simulation of the prototype. The simulation of the prototype
 integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
-similarity between the experiment and simulation is shown. We changed $r$ keeping P
-and I term fixed. The current drifting problem could be solved by lowering the value of $r$, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms are discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
+similarity between the experiment and simulation is shown. The current drifting problem could be solved by lowering the value of $r$ keeping P
+and I term fixed, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms are discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
 
 New directions for future studies are presented in
 Chapter~\ref{ch:conclusion}.
@@ -168,7 +168,7 @@ Chapter~\ref{ch:conclusion}.
 In Chapter~\ref{ch:amcP}, I discussed new low-pass analog Butterworth
 filters which I built and implemented into the system.  The filters
 were designed with 10~Hz corner frequency with the goal to remove
-high-frequency noise.  This would allow the ADC to operate with less
+high-frequency noise.  This would allow the ADC to operate with shorter
 averaging, increasing its effective sampling frequency (denoted by the
 ``resolution index'' in Table~\ref{table:t7freq}).  The filter gives
 us more freedom in terms of
@@ -269,7 +269,7 @@ reduce the noise.
 %\item Main point:  loop cycle rate is good!  $\sim$ 15x faster.  Even plenty of time for additional averaging to reduce noise further.  Likely the same result if somewhat higher resolution index used, possibly even with reduced software averaging.
 %\end{itemize}
 
-\fig{Images/samp_freq_iteration}{width=\textwidth,height=8cm}{Magnetic field at sensor position 1y using resolution index 1 with 50 software averages per cycle (left) and resolution index 12 (right) when the active magnetic compensation system is switched on.  Blue curves:  measured field change $\Delta B$.  Red curves:  predicted uncompensated field change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_iteration}}{Active magnetic field compensation at sensor position 1y.}
+\fig{Images/samp_freq_iteration}{width=\textwidth,height=8cm}{Magnetic field at sensor position 1y using resolution index 1 with 50 software averages per cycle (left) and resolution index 12 (right) when the active magnetic compensation system is switched on.  Blue curves:  measured field change $\Delta B$.  Red curves:  predicted uncompensated field (Eq.~(\ref{eq:Buncomp})) change. Vertical dashed lines indicate the time of the perturbation coil being turned on and off. \label{fig:samp_freq_iteration}}{Active magnetic field compensation at sensor position 1y.}
 
 Figure~\ref{fig:samp_freq_iteration} shows an example of using the
 filters with the active compensation system switched on (left).  Only
@@ -308,8 +308,7 @@ result displaying the current in one of the 6 coils and the field in
 one of the 14 fluxgate axes, when the resolution index is changed.
 For each case, 50 software averages have always been done in the
 feedback loop, further reducing the loop cycle rate.  Increasing the
-resolution index slows the response of the system, and most notably
-the current response time increases.  For example, it takes $\sim 7$~s
+resolution index slows the response of the system, and most notably increases the current response time. For example, it takes $\sim 7$~s
 for the $C_x^-$ coil current to settle after the perturbation coil is
 switched on when the loop sampling frequency is 6.35 Hz. It is also
 seen that the loop cycle rate slows to 1.1 Hz and 0.39 Hz by
@@ -347,8 +346,7 @@ field, averaged over that cycle.
 
 The tuning method of proportional gain $k_c^p$ (P) and integral reset
 $k_c^i$ (I) have been discussed in Section~\ref{sec:tune}, for example
-in Eq.~(\ref{eq:I}).  This Section describes the effect of changing P
-and I term individually and together on feedback system performance.
+in Eq.~(\ref{eq:I}).  This Section describes the effect of changing the P and I terms on feedback system performance when they are changed individually or together.
 
 A problem that became more apparent in the course of these studies was
 long-term drifting of the applied currents in the feedback system.  A
@@ -625,9 +623,9 @@ $k_c^i$=0.37 is used.
 
 The conclusion is that the P term has a smaller effect compared to the
 I term which is seen from comparing Fig.~\ref{fig:p_pi} with
-Fig.~\ref{fig:i_pi} and Fig.~\ref{fig:pi_i_mCond30}.  It is also clear
+Fig.~\ref{fig:i_pi} and Fig.~\ref{fig:pi_i_mCond30}.  \textcolor{red}{It is also clear
 that it is important to do some fine tuning of the PI parameters
-beyond Ziegler-Nichols in order to get the best feedback results.
+beyond Ziegler-Nichols in order to get the best feedback results.}
 
 Unfortunately, neither applying Ziegler-Nichols nor doing any
 additional tuning was able to change the current drifting problem.
@@ -643,7 +641,7 @@ using the I term or combined PI tuning.
 Because of the current drifting problem, I changed a large number of
 parameters in order to try to determine its cause.  For example, one
 suspicion was that it could be due to malfunctioning power supplies
-that were themselves drifting, but that the feedback loop was
+that were themselves drifting, while the feedback loop was
 stabilizing.  This was ruled out by careful tests of the power
 supplies, and by running the system with a reduced number of axes of
 control.  For example, when only one axis of control was used, the
@@ -660,15 +658,15 @@ drifting problem.
 In Section~\ref{sec:pSim}, simulation results are presented and
 compared with the data.  It was at this point that we started to gain
 confidence that this was a true problem of multidimensional control,
-because, surprisingly (to us) the simulations agreed perfectly with
+because, surprisingly the simulations agreed perfectly with
 the data and even reproduced the current drifting problem.
 
-By the studying the simulation results and the conditioning of the
+By studying the simulation results and the conditioning of the
 matrix (Section~\ref{sec:cond}), we eventually determined that
 ill conditioning was the main problem.  The next several sections all
 follow this theme of developing a better understanding of
-multidimensional control and ultimately show that the simulation tools
-I developed are the best way to design the control system.
+multidimensional control and ultimately showing that the simulation tools
+we developed are the best way to design the control system.
 
 
 \section{Fluxgate Placements and Impact of Passive Shield}\label{sec:flux_place}
@@ -695,12 +693,12 @@ corners and center of each of the coil faces, and at various distances
 inside and outside the coil cube.  The conclusion of this study was
 that I could not change the condition number or the current drifting
 problem significantly.
-\item The slow current response might be due to magnetic responses that were slow.
+\item The slow current response might be due to slow magnetic responses.
 To address this, I tried removing the magnetic shielding system from
 the coil cube and re-tuning the system.  The conclusion of this study
 was that it also did not fix the problem.
 \end{enumerate}
-In this Section, the results of those studies are shown and discussed.
+In this Section, the results of these studies are shown and discussed.
 As will be shown in Section~\ref{sec:coil_config}, the problem
 originates from having too many degrees of freedom in the coil system
 itself.  Nonetheless these studies are important to show the process
@@ -768,7 +766,7 @@ the unregularized pseudoinverse) and the condition number of the
 regularized pseudoinverse are reported.  Two very similar
 regularization parameters $r$ and $r'$ are reported.  The
 regularization parameter $r'$ was determined by a new method I
-developed and the method will be discussed further in
+developed which will be discussed further in
 Section~\ref{sec:cond}.
 
 The positions of the fluxgates are defined by the numbers for corner
@@ -857,14 +855,14 @@ and my new method) agree.
 
 Fluxgate placements failed to solve the slow coil current response.
 Another hypothesis developed around this time was that increasing
-sampling frequency will solve the problem.  So, besides the advantages
+sampling frequency would solve the problem.  So, besides the advantages
 discussed in Section~\ref{sec:freq}, solving the slow current response
 time was also a motivation to build the filters as that would allow us
 to use the fastest sampling frequency of the ADC.  As can be seen in
 that Section, using the filter, we successfully reduced the response
 time but still suffered from current drifts over long timescales.
 
-Then we thought the passive shielding layer might have cause some
+Then we thought the passive shielding layer might have caused some
 slower response of the system, perhaps due to slow changes in the
 magnetization of the shield. To test if this affected the feedback and
 control system, I conducted tests where I removed the magnetic shield
@@ -923,7 +921,7 @@ behavior of the multidimensional PI control loop:
 \item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into for example~the matrix $\bm{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
 \item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed me to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
 \end{enumerate}
-As will be shown, these simulations were quite successful at
+As will be shown, these simulations were quite successful in
 describing the system including: the matrix $\bm{M}$ and its
 inverse, and the time-dependent response of the PI loop to
 perturbation.
@@ -975,7 +973,7 @@ coils, the module uses the Biot-Savart integral equation.
 \doublefig{Images/shield2}{width=\textwidth,height=8cm}{\label{fig:shield_opera}}{Images/noShield}{width=\textwidth,height=8cm}{\label{fig:noShield_opera}}{{Geometry in OPERA simulation (a) with passive shielding, and (b) without passive shielding.  The square in the back, appearing in both drawings, is the perturbation coil. The direction of each of the three axes may be seen in (b).} \label{fig:opera_setup}}{Prototype geometry in OPERA simulation}
 
 Figure~\ref{fig:opera_setup} shows the geometry as defined in OPERA,
-both with and without the magnetic shields present.  The dimensions of
+both with and without the magnetic shields.  The dimensions of
 the prototype passive shielding layers and the stove pipe were given
 in Table~\ref{table:mu-metal}.  These were implemented using simple
 cylindrical and planar shapes available in OPERA.  The dimensions of
@@ -989,7 +987,7 @@ also drawn near the shields to aid in meshing near the thin layers.
 The perturbation coil is 1.06~m away from the origin, which is at the
 center of the coil cube.
 
-All the information has been written in the {\tt comi} file format
+All the information has been written in the {\tt comi} format
 file which is the command language in OPERA. Another {\tt comi} file
 was made with no shield
 (Fig.~\ref{fig:opera_setup}\textcolor{blue}{(b)}) for simulation of
@@ -1037,7 +1035,7 @@ Once the solution for a single energize coil was completed, the field
 map was outputted to a file using the post-processor of OPERA.
 The unit of the magnetic field was set to be T, and I used the GRID
 command which evaluates the fields over a uniform 3D grid. The grid
-started from $-62$~cm in $x$, $y$ and $z$ co-ordinates with an
+started from $-62$~cm in $x$, $y$ and $z$ coordinates with an
 increment of 1~cm and ends at $+62$~cm which covers the full cube
 dimensions.  The output of the GRID command gives a text ({\tt csv})
 file with 6 columns, where the first 3 columns indicate the
@@ -1060,21 +1058,21 @@ the 6 coils.
 %     \item[$\blacksquare$] \textbf{Creation of Matrix M}
 % \end{itemize}
 
-% The advantage of simulation is that we have got 6 field maps for 6 coil sides which we can use to generate any dimensions of matrix $\bm{M}$ within the cube dimensions. For generating the matrix, we used the Python programming language where the fields maps are acted as input. We convert the fields maps into nT/A and depending on the co-ordinates of the points provided by us, the matrix is generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
+% The advantage of simulation is that we have got 6 field maps for 6 coil sides which we can use to generate any dimensions of matrix $\bm{M}$ within the cube dimensions. For generating the matrix, we used the Python programming language where the fields maps are acted as input. We convert the fields maps into nT/A and depending on the coordinates of the points provided by us, the matrix is generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
 
 
-% % The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the co-ordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined.
+% % The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the coordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined.
 
-% % And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the co-ordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
+% % And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the coordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
 % % \fig{Images/noShield}{width =\textwidth,height=14 cm}{Prototype setup in OPERA simulation software without passive shielding layers. \label{fig:noShield_opera}}
 
-% For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$ has been made by choosing co-ordinates of the points as same as the sensor positions in the experiment. Then the absolute differences between the experimental $M_{sc}$ elements with that of the simulation ones  are calculated as
+% For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$ has been made by choosing coordinates of the points as same as the sensor positions in the experiment. Then the absolute differences between the experimental $M_{sc}$ elements with that of the simulation ones  are calculated as
 
 % \begin{equation}
 %     |M_{sc}^{\text{diff}}|=|(|M_{sc}^{\text{exp}}|-|M_{sc}^{\text{sim}}|)|
 % \end{equation}
 % where, $|M_{sc}^{\text{exp}}|$ and $|M_{sc}^{\text{sim}}|$ indicate the absolute values of $M_{sc}$ elements both in experiment and simulation respectively.
-% The absolute differences $|M_{sc}^{\text{diff}}|$ have been shown in Fig. \ref{fig:Mdiff}. It is seen that most of $|M_{sc}^{\text{diff}}|$ differences are within 100 nT/A. But that in some of the positions the differences are very big. The reason is that it is very difficult to exactly pinpoint the locations both in experiment and simulation and also the simulation runs in ideal conditions where the experiment suffers from the condition of its surrounding. The differences can be made smaller by choosing different co-ordinates of the sensor positions. We are not that concerned about that because the $M_{sc}$ element due to a particular coil and sensor position has similar response pattern both in experiment and simulation. 
+% The absolute differences $|M_{sc}^{\text{diff}}|$ have been shown in Fig. \ref{fig:Mdiff}. It is seen that most of $|M_{sc}^{\text{diff}}|$ differences are within 100 nT/A. But that in some of the positions the differences are very big. The reason is that it is very difficult to exactly pinpoint the locations both in experiment and simulation and also the simulation runs in ideal conditions where the experiment suffers from the condition of its surrounding. The differences can be made smaller by choosing different coordinates of the sensor positions. We are not that concerned about that because the $M_{sc}$ element due to a particular coil and sensor position has similar response pattern both in experiment and simulation. 
 
 % \fig{Images/Mdiff_56}{width = \textwidth}{The absolute differences between the  experimental $M_{sc}$ elements with that of simulation in nT/A. Horizontal axis indicates the various sensors, which are counted using the index $s$. Vertical axis indicates the various coils, which are counted using the index $c$. The value of the elements are increasing from dark blue to red. For position of the sensors and coils please see Fig.~\ref{fig:coil}. \label{fig:Mdiff}}{Comparison of experimental $\bm{M}$ with simulation one.}
 
@@ -1140,7 +1138,7 @@ field was solved and outputted to a {\tt csv} file as in the previous
 section.  Two {\tt csv} files (one each for the perturbation coil
 switched on and off) were created.
 
-% For generating setpoints, we have used the Python programming language where the fields map is acted as input. We convert the fields maps into nT as to match the experimental unit  and depending on the co-ordinates of the points provided by us, the $B_s(\text{setpoint})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
+% For generating setpoints, we have used the Python programming language where the fields map is acted as input. We convert the fields maps into nT as to match the experimental unit  and depending on the coordinates of the points provided by us, the $B_s(\text{setpoint})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
 
 % While comparing experimentally measured setpoints with that determined by simulation we have found that, the values of Bx, By and Bz are differ by $\sim$2000 nT but they have the same signs with same order of magnitude in $x$, $y$ and $z$ co-ordinate. The different values can be due to not match the coordinate points exactly. 
 
@@ -1149,8 +1147,7 @@ switched on and off) were created.
 
 %\subsubsection{Simulation of Field Map With Current in Perturbation Coil}
 
-When the perturbation coil was switched on, its current density on the
-was set to 770~mA/area.  The reason is that, in the experiment, 10~mA
+When the perturbation coil was switched on, its current density was set to 770~mA/area.  The reason is that, in the experiment, 10~mA
 current was normally provided to the perturbation coil which has
 77~turns.
 
@@ -1158,9 +1155,9 @@ current was normally provided to the perturbation coil which has
 %     \item[$\blacksquare$] \textbf{Creation of Measurements}
 % \end{itemize}
 
-% For generating measurements, we have used the Python programming language where the fields map is acted as input. We convert the fields maps into nT as to match the experimental unit  and depending on the co-ordinates of the points provided by us, the measurements $B_s(\text{measure})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
+% For generating measurements, we have used the Python programming language where the fields map is acted as input. We convert the fields maps into nT as to match the experimental unit  and depending on the coordinates of the points provided by us, the measurements $B_s(\text{measure})$ are generated in the output of the Python code. Note that the points must be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$, $y$ and $z$ co-ordinate.
 
-% For comparing the simulation result with experimental one, the effect of the perturbation has been found in terms of change in the coil currents in all six coils both in simulation and experiment. For the simulation, in the above, $B_s(\text{setpoint})$ and $B_s(\text{measure})$ have been determined by choosing co-ordinates of the points as same as the sensor positions in the experiment from which the change in the signal i.e. $\Delta B_s$ have been determined using Eq.~(\ref{eq:del_B}). Finally, the change in the coils current i.e. the errors in the coils have been determined by multiplying $\Delta B_s$ with regularized pseudo-inverse of $\bm{M(\text{sim})}$ obtained from Section~\ref{sec:mSim} (see Eq.~(\ref{eq:del_I}) and Section~\ref{sec:inv}). For experiment the changes in the fluxgate signals are determined by applying 10 mA in the perturbation  coil and then find $\Delta B_s$ using Eq.~(\ref{eq:del_B}) and eventually find the change in coil currents in the same way as done for the simulation. The change in current in all six coil sides found due to experiment and simulation are given in Table~\ref{table:currentChange} where the simulation results are quite similar to the experimental ones for all six coils sides.
+% For comparing the simulation result with experimental one, the effect of the perturbation has been found in terms of change in the coil currents in all six coils both in simulation and experiment. For the simulation, in the above, $B_s(\text{setpoint})$ and $B_s(\text{measure})$ have been determined by choosing coordinates of the points as same as the sensor positions in the experiment from which the change in the signal i.e. $\Delta B_s$ have been determined using Eq.~(\ref{eq:del_B}). Finally, the change in the coils current i.e. the errors in the coils have been determined by multiplying $\Delta B_s$ with regularized pseudo-inverse of $\bm{M(\text{sim})}$ obtained from Section~\ref{sec:mSim} (see Eq.~(\ref{eq:del_I}) and Section~\ref{sec:inv}). For experiment the changes in the fluxgate signals are determined by applying 10 mA in the perturbation  coil and then find $\Delta B_s$ using Eq.~(\ref{eq:del_B}) and eventually find the change in coil currents in the same way as done for the simulation. The change in current in all six coil sides found due to experiment and simulation are given in Table~\ref{table:currentChange} where the simulation results are quite similar to the experimental ones for all six coils sides.
 
 % \begin{table} [htb!]
 %     \centering
@@ -1212,19 +1209,19 @@ OPERA.
 %within the cube dimensions. For generating the matrix, we used the
 %Python programming language where the fields maps are acted as
 %input. We convert the fields maps into nT/A to match the experimental
-%unit and depending on the co-ordinates of the points provided by us,
+%unit and depending on the coordinates of the points provided by us,
 %the matrix is generated in the output of the Python code. Note that
 %the points must be from -62 cm to 62 cm with an increment of 1 cm in
 %each of the $x$, $y$ and $z$ co-ordinate.
 
 
-% The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the co-ordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined.
+% The best thing about simulating in this setting is that the OPERA has calculated the $M_{sc}$ elements for the whole volume of the prototype geometry which can be easily exported in a 'csv' file by running a simple 'comi' file for volume extraction. Thus the $M_{sc}$ elements of the whole prototype geometry have been stored in a 'csv' file in T/A. Then, a code has been written in the Python programming language to clean, modify and sort the data of that 'csv' file and convert the data in nT/A and  provide the coordinates of the points from where the magnetic field values i.e.  $M_{sc}$ elements (see Eq.~(\ref{eq:B_coils_1A})) are determined.
 
-% And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the co-ordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
+% And the current in the coils are related to the magnetic filed with those $M_{sc}$ elements as given in Eq.~(\ref{eq:B_coils}). It is very easy to extract magnetic field information by providing the coordinates vale in OPERA. In addition to the field produced by the coil currents, there is also  values of $M_{sc}$. That means, setting current, I=1 A and offset =0 in all six coil will produce 
 % \fig{Images/noShield}{width =\textwidth,height=14 cm}{Prototype setup in OPERA simulation software without passive shielding layers. \label{fig:noShield_opera}}
 
 For comparison with the experimental $\bm{M}$, the simulation $\bm{M}$
-has been made by choosing co-ordinates of the points as same as the
+has been made by choosing coordinates of the points as same as the
 sensor positions in the experiment. Then the absolute differences
 between the experimental and simulated matrix elements are calculated
 as
@@ -1278,7 +1275,7 @@ simulated one is 30.5.  Recall that the condition number is the ratio
 of the maximum and minimum singular values.  This likely indicates
 that ratios of the important matrix elements are reproduced better
 than the absolute difference would indicate.  The singular value
-decomposition also tends to correct for sensor misalignment.  In other
+decomposition also tends to correct sensor misalignment.  In other
 simulations, I found that moving sensors slightly or changing their
 alignment had little to no effect on the condition number, even though
 the matrix elements might change.
@@ -1297,7 +1294,7 @@ connection, which was repaired.
 %the locations both in experiment and simulation and also the
 %simulation runs in ideal conditions where the experiment suffers from
 %the condition of its surrounding. The differences can be made smaller
-%by choosing different co-ordinates of the sensor positions. We are not
+%by choosing different coordinates of the sensor positions. We are not
 %that concerned about that because the $M_{sc}$ element due to a
 %particular coil and sensor position has similar response pattern both
 %in experiment and simulation.
@@ -1314,14 +1311,14 @@ connection, which was repaired.
 %where the field map generated due to no current in any coils with
 %external field applied as discussed earlier is acted as input. We
 %convert the field map into nT to match the experimental unit and
-%depending on the co-ordinates of the points provided by us, the
+%depending on the coordinates of the points provided by us, the
 %$B_s(\text{setpoint})$ are generated in the output of the Python code.
 
 %Similarly, for generating actual measurement, we have again used the
 %Python programming language where the field map generated due to
 %current in perturbation coil with external field applied as discussed
 %earlier is acted as input. We convert the field map again into nT to
-%match the experimental unit and depending on the co-ordinates of the
+%match the experimental unit and depending on the coordinates of the
 %points provided by us, the measurements $B_s(\text{measure})$ are
 %generated in the output of the Python code. Note that the points must
 %be from -62 cm to 62 cm with an increment of 1 cm in each of the $x$,
@@ -1411,10 +1408,7 @@ introducing higher-frequency noise.
 
 Finally, I propose a new method of determining the regularization
 parameter which is unique compared to the Monte Carlo method
-introduced in Section~\ref{sec:mont} and used in Ref.~\cite{bea}.  The
-method is based on minimizing the condition number of the regularized
-matrix.  This will give similar results as the Monte Carlo method, and
-the correspondence between the two methods will be discussed.
+introduced in Section~\ref{sec:mont} and used in Ref.~\cite{bea}. The method is based on minimizing the condition number of the regularized matrix, which gives similar results as the Monte Carlo method. The correspondence between the two methods will be discussed in the following sections.
 
 % So, first the importance of matrix condition number on PI will be discussed.
 
@@ -1575,8 +1569,7 @@ Section~\ref{sec:pi_behave} that increasing $k_c^i$ after a point
 makes the current unstable resulting in overshoot.
 
 For these studies, I focused on the $C_z^+$ coil and the 8x sensor
-because they are located closer to the pertubation coil and hence see
-most of the effect.
+because they are located closer to the perturbation coil and hence see the effect most.
 
 \fig{Images/pi_r}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p=0.6$, $k_c^i=0.37$ and different values of $r$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:pi_r}}{Single magnetic field compensation results for fixed $k_c^p$ and $k_c^i$ and different values of $r$.}
 
@@ -1586,7 +1579,7 @@ fixed.  Figure~\ref{fig:pi_r} shows the active compensation for same
 fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
 $k_c^i=0.37$, and this time for different values of $r$. The
 observation is that for decreasing $r$, the current drifting problem
-disappears, but the feedback system introduces high frequency noise.
+disappears, \textcolor{red}{but the feedback system introduces high frequency noise}.
 
 It is natural that $r$ should affect the PI control, because the error
 function involves $\bm{M^{-1}}$ and therefore $r$ (see
@@ -1597,15 +1590,13 @@ both $k_c^p$ and $k_c^i$ accordingly (see Eq.~(\ref{eq:I})).
 
 \fig{Images/p60i36r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.6$, $k_c^i=0.37$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:pi_tuned_r24}}{Coil currents with field change $\Delta B$ for $k_c^p=0.60$, $k_c^i=0.37$ and $r=2.4$}
 
-The best that can be done to fix the current drifting problem is then
-that $r$, $k_c^p$, and $k_c^i$ be adjusted to reduce the current
+Therefore best that can be done to fix the current drifting problem is that $r$, $k_c^p$, and $k_c^i$ be adjusted to reduce the current
 drifting problem without too much impact on high-frequency noise.  An
 example of an attempt to make this trade-off is shown in in
 Fig.~\ref{fig:pi_tuned_r24}.  Other than changing $r$ to 2.4, this
 Figure uses the same settings as
 Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)}.  Indeed reducing $r$
-has increased the speed with which the currents settle, but an
-increase in high-frequency noise on the currents is apparent.
+has increased the speed with which the currents settle, but apparently increased high-frequency noise on the currents.
 However, this increase in current noise does not increase
 the noise on the field measurements noticeably, which is similar in both cases.
 In Fig.~\ref{fig:i100_r24}, I have retained this value of $r=2.4$ and
@@ -1614,18 +1605,19 @@ time on the currents.
 
 \fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:i100_r24}}{Coil currents with field change $\Delta B$ for $k_c^p=0.0$, $k_c^i=1.0$ and $r=2.4$}
 
-Eventually, I determined that neither of these solutions is truly
+Eventually, I discovered that neither of these solutions is truly
 optimal.  I now characterize them as being generally
 ill-conditioned.  The final solution is discussed further in
 Section~\ref{sec:coil_config}.
 
 The above results show that if $r$ (or the condition number) is bad
 (too big) then no amount of PI tuning will help speed up the current
-drifting.  If $r$ set falsely low, it has the undesirable impact of
-inducing high frequency current noise, similar to increasing the PI
-parameters, which is expected. While this might be acceptable in some
-situations, such as if the field noise is already rather large, it is
+drifting. If $r$ is set too small, it is expected to have an undesirable impact on the PI parameters. While this might be acceptable in some
+situations, such as a case where the field noise is already rather large, it is
 not the best general solution.
+%If $r$ set falsely low, it has the undesirable impact of
+%inducing high frequency current noise, similar to increasing the PI
+%parameters, which is expected. 
  
 
 
@@ -1940,7 +1932,7 @@ dimension is equal to the number of fluxgate axes being used for
 control (12 in my case).  The quantity $\bm{M^{-1}}$ is the Moore-Penrose
 pseudoinverse (a $6\times 12$ non-square matrix, in my case).  The
 quantity $\vec{I}^{n}$ are a vector of currents (dimension 6, in my case).
-The index $n$ refers to the values as of the present feedback step.
+The index $n$ refers to the present feedback step.
 The index $n+1$ on the left-hand-side of the equation is indicating
 the next vector of currents that will be set based on this feedback
 algorithm.
@@ -1950,7 +1942,7 @@ presented in Eqs.~(\ref{eq:del_I}), and (\ref{eq:I}).  Naively, the main
 difference between the two equations appeared to be that the current
 from the previous step was being used to determine the next current
 with the error from the present step also being included.
-Eq.~(\ref{eq:I}) on the other hand, references the next current to
+Eq.~(\ref{eq:I}) on the other hand, refers to the next current to
 the initial current, and implements two control terms: a proportional
 term which appears similar to the error term containing $\bm{M^{-1}}$
 above, and an integral term containing an sum over the past history of
@@ -2013,14 +2005,14 @@ Ref.~\cite{rawlik} is simply the usual PI feedback algorithm, with the
 PI parameters being restricted to the particular values $k_c^p=0$ and
 $k_c^i=1$. My recommendation would be to keep these as tunable
 parameters and allow for the potential of some ability to make
-adjustments to them as necessary, rather than falsely restricting them
+adjustments to them as necessary, rather than restricting them
 to particular values. It is interesting that the particular tuning
 $k_c^p=0$ and $k_c^i=1$ (integral control) does seem to be fairly optimal
 for this particular system.
 
 Reference~\cite{rawlik} further mentions that due to time delays in
 their active magnetic compensation system, it was logically more
-correct to use the current from three steps prior to make the
+correct to use the current from three steps prior to making the
 correction for the $n+1$ step
 \begin{equation}\label{eq:I_raw_delay}
     \vec{I}^{n+1}= \vec{I}^{n-2}+\bm{M^{-1}} \Delta \vec{B}^{n-2}
@@ -2250,7 +2242,7 @@ Fig.~\ref{fig:matrix_patch_6c}.\label{fig:matrix_patch_5c}}{Matrix for
 
 The simulated matrix $\bm{M}$ for this configuration is shown in
 Fig.~\ref{fig:matrix_patch_5c}.  Naively, it is not considerably
-different that the corresponding matrix for six coils, which was
+different in terms of the corresponding matrix for six coils, which was
 displayed in Fig.~\ref{fig:matrix_patch_6c}.  However, upon performing
 the singular value decomposition, the differences become evident.
 
@@ -2429,7 +2421,7 @@ $\bm{\Sigma}$ matrix.}
 It is interesting to compare the results for the diagonal matrix
 $\bm{\Sigma}$ in simulation and experiment.  The experimental results
 for $\bm{\Sigma}$ are presented in Fig.~\ref{fig:diag_comb}, for both
-the five-coil and six-coil case.  These can be compare with the
+the five-coil and six-coil case.  These can be compared with the
 simulated results which were presented in
 Figs.~\ref{fig:diag_patch_5c} and \ref{fig:diag_patch_6c}.  It can be
 seen that, despite having only 12 fluxgate axes available
@@ -2563,7 +2555,7 @@ Fig.~\ref{fig:5c_pseudo_shield_y}, the $C_y^+$ and $C_y^-$ coils have
 been required to carry a common current $C_y^\pm$ while the other five
 coils may be adjusted freely.  Even with the magnetic shield present,
 the results are very similar to Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} where no
-shield was present. The results were also compared with redid in PI simulations and similar behaviour were observed as expected.
+shield was present. The results were also compared with redid in PI simulations and a similar behaviour was observed as expected.
 
 
 %\fig{Images/5c_pseudo_shield_z}{width = \textwidth}{$C_x^-$, $C_x^+$, $C_y^-$, $C_y^+$ and $C_z^\pm$. \label{fig:5c_pseudo_shield_z}}{S}
@@ -2709,7 +2701,7 @@ shield was present. The results were also compared with redid in PI simulations 
 %\item Internal sensor perturbations (related to previous section).
 %\end{enumerate}
 
-In Section~\ref{sec:metrics}, I introduced a some additional
+In Section~\ref{sec:metrics}, I introduced some additional
 quantitative measures of the magnetic compensation performance.  These
 metrics had been used in the previous studies of
 Refs.~\cite{bea,lins,rawlik}.  The two metrics I will discuss further in this section are
@@ -2726,12 +2718,12 @@ Chapter~\ref{ch:conclusion}.
 
 \subsection{Internal Sensor Perturbations}
 
-Most of the results that I showed so far related to the magnetic field
+Most of the results that I showed so far are related to the magnetic field
 measured by 12 fluxgate sensors positioned within the coil cube just
 outside the region of interest.  Normally when these data were taken,
 I simultaneously acquired data for two additional fluxgate axes placed
 centrally within the coil cube.  These sensors were not used in the
-feedback algorithm.  The idea was to used these as a way to estimate
+feedback algorithm.  The idea was to use these as a way to estimate
 average feedback system performance within the region of interest.
 
 \fig{Images/center_6c_reg_sNs}{width = \textwidth}{Central magnetic field in
@@ -2798,8 +2790,7 @@ While it is not a large reduction, the result is relatively consistent
 with my results for the general reduction in the field at the external
 sensor sites when the feedback system is used to correct the effect of
 the perturbation coil (see the previous Section).  In that case also,
-the general reduction in the field at the external sensor sites was
-also by a factor of roughly 1/2 to 2/3 on average.  I expect that in
+the general reduction in the field at the external sensor sites was by a factor of roughly 1/2 to 2/3 on average.  I expect that in
 order to provide better overall compensation results, the chief
 improvement will be in coil design, which was beyond the scope of this
 thesis.
@@ -2844,9 +2835,11 @@ under two conditions:
 \item ``Natural'' fluctuations with feedback on.  In this case I tried to compensate typical environmental changes in the magnetic field in the laboratory at U.~Winnipeg.
 \item Simulated drift, where I slowly ramped the current in the perturbation coil over a long time, to see how well the feedback system could correct a linear drift.
 \end{itemize}
-In each case the feedback system provided superior result where the
+
+In each case, the feedback system provided a shielding factor (ratio of uncorrected to feedback-corrected Allan deviations) larger than one.
+\textcolor{red}{In each case the feedback system provided superior result where the
 shielding factor (ratio of uncorrected to feedback-corrected Allan
-deviations) was larger than one.
+deviations) was larger than one.}
 
 \fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{Field change $\Delta B$ for 24 hrs with feedback algorithm switched off.}
 
@@ -2856,7 +2849,7 @@ impression of the overal scale of the fluctuations that the feedback
 algorithm must correct.  It was based on measurements like this that
 feedback system was designed with a dynamic range capable of
 correcting a few hundred nT in the fluxgate readings.  The Allan
-deviation shown in Fig.~\ref{fig:adev_nc}\textcolor{blue}{(b)} rises with typically a
+deviation shown in Fig.~\ref{fig:adev_nc}\textcolor{blue}{(b)} typically rises with a
 $\tau^{1/2}$-$\tau^{1/3}$ dependence, which is similar to a 1D random
 walk.
 
@@ -2949,10 +2942,10 @@ corrected readings (shown by the colored curves).  In
 Fig.~\ref{fig:7}\textcolor{blue}{(c)}, the ratio of Allan deviations
 (uncorrected/corrected), which is defined as the shielding factor, is
 shown.  In general the shielding factor is larger than one and less
-than about 2.  For longer times one of the fluxgate axes drops below
+than about 2.  For longer averaging times, $x$- and $y$-axis shielding factors of some of the sensors drop below one, indicating that the system failed to stabilize the magnetic fluctuations in these directions. \textcolor{red}{For longer times one of the fluxgate axes drops below
 one, indicating that over long times, the feedback algorithm did not
 stabilize that particular axis better than as if the feedback
-algorithm had been switched off.  However, on average the feedback
+algorithm had been switched off.} However, on average the feedback
 system improved the fluxgate reading stability over time.  For the
 longest times $\tau\gtrsim 100$~s, there is also some increased
 statistical fluctuation in the data.
