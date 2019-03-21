@@ -64,17 +64,17 @@ current response in the compensation coils. We did different
 experiments with different parameters for understanding the problem
 and figure out the solution. The system was made faster by introducing
 filter which enabled us to change the sample frequency without adding
-noise. The effect of the filter are discussed in
+noise. The effect of the filter is discussed in
 Section~\ref{sec:freq}. The general behaviour
 of P and I terms and their impact are
 discussed in Section~\ref{sec:pi_behave}. The study
 revealed that I term was responsible for current unsettle problem in the
 coils. We added more fluxgates, changed the positions
-of the fluxgates and also removed the passive shield but that made no difference. The studies are discussed in Section~\ref{sec:flux_place}. We then motivated to build a
+of the fluxgates and also removed the passive shield but that made no difference for current unsettle problem. The studies are discussed in Section~\ref{sec:flux_place}. We then motivated to build a
 simulation of the prototype. The simulation of the prototype
 integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
 similarity between the experiment and simulation is shown. The current drifting problem could be solved by lowering the value of $r$ keeping P
-and I term fixed, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms are discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
+and I term fixed, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms is discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
 
 New directions for future studies are presented in
 Chapter~\ref{ch:conclusion}.
@@ -165,8 +165,8 @@ Chapter~\ref{ch:conclusion}.
 %\item We show the effectiveness in this section.
 %\end{itemize}
 
-In Chapter~\ref{ch:amcP}, I discussed new low-pass analog Butterworth
-filters which I built and implemented into the system.  The filters
+In Chapter~\ref{ch:amcP}, low-pass analog Butterworth
+filters which were built and implemented into the system are discussed.  The filters
 were designed with 10~Hz corner frequency with the goal to remove
 high-frequency noise.  This would allow the ADC to operate with shorter
 averaging, increasing its effective sampling frequency (denoted by the
@@ -178,7 +178,7 @@ us more freedom in terms of
     \item reducing coil current response time, and most importantly
     \item maintaining our design sample rate with better reduction of noise.
 \end{itemize}
-My studies of the effectiveness of the filters in achieving these
+Studies of the effectiveness of the filters in achieving these
 points are described in this section.
 
 
@@ -209,18 +209,18 @@ this solution is that the feedback and control loop cycle time for all
 14 ADC channels would be limited to $\sim 0.5$~Hz, which does not meet
 the design goal of $\gtrsim 6$~Hz.
 
-\fig{Images/filtering2}{width=\textwidth}{Filtering effect on the magnetic field signal measured at the 1x position.  For this measurement, the PI control system was switched off so that it would not affect the noise.  Vertical axis represent $\Delta B$ (see Eq.~(\ref{eq:del_B})) found from the measurement of sensor (a) without filter, (b) with Bartington's SCU1 (Signal Conditioning Unit) and (c) with our filter. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.  The current supplied on perturbation coil was 100~mA and resolution index 1 was used for the ADC. The loop sampling frequency for (a), (b) and (c) are shown in Hz and is limited by the polling time for the 14 sensors.\label{fig:filtering}}{Filtering effect on the magnetic field signals.}
+\fig{Images/filtering2}{width=\textwidth}{Filtering effect on the magnetic field signal measured at the 1x position.  For this measurement, the PI control system was switched off so that it would not affect the noise.  Vertical axis represent $\Delta B$ (see Eq.~(\ref{eq:del_B})) found from the measurement of sensor (a) without filter, (b) with Bartington SCU1 (Signal Conditioning Unit) and (c) with our filter. Vertical dashed lines indicate the time of the perturbation coil being turned on and off.  The current supplied on perturbation coil was 100~mA and resolution index 1 was used for the ADC. The loop sampling frequency for (a), (b) and (c) are shown in Hz and is limited by the polling time for the 14 sensors.\label{fig:filtering}}{Filtering effect on the magnetic field signals.}
 
 Figure~\ref{fig:filtering} shows an example of the importance of using
 the filter, comparing an unfiltered signal to one filtered by
-Bartington's SCU1 10 Hz low pass filter, and comparing with our
+Bartington SCU1 10 Hz low pass filter, and comparing with our
 filter.  For this study the fastest effective sampling rate
 (resolution index 1) has been used.  The loop sampling frequency is
 found to be $\sim 220$~Hz limited by the polling time for all 14
 channels and additional delays arising from LabJack communications.
 
 It is seen that the signal is very noisy without any filter. The noise
-is reduced by a factor of ten using Bartington's SCU1 10 Hz low pass
+is reduced by a factor of ten using Bartington SCU1 10 Hz low pass
 filter.  Our filters gave slightly better performance (lower noise)
 than the Bartington SCU1 module, likely due to slight differences in
 components and design.  It is also seen that the outputs are limited
@@ -292,9 +292,9 @@ because the number of feedback control loops has been equalized.
 %\end{itemize}
 
 
-Another significant problem that I faced in this experiment was that
+Another significant problem that we faced in this experiment was that
 the current would drift during compensation although field would not
-change significantly.  This is discussed further in Sections~\ref{sec:pi_behave}, \ref{sec:flux_place}, and \ref{sec:pSim}.  For this reason, I was
+change significantly.  This is discussed further in Sections~\ref{sec:pi_behave}, \ref{sec:flux_place}, and \ref{sec:pSim}.  For this reason, we were
 often concerned with any sources of slow current response.  The main
 point of the remainder of this section is to study the trade-offs
 involved in the resolution index, the loop cycle rate, and the number
@@ -398,7 +398,7 @@ compared to the predicted uncompensated field.  When the system is
 oscillating, both the measured and uncompensated fields are seen to
 oscillate, which is inaccurate (the uncompensated field obviously
 should not oscillate).  As a consequence the system believes it is
-reducing the field fluctations when in fact it is inducing
+reducing the field fluctuations when in fact it is inducing
 oscillation.  This is the reason the fluctuations apparently decrease
 in the right panel.
 
@@ -408,7 +408,7 @@ in the right panel.
 %%%%\fig{Images/mont_pr}{width = \textwidth}{The effect of changing $k_c^p$ and changing $r$ on current fluctuations (a) and remaining field fluctuations (b) for fluxgate positions 1, 2, and 7. Here, 100 mA current has been supplied in the perturbation coil. For position of the fluxgates  and coil see Fig.~\ref{fig:coil}.\label{fig:mont_pr}}{Short}
 
 
-I also studied the effect of varying the regularization parameter $r$.
+We also studied the effect of varying the regularization parameter $r$.
 As expected, when $r$ is increased, it decreases the amount of the
 control.  The proportional gain would therefore have to be increased
 in order to provide compensation.  Further studies of the adjustment
@@ -504,7 +504,7 @@ eventually it results in overshoot i.e. exceed the setpoint.
 %     \label{fig:i_pi}
 % \end{figure}
 
-In this study I tried running the system with $k_c^p=0$ and then
+In this study we tried running the system with $k_c^p=0$ and then
 adjusting $k_c^i$.  The results are shown in Fig.~\ref{fig:i_pi}.  As
 for Fig.~\ref{fig:p_pi}, the current supplied to the perturbation coil
 was 10~mA when it was switched on.  Resolution index 1 with 50
@@ -585,7 +585,7 @@ PI parameters to see what effect that might have.
 
 The above results show that using only the I term provides better
 compensation, but then it gives rise to slowly-varying currents that
-take a long time to settle.  I often refer to this problem as the
+take a long time to settle.  We often refer to this problem as the
 ``current drifting problem'' in the remainder of this thesis.
 
 % \subsection{r vs. Condition No.}\label{sec:cond}
@@ -597,7 +597,7 @@ take a long time to settle.  I often refer to this problem as the
 
 \subsection{Effect of adjusting both P and I}
 
-In this section, I tuned the P and I terms following the
+In this section, the P and I terms were tuned following the
 Ziegler-Nichols procedure (discussed in Section~\ref{sec:tune}). The
 tuned values were found to be $k_c^p=0.60$ and $k_c^i=0.37$.
 
@@ -640,7 +640,7 @@ using the I term or combined PI tuning.
 
 \subsection{The ``Current Drifting Problem''}
 
-Because of the current drifting problem, I changed a large number of
+Because of the current drifting problem, we changed a large number of
 parameters in order to try to determine its cause.  For example, one
 suspicion was that it could be due to malfunctioning power supplies
 that were themselves drifting, while the feedback loop was
@@ -684,19 +684,19 @@ An observation of the previous section was that the coil current does
 not settle properly although the field seems to be compensated on
 shorter timescales than the settling time for the currents.  We called
 this the ``current drifting problem'' as noted in the previous
-Section.  I developed hypotheses to try to explain this observation
+Section.  We developed hypotheses to try to explain this observation
 and then began to test these hypotheses experimentally.
 
 The two hypotheses to explain the current drifting problem that are
 addressed in this Section are:
 \begin{enumerate}
-\item The fluxgate positions might be affecting the measurement.   To address this, I adjusted the fluxgate positions to try to reduce the condition number and see if this had a positive effect.  I tried different positions mainly in
+\item The fluxgate positions might be affecting the measurement.   To address this, we adjusted the fluxgate positions to try to reduce the condition number and see if this had a positive effect.  We tried different positions mainly in
 corners and center of each of the coil faces, and at various distances
 inside and outside the coil cube.  The conclusion of this study was
-that I could not change the condition number or the current drifting
+that we could not change the condition number or the current drifting
 problem significantly.
 \item The slow current response might be due to slow magnetic responses.
-To address this, I tried removing the magnetic shielding system from
+To address this, we tried removing the magnetic shielding system from
 the coil cube and re-tuning the system.  The conclusion of this study
 was that it also did not fix the problem.
 \end{enumerate}
@@ -767,7 +767,7 @@ condition number of the matrix (equivalent to the condition number of
 the unregularized pseudoinverse) and the condition number of the
 regularized pseudoinverse are reported.  Two very similar
 regularization parameters $r$ and $r'$ are reported.  The
-regularization parameter $r'$ was determined by a new method I
+regularization parameter $r'$ was determined by a new method we
 developed which will be discussed further in
 Section~\ref{sec:cond}.
 
@@ -786,13 +786,13 @@ incorporated into the matrix.
 
 The general conclusion of Table~\ref{table:flux-pos} is that while the
 fluxgate positions have some impact on the condition number of both
-the unregularized and regularized pseudoinverse, they do not solve the
+the unregularized and regularized pseudo-inverse, they do not solve the
 problem of ill-conditioning: the matrix must still be regularized or
 the current fluctuations driven by the compensation system would be
 unacceptably large.  Even with significant changes in the fluxgate
 positions (for example~corners vs.~center faces) the condition number
 changes at most by a factor of three in the unregularized
-pseudoinverse and a factor of $<2$ for the regularized pseudoinverse.
+pseudo-inverse and a factor of $<2$ for the regularized pseudo-inverse.
 Interestingly, even if a large number of sensors are included ({\it
 e.g.}~the final two rows of the table), this does not necessarily have
 a positive impact on the condition number.
@@ -811,18 +811,18 @@ properties for the matrix as any other row in the Table.  We also
 tried studies where we used only those six axes in the control system,
 with very similar results to the corner-placement positions.
 
-In Section~\ref{sec:pSim}, I will report a simulation which is
+In Section~\ref{sec:pSim}, a simulation will be reported which is
 successful in reproducing these results.  Although not shown here, the
 results of PI tuning of the systems for which we had enough sensors
 were also acquired.  None of the positions gave particularly better PI
 control than any of the others and all of them generally suffered from
 the same current drifting problem.
 
-I also tried slight adjustments to the corner positions and this had a
+We also tried slight adjustments to the corner positions and this had a
 similar small effect.  It will be discussed further in
 Section~\ref{sec:cond} that it is also noticeable that regularization
 by two different methods (the method of Ref.~\cite{bea}
-and my new method) agree.
+and our new method) agree.
 
 % \doublefig{Images/cB_t_center_p}{width =\textwidth, height= 6 cm}{Position=1,2,3,4,6,8\label{fig:cb_center_p}}{Images/cB_t_center_pi}{width = \textwidth, height= 6 cm}{Position=1,2,3,4,6,8\label{fig:cb_center_pi}}{{PI Active Magnetic Field Compensation Results by both Experiment and Simulation.} \label{fig:cb_center}}
 
@@ -867,7 +867,7 @@ time but still suffered from current drifts over long timescales.
 Then we thought the passive shielding layer might have caused some
 slower response of the system, perhaps due to slow changes in the
 magnetization of the shield. To test if this affected the feedback and
-control system, I conducted tests where I removed the magnetic shield
+control system, we conducted tests where we removed the magnetic shield
 from within the coil cube.
 
 
@@ -905,13 +905,13 @@ current sinks.
 % \doublefig{Images/bt8}{width =\textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:bt8}}{Images/sf8}{width = \textwidth, height= 7 cm}{Position=1,2,3,4,5,6,7,8\label{fig:sf8}}{{No SHield} \label{fig:btSF8}}{short}
 
 In the end, neither fluxgate placement nor shielding effect provided a
-solution of the current drifting problem.  How I really started to
+solution of the current drifting problem.  How we really started to
 determine the source of the problem was by simulating the full,
 multidimensional feedback and control system.
 
 \section{Simulation of Multidimensional Feedback System}\label{sec:pSim}
 
-I developed a variety of simulation tools in order to understand the
+We developed a variety of simulation tools in order to understand the
 behavior of the multidimensional PI control loop:
 \begin{enumerate}
 \item {\bf Three-dimensional finite-element analysis simulations in OPERA.}  These were used to simulate
@@ -921,7 +921,7 @@ behavior of the multidimensional PI control loop:
 \item the magnetic response of the magnetic shield to the perturbation coil (in turn allowing us to simulate the PI system response to this perturbation.
 \end{enumerate}
 \item {\bf Field Map Processing in Python.}  The OPERA simulations provided full three-dimensional field maps.  Python scripts were written to process and simplify the information into for example~the matrix $\bm{M}$, or the changes seen at each fluxgate position when the perturbation coil was energized.
-\item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed me to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
+\item {\bf PI Simulation in Python.}  With this reduced information in hand, the full PI loop was also simulated in Python in real time.  This allowed us to simulate the full time-dependent response of the feedback and control system to the perturbation coil.
 \end{enumerate}
 As will be shown, these simulations were quite successful in
 describing the system including: the matrix $\bm{M}$ and its
@@ -1030,12 +1030,12 @@ position.
 In OPERA, a coil was energized by setting its current density to
 1~A/area, where the area is determined automatically by the OPERA
 based on the dimensions provided.  To conduct the finite element
-analysis, I used the TOSCA magnetostatic module of OPERA.  I set the
-numerical solution convergence tolerance to be $1\times10^{-13}$.
+analysis, the TOSCA magnetostatic module of OPERA was used.  The
+numerical solution convergence tolerance was set to be $1\times10^{-13}$.
 
 Once the solution for a single energize coil was completed, the field
 map was outputted to a file using the post-processor of OPERA.
-The unit of the magnetic field was set to be T, and I used the GRID
+The unit of the magnetic field was set to be T, and we used the GRID
 command which evaluates the fields over a uniform 3D grid. The grid
 started from $-62$~cm in $x$, $y$ and $z$ coordinates with an
 increment of 1~cm and ends at $+62$~cm which covers the full cube
@@ -1098,7 +1098,7 @@ fields to those setpoints.
 
 The average field measured by fluxgates surrounding the prototype
 without any compensation system running were given in
-Table~\ref{table:Benvironment}.  I used this information to try to
+Table~\ref{table:Benvironment}.  This information was used to try to
 simulate the setpoints.  This was done for two field maps: one with no
 current in any coils and another with current only in the perturbation
 coil.  So, the field map with no current in any coil will generate the
@@ -1135,8 +1135,7 @@ set according to Table~\ref{table:Benvironment}.
 %mesh) to use reduced magnetic scalar potential. The extent of this layer is
 %unimportant – a single layer of elements works just as well as making all
 %the air reduced potential. }
-Otherwise the
-field was solved and outputted to a {\tt csv} file as in the previous
+Otherwise the field was solved and outputted to a {\tt csv} file as in the previous
 section.  Two {\tt csv} files (one each for the perturbation coil
 switched on and off) were created.
 
@@ -1149,8 +1148,7 @@ switched on and off) were created.
 
 %\subsubsection{Simulation of Field Map With Current in Perturbation Coil}
 
-When the perturbation coil was switched on, its current density was set to 770~mA/area.  The reason is that, in the experiment, 10~mA
-current was normally provided to the perturbation coil which has
+When the perturbation coil was switched on, its current density was set to 770~mA/area.  The reason is that, in the experiment, 10~mA current was normally provided to the perturbation coil which has
 77~turns.
 
 % \begin{itemize}
@@ -1278,15 +1276,15 @@ of the maximum and minimum singular values.  This likely indicates
 that ratios of the important matrix elements are reproduced better
 than the absolute difference would indicate.  The singular value
 decomposition also tends to correct sensor misalignment.  In other
-simulations, I found that moving sensors slightly or changing their
+simulations, we found that moving sensors slightly or changing their
 alignment had little to no effect on the condition number, even though
 the matrix elements might change.
 
-In another experimental study, I measured the stability of the matrix
-elements over an eight-hour period, continually ramping the currents
-on each coil and measuring the slope over and over again.  I found
+In another experimental study, the stability of the matrix
+elements was measured over an eight-hour period, continually ramping the currents
+on each coil and measuring the slope over and over again.  We found
 that the measured matrix elements were reproducible at the level of
-100 nT/A.  I also discovered a technical issue that the $C_x^-$ coil
+100 nT/A.  We also discovered a technical issue that the $C_x^-$ coil
 current had stability issues, which turned out to be due a bad
 connection, which was repaired.
 
@@ -1348,10 +1346,10 @@ coil currents (Eq.~(\ref{eq:del_I})) are generated using $\Delta B$
 and the regularized pseudoinverse of the simulated $\bm{M}$. The same values
 of $k_c^p$ and $k_c^i$ are used in the simulation as in the experiment.
 
-I decided to simulate the PI loop in real-time.  In
+We decided to simulate the PI loop in real-time.  In
 Section~\ref{sec:tune}, the time difference between two consecutive
 feedback loop is found to be 0.146~s. To match the same time of
-completing a feedback loop both in simulation and experiment, I added
+completing a feedback loop both in simulation and experiment, we added
 a time delay of 0.146~s in the PI simulation code. After adding the
 time delay, The same process have been repeated for the same time
 duration as the experiment.
@@ -1397,19 +1395,19 @@ apparatus.
 
 \section{New Studies on the Regularization Parameter $r$}\label{sec:new_study_r}
 
-In Section~\ref{sec:inv}, I introduced the regularization parameter $r$
-and then discussed regularization by random field fluctuations in
+In Section~\ref{sec:inv}, the regularization parameter $r$ was introduced
+and then regularization by random field fluctuations was discussed in
 Section~\ref{sec:mont} which is based on the previous study from
 Ref.~\cite{bea}.
 
 These studies were expanded in relation to the current drifting
-problem.  I found that the current drifting problem can be reduced by
+problem.  We found that the current drifting problem can be reduced by
 adjusting $r$ and the PI parameters, treating $r$ more-or-less as
 another free parameter.  But this is generally at the expense of also
 introducing higher-frequency noise.
 
-Finally, I propose a new method of determining the regularization
-parameter which is unique compared to the Monte Carlo method
+Finally, a new method of determining the regularization
+parameter is proposed which is unique compared to the Monte Carlo method
 introduced in Section~\ref{sec:mont} and used in Ref.~\cite{bea}. The method is based on minimizing the condition number of the regularized matrix, which gives similar results as the Monte Carlo method. The correspondence between the two methods will be discussed in the following sections.
 
 % So, first the importance of matrix condition number on PI will be discussed.
@@ -1544,12 +1542,12 @@ introduced in Section~\ref{sec:mont} and used in Ref.~\cite{bea}. The method is 
 The discussion on Section~\ref{sec:pi_behave} suggests that the
 $k_c^i$ term in the PI feedback algorithm is necessary for fast system
 response, and to reduce proportional droop and hence the error
-signals.  But, in including this term, I found that it also creates
+signals.  But, in including this term, we found that it also creates
 problems in terms of the coil currents which take long periods of time
-to settle (several tens of seconds).  I called this problem the
+to settle (several tens of seconds).  We called this problem the
 current drifting problem.  Adjusting the PI feedback parameters
 changed the problem somewhat but ultimately did not reduce the current
-drifting time.  Here, I focus on the effect of $r$ on this problem,
+drifting time.  Here, we focus on the effect of $r$ on this problem,
 treating it on a more equal footing with the PI parameters.
 
 
@@ -1570,13 +1568,13 @@ Section~\ref{sec:pi_behave}.  We have also seen the effect in
 Section~\ref{sec:pi_behave} that increasing $k_c^i$ after a point
 makes the current unstable resulting in overshoot.
 
-For these studies, I focused on the $C_z^+$ coil and the 8x sensor
+For these studies, we focused on the $C_z^+$ coil and the 8x sensor
 because they are located closer to the perturbation coil and hence see the effect most.
 
 \fig{Images/pi_r}{width = \textwidth,height=8 cm}{The $C_z^+$ coil current (left) and magnetic field change $\Delta B$ (right) for sensor 8x with $k_c^p=0.6$, $k_c^i=0.37$ and different values of $r$. In each case, resolution index 1 with 50 software averages per cycle were used. Vertical dashed lines indicate the perturbation coil state.\label{fig:pi_r}}{Single magnetic field compensation results for fixed $k_c^p$ and $k_c^i$ and different values of $r$.}
 
 
-I then tried changing $r$ while keeping $k_c^i$ and $k_c^p$ terms
+We then tried changing $r$ while keeping $k_c^i$ and $k_c^p$ terms
 fixed.  Figure~\ref{fig:pi_r} shows the active compensation for same
 fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
 $k_c^i=0.37$, and this time for different values of $r$. The
@@ -1601,14 +1599,14 @@ Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)}.  Indeed reducing $r$
 has increased the speed with which the currents settle, but apparently increased high-frequency noise on the currents.
 However, this increase in current noise does not increase
 the noise on the field measurements noticeably, which is similar in both cases.
-In Fig.~\ref{fig:i100_r24}, I have retained this value of $r=2.4$ and
+In Fig.~\ref{fig:i100_r24}, we have retained this value of $r=2.4$ and
 adjusted the PI parameters to attempt to further improve the response
 time on the currents.
 
 \fig{Images/p0i100r24}{width = \textwidth,height=7cm}{Currents (left) in all six coils ($C_x^\pm$, $C_y^\pm$ and $C_z^\pm$) and field change $\Delta B$ (right). The fluxgate positions are 1, 3, 6 and 8.  The feedback and regularization parameters are $k_c^p=0.0$, $k_c^i=1.0$, and $r=2.4$.  The current supplied to the perturbation coil was 10  mA when switch on. Resolution index 1 with 50 averages per cycle were used.\label{fig:i100_r24}}{Coil currents with field change $\Delta B$ for $k_c^p=0.0$, $k_c^i=1.0$ and $r=2.4$}
 
-Eventually, I discovered that neither of these solutions is truly
-optimal.  I now characterize them as being generally
+Eventually, it was discovered that neither of these solutions was truly
+optimal.  We now characterize them as being generally
 ill-conditioned.  The final solution is discussed further in
 Section~\ref{sec:coil_config}.
 
@@ -1727,14 +1725,14 @@ not the best general solution.
 %\end{itemize}
 
 
-The condition number of $\bm{M}$ and its regularized pseudoinverse,
+The condition number of $\bm{M}$ and its regularized pseudo-inverse,
 and the regularization parameter $r$ were introduced in
 Section.~\ref{sec:m} while discussing the inversion of the matrix
 $\bm{M}$ . Moreover, in Section~\ref{sec:mont}, the method of
 Ref.~\cite{bea} of selecting the best value for $r$ by randomly
 generated field perturbations was discussed.  The purpose of this
 section is to report that this method of selecting $r$ is equivalent
-to minimizing the condition number of the regularized pseudoinverse
+to minimizing the condition number of the regularized pseudo-inverse
 $\bm{M^{-1}}$.
 
 %  Recall from Section~\ref{sec:inv}, regularization is needed in the first place while inverse of the matrix $\bm{M}$ because $\bm{M}$ itself is ill-conditioned matrix. That means the $\bm{M}$ has a large condition number which while inverse would produce large currents in some ill-positioned places that will make the system unstable. So, it is required to have a well-conditioned  $\bm{M^{-1}}$ which implies that the condition number of $\bm{M^{-1}}$ should be small and that's what regularization has been doing. So, 
@@ -1759,23 +1757,23 @@ are traded off against field control.  In this study, the ``best''
 value $r=2.88$ is determined, which can be compared to $r=2.90$ which
 minimizes the condition number of the regularized pseudoinverse.
 
-I tried this same comparison for a variety of different $\bm{M}$ and
+We tried this same comparison for a variety of different $\bm{M}$ and
 always found the same level of agreement in the determination of $r$.
-A sample of results was shown in Table~\ref{table:flux-pos}.  I think
+A sample of results was shown in Table~\ref{table:flux-pos}.  We think
 that the method of minimizing the condition number is more robust
 because it does not involve random number generation and therefore is
 free of any additional statistical error.
 
-I suspect the excellent agreement seen between the two methods results
+We suspect the excellent agreement seen between the two methods results
 from the definition of Tikhonov
 regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3}.
 
 Given a vector of field fluctuations $\Delta\vec{B}$ and a vector of
-correction currents $\Delta\vec{I}$, the Moore-Penrose pseudoinverse
+correction currents $\Delta\vec{I}$, the Moore-Penrose pseudo-inverse
 $\bm{M}^{-1}$ can be thought of as the matrix which minimizes
 $|\Delta\vec{I}-\bm{M}^{-1}\Delta\vec{B}|$, which is analogous to
 chi-squared minimization for a system of linear equations.  Tikhonov
-regularization is used when this problem becomes ill conditioned, and
+regularization is used when this problem becomes ill-conditioned, and
 introduces another constraint that simultaneously minimized the modulus of the vector
 $|\Delta\vec{I}|$ . In a way this is equivalent to the compromise being
 made in the selection of the ``best'' $r$ using the random field
@@ -1786,8 +1784,8 @@ from occurring.
 
 
 
-I think, it is therefore not surprising that the two methods give good
-agreement. I feel the minimization of condition number is a better
+We think, it is therefore not surprising that the two methods give good
+agreement. We feel the minimization of condition number is a better
 defined solution, not requiring random number generation, and that it
 is a superior and robust method to determine $r$.
 
@@ -1902,9 +1900,9 @@ is a superior and robust method to determine $r$.
 %\item So we use regular PI and treat the parameters as TBD by system tuning.
 %\end{itemize}
 
-In Sections~\ref{sec:tune} and \ref{sec:pi_behave}, I discussed the PI
-feedback algorithm and my studies of tuning both the PI parameters and
-the regularization parameter $r$. The studies were all based on the
+In Sections~\ref{sec:tune} and \ref{sec:pi_behave}, the PI
+feedback algorithm and the studies of tuning both the PI parameters and
+the regularization parameter $r$ were discussed. The studies were all based on the
 work of Ref.~\cite{bea}.
 
 Subsequently, Refs.~\cite{rawlik,rawkliknedm2017,rawlikpriv} made the
@@ -1913,7 +1911,7 @@ This led to a number of studies using the ``new'' feedback algorithm,
 which indeed seemed to give similar results when compared to the
 ``old'' feedback algorithm.
 
-Eventually, I determined this is due to the fact that they are
+Eventually, we determined this is due to the fact that they are
 mathematically equivalent under certain conditions which correspond
 closely to the typical operating conditions of my active magnetic
 compensation apparatus.
@@ -1931,15 +1929,15 @@ which is taken directly from Eq.~\textcolor{blue}{(28)} in Section~\textcolor{bl
 Ref.~\cite{rawlik}. In this equation, $\Delta  \vec{B}^{n}$ is a vector of
 magnetic field values measured in the given feedback step.  The
 dimension is equal to the number of fluxgate axes being used for
-control (12 in my case).  The quantity $\bm{M^{-1}}$ is the Moore-Penrose
-pseudoinverse (a $6\times 12$ non-square matrix, in my case).  The
-quantity $\vec{I}^{n}$ are a vector of currents (dimension 6, in my case).
+control (12 in our case).  The quantity $\bm{M^{-1}}$ is the Moore-Penrose
+pseudo-inverse (a $6\times 12$ non-square matrix, in our case).  The
+quantity $\vec{I}^{n}$ are a vector of currents (dimension 6, in our case).
 The index $n$ refers to the present feedback step.
 The index $n+1$ on the left-hand-side of the equation is indicating
 the next vector of currents that will be set based on this feedback
 algorithm.
 
-This algorithm can be compared with the standard PI algorithm, which I
+This algorithm can be compared with the standard PI algorithm, which were
 presented in Eqs.~(\ref{eq:del_I}), and (\ref{eq:I}).  Naively, the main
 difference between the two equations appeared to be that the current
 from the previous step was being used to determine the next current
@@ -1956,9 +1954,9 @@ errors.
 %    \vec{I}^{n+1}= \vec{I^{n-2}}+\bm{M^{-1}} (B_{setpoint}-B_{measure}^n)=\vec{I^{n-2}}+\bm{M^{-1}} \Delta B^n
 %\end{equation}
 
-I implemented the new feedback algorithm into my code to test it.
-Experimentally, I discovered that the new algorithm gave very similar
-results to the standard PI algorithm if I set $k_c^p=0$ and used
+The new feedback algorithm was implemented into our code to test it.
+Experimentally, it was discovered that the new algorithm gave very similar
+results to the standard PI algorithm if we set $k_c^p=0$ and used
 $k_c^i=1.0$.  The results of such a test are shown in
 Fig.~\ref{fig:style_of_pi}, where the two algorithms are compared in
 both their current and field response, and give suspiciously similar
@@ -1978,7 +1976,7 @@ In the case of $k_c^p=0$ and $k_c^i=1$, the PI feedback algorithm in Eq.~(\ref{e
 where the same matrix and vector notation is being used as in
 Eq.~(\ref{eq:I_raw}).
 
-Studying Eqs.~(\ref{eq:I_raw}) and (\ref{eq:I_raw_eq}) further, I was
+Studying Eqs.~(\ref{eq:I_raw}) and (\ref{eq:I_raw_eq}) further, we were
 able to prove that the similar results actually arise because the two
 implementations are mathematically equivalent.
 
@@ -2002,10 +2000,10 @@ Section~\ref{sec:pSim}.  In this case, the algorithms indeed gave
 identical results since there is no experimental noise in the
 simulation.
 
-Hence, I conclude that the ``new'' feedback algorithm of
+Hence, we conclude that the ``new'' feedback algorithm of
 Ref.~\cite{rawlik} is simply the usual PI feedback algorithm, with the
 PI parameters being restricted to the particular values $k_c^p=0$ and
-$k_c^i=1$. My recommendation would be to keep these as tunable
+$k_c^i=1$. The recommendation would be to keep these as tunable
 parameters and allow for the potential of some ability to make
 adjustments to them as necessary, rather than restricting them
 to particular values. It is interesting that the particular tuning
@@ -2056,7 +2054,7 @@ In light of the previous studies, there was now strong evidence to
 suggest that the current drifting problem had more to do with the
 structure of the non-square matrix than with other possible problems
 such as instability of the current sinks or issues with the PI
-feedback loop.  In consideration of this, I began to focus more on
+feedback loop.  In consideration of this, we began to focus more on
 understanding the matrix, its pseudo-inverse, and the concepts of
 matrix regularization.
 
@@ -2126,7 +2124,7 @@ never make the smallest singular value larger than zero.
 \fig{Images/Right_patch_6c}{width =0.9\textwidth}{Color map of orthogonal matrix $\bm{V^T}$ found by SVD of $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil
 dimensions and fluxgate positions are given in Fig.~\ref{fig:matrix_patch_6c}. \label{fig:right_patch_6c}}{Orthogonal matrix $\bm{V^T}$ for 6 coils.}
 
-I then tried to understand the reason for the minimum diagonal element
+We then tried to understand the reason for the minimum diagonal element
 being zero, by studying the right singular vectors, which are
 represented by the rows of $\bm{V^T}$.  This matrix is displayed in
 Fig.~\ref{fig:right_patch_6c}.
@@ -2215,11 +2213,11 @@ described by Fig.~\ref{fig:cDir}. A general parametrization of the magnetic fiel
 
 Eq.~(\ref{eq:dbzdz}) suggests one method to prevent the problematic
 coil mode from ever being excited: remove the coil which generates
-$\partial B_z/\partial z$.  I implemented this in the Python
+$\partial B_z/\partial z$. This was implemented in the Python
 code by requiring that the currents in the $C_z^+$ and $C_z^-$ always
 be in the same direction and have the same value, {\it i.e.}~like the
 currents in a Helmholtz coil.  This means that there are only five
-independently controlled currents, which I denote $C_x^+$, $C_x^-$,
+independently controlled currents, which we denote $C_x^+$, $C_x^-$,
 $C_y^+$, $C_y^-$, and $C_z^\pm$.  More about the coils that generate spherical harmonics are discussed in Section~\ref{sec:spherical}.
 
 % \textcolor{red}{Need to add a note here about spherical harmonics. Need to add some note about Rawlik's patch coil system.  Or this could/should go in future work with a forward reference here.}
@@ -2295,15 +2293,13 @@ each of the $x$ and $y$ directions.
 \end{table}
 
 
-I then implemented this solution into the active magnetic compensation
-system.  Rather than physically wire two coils together, I implemented
-a software solution where the currents in one pair of opposing coils
+This solution was then implemented into the active magnetic compensation
+system.  Rather than physically wire two coils together, a software solution was used where the currents in one pair of opposing coils
 were required to be equal and run in the same direction.
 
 The results of matrix measurement followed by singular value
-decomposition are shown in Table~\ref{table:mcond_coil}.  Since I
-could only instrument $4\times 3$ fluxgate axes, only such matrices
-are considered.  The measurements shown inside and outside the parentheses were done with and without the magnetic shield within the coil cube. It is seen that they are similar as expected from the discussion in Section~\ref{sec:shield_impact}.
+decomposition are shown in Table~\ref{table:mcond_coil}.  Since $4\times 3$ fluxgate axes could be instrumented, only such matrices
+were considered.  The measurements shown inside and outside the parentheses were done with and without the magnetic shield within the coil cube. It is seen that they are similar as expected from the discussion in Section~\ref{sec:shield_impact}.
 
 Table~\ref{table:mcond_coil} shows that the condition number of the
 matrix is reduced by more than a factor of ten when comparing the
@@ -2315,10 +2311,9 @@ configurations gave essentially the same results for the condition
 number.
 
 Clearly, in the six-coil case, it is an absolute necessity to
-regularize the matrix.  As I discussed earlier, this may be done by
+regularize the matrix.  As discussed earlier, this may be done by
 adjusting the regularization parameter to minimize the condition
-number of the Tikhonov regularized pseudoinverse.  I also decided to
-study Tikhonov regularization for the five-coil case, to see if it had
+number of the Tikhonov regularized pseudoinverse. Tikhonov regularization was also studied for the five-coil case, to see if it had
 any impact on the PI feedback system.  Results of the Tikhonov
 regularization process are also displayed in
 Table~\ref{table:mcond_coil}.
@@ -2332,9 +2327,9 @@ $\bm{M^{-1}}$}
 
 Figure~\ref{fig:coil_reg} shows experimental data which demonstrate
 the success of the five-coil method compared to the six-coil method.
-In this case, I have compared the matrices with my regularization
+In this case, we have compared the matrices with our regularization
 method, determining the best value of $r$ based on its ability to
-minimize the condition number of the resultant pseudoinverse (see
+minimize the condition number of the resultant pseudo-inverse (see
 Section~\ref{sec:cond}).
 Figs.~\ref{fig:coil_reg}\textcolor{blue}{(a)}
 and \textcolor{blue}{(b)} correspond to the settings described in the
@@ -2386,7 +2381,7 @@ $\Delta B$ for different coil configurations with non-regularized
 $\bm{M^{-1}}$.}
 
 The five-coil algorithm can even be operated without the need for
-Tikhonov regularization of the pseudoinverse.
+Tikhonov regularization of the pseudo-inverse.
 Figure~\ref{fig:coil_pseudo} compares the six-coil and five-coil
 algorithms when no regularization is performed.  The five-coil case
 performs well, perhaps even better than the results displayed in
@@ -2396,11 +2391,11 @@ feedback parameters are not fully optimal, since more overshoot is
 also evident in Fig.~\ref{fig:coil_pseudo}\textcolor{blue}{(b)} when
 compared to Fig.~\ref{fig:coil_reg}\textcolor{blue}{(b)}.  For this
 study, the feedback parameters were held constant, and in
-Section~\ref{sec:new_study_r}, I showed that there is a relationship
-between these parameters.  Additional optimization is possible and
+Section~\ref{sec:new_study_r}, a relationship
+between these parameters was shown.  Additional optimization is possible and
 could affect this conclusion.
 
-In general, I expect that the non-regularized solution is superior.
+In general, we expect that the non-regularized solution is superior.
 Tikhonov regularization introduces additional constraints in order
 attempt to keep a poorly conditioned feedback system from oscillating.
 It is a superior principle to design the system to be well-conditioned
@@ -2408,8 +2403,7 @@ rather than relying on Tikhonov regularization to solve the problem of
 ill-conditioning.  This is also one of the general conclusions of
 Ref.~\cite{rawlik}.
 
-In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c}, I
-showed the ideal simulation results of the matrix $\bm{M}$.  The matrix $\bm{M}$ measured
+In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c}, the ideal simulation results of the matrix $\bm{M}$ is shown.  The matrix $\bm{M}$ measured
 experimentally is similar in its structure to these simulation
 results.
 
@@ -2427,7 +2421,7 @@ the five-coil and six-coil case.  These can be compared with the
 simulated results which were presented in
 Figs.~\ref{fig:diag_patch_5c} and \ref{fig:diag_patch_6c}.  It can be
 seen that, despite having only 12 fluxgate axes available
-experimentally, the $\Sigma$ matrices compare favorably with the
+experimentally, the $\bm{\Sigma}$ matrices compare favorably with the
 simulated counterparts.  In general the matrix elements are smaller
 experimentally, but this is simply because the fluxgates were located
 about 8-10~cm inside the corner positions of the coil cube, whereas in
@@ -2475,7 +2469,7 @@ response to the excitation coil was in the $C_z^+$ coil.  The reason
 for this is that the $C_z^+$ coil is located at the closest position
 and in the correct direction to cancel the field coming from the
 excitation coil.  For that study, the $C_x^\pm$ coils were required to
-have a common current.  I was interested to study the effect on the
+have a common current.  We were interested to study the effect on the
 five-coil feedback algorithm if common current was required in the
 $C_z^\pm$ coils instead.
 
@@ -2489,7 +2483,7 @@ $\partial B_y/\partial y$ using the other four coils which then
 generates the required gradient $\partial B_z/\partial z$ according to
 Eq.~(\ref{eq:dbzdz}).
 
-I think an interesting point in this case is that, for this particular
+We think an interesting point in this case is that, for this particular
 positioning of the perturbation coil, it would clearly be desirable
 for the system itself to be able to generate different currents in
 $C_z^+$ and $C_z^-$ if aiming to have the smallest changes in the
@@ -2507,7 +2501,7 @@ currents.
 %\end{itemize}
 
 
-I also redid the tests with the magnetic shield inside the coil cube.
+The tests were also redone with the magnetic shield inside the coil cube.
 Not surprisingly, the conclusions were the same.
 
 %\fig{Images/matrix_comb_shield}{width = \textwidth}{.. \label{fig:matrix_comb_shield}}{S}
@@ -2552,7 +2546,7 @@ The improvement in the general feedback system operation for the
 five-coil feedback algorithm is also very clear when the magnetic
 shield is within the coil cube.  Results of the usual test with the
 excitation coil are shown in Fig.~\ref{fig:5c_pseudo_shield_y}, where
-the non-regularized pseudoinverse has been used.  For
+the non-regularized pseudo-inverse has been used.  For
 Fig.~\ref{fig:5c_pseudo_shield_y}, the $C_y^+$ and $C_y^-$ coils have
 been required to carry a common current $C_y^\pm$ while the other five
 coils may be adjusted freely.  Even with the magnetic shield present,
@@ -2703,27 +2697,27 @@ shield was present. The results were also compared with redid in PI simulations 
 %\item Internal sensor perturbations (related to previous section).
 %\end{enumerate}
 
-In Section~\ref{sec:metrics}, I introduced some additional
-quantitative measures of the magnetic compensation performance.  These
+In Section~\ref{sec:metrics}, some additional
+quantitative measures of the magnetic compensation performance were introduced.  These
 metrics had been used in the previous studies of
-Refs.~\cite{bea,lins,rawlik}.  The two metrics I will discuss further in this section are
+Refs.~\cite{bea,lins,rawlik}.  The two metrics that will be discussed further in this section are
 \begin{itemize}
 \item the readings of central internal sensors when the compensation system is used, and
 \item the Allan standard deviation, which is used to gauge the effectiveness of corrections over long timescales.
 \end{itemize}
 The general conclusion of these studies is that they are in
-qualitative agreement with the previous works of others.  I also
+qualitative agreement with the previous works of others.  We also
 believe that one of the main limiting factors relates to the need for
-more advanced coil design, which I discuss further in
+more advanced coil design, which is discussed further in
 Chapter~\ref{ch:conclusion}.
 
 
 \subsection{Internal Sensor Perturbations}
 
-Most of the results that I showed so far are related to the magnetic field
+Most of the results that was showed so far are related to the magnetic field
 measured by 12 fluxgate sensors positioned within the coil cube just
 outside the region of interest.  Normally when these data were taken,
-I simultaneously acquired data for two additional fluxgate axes placed
+we simultaneously acquired data for two additional fluxgate axes placed
 centrally within the coil cube.  These sensors were not used in the
 feedback algorithm.  The idea was to use these as a way to estimate
 average feedback system performance within the region of interest.
@@ -2783,16 +2777,16 @@ problem.
 %Fig.~\ref{fig:center_pseudo_5c_x} and
 %Fig.~\ref{fig:center_5c_pseudo_s_xz}.
 
-I also did various other trials varying the feedback system
+We also did various other trials varying the feedback system
 parameters, and adjusting the current applied to the perturbation
 coil, both with and without the magnetic shield present.  In general
 the reduction in the central $z$ field was similar.
 
 While it is not a large reduction, the result is relatively consistent
-with my results for the general reduction in the field at the external
+with our results for the general reduction in the field at the external
 sensor sites when the feedback system is used to correct the effect of
 the perturbation coil (see the previous Section).  In that case also,
-the general reduction in the field at the external sensor sites was by a factor of roughly 1/2 to 2/3 on average.  I expect that in
+the general reduction in the field at the external sensor sites was by a factor of roughly 1/2 to 2/3 on average.  We expect that in
 order to provide better overall compensation results, the chief
 improvement will be in coil design, which was beyond the scope of this
 thesis.
@@ -2831,23 +2825,21 @@ sensors.
 
 %\fig{Images/adev_test}{width = \textwidth}{\label{fig:px}}{S}
 
-This Section presents my results for Allan deviation measurements
+This Section presents our results for Allan deviation measurements
 under two conditions:
 \begin{itemize}
-\item ``Natural'' fluctuations with feedback on.  In this case I tried to compensate typical environmental changes in the magnetic field in the laboratory at U.~Winnipeg.
-\item Simulated drift, where I slowly ramped the current in the perturbation coil over a long time, to see how well the feedback system could correct a linear drift.
+\item ``Natural'' fluctuations with feedback on.  In this case we tried to compensate typical environmental changes in the magnetic field in the laboratory at U.~Winnipeg.
+\item Simulated drift, where the current in the perturbation coil was ramped slowly over a long time, to see how well the feedback system could correct a linear drift.
 \end{itemize}
 
 In each case, the feedback system provided a shielding factor (ratio of uncorrected to feedback-corrected Allan deviations) larger than one.
-\textcolor{red}{In each case the feedback system provided superior result where the
-shielding factor (ratio of uncorrected to feedback-corrected Allan
-deviations) was larger than one.}
 
-\fig{Images/adev_nc}{width = \textwidth, height=14 cm}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{Field change $\Delta B$ for 24 hrs with feedback algorithm switched off.}
+
+\fig{Images/adev_nc_2}{width =\textwidth}{(a) Field change $\Delta B$ in 12 fluxgate sensors placed within the coil cube for 24 hrs with feedback algorithm switched off. (b) Corresponding Allan deviation.\label{fig:adev_nc}}{Field change $\Delta B$ for 24 hrs with feedback algorithm switched off.}
 
 Figure~\ref{fig:adev_nc} shows a measurement of fluxgate readings over
 a 24-hour period with the feedback system switched off.  This gives an
-impression of the overal scale of the fluctuations that the feedback
+impression of the overall scale of the fluctuations that the feedback
 algorithm must correct.  It was based on measurements like this that
 feedback system was designed with a dynamic range capable of
 correcting a few hundred nT in the fluxgate readings.  The Allan
@@ -2866,9 +2858,9 @@ walk.
 \end{figure}
 
 In order to ensure that the feedback system will not induce noise at
-higher frequencies, I retuned the PI parameters, resulting in
-reasonable values of $k_c^p=0.1$ and $k_c^i=0.37$.  The reponse of the
-system to a step perturbation with this retuning is shown in
+higher frequencies, the PI parameters were re-tuned, resulting in
+reasonable values of $k_c^p=0.1$ and $k_c^i=0.37$.  The response of the
+system to a step perturbation with this re-tuning is shown in
 Fig.~\ref{fig:p10_i37_x}.  The main feature to be observed is the
 coil currents do not experience and overshoot and appear more like a
 critically damped solution than in the previous sections.  This does
@@ -2944,13 +2936,15 @@ corrected readings (shown by the colored curves).  In
 Fig.~\ref{fig:7}\textcolor{blue}{(c)}, the ratio of Allan deviations
 (uncorrected/corrected), which is defined as the shielding factor, is
 shown.  In general the shielding factor is larger than one and less
-than about 2.  For longer averaging times, $x$- and $y$-axis shielding factors of some of the sensors drop below one, indicating that the system failed to stabilize the magnetic fluctuations in these directions. \textcolor{red}{For longer times one of the fluxgate axes drops below
-one, indicating that over long times, the feedback algorithm did not
-stabilize that particular axis better than as if the feedback
-algorithm had been switched off.} However, on average the feedback
+than about 2.  For longer averaging times, $x$- and $y$-axis shielding factors of some of the sensors drop below one, indicating that the system failed to stabilize the magnetic fluctuations in these directions. However, on average the feedback
 system improved the fluxgate reading stability over time.  For the
 longest times $\tau\gtrsim 100$~s, there is also some increased
 statistical fluctuation in the data.
+
+%\textcolor{red}{For longer times one of the fluxgate axes drops below
+%one, indicating that over long times, the feedback algorithm did not
+%stabilize that particular axis better than as if the feedback
+%algorithm had been switched off.} 
 
 Figure~\ref{fig:8} shows the behavior of the coil currents for this
 run over time.  It can be seen that the currents are indeed responding
@@ -3018,8 +3012,8 @@ factor generally above one.
 %    \label{fig:p10_i37_ramp_x}
 %\end{figure}
 
-In order to induce a long-term drift in the fluxgate signals, I also
-conducted runs where I slowly ramped the current in the perturbation
+In order to induce a long-term drift in the fluxgate signals, we also
+conducted runs where we slowly ramped the current in the perturbation
 coil over the 4096~s measurement period.  The results of one such run
 are shown in Figs.~\ref{fig:0_1} and~\ref{fig:0_2}.  In
 Fig.~\ref{fig:0_1}, it can be seen that all the fluxgate signals ramp
