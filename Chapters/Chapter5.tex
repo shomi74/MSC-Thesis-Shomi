@@ -623,9 +623,11 @@ $k_c^i$=0.37 is used.
 
 The conclusion is that the P term has a smaller effect compared to the
 I term which is seen from comparing Fig.~\ref{fig:p_pi} with
-Fig.~\ref{fig:i_pi} and Fig.~\ref{fig:pi_i_mCond30}.  \textcolor{red}{It is also clear
-that it is important to do some fine tuning of the PI parameters
-beyond Ziegler-Nichols in order to get the best feedback results.}
+Fig.~\ref{fig:i_pi} and Fig.~\ref{fig:pi_i_mCond30}. It is also clear that the Ziegler-Nichols tuning does not necessarily give substantially different results compared to the $k_c^p=0$ case. Figure~\ref{fig:pi_i_mCond30}\textcolor{blue}{(b)}, in comparison to the Ziegler-Nichols results in Fig.~\ref{fig:pi_i_mCond30}\textcolor{blue}{(a)}, looks better in some respects. The recovery time for the $\Delta B$ is somewhat faster upon application of the perturbation coil current, and the general high-frequency noise on the $\Delta B$ is somewhat reduced. It should also be noted that there are some lower frequency bumps in the $\Delta B$ graphs in Fig.~\ref{fig:pi_i_mCond30}. These were caused by a somewhat unstable magnetic environment during the measurement and are not reflective of the tuning parameters.
+
+% \textcolor{red}{It is also clear
+% that it is important to do some fine tuning of the PI parameters
+% beyond Ziegler-Nichols in order to get the best feedback results.}
 
 Unfortunately, neither applying Ziegler-Nichols nor doing any
 additional tuning was able to change the current drifting problem.
@@ -1579,7 +1581,7 @@ fixed.  Figure~\ref{fig:pi_r} shows the active compensation for same
 fluxgate positions and same settings as in Fig.~\ref{fig:rp_i}, with
 $k_c^i=0.37$, and this time for different values of $r$. The
 observation is that for decreasing $r$, the current drifting problem
-disappears, \textcolor{red}{but the feedback system introduces high frequency noise}.
+disappears, but the feedback system introduces high frequency noise (the spiky behavior in the currents, which is also seen at a somewhat reduced level in the $\Delta B$).
 
 It is natural that $r$ should affect the PI control, because the error
 function involves $\bm{M^{-1}}$ and therefore $r$ (see
@@ -2955,9 +2957,11 @@ run over time.  It can be seen that the currents are indeed responding
 to changes seen in the magnetic field, for example the step feature
 near $t=3500$~s.
 
-Over these shorter, hour-long runs, a common feature is that the
-excursions in the magnetic field are generally smaller than over a
-24~h period.
+% Over these shorter, hour-long runs, a common feature is that the
+% excursions in the magnetic field are generally smaller than over a
+% 24~h period.
+
+In these particular hour-long runs, a common feature was that the variations in field were smaller than over a typical 24~h period. It is just a coincidence that the environment happened to be quieter during these runs.
 
 %\begin{figure}
 %     \begin{subfigure}{\textwidth}
