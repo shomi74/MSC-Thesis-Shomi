@@ -152,9 +152,9 @@ The signals that are measured by fluxgate sensors are separated into $x$, $y$ an
 
 In addition to the standard 16-bit ADC with range $\pm10~\mathrm{V}$, the LabJack T7-Pro is equipped with a 24-bit sigma-delta ADC. The effective resolution can be varied from 16 to 19.1~bits when analog conversions occur on the 16-bit ADC and for 24-bit it is from 19.6 to 21.8 bits with gain 1~\cite{T7}. For testing, a short jumper was used to connect a test channel with ground and 512 successive reading and mean of those readings were stored. The root mean square (RMS) calibrated voltage differences from the mean was calculated as $\mathrm{\Delta V_{RMS}}$. This was converted to bits using
 \begin{equation}
-    \mathrm{Effective\;Resolution=log_2\left(\frac{\Delta V_{FSR}}{\Delta V_{RMS}}\right)}
+    \mathrm{Effective\;Resolution=log_2\left(\frac{\Delta V_{FSR}}{\Delta V_{RMS}}\right)}{\rm ,}
 \end{equation}
-where, $\mathrm{\Delta V_{FSR}=20~V}$ is the ADC full-scale range for $\mathrm{gain=1}$ used for this study.
+where $\mathrm{\Delta V_{FSR}=20~V}$ is the ADC full-scale range for $\mathrm{gain=1}$ used for this study.
 % The root mean square of the differences between the mean of the readings with each reading was calculated and termed as $\mathrm{noise_{RMS}}$. Depend on the 16-bit or 24-bit ADC with their input range, $\mathrm{noise_{RMS}}$ had been converted into ADC counts which transformed into bits by multiplying with $\mathrm{log_2}$ and termed as $\mathrm{noise_{bits}}$. The effective resolution was finally calculated by subtracting $\mathrm{noise_{bits}}$ from either  16 bits or 24 bits resolution depend on the type of ADC. For example, for a 16-bit ADC with $\pm$10~V range, the noise in teRMS of bits and thus effective resolution:
 % \begin{equation}\label{eq:adc_mean}
 %     \mathrm{noise_{bits}=log_2 \times \left(\frac{noise_{RMS}\times 2^{16}}{20}\right)}
@@ -374,13 +374,13 @@ The circuit diagram of a $\mathrm{4^{th}}$-order low-pass Butterworth filter is 
 To characterize the filters above, one was connected to a lock-in amplifier and the frequency varied from $\mathrm{1~Hz-15~kHz}$ with constant amplitude inputted to the filter. The output of the filter was connected to the lock-in amplifier for demodulation. The gain was then determined as 
 
 \begin{equation}\label{eq:filter_gain}
-    \mathrm{Gain=|V_{out}/V_{in}|~~,and}
+    \mathrm{Gain=|V_{out}/V_{in}|,~and}
 \end{equation}
 in decibel (dB) as
 \begin{equation}\label{eq:filter_gain_db}
-    \mathrm{Gain\;(dB)=20\;log_{10}|V_{out}/V_{in}|}
+    \mathrm{Gain\;(dB)=20\;log_{10}|V_{out}/V_{in}|,}
 \end{equation}
-where, $\mathrm{V_{in}}$ is the signal amplitude inputted to the filter, and $\mathrm{V_{out}}$ is the output amplitude.
+where $\mathrm{V_{in}}$ is the signal amplitude inputted to the filter, and $\mathrm{V_{out}}$ is the output amplitude.
 
 \fig{Images/mag_dB-Freq2}{width=0.9\textwidth}{Comparison of frequency response of a $\mathrm{4^{th}}$-order low-pass Butterworth with simulation. Vertical axis in both represents the gain. The difference between (a) and (b) is that the gain is converted to dB in (b). The curve with different colors represent different results as shown by the legends and their description is given in the text. \label{fig:butter}}{Frequency response of a $\mathrm{4^{th}}$-order low-pass Butterworth filter.}
 
