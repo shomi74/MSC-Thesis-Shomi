@@ -277,7 +277,6 @@ The point of SVD is that this is easy to invert because the transpose of an orth
 0 &  &  & \frac{1}{\Sigma_{nn}} &  &  & & &0 \\
  \end{bmatrix}{\rm .}
 \end{equation}
-
 The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}$ and $\bm{V^T}$ and can be written as
 \begin{equation}\label{eq:psMinv}
     \bm{M^{-1}} = \bm{V \Sigma^{-1} U^T}{\rm .}
@@ -287,7 +286,7 @@ The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma
 % ${\rm I\!R}$
 %  \fig{Images/6c_U_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{U}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{U}$ is orthonormal eigenvectors of $\bm{M}\bm{M^T}$ in sensors$\times$sensors dimension for 12 sensors signals (nT). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_U}}{Color map of $\bm{U}$.}
 
- \fig{Images/V_30_2}{width =0.8\textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate negative values. Elements that appear white are near zero in the matrix element.\label{fig:v}}{Color map of $\bm{\Sigma}$}
+
 
 %  \fig{Images/6c_Wt_Mcond26_p1368}{width = \textwidth}{Color map of $\bm{V^T}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{V^T}$ is orthonormal eigenvectors of $\bm{M^T}\bm{M}$ in coils$\times$coils dimension for 6 coils currents (A). Red elements indicate positive values while blue elements indicate near zero values. \label{fig:6c_Vt}}{Color map of $\bm{V^T}$.}
 
@@ -301,6 +300,7 @@ The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma
 % Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
 Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$ for our measured $\bm{M}$. It is a diagonal with the singular values arranged from $\Sigma_{11}$ to $\Sigma_{66}$ in a decreasing order, each having a non-negative value. It is also noticeable that $\Sigma_{66}$ is very small compare to $\Sigma_{11}$. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as the representation modes of the coil set. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
 
+ \fig{Images/V_30_2}{width =0.8\textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate negative values. Elements that appear white are near zero in the matrix element.\label{fig:v}}{Color map of $\bm{\Sigma}$}
 
 % \textcolor{red}{\bf{*************Need to Modify***************}}
 
