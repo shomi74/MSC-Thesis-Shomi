@@ -35,20 +35,24 @@
 \end{figure}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
-  bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,filecolor=magenta,colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={cyan},
-  pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
+% \usepackage[pdfpagemode={UseOutlines},bookmarks=true,bookmarksopen=true,
+%   bookmarksopenlevel=0,bookmarksnumbered=true,hypertexnames=false,filecolor=magenta,colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={cyan},
+%   pdfstartview={FitV},unicode,breaklinks=true]{hyperref}
    
-% \usepackage{hyperref}
-% \hypersetup{
-%     colorlinks=true,
-%     linkcolor=blue,
-%     filecolor=magenta,      
-%     urlcolor=cyan,frenchlinks=true,urlbordercolor=0 0 1
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,citecolor=cyan,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue!80!black}
+%     % , filebordercolor= 0 0.5 0.5, urlbordercolor= 0 1 1, linkbordercolor= 1 0 0, menubordercolor= 1 0 0, runbordercolor= 0 0.7 0.7, pdfborder = 0 0 1
+% % \usepackage[filecolor={magenta},colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={cyan}]{hyperref}
+% \makeatletter
+% \Hy@AtBeginDocument{%
+%   \def\@pdfborder{0 0 1}% Overrides border definition set with colorlinks=true
+%   \def\@pdfborderstyle{/S/U/W 1}% Overrides border style set with colorlinks=true
+%                                 % Hyperlink border style will be underline of width 1pt
 % }
-% \usepackage[filecolor={magenta},colorlinks=true,linkcolor={blue},citecolor={cyan},urlcolor={cyan}]{hyperref}
-
-% \usepackage{hyperref}
+% \makeatother
 %hyperref is nice, I find - it turns all your references (to citations, figures, etc) into hyperlinks,
 % so someone reading electronically can jump around your document.  It makes no visible marks on a
    

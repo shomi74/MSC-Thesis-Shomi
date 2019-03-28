@@ -344,8 +344,9 @@
     \hsp % intermediate spacing for title page.
   \newpage
   \thispagestyle{empty}
+  \centerline{\includegraphics[width=5cm]{Images/UM}}
   \centerline{\ }
-  \vspace{0.5in}
+  \vspace{0.25in}
   \begin{center}
     {\Large\bf {\@title}}
   \end{center}
@@ -408,13 +409,14 @@
   \addcontentsline{toc}{section}{Abstract}
     \vspace*{-0.8in}
     \noindent Thesis Advisor and Co-advisor \hfill Author \\
-    \noindent {\bf \@advisor} \hfill {\bf \@author} 
-    \vspace*{0.3in}
- \begin{center}
-        {\large\bf {\@title}}
-    \end{center} \vspace*{.3in}
-  {\centerline{\bf {\LARGE Abstract}}}
-  \vspace*{0.1in}
+    \noindent {\bf \@advisor} \hfill {\bf \@author}  \\[.5in]
+    % \vspace*{0.3in}
+%  \begin{center}
+%         {\large\bf {\@title}}
+%     \end{center} 
+    % \vspace*{.3in}
+  {\centerline{\bf {\LARGE Abstract}}}\\[0.3in]
+%   \vspace*{0.1in}
 }
 {}
 
