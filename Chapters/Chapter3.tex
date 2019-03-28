@@ -5,7 +5,10 @@
 % In Chapter~\ref{ch:magnetics}, the requirements of the magnetic field for nEDM experiment have been discussed. It also includes the active magnetic compensation to stabilize the external magnetic field. This thesis is based on the development of Active Compensation system for the TUCAN nEDM experiment. For that purpose a 
 
 
-A prototype active magnetic compensation system was built and tested at the University of Winnipeg. This chapter describes the components of the prototype and their performance. Measurements of time-dependence of the surrounding field in the laboratory are also presented. The system was designed to compensate fluctuations of that relevant scale. In Chapter~\ref{ch:operation}, the multi-dimensional feedback algorithm which corrects fluctuations is discussed.
+% A prototype active magnetic compensation system was built and tested at the University of Winnipeg. This chapter describes the components of the prototype and their performance. Measurements of time-dependence of the surrounding field in the laboratory are also presented. The system was designed to compensate fluctuations of that relevant scale. In Chapter~\ref{ch:operation}, the multi-dimensional feedback algorithm which corrects fluctuations is discussed.
+
+
+A prototype active magnetic compensation system was built and tested at the University of Winnipeg. This chapter describes the components of the prototype and their performance. The multi-dimensional feedback algorithm which corrects fluctuations is discussed in the next chapter. The system was designed to compensate fluctuations on the scale of those of the background field in the laboratory. Customization of a future AMC system for the scale and magnetic environment of the TUCAN nEDM experiment can be done based on the experience gained with the prototype.
 
 
 % The chapter describes the Active Magnetic Field Compensation (AMC) prototype that has been built at the University of Winnipeg. All the apparatus that made the AMC prototype will be discussed in detail.
@@ -18,27 +21,29 @@ A prototype active magnetic compensation system was built and tested at the Univ
 \doublefig{Images/exp4}{width=0.95\textwidth,height =8cm}{Schematic diagram \label{fig:exp}}{Images/exp_photo}{width =0.95\textwidth,height =8cm}{Photograph\label{fig:exp_photo}}{{AMC Prototype at the University of Winnipeg. The schematic diagram is shown in (a) and a photograph in (b). Surrounding the outermost mu-metal passive shielding layer are six coils on six faces of a cubic $\mathrm{Al}$ frame. A seventh coil provides additional perturbations to the field. The magnetic environment is sensed by the 3-axis fluxgates. The filters remove high-frequency noise. Fluxgate signals are recorded by an ADC and a computer uses a multi-dimensional feedback algorithm to control the currents in the coils via DACs and current sinks.} \label{fig:active}}{Active Magnetic Field Compensation (AMC) Prototype at the University of Winnipeg}
 
 
-A schematic diagram of the prototype is displayed in Fig.~\ref{fig:active}\textcolor{blue}{(a)}. A picture of the coils and magnetic shield is shown in Fig.~\ref{fig:active}\textcolor{blue}{(b)}. The magnetic background fluctuation was known to be $\sim100$~nT (see Section~\ref{sec:field}) over the course of a day. The prototype has been designed to compensate that by introducing six current carrying single loop coils on the six faces of a cube frame. The frame surrounds the outermost mu-metal shield of a four-layer cylindrical passive shielding system. A seventh square coil was used to generate additional perturbations. The properties of the mu-metal shields are discussed further in Section~\ref{sec:shield} and the coil cube in Section~\ref{sec:cube}. 
+% A schematic diagram of the prototype is displayed in Fig.~\ref{fig:active}\textcolor{blue}{(a)}. A picture of the coils and magnetic shield is shown in Fig.~\ref{fig:active}\textcolor{blue}{(b)}. The magnetic background fluctuation was known to be $\sim100$~nT (see Section~\ref{sec:field}) over the course of a day. The prototype has been designed to compensate that by introducing six current carrying single loop coils on the six faces of a cube frame. The frame surrounds the outermost mu-metal shield of a four-layer cylindrical passive shielding system. A seventh square coil was used to generate additional perturbations. The properties of the mu-metal shields are discussed further in Section~\ref{sec:shield} and the coil cube in Section~\ref{sec:cube}. 
+
+
+
+A schematic diagram of the prototype is displayed in Fig.~\ref{fig:active}\textcolor{blue}{(a)}. A picture of the coils and magnetic shield is shown in Fig.~\ref{fig:active}\textcolor{blue}{(b)}. The magnetic background fluctuation was known to be $\sim100$~nT (see Section~\ref{sec:field}) over the course of a day. The prototype has been designed to compensate that through the six current-carrying single-loop coils on the six faces of a cubic frame. A cylindrical multi-layer, mu-metal shield sits at the centre of the coils. This combined system represents a roughly one-third scale model of the eventual TUCAN nEDM experiment. An additional coil, located $\sim1-2$~m away from the prototype, serves to generate known magnetic field perturbations for quantitative characterization. The properties of the mu-metal shields are discussed further in Section~\ref{sec:shield} and the coil cube in Section~\ref{sec:cube}. 
 
 Four 3-axis fluxgate sensors were placed at positions near the shield and coil system to measure the field for compensation. Another 3-axis fluxgate sensor was placed at the center of the passive shield for quantification of the prototype. Details of the fluxgate sensor system are discussed in Section~\ref{sec:sensor}.
 
 
 %\FloatBarrier
 % \clearpage
-The fluxgates suffered from environmental noise dominated by 60~Hz electrical noise. Moreover, if the system has any potential of generating noise at $\sim8$~Hz in a $1~\mu$T field, it could induce changes in the $\mathrm{^{199}Hg}$ free precession. $\mathrm{4^{th}}$-order low-pass Butterworth filters with corner frequency 10~Hz were built to reduce the noise. The filter details are prescribed in Section~\ref{sec:filter}. After filtering, the signals are transmitted to the computer via the analog to digital converter (ADC) of a LabJack T7 Pro~\cite{T7}. The required currents are calculated in a computer (PC) using a proportional-integral (PI) control algorithm. The computer uses digital to analog converters (DACs) to control six voltage controlled current sinks. The current sinks drive the six compensation coils.
+% The fluxgates suffered from environmental noise dominated by 60~Hz electrical noise. Moreover, if the system has any potential of generating noise at $\sim8$~Hz in a $1~\mu$T field, it could induce changes in the $\mathrm{^{199}Hg}$ free precession. $\mathrm{4^{th}}$-order low-pass Butterworth filters with corner frequency 10~Hz were built to reduce the noise. The filter details are prescribed in Section~\ref{sec:filter}. After filtering, the signals are transmitted to the computer via the analog to digital converter (ADC) of a LabJack T7 Pro~\cite{T7}. The required currents are calculated in a computer (PC) using a proportional-integral (PI) control algorithm. The computer uses digital to analog converters (DACs) to control six voltage controlled current sinks. The current sinks drive the six compensation coils.
+
+
+It was found that the fluxgate signals were dominated by 60-Hz electrical noise from the background. A further concern is that if the AMC system itself generates substantial feedback at $\sim8$~Hz in a $1~\mu$T field, it could induce changes in the $\mathrm{^{199}Hg}$ free precession. As a result, $\mathrm{4^{th}}$-order low-pass Butterworth filters with corner frequency 10~Hz were built to reduce the noise. The filter details are prescribed in Section~\ref{sec:filter}. After filtering, the signals are transmitted to the computer via the analog to digital converter (ADC) of a LabJack T7 Pro~\cite{T7}. The required currents are calculated in a computer (PC) using a proportional-integral (PI) control algorithm. The computer uses digital to analog converters (DACs) to control six voltage controlled current sinks. The current sinks drive the six compensation coils.
 
 % \fig{Images/exp2}{width = 0.8\textwidth}{Schematic diagram of prototype active compensation system at University of Winnipeg.\label{fig: active}}
-More details of each component is discussed in the following sections.
+More details of each component are discussed in the following sections.
 
 \section{Mu-Metal Shields}\label{sec:shield}
 The passive magnetic shielding is composed of thin multi-layer shields with materials having high magnetic permeability (mu-metal). 
-
-% The outer layers are usually cylindrical \cite{mu_cyl_1,mu_cyl_2} but they can also take the same forms as the magnetic shielded room (msr)~\cite{mu_msr_1,mu_msr_2}. The inner layer is designed based on the coil to achieve required homogeneity \cite{mu_inner_1,mu_inner_2}. 
-
 \fig{Images/passive2}{width =0.95\textwidth}{Prototype passive shielding at the University of Winnipeg (UW)~\cite{mammei_presentation}.\label{fig: passive}}{Prototype passive shielding at the University of Winnipeg}
-
-
-In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625~inch has been used for the layers,  which is an 80\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps in each cylinder with a hole of 7.5~cm diameter at the center. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
+In the prototype at UW, there are four layers of cylindrical shields enclosing a volume of interest as shown in Fig.~\ref{fig: passive}. Each shell is enclosed  with end caps as shown in Fig.~\ref{fig: passive}\textcolor{blue}{(a)}. Amumetal (Magnifer 7904) of thickness 0.0625~inch has been used for the layers,  which is an 80\% Nickel-Iron alloy. The shields were fabricated and annealed by Amuneal Manufacturing Corp.~\cite{mu-metal}.  There are two end-caps on each cylinder with a hole of 7.5~cm diameter at the center. To minimize the leakage of the external fields into the progressively shielded inner volumes, a stove-pipe of length 5.5~cm is placed on each hole (see Fig.~\ref{fig: passive}\textcolor{blue}{(a)}).
 
 \begin{table} [!htb]
     \centering
@@ -55,7 +60,7 @@ In the prototype at UW, there are four layers of cylindrical shields enclosing a
     \caption[Dimensions of prototype passive shielding layers]{Dimensions of prototype passive shielding layers including stove pipes radius and length.}\label{table:mu-metal}
 \end{table}
 
-The radii and lengths of the four layers including the stove pipes are shown in Table~\ref{table:mu-metal}. A combined DC shielding factor $\sim\mathrm{10^6}$ is expected. A discussion about another prototype of similar design but smaller in size can be found in Ref. \cite{baby_shield}, where the shielding factor $=\mathrm{10^7}$ was measured using a very sensitive magnetometer.
+The radii and lengths of the four layers including the stove pipes are shown in Table~\ref{table:mu-metal}. A combined DC shielding factor $\sim\mathrm{10^6}$ is expected. A discussion about another prototype of similar design but smaller in size can be found in Ref. \cite{baby_shield}, where a shielding factor of $\sim\mathrm{10^7}$ was measured using a very sensitive magnetometer.
 
 
 
@@ -64,10 +69,16 @@ The radii and lengths of the four layers including the stove pipes are shown in 
 
 \section{Coil Cube}\label{sec:cube}
 
-\fig{Images/coil}{width =0.9\textwidth}{Schematic diagram indicating the coil   configuration and the position of the fluxgate sensors.\label{fig:coil}}{Schematic diagram indicating the coil configuration and the position of the fluxgate sensors.}
 
-As discussed in Section~\ref{sec:amcp_overview}, the prototype has been designed to compensate $\sim 100$~nT magnetic background fluctuations by introducing six current carrying closed loop coils on six faces of a cube surrounding the outermost mu-metal shield. The coils are designated as $C_x^\pm$, $C_y^\pm$ and $C_z^\pm$ (Fig.~\ref{fig:coil}) and are sometimes referred to as compensation coils because they are responsible for compensating magnetic fluctuations. The side length of the cube is 1.15~m. In addition, there is a perturbation coil namely $P_z^+$, which is used to apply additional field for testing purposes. Figure~\ref{fig:coil} also displays the numbers 1-8 indicating possible positions of the fluxgate sensors, which will be discussed in the next section.
 
+As discussed in Section~\ref{sec:amcp_overview}, the prototype has been designed to compensate $\sim 100$~nT magnetic background fluctuations by introducing six current carrying closed loop coils on six faces of a cube surrounding the outermost mu-metal shield. To achieve this a single turn coil was wound on each of the six sides ($\rm 1.5~m\times1.5~m$) of an aluminium frame. The coils, which can be powered independently,
+are designated as designated as $C_x^\pm$, $C_y^\pm$ and $C_z^\pm$ (Fig.~\ref{fig:coil}) and are sometimes referred to as compensation coils because they are responsible for compensating magnetic fluctuations. In addition, there is a perturbation coil namely $P_z^+$, which is used to apply additional field for testing purposes. Figure~\ref{fig:coil} also displays the numbers 1-8 indicating possible positions of the fluxgate sensors, which will be discussed in the next section.
+% The side length of the cube is 1.15~m. 
+
+\fig{Images/coil2}{width =0.95\textwidth}{Schematic diagram indicating the coil configuration and naming scheme, as well as the numbered locations of the fluxgate sensors.\label{fig:coil}}{Schematic diagram indicating the coil configuration and the position of the fluxgate sensors.}
+
+% \FloatBarrier
+The compensation coils have been chosen to be single turn to have small resistance ($\sim0.15~\Omega$) and small inductive reactance. The perturbation electro-magnet coil has the same dimensions but 77 turns. The perturbation coil was typically placed parallel to the same face of the $C_z^+$ coil, separated by 1.06~m. Coil properties are summarized in Table~\ref{table:coil}. 
 
 \begin{table} [!htb]
     \centering
@@ -90,9 +101,9 @@ As discussed in Section~\ref{sec:amcp_overview}, the prototype has been designed
     \caption{Coil dimensions and electrical properties.}\label{table:coil}
 \end{table}
 
-% \FloatBarrier
-The compensation coils have been chosen to be single turn to have small resistance ($\sim0.15~\Omega$) and small inductive reactance. The perturbation electro-magnet coil has the same dimensions but 77 turns. The perturbation coil was typically placed in the same face as $C_z^+$ and separated from it by 1.06~m. Coil properties are summarized in Table~\ref{table:coil}. 
 
+
+%The perturbation coil was typically placed in the same face as $C_z^+$ and separated from it by 1.06~m.
 
 % %\FloatBarrier
 % The above discussion gives an idea about the coil configuration, dimensions and properties. Next, the apparatus used to measure magnetic field will be discussed.
@@ -102,8 +113,12 @@ The compensation coils have been chosen to be single turn to have small resistan
 % The measured data from the fluxgate sensors are transferred to the computer via anlog to digital converter (ADC) of LabJack T7 Pro which will be discussed in the next section. But before coming to the ADC, the 3-axis of the fluxgates have to be separated and for that purpose we have build  2 breakout boxes. 
 
 % A breakout box was built to separate each of $x$, $y$ and $z$ axis in respective direction and provide power. 
-A fluxgate sensor is a piece of magnetic material, within a sensing winding used for measuring the magnitude and direction of DC or low-frequency AC magnetic fields. The magnetometer's sensitivity direction is the axis of the sensing winding. The magnetic material is periodically saturated by a source of excitation power. It is the transition of this material into the magnetic saturation that creates the measurement signal~\cite{flux1,flux_sense}.
+% A fluxgate sensor is a piece of magnetic material, within a sensing winding used for measuring the magnitude and direction of DC or low-frequency AC magnetic fields. The magnetometer's sensitivity direction is the axis of the sensing winding. The magnetic material is periodically saturated by a source of excitation power. It is the transition of this material into the magnetic saturation that creates the measurement signal~\cite{flux1,flux_sense}.
+       
+      
+% A breakout box was built to separate each of $x$, $y$ and $z$ axis of the fluxgates in respective direction and provide power. The breakout box separates both powers and four 3-axis fluxgate sensors resulting in $3\times4=12$ analog outputs. Figure~\ref{fig:coil} also defines the direction $x$, $y$ and $z$ for the fluxgates. The properties of the fluxgate sensors that are used for the prototype are shown in Table~\ref{table:sensor} and collected from the manufacturer~\cite{flux}. 
 
+The fluxgate is a well-known magnetic sensor~\cite{flux1,flux_sense}. For the AMC prototype, four 3-axis fluxgate sensors (2 Bartington Mag-03 and 2 Bartington Mag690) were placed at different positions within the compensation coils to measure field for compensation. Beside those, one 3-axis fluxgate sensor (Bartington Mag690) was placed at the center of the prototype for quantification of its performance. The numbering 1-8 in Fig.~\ref{fig:coil} indicates possible positions of the fluxgates. In addition to those, more positions were also used which would be discussed in Chapter~\ref{ch:quantification}. A breakout box was built to provide power to each of the four fluxgate units and to separate each of $x$-, $y$- and $z$-axis readouts, resulting in 12 analog outputs. Figure~\ref{fig:coil} also defines the direction $x$, $y$ and $z$ for the fluxgates. The properties of the fluxgate sensors that are used for the prototype are shown in Table~\ref{table:sensor} and collected from the manufacturer~\cite{flux}. 
 
 \begin{table} [!htb]
     \centering
@@ -123,16 +138,12 @@ A fluxgate sensor is a piece of magnetic material, within a sensing winding used
     \caption{Properties of the fluxgate sensors used for the prototype.}\label{table:sensor}
 \end{table}
 
-For the prototype, four 3-axis fluxgate sensors (2 Bartington Mag-03 and 2 Bartington Mag690) were placed at different positions within the compensation coils to measure field for compensation. Beside those, one 3-axis fluxgate sensor (Bartington Mag690) was placed at the center of the prototype for quantification of its performance. The numbering 1-8 in Fig.~\ref{fig:coil} indicates possible positions of the fluxgates. In addition to those, more positions were also used which would be discussed in Chapter~\ref{ch:quantification}. A breakout box was built to separate each of $x$, $y$ and $z$ axis of the fluxgates in respective direction and provide power. The breakout box separates both powers and four 3-axis fluxgate sensors resulting in $3\times4=12$ analog outputs. Figure~\ref{fig:coil} also defines the direction $x$, $y$ and $z$ for the fluxgates. The properties of the fluxgate sensors that are used for the prototype are shown in Table~\ref{table:sensor} and collected from the manufacturer~\cite{flux}. 
-
-
-
 %\FloatBarrier
 
-\fig{Images/noise}{width =0.8\textwidth}{Average Spectral Density for Mag690. \label{fig:noise}}{Average Spectral Density for Mag690.}
 
 According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_{rms}\;/\sqrt{Hz}}$ and $\geq \mathrm{10}$ to $\mathrm{<20}$~$\mathrm{pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for Mag-03 and Mag690 respectively. The noise level of the fluxgates were measured to be found that they matched the manufacturer's specification. For the test, data was taken by placing each fluxgate inside the shield and field data recorded. The data was processed in Mathematica~\cite{Mathematica} to estimate the power spectral density using a discrete Fourier transform (DFT)~\cite{dft}. Figure~\ref{fig:noise} shows that the noise level is $\sim\mathrm{16~pT_{rms}\;/\sqrt{Hz}}$ at $\mathrm{1~Hz}$ for the Mag690. This also confirms that the ADC (Section~\ref{sec:DAQ}) does not present any substantial noise beyond the fundamental noise of the fluxgate.
 
+\fig{Images/noise}{width =0.8\textwidth}{Average Spectral Density for Mag690. \label{fig:noise}}{Average Spectral Density for Mag690.}
 
 
 
@@ -141,16 +152,19 @@ According to the manufacturer, the typical noise levels are from $\mathrm{<6~pT_
 
 \section{Data Acquisition (DAQ) Module}\label{sec:DAQ}
 
-The signals from the fluxgates are all analog. An analog to digital converter (ADC) transfers information to the computer and a digital to analog converter (DAC) transfers information out of the computer. For that purpose, a LabJack T7 Pro Data Acquisition (DAQ) module~\cite{T7} was used.
+% The signals from the fluxgates are all analog. An analog to digital converter (ADC) transfers information to the computer and a digital to analog converter (DAC) transfers information out of the computer. For that purpose, a LabJack T7 Pro Data Acquisition (DAQ) module~\cite{T7} was used.
 
-\subsubsection{ADC of LabJack T7 Pro}
+A LabJack T7 Pro Data Acquisition (DAQ) module~\cite{T7} was used for analog to digital conversion of the 
+fluxgate signals. The performance and characterization of the LabJack's analog to digital converter (ADC) is presented here. The same unit, with an additional expansion module, was used a digital to analog converter (DAC) to control coil currents, as discussed in the next section.
 
-The signals that are measured by fluxgate sensors are separated into $x$, $y$ and $z$ axis via breakout box and then with/without filter (discussed later) are transmitted to the computer via ADC of LabJack T7 Pro. The ADC records the analog voltage in terms of ADC counts. An ADC count is the smallest change in the voltage for a single change in ADC value. The resolution of ADC defines the number of discrete voltages which can be represented for a input range. 
+% \subsubsection{ADC of LabJack T7 Pro}
 
-% For example, an ADC with 16 bit resolution can record $\mathrm{2^16=65536}$ discrete voltages and for an input range of 10 V, the smallest change in the voltages will be $\mathrm{10}$ V$\mathrm{/2^16=0.153}$ mV. But it is just theoretical prediction considering no channel noise. But in reality, in addition to noise of the ADC itself, there are noises from the power source and the fluxgates which contribute to the channel resolution and that resolution is called effective resolution which is lower than ideal resolution.
+% The signals that are measured by fluxgate sensors are separated into $x$, $y$ and $z$ axis via breakout box and then with/without filter (discussed later) are transmitted to the computer via ADC of LabJack T7 Pro. The ADC records the analog voltage in terms of ADC counts. An ADC count is the smallest change in the voltage for a single change in ADC value. The resolution of ADC defines the number of discrete voltages which can be represented for a input range. 
+
+% %For example, an ADC with 16 bit resolution can record $\mathrm{2^16=65536}$ discrete voltages and for an input range of 10 V, the smallest change in the voltages will be $\mathrm{10}$ V$\mathrm{/2^16=0.153}$ mV. But it is just theoretical prediction considering no channel noise. But in reality, in addition to noise of the ADC itself, there are noises from the power source and the fluxgates which contribute to the channel resolution and that resolution is called effective resolution which is lower than ideal resolution.
 
 
-In addition to the standard 16-bit ADC with range $\pm10~\mathrm{V}$, the LabJack T7-Pro is equipped with a 24-bit sigma-delta ADC. The effective resolution can be varied from 16 to 19.1~bits when analog conversions occur on the 16-bit ADC and for 24-bit it is from 19.6 to 21.8 bits with gain 1~\cite{T7}. For testing, a short jumper was used to connect a test channel with ground and 512 successive reading and mean of those readings were stored. The root mean square (RMS) calibrated voltage differences from the mean was calculated as $\mathrm{\Delta V_{RMS}}$. This was converted to bits using
+In addition to the standard 16-bit ADC with range $\pm10~\mathrm{V}$, the LabJack T7-Pro is equipped with a 24-bit sigma-delta ADC. The effective resolution can be varied from 16 to 19.1~bits when analog conversion occurs on the 16-bit ADC, and from 19.6 to 21.8 bits on the 24-bit ADC with gain 1~\cite{T7}. For testing, a short jumper was used to connect a test channel with ground and 512 successive readings, and the mean of those readings were stored. The root mean square (RMS) calibrated voltage differences from the mean was calculated as $\mathrm{\Delta V_{RMS}}$. This was converted to bits using
 \begin{equation}
     \mathrm{Effective\;Resolution=log_2\left(\frac{\Delta V_{FSR}}{\Delta V_{RMS}}\right)}{\rm ,}
 \end{equation}
@@ -163,6 +177,7 @@ where $\mathrm{\Delta V_{FSR}=20~V}$ is the ADC full-scale range for $\mathrm{ga
 % \begin{equation}
 %     \mathrm{Effective\;Resolution=16 - noise_{bits}}
 % \end{equation}. 
+
 
 \fig{Images/res_T7adc}{width =0.75\textwidth}{Effective resolution for different resolution index for gain 1 and $\pm 10\:V$ range. A higher resolution index will result in lower noise and higher effective resolution but increases sample times. \label{fig:res}}{Effective resolution for different resolution index for gain 1 and $\pm 10\:V$ range.}
 
@@ -178,8 +193,8 @@ where $\mathrm{\Delta V_{FSR}=20~V}$ is the ADC full-scale range for $\mathrm{ga
 % \end{equation}
 
 
-Figure~\ref{fig:res} compares the manufacturer~\cite{T7} result (dashed red) with  measured result (solid green) for different resolution indices. Higher resolution index means lower noise but also increases averaging and decreases bandwidth. Table~\ref{table:t7freq2} shows this. Normally, gain 1(first column of Table~\ref{table:t7freq2}) was used.
-
+Figure~\ref{fig:res} compares the manufacturer~\cite{T7} result (dashed red) with  measured result (solid green) for different resolution indices. Higher resolution index means lower noise, but it also results in increased averaging times and decreased bandwidth as shown in Table~\ref{table:t7freq2}. Normally, a gain of 1 was used.
+% Normally, a gain of 1(first column of Table~\ref{table:t7freq2}) was used.
 
 
 % It is seen from the figure that the results are quite similar. Note that for resolution index 1-8, T7 Pro uses 16-bit ADC and for 9-12 resolution index it uses 24-bit sigma-delta ADC. 
@@ -261,12 +276,12 @@ Figure~\ref{fig:res} compares the manufacturer~\cite{T7} result (dashed red) wit
 \end{table}
 % For the prototype, by effective sampling frequency we meant that the number of signals of the fluxgate sensors that are going to the feedback algorithm via analog to digital converter (ADC) per second per measurement. But we are recording the time for a complete iteration which we call it as loop sampling frequency which includes the ADC effective sampling frequency plus rest of the loop frequency. 
 
-Table~\ref{table:t7freq2} reports sampling rate for each analog input. If more than one input is used, the overall sample rate suffers accordingly since the same ADC is used. In addition, there are computer delays. Including these delays results in a lower frequency which we call the loop sampling frequency (Table~\ref{table:t7freq}). For resolution index 1, it is found to be 3846.2~Hz, which is smaller than the effective sampling frequency 25000~Hz reported in Table~\ref{table:t7freq2} because of polling time which is typically 1~ms per channel read~\cite{T7}. The polling time includes LJM library overhead, Linux overhead, USB communication time, and device processing time. Table~\ref{table:t7freq} also shows the possible loop bandwidth for 14 fluxgate axes that have been used for active magnetic compensation. Possible software averaging is also shown in Table~\ref{table:t7freq} to meet the 6~Hz system design goal. Resolution index $1-9$ are acceptable to meet the design goal. Software averaging should give roughly the same noise performance which is discussed later (Chapter~\ref{ch:quantification}).
+Table~\ref{table:t7freq2} also reports sampling rates for each analog input. If more than one input is used, the overall sample rate suffers accordingly since the same ADC is used. In addition, there are delays due to computation time, which results in an overall slower response which we call the loop sampling frequency (Table~\ref{table:t7freq}). For resolution index 1, it is found to be 3846.2~Hz, which is smaller than the effective sampling frequency 25000~Hz reported in Table~\ref{table:t7freq2} because of polling time which is typically 1~ms per channel read~\cite{T7}. The polling time includes LJM library overhead, Linux overhead, USB communication time, and device processing time. Table~\ref{table:t7freq} also shows the possible loop bandwidth for 14 fluxgate axes that have been used for active magnetic compensation. Possible software averaging is also shown in Table~\ref{table:t7freq} to meet the 6~Hz system design goal. Resolution index $1-9$ are acceptable to meet the design goal. Software averaging should give roughly the same noise performance which is discussed later (Chapter~\ref{ch:quantification}).
 %\FloatBarrier
 % The above discussion shows that the effective resolution that the LabJack corporation has given in their website are pretty similar to our result (see Fig.~\ref{fig:res}) and if we want to sample faster we need a lower resolution index but that will increase noise. To get rid of that noise and to meet design goal we can use software averaging (see Table~\ref{table:t7freq}), and filters which will be discussed in the latter part of this chapter.
 
-\subsubsection{LabJack T7 Pro with LJTick-DAC}
-Once the fluxgate signals have been processed in the PI control algorithm within the computer, currents must be sent to the compensation coils. An expansion module from LabJack called the LJTick-DAC provides two 14-bit analog outputs per module with a range of $\pm10$~V. The LJTick-DAC plugs into any digital I/O block of T7 Pro. To control the seven coils (including the perturbation coil), 4 LJTick-DACs were connected to LabJack T7 Pro via the CB15 terminal. 
+% \subsubsection{LabJack T7 Pro with LJTick-DAC}
+% Once the fluxgate signals have been processed in the PI control algorithm within the computer, currents must be sent to the compensation coils. An expansion module from LabJack called the LJTick-DAC provides two 14-bit analog outputs per module with a range of $\pm10$~V. The LJTick-DAC plugs into any digital I/O block of T7 Pro. To control the seven coils (including the perturbation coil), 4 LJTick-DACs were connected to LabJack T7 Pro via the CB15 terminal. 
 
 % There are 3 LJTickDACs each with two channels thus total six for six compensation coils. They are shown in Fig. \ref{fig:tick}.
 
@@ -285,18 +300,24 @@ Once the fluxgate signals have been processed in the PI control algorithm within
 % This ends our discussion of DAQ for now. Next, we will test the resolution of the DAC as claimed by the LabJack by doing experiment on it after describing the current sink circuit.
 
 
-\section{Current Sink}\label{sec:sink}
+\section{DAC and the Current Sink}\label{sec:sink}
 
+Once the fluxgate signals have been processed in the PI control algorithm within the computer, currents must be sent to the compensation coils. DACs were used to provide analog output voltage signals. An 8-channel current sink device was built to convert those voltage signals into currents for the coils. Both the DAC and the current sink device will be discussed in this section. 
+% The LJTick-DACs provide 14-bit analog outputs with a range of $\pm10$~V. The analog outputs are voltage signals which must be converted to currents for the coils. An 8-channel current sink device was built which will be discussed in this section. 
 
-The LJTick-DACs provide 14-bit analog outputs with a range of $\pm10$~V. The analog outputs are voltage signals which must be converted to currents for the coils. An 8-channel current sink device was built which will be discussed in this section. 
+% \subsubsection{LabJack T7 Pro with LJTick-DAC}
+% Once the fluxgate signals have been processed in the PI control algorithm within the computer, currents must be sent to the compensation coils. 
+
+An expansion module from LabJack called the LJTick-DAC provides two 14-bit analog outputs per module with a range of $\pm10$~V. The LJTick-DAC plugs into any digital I/O block of T7 Pro. To control the seven coils (including the perturbation coil), 4 LJTick-DACs were connected to LabJack T7 Pro via the CB15 terminal. 
 
 % To generate the designed $\sim 200\:nT$ magnetic field by the coils (see section \ref{sec:cube}), it was found that $\sim 200\:mA$ current must be sent to them. So, a current sink  device as shown in Fig. \ref{fig:currenSink} with 8 channels has been built.
 
 % The 8 channels are actually 8 different voltage controlled current source circuits whose output currents are controlled by their input voltages. The circuit actively monitors and regulates the voltage drop across its sense resistor ($\mathrm{R_{sense}}$) until that is equal to the incoming voltage (in this case the output voltage of the LJTickDACs). Now, the the coil is kept in series with this resistor and thus, whatever current flows through the sense resistor must also flow through the coil. The device is termed as current sink device as current flows into the coils. The current sinks were designed to control 0-200 mA current from a 10V signal range. Because, 
 
+% \subsubsection{Current Sink}
 
-It was found that the field generated by one of the coils at the center of the cube was $\sim200$~nT, when there was $\sim200$~mA current flowing through the coil. Since the environmental magnetic fluctuations are $\sim100$~nT, a $200$~mA current sink was considered sufficient. The required gain of the current sink is then such that $200$~mA current shall be generated over a $10$~V range. In the current sink design (Fig.~\ref{fig:currenSink}), it means that the sense resistor must be $\mathrm{R_{sense}=\frac{10~V}{0.2~A}=50~\Omega}$. Of the eight available channels, six were connected to the six compensation coils and our first prototype current sink was connected to the perturbation coil. Other two remaining channels are not instrumented. The 8-channel device is powered by $24$~V at a limit of $\sim 1.3$~A current. 
-
+It was found that the field generated by one of the coils at the center of the cube was $\sim200$~nT, when there was $\sim200$~mA current flowing through the coil. Since the environmental magnetic fluctuations are $\sim100$~nT, a $200$~mA current sink was considered sufficient. The required gain of the current sink is then such that $200$~mA current shall be generated over a $10$~V range. In the current sink design (Fig.~\ref{fig:currenSink}), it means that the sense resistor must be $\mathrm{R_{sense}=\frac{10~V}{0.2~A}=50~\Omega}$. Of the eight available channels, six were connected to the six compensation coils and our first prototype current sink was connected to the perturbation coil. The other two remaining channels were not used here. The 8-channel device is powered by $24$~V at a limit of $\sim 1.3$~A current. 
+% Other two remaining channels are not instrumented.
 \fig{Images/currentSink2}{width =0.9\textwidth}{Current Sink Device. Circuit diagram of one of the voltage controlled current sink device shows in (a) and the pictorial topview of all the assembled current sink circuits shows in (b). The description is given in the text. \label{fig:currenSink}}{Current Sink Device}
 
 
@@ -304,15 +325,15 @@ It was found that the field generated by one of the coils at the center of the c
 % speed switching applications. So, voltage from LJTick-DAC$\_$1a ($\mathrm{V_{in}}$) is coming to gate of MOSFET and also current is generated as $\mathrm{I_{out}=V_{in}/R_{sense}}=V_{in}/50$ where, $\mathrm{Vin}$ ranges from 0 to 10 V. Now, when voltage between pin 1 (gate G) and pin 3 (source S) of MOSFET i.e.  $\mathrm{V_{GS}>0}$, then $\mathrm{I_{out}}$ flows from pin 3 (source S) to pin 2 (drain D) and eventually flows towards the coil $C_x^-$. It is also seen that a Schottky diode has been connected in parallel with the output where coil $C_x^-$ is connected for reverse current protection. It should be noted that outputs can not be left open. All the current sink circuits are assembled in a box and a picture from top is shown in Fig.~\ref{fig:currenSink}\textcolor{blue}{(b)}.
 
 
-In the circuit diagram (Fig.~\ref{fig:currenSink}\textcolor{blue}{(a)}), the output voltage from LJTick-DAC$\_$1a (channel a of first LJTick-DAC) is connected to the input of the current sink. The output of the op-amp is connected to pin 1 (the gate) of a power metal-oxide-semiconductor field-effect transistor (MOSFET) designed for low voltage, high speed switching applications. A Schottky diode is connected in parallel with the output where the coil $C_x^-$ is connected for reverse current protection. All the current sink circuits are assembled in a box and a picture is shown in Fig.~\ref{fig:currenSink}\textcolor{blue}{(b)}.
+In the circuit diagram (Fig.~\ref{fig:currenSink}\textcolor{blue}{(a)}), the output voltage from LJTick-DAC$\_$1a (channel a of first LJTick-DAC) is connected to the input of the current sink. The output of the op-amp is connected to pin 1 (the gate) of a power metal-oxide-semiconductor field-effect transistor (MOSFET) designed for low voltage, high speed switching applications. A Schottky diode is connected in parallel with the output where the coil $C_x^-$ is connected for reverse current protection. All the current sink circuits are assembled in a box and a picture is shown in Fig.~\ref{fig:currenSink}\textcolor{blue}{(b)}. The current sinks were calibrated and agreement was formed with the gain of $50~\Omega$ set by $\mathrm{R_{sense}}$.  
 
 % For calibrating current sink device, currents in the range of $0-200$ mA was requested and on the basis of that DACs generate the required voltages. Then the DACs generated voltage (input voltage) and the current that has been requested have been measured by 34970A data acquisition device. The readings of the input voltage and measured current have been noted. A linear fit of the input voltage (y-axis) based on LabJack 24-bit sigma-delta ADC specifications and measured current (x-axis) was made. The slope and offset of that fit is the ultimate gain and offset of the current sink channels. The gain found was 50 as expected because $\mathrm{R_{sense}}$ is 50 $\Omega$.  
 
-The current sinks were calibrated and agreement was formed with the gain of $50~\Omega$ set by $\mathrm{R_{sense}}$.  
+
 
 % Although the LJTickDACs support a $\pm10$~V range, the current sink device has been built to be in 0-10 V range. The reason is that it is relatively easy to make a circuit that can source or sink current based on a unipolar voltage and unipolar current. However, to generate a circuit that can do both without any distortion near $0\:V$ is a bit harder but certainly doable. But losing half ranges was not an issue for the prototype design and thus without wasting time, the device was built. Now, at this point, if it is required to utilize the full resolution of the DACs,  it's probably easier to just modify the LJTick-DACs $\pm$10 V range to a smaller range prior to the generation of the bipolar output instead of making a new voltage controlled current supply. The first LJTick-DAC had been done modified in this way. 
 
-Although the LJTickDACs support $\mathrm{-10~to~10~V}$ range, the current sink device uses the $\mathrm{0~to~10~V}$ range for convenience, at the cost of losing one bit in resolution. If it is required to utilize the full resolution of the DACs,  it's probably easier to just modify the LJTick-DACs $\mathrm{-10~to~10~V}$ range to a smaller unipolar range which exists on the chip just prior to the generation of the bipolar. We succesfully modified one LJTick-DAC in this way, and modified $\mathrm{R_{sense}}$ accordingly in its current sink. 
+Although the LJTick-DAC supports $\mathrm{-10~to~10~V}$ range, the current sink device uses the $\mathrm{0~to~10~V}$ range for convenience, at the cost of losing one bit in resolution. If it is required to utilize the full resolution of the DACs,  it's probably easier to just modify the LJTick-DACs $\mathrm{-10~to~10~V}$ range to a smaller unipolar range which exists on the chip just prior to the generation of the bipolar. We succesfully modified one LJTick-DAC in this way, and modified $\mathrm{R_{sense}}$ accordingly in its current sink. 
 
 % For testing the resolution of the DACs, 500 values in the range of  0-1 mA was requested with 0.001 mA increment each time and the currents have been measured by 34970A data acquisition device. The readings of measured current had been noted.Then, the differences between the successive measured currents (mA)  were calculated from which the average difference was determined. Finally, from that average difference the resolution of the DACs had been calculated as
 % \begin{equation}
@@ -417,30 +438,48 @@ To characterize the magnetic field fluctuations, the field was measured as a fun
 % \end{equation}
 % where, $B_{\mathrm{meas}}(0)$ is the first field measurement using the fluxgates and $B_{\mathrm{meas}}(t)$ is field measurement in time t.
 
-The field fluctuation measurement is shown in Fig.~\ref{fig:fluc_24hrs} for one 24-hour period. The data are compared with data from the nearest space weather station (Brandon, MB, CA)~\cite{weather_station} which is $\sim215$~km away. The direction of $x$, $y$ and $z$ axis used in Fig.~\ref{fig:fluc_24hrs} are defined by the space weather station as
-\begin{itemize}
-    \item $+x$ is the north,
-    \item $+y$ is east, and
-    \item $+z$ is vertically down.
-\end{itemize}
+
+
+The field fluctuation measurement is shown in Fig.~\ref{fig:fluc_24hrs} for one 24-hour period. The data are compared with data from the nearest space weather station (Brandon, MB, CA)~\cite{weather_station} which is $\sim215$~km away. The direction of $x$, $y$ and $z$ axis used in Fig.~\ref{fig:fluc_24hrs} are defined by the space weather station as follows: $+x=$ north, $+y=$ east, and $+z=$ vertically down.
 % The nearest space weather station is in Brandon, MB, CA which is $\sim$215 km away from the prototype. We have measured the magnetic field around the prototype at UofW at 1pm on August 29, 2018 to 1pm on August 30, 2018. The field data given at space weather station is in Coordinated Universal Time (UTC) while we have measured in Central Standard Time (CST). So, we have downloaded the data from the Brandon space weather station by converting 1pm CST to UTC. The the fluctuations for our measured field and for the data from the Brandon space weather station have been determined using Eq.~(\ref{eq:fluc_meas_24}).
-The fluctuations for our measured field and for the data from the Brandon space weather station had the offset defined by one first data point subtracted. The offsets were 10139~nT, 3048~nT, and 40358~nT for our case and 15108~nT, 1341~nT, and 54712~nT for the Brandon space weather station in $x$, $y$ and $z$ axis respectively.
-
-\fig{Images/bmeas_24hrs2}{width=\textwidth}{Comparison of fluctuations of the magnetic field measured at the University of Winnipeg (UofW) for 24 hours with that from the Brandon, MB space weather station. The data was taken from 1pm CST on August 29, 2018 to 1pm CST on August 30, 2018.\label{fig:fluc_24hrs}}{Fluctuations of the magnetic field at UofW}
-
-Figure~\ref{fig:fluc_24hrs} shows that the field fluctuations level are $\sim50-100$~nT for all axes in both the measurement taken at UofW and that in Brandon. In general, the two measurements track one another. The UofW data obviously suffer additional human-induced noise. Overall, the fluctuations of the magnetic field in the lab at UofW are typically $\pm100$~nT, as was known prior to this measurement.
+In order to compare field fluctuations more efficiently, an offset, defined by the first data points in the time series, was subtracted from all other data. The offsets were 10139~nT, 3048~nT, and 40358~nT for our case and 15108~nT, 1341~nT, and 54712~nT for the Brandon space weather station in $x$, $y$ and $z$ axis respectively.
 
 
+\fig{Images/bmeas_24hrs2}{width=0.85\textwidth}{Comparison of fluctuations of the magnetic field measured at the University of Winnipeg (UofW) for 24 hours with that from the Brandon, MB space weather station. The data was taken from 1pm CST on August 29, 2018 to 1pm CST on August 30, 2018.\label{fig:fluc_24hrs}}{Fluctuations of the magnetic field at UofW}
 
-Magnetic noise at 1~Hz was characterized by making a histogram of differences in subsequent magnetic field measurements separated by 1 second as:
+
+
+Figure~\ref{fig:fluc_24hrs} shows that the field fluctuations level are $\sim50-100$~nT for all axes in both the measurement taken at UofW and that in Brandon. In general, the two measurements track one another. The UofW data, taken in a busy building in the middle of a city, obviously suffers additional human-induced magnetic noise. Overall, the fluctuations of the magnetic field in the lab at UofW are typically $\pm100$~nT, as was known prior to this measurement.
+
+
+
+Magnetic noise at 1~Hz was characterized by making a histogram of differences in subsequent magnetic field measurements separated by 1 second as
 \begin{equation}
     \mathrm{\Delta B (1s)=B(t+1s)-B(t)}.
 \end{equation}
 
 
+
 The result is shown in Fig.~\ref{fig:hist}. It is seen that the noise width at 1~Hz is $\sim1.5$~nT for most sensors. This property will be used in Section~\ref{sec:mont} for generating random magnetic fields. The fluxgate sensors used are shown in the legends of the figure for $x$, $y$ and $z$ magnetic field direction. For fluxgate sensor positions see Fig.~\ref{fig:coil}.
 
-\fig{Images/dbts2}{width=0.95\textwidth}{Histogram of the difference in the magnetic field for different sensor positions and axes over 24 hours starting at 1 pm CST on 29 August, 2018 in the laboratory at the University of Winnipeg. \label{fig:hist}}{Histogram of the difference in the magnetic field.}
+%%%%%%%%%%%%%%%%%%%%%%
+%The vertical spacing above the top floatpage float is defined by \@fptop. The default value of this parameter is 0pt plus 1.0fil. Hence when you have a single figure on a separate page you get white space on top. (Similarly \@fpbot is for bottom space with the value 0pt plus 1.0fil. Hence you get white space on bottom also. And \@fpsep defines the vertical spacing between floatpage floats. The default is 8pt plus 2.0fil).
+
+% To have the figure on top, you have to define @\fptop as
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[t!]
+    \includegraphics[width=\textwidth]{Images/dbts2}
+    \caption[Histogram of the difference in the magnetic field.]{Histogram of the difference in the magnetic field for different sensor positions and axes over 24 hours starting at 1 pm CST on 29 August, 2018 in the laboratory at the University of Winnipeg.}
+    \label{fig:hist}
+\end{figure}
+
+% \fig{Images/dbts2}{width=\textwidth}{Histogram of the difference in the magnetic field for different sensor positions and axes over 24 hours starting at 1 pm CST on 29 August, 2018 in the laboratory at the University of Winnipeg. \label{fig:hist}}{Histogram of the difference in the magnetic field.}
+
+
 % \begin{table} [h!]
 %     \centering
 %     \begin{tabular} { |c|c|c| } 
