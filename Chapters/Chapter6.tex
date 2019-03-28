@@ -26,7 +26,7 @@ fluctuations, based on the work of Refs.~\cite{bea,lins}. This primary goal was 
 list the key improvements made to the system and the results of those
 improvements.  They are the following:
 \begin{enumerate}
-\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filters.}  
+\item {\bf $\mathbf{4^{th}}$ order low pass Butterworth filter}  
 
 I designed active filters which are excellent in reducing high frequency noise, even slightly better than the low pass filter (LPF) of Bartington's SCU1. The filters will be important for future studies facing high frequency ($>10$~Hz) noise issues. The filters could be improved further by designing them with variable gain and offset, which is an advantage of the SCU1. This would make it easier to adjust the range of values passed to the DAQ module, without much additional noise. An important example would be to amplify and acquire signals from fluxgates located inside the passive shielding where all magnetic fields are very small. In such cases, I used the SCU1 with gain 100 so that it can easily be read by the ADC.
 This is one reason that in my case, to acquire the fluxgate signals placed inside the shield within the coil cube. In such cases, I used the SCU1 with gain 100 so that it can easily be read by the ADC.  
@@ -35,7 +35,7 @@ This is one reason that in my case, to acquire the fluxgate signals placed insid
 % fluxgates located inside the passive shielding where all magnetic fields are very small.
 
 
-\item {\bf Finite Element Analysis and Multi-dimensional PI control simulation.}  
+\item {\bf Finite Element Analysis and Multi-dimensional PI control simulation}  
 
 The simulation of the prototype AMC system was vital to demonstrate a full understanding of the experimental results. Finite element analysis (FEA) was used to generate both the matrix $\bm{M}$ and the field change $\Delta B$ due to the perturbation coil for any number of the sensors placed within the coil cube. The FEA results were then used in a time-dependent PI feedback algorithm implemented in Python. This resulted in a real time PI control simulation which gave agreement with experiment. Problems observed in the data, for example the current drifting problem, were correctly reproduced by the simulation. Even a simulation conducted in free space based on analytical magnetic field calculations (not requiring OPERA) showed many of the same issues. The strong message for future work is to use this kind of simulation as a tool for testing the entire system before it is built.
 
@@ -50,7 +50,7 @@ The simulation of the prototype AMC system was vital to demonstrate a full under
 %\item Even simulation in free space (not requiring OPERA) would have shown many of the same issues.
 %\end{itemize}
 
-\item {\bf Better understanding of matrix inversion, PI parameters, and tuning.} 
+\item {\bf Better understanding of matrix inversion, PI parameters, and tuning} 
 
 The author of Ref.\cite{bea} proposed matrix inversion with Tikhonov regularization, which I followed initially. I realized later, however, that there was more to the story. I noticed there a relationship between the regularization parameter $r$ and the PI parameters. I came to the conclusion that no amount of PI tuning could reduce the current drifting problem even though $r$ was optimized according to Ref.\cite{bea}.  However, I found that the current drifting problem could be reduced by treating $r$ more-or-less as another free parameter at the cost of introducing high frequency noise. Moreover, I proposed a new method to find $r$ based on the condition number of the matrix which I argue is more robust than the method of Ref.\cite{bea}. Eventually, I realized that regularized matrix inversion was nonoptimal. It can be avoided by carefully designing a well-conditioned system. This conclusion is consistent with Ref.~\cite{rawlikpriv}. 
 
@@ -62,7 +62,7 @@ References~\cite{rawlik,rawlikpriv}, further proposed a new feedback algorithm. 
 %\item Rawlik proposed a new feedback algorithm apparently not based on PI.  I showed that this is equivalent to a PI system restricted to one particular choice of tuning.  It is clearly better to allow for more flexibility in the tuning than proposed by Rawlik.
 %\end{itemize}
 
-\item {\bf Coil current modes based on coil configuration.}  
+\item {\bf Coil current modes based on coil configuration}  
 
 Solving the current drifting problem was one breakthrough of this thesis. After many experimental tests, I found that the simulation in free space was very effective in improving the understanding of the problem. I discovered that the 6-coil feedback algorithm always had one mode which generated zero field no matter what the current. This resulted in one singular value that was always near zero. Tikhonov regularization tries to force this mode to be treated on an equal footing with the others. I found a superior solution which connects two coils in series (a 5-coil feedback algorithm) thus preventing the undesirable mode from occurring. It was then I realized that I did not need to regularize the system if the system is well conditioned in the first place. In the end, I agreed with Ref.~\cite{rawlik} that a low condition number (near unity) is a measure of good system design. As further coil design was beyond the scope of this thesis, it suggests future work studying coil design in the context of the condition number to study the ill-conditioning problem.
 
@@ -88,7 +88,7 @@ Solving the current drifting problem was one breakthrough of this thesis. After 
 In this Section, I make a few general recommendations on how I would proceed if designing the ultimate active magnetic compensation system for the TUCAN nEDM experiment.
 
 
-\subsection{Test designs based on known perturbations.\label{sec:sources}}
+\subsection{Test designs based on known perturbations\label{sec:sources}}
 
 % When using my 6-coil feedback algorithm, a key observation was the current-drifting problem.  I used a process of developing hypothesis followed by experimentation, which took a long time to determine the source of the problem.
 
@@ -97,7 +97,7 @@ One of the key observations that suggested my system was finally working properl
 Another recommendation related to this one is to carefully measure the perturbations expected, or to simulate the planned perturbations if driven by a perturbation coil. A plan to measure background field fluctuations at TRIUMF is ongoing at this time~\cite{beapriv}, and a perturbation coil for testing has already been built there~\cite{smith,cudmore}. These should be used, in simulation, to test any planned multi-dimensional PI system.  Based on the discussion above, if I had conducted such analysis in simulation first, I would have discovered the solution to the current drifting problem much earlier.
 
 % The plan of measurement of the perturbations is being developed and some experiments are ongoing at this time~\cite{beapriv}. On the other hand, a perturbation coil has already been built at TRIUMF~\cite{smith,cudmore}.
-\subsection{To regularize or not to regularize.}
+\subsection{To regularize or not to regularize}
  
 My recommendation is to develop a system with sufficient degrees of freedom and with condition number as close to unity as possible. 
 
@@ -108,12 +108,12 @@ My expectation is that this problem can be solved in an alternate way. In my cas
 It is important to consider the condition number of the matrix when designing the coil system.  If the condition number is reduced near unity, it could be a step in the right direction.  It is also important to consider the right singular vectors ({\it i.e.} coil modes), which could reveal why a certain singular value is small.
 
 
-\subsection{Condition number is not everything.}
+\subsection{Condition number is not everything}
 
 One clear way to reduce the condition number is to simply use Helmholtz coils for everything (three independent sets with three independent currents).  In fact such a solution was pursued in the prototype system of Ref.~\cite{rawlik} constructed at ETH Z\"urich. However, this is clearly a bad strategy because such a system will not have as many degrees of freedom as six independent coils.  For example, it would never be able to compensate magnetic gradients. What is not trivial is why five independent coils is sufficient.  But if thinking in terms of spherical harmonics applied to the magnetic scalar potential, and the kinds of fields that can be generated by Helmholtz coils, this becomes more obvious.  This leads to my next recommendation.
 
 
-\subsection{What to do instead of regularizing.\label{sec:spherical}}
+\subsection{What to do instead of regularizing\label{sec:spherical}}
 % If I have to begin designing coils tomorrow, I would try the following two general strategies.
 % \begin{enumerate}
 %     \item Coils that generate spherical harmonics.
