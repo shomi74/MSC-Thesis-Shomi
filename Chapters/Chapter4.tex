@@ -253,29 +253,27 @@ The Moore--Penrose pseudo-inverse can be used for the inversion process. A tutor
 \end{equation}
 % where, $\bm{U}\:\epsilon\:\mathbb{R}^{m \times m}$, $\bm{V^*}\:\epsilon\:\mathbb{R}^{n \times n}$ 
 where $\bm{U}$ and $\bm{V}$ are matrices with dimensions $m \times m$ and $n \times n$ respectively and $\bm{V^T}$ is the transpose of $\bm{V}$. $\bm{U}$ and $\bm{V^T}$ are composed of the left and right singular vectors representing the orthonormal eigenvectors of $\bm{M}\bm{M^T}$ and $\bm{M^T}\bm{M}$ respectively. $\bm{\Sigma}$ is a real non-negative diagonal matrix with the same dimension as  $\bm{M}$ and can be written as
-
 \begin{equation}
 \bm{\Sigma} = \begin{bmatrix} 
-\Sigma_{11} &   &   & 0           \\
-            & . &   &             \\
-            &   & . &             \\
-            &   &   & \Sigma_{nn} \\
-            &   &   &             \\
-          0 &   &   & 0          \\
+\Sigma_{11} &           0 & \cdots & 0 \\
+          0 & \Sigma_{22} & \cdots & 0 \\
+     \vdots &      \vdots & \ddots & \vdots \\
+          0 &           0 & \cdots & \Sigma_{nn} \\
+     \vdots &      \vdots & \vdots & \vdots \\
+          0 &           0 & \cdots & 0 \\
 
- \end{bmatrix}{\rm ,}
+ \end{bmatrix},
 \end{equation}
 where $\Sigma_{11},..,\Sigma_{nn}$ are diagonal values of $\bm{\Sigma}$ with $\Sigma_{11}\gg...\; \Sigma_{nn}\geq0$. The positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ yield the $\Sigma_{ii}(i=1,..,n)$, and are called the singular values of $\bm{M}$. 
 
 The point of SVD is that this is easy to invert because the transpose of an orthogonal matrix is equal to its inverse. That is $\bm{U^T}=\bm{U^{-1}}$ and $\bm{V^T}=\bm{V^{-1}}$ and
 \begin{equation}\label{eq:sigma_inv}
-\bm{\Sigma^{-1}=}\frac{1}{\bm{\Sigma}} = \begin{bmatrix} 
-\frac{1}{\Sigma_{11}} &  &  &  &  &  & & &0\\
-  & . &  &  & & & & &\\
-  &   & . & & & & & &\\
-
-0 &  &  & \frac{1}{\Sigma_{nn}} &  &  & & &0 \\
- \end{bmatrix}{\rm .}
+\bm{\Sigma^{-1}}= \begin{bmatrix} 
+\frac{1}{\Sigma_{11}} &                     0 & \cdots &                     0 & \cdots & 0\\
+                    0 & \frac{1}{\Sigma_{22}} & \cdots &                     0 & \cdots & 0\\
+               \vdots &                \vdots & \ddots &                \vdots & \cdots & \vdots\\
+                    0 &                     0 & \cdots & \frac{1}{\Sigma_{nn}} & \cdots & 0 \\
+ \end{bmatrix},
 \end{equation}
 The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma}$ and $\bm{V^T}$ and can be written as
 \begin{equation}\label{eq:psMinv}
@@ -300,7 +298,7 @@ The pseudo-inverse of $\bm{M}$ will be then the inverse of $\bm{U}$, $\bm{\Sigma
 % Using Eq.~(\ref{eq:cond}), the condition number of $\bm{M^T}$=5676/215=26.4 which indicates an ill-conditioned matrix.
 Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$ for our measured $\bm{M}$. It is a diagonal with the singular values arranged from $\Sigma_{11}$ to $\Sigma_{66}$ in a decreasing order, each having a non-negative value. It is also noticeable that $\Sigma_{66}$ is very small compare to $\Sigma_{11}$. Since no. of coils ($c$) is less than no. of fluxgate sensors ($s$), it is easily thought of as the representation modes of the coil set. If $\Sigma_{nn}<<\Sigma_{11}$ it means that mode corresponding to  $\Sigma_{nn}$ requires a much larger current in order to generate the same scale of magnetic field as for the $\Sigma_{11}$ mode. 
 
- \fig{Images/V_30_2}{width =0.8\textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate negative values. Elements that appear white are near zero in the matrix element.\label{fig:v}}{Color map of $\bm{\Sigma}$}
+ \fig{Images/V_30_4}{width =0.8\textwidth}{Color map of $\bm{\Sigma}$ for transpose of $\bm{M}$ shown in Fig.~\ref{fig:m}. $\bm{\Sigma}$ is positive square roots of the non-negative eigenvalues of $\bm{M^T}\bm{M}$ in sensors$\times$coils dimension for 12 sensors and 6 coils in nT/A. Red elements indicate positive values while blue elements indicate negative values. Elements that appear white are near zero in the matrix element.\label{fig:v}}{Color map of $\bm{\Sigma}$}
 
 % \textcolor{red}{\bf{*************Need to Modify***************}}
 
@@ -317,25 +315,20 @@ Figure~\ref{fig:v} shows the diagonal matrix $\bm{\Sigma}$ for our measured $\bm
 In Section~\ref{sec:coil_config}, this effect has been analyzed further in both simulation and experiment. For now, the strategy of Ref.~\cite{bea} is presented which was followed initially. The strategy involves matrix regularization.
 
 Regularization methods help to reduce the dominance of singular vectors corresponding to small singular values. Tikhonov regularization~\cite{tikhonov2013numerical,tikhonov_book,svd,svd3} is a commonly used regularization method which solves the problem by minimizing 
-
 % The aim of the feedback algorithm is to make $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ equal to zero. But making it zero will regenerate the original problem of larger $\Delta\Vec{I}$ for smaller $\Sigma_{ii}$ as explained above and by Eq.~(\ref{eq:del_I_pseudo}).
 \begin{equation}\label{eq:tikhonov}
     ||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2+{\alpha}^2||\Delta\Vec{I}||_2^2{\rm ,}
 \end{equation}
-where  $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ is due to the Moore--Penrose pseudo-inverse. Here, $||\cdot ||_2$ is the Euclidean norm. Tikhonov regularization tries to make a compromise between $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ and $||\Delta\Vec{I}||_2^2$ so that both of them are smaller. Tikhonov regularization makes that possible by introducing a filter $\alpha$ which sets the relative importance of the two terms. The filter $\alpha$ modifies the diagonal elements of $\bm{\Sigma^{-1}}$ from Eq.~(\ref{eq:psMinv}) as
-
+where  $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ is due to the Moore--Penrose pseudo-inverse.  Here, $||\cdot ||_2$ is the Euclidean norm for vector and Frobenius norm for matrix~\cite{m_norm_0,m_norm}. Tikhonov regularization tries to make a compromise between $||\Delta\Vec{B}-\bm{M}\Delta\Vec{I}||_2^2$ and $||\Delta\Vec{I}||_2^2$ so that both of them are smaller. Tikhonov regularization makes that possible by introducing a filter $\alpha$ which sets the relative importance of the two terms. The filter $\alpha$ modifies the diagonal elements of $\bm{\Sigma^{-1}}$ from Eq.~(\ref{eq:psMinv}) as
 \begin{equation}\label{eq:minvR}
     \frac{1}{\Sigma_{ii}} \rightarrow \frac{\Sigma_{ii}}{\Sigma_{ii}^2+\alpha^2}{\rm .}
 \end{equation}
 
 In Ref.~\cite{bea}, Tikhonov regularization has been further modified by defining $\alpha=10^r$~nT/A where $r$ is called the regularization parameter. If  $r \rightarrow - \infty$, Eq.~(\ref{eq:minvR}) becomes the same as Eq.~(\ref{eq:sigma_inv}) indicating no regularization whereas $r \rightarrow + \infty$ results in $\bm{M^{-1}} \rightarrow 0$ resulting no control (as no changes to currents, and independent of $\Vec{B}$). Generally, $r$ should be of order $\log(\Sigma_{ii})$ in order for regularization to have its desired effect of making the diagonal values of $\bm{\Sigma^{-1}}$ more equal to one another. For example, suppose $\Sigma_{11}$=100 and $\Sigma_{ii}$=1. The choice $\alpha$=10 results in 
-
 % $$\frac{1}{\Sigma_{11}} \rightarrow \frac{100}{100^2+10^2}=\frac{1}{101} {\rm ~and~}\frac{1}{\Sigma_{ii}} \rightarrow\frac{1}{1^2+10^2}=\frac{1}{101}$$
-
 % and the singular values thereby become equalized.
-
 \begin{align*}
-    \frac{1}{\Sigma_{11}} &\rightarrow \frac{100}{100^2+10^2}=\frac{1}{101} {\rm ~and~}\\
+    \frac{1}{\Sigma_{11}} &\rightarrow \frac{100}{100^2+10^2}=\frac{1}{101} {\rm ~and~}\\ \\
     \frac{1}{\Sigma_{ii}} &\rightarrow \frac{1}{1^2+10^2}=\frac{1}{101} 
 \end{align*}
 and the singular values thereby become equalized.

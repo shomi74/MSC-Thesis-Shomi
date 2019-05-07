@@ -59,22 +59,16 @@
 
 In Chapter~\ref{ch:operation}, the magnetic control process and the
 quantitative measures of the magnetic field compensation performance
-suggested by the Refs.~\cite{bea,lins,rawlik} are discussed. While implementing the magnetic control process, problems occurred in terms of slow
+suggested by the Refs.~\cite{bea,lins,rawlik} were discussed. While implementing the magnetic control process, problems occurred in terms of slow
 current response in the compensation coils. We did different
-experiments with different parameters for understanding the problem
-and figure out the solution. The system was made faster by introducing
-filter which enabled us to change the sample frequency without adding
+experiments with different parameters to understand the problem
+and devise a solution. The system was made faster by introducing
+filters which enabled us to change the sample frequency without adding
 noise. The effect of the filter is discussed in
-Section~\ref{sec:freq}. The general behaviour
-of P and I terms and their impact are
-discussed in Section~\ref{sec:pi_behave}. The study
-revealed that I term was responsible for current unsettle problem in the
-coils. We added more fluxgates, changed the positions
-of the fluxgates and also removed the passive shield but that made no difference for current unsettle problem. The studies are discussed in Section~\ref{sec:flux_place}. We then motivated to build a
-simulation of the prototype. The simulation of the prototype
-integrating PI algorithm is discussed in Section~\ref{sec:pSim} where
-similarity between the experiment and simulation is shown. The current drifting problem could be solved by lowering the value of $r$ keeping P
-and I term fixed, although additional noise was introduced. The effect of changing $r$ is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. The new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}. An interesting similarity in the control algorithms is discussed in Section~\ref{sec:style_pi}. We realized that the matrix for the prototype was ill conditioned because one of the current modes was producing zero net current. The matrix condition number can be improved significantly by removing the bad current mode which also eliminates our initial problem of current unsettle which is discussed in Section~\ref{sec:coil_config}. Finally, the results of the metrics are presented in Section~\ref{sec:metrics_res}. 
+Section~\ref{sec:freq}. The results of PI tuning are
+discussed in Section~\ref{sec:pi_behave}, and revealed that
+the introduction of the integral term was related to the current drifting problem in the coils. Additional fluxgates, altering the positions
+of the fluxgates, and removing the passive shielding system were found to have little impact on the current drifting problem. These studies are discussed in Section~\ref{sec:flux_place}.  A simulation involving magnetic field calculations done in a finite element analysis code was combined with a PI algorithm.  The simulation correctly reproduced the current drifting problem, as discussed in Section~\ref{sec:pSim}. The current drifting problem could be reduced by lowering the value of $r$, similar to using it as a tuning parameter, although additional noise was introduced. This is discussed in Section~\ref{sec:new_study_r}. In Section~\ref{sec:cond}, an alternative method is proposed to find $r$ based on lowest matrix condition number. A new control algorithm suggested by Ref.~\cite{rawlik} was also implemented and compared with the existing one suggested by Ref.~\cite{bea}, and the equivalence of the algorithms (which I found) is discussed in Section~\ref{sec:style_pi}.  Eventually it was realized that the matrix for the prototype was ill conditioned because one of the current modes produces zero net current.  The matrix condition number can be improved significantly by removing the bad coil mode which in turn eliminates the current drifting problem, as discussed in Section~\ref{sec:coil_config}. Finally, the system is characterized using a number of standard metrics in Section~\ref{sec:metrics_res}. 
 
 New directions for future studies are presented in
 Chapter~\ref{ch:conclusion}.
@@ -166,7 +160,7 @@ Chapter~\ref{ch:conclusion}.
 %\end{itemize}
 
 In Chapter~\ref{ch:amcP}, low-pass analog Butterworth
-filters which were built and implemented into the system are discussed.  The filters
+filters which were built and implemented into the system were discussed.  The filters
 were designed with 10~Hz corner frequency with the goal to remove
 high-frequency noise.  This would allow the ADC to operate with shorter
 averaging, increasing its effective sampling frequency (denoted by the
@@ -980,14 +974,13 @@ the prototype passive shielding layers and the stove pipe were given
 in Table~\ref{table:mu-metal}.  These were implemented using simple
 cylindrical and planar shapes available in OPERA.  The dimensions of
 the coils were given in Table~\ref{table:coil}.  These were
-implemented as wires of square profile 1.24~m~$\times$~1.24~cm.
+implemented as wires of square profile 1.24~m~$\times$~1.24~cm. The perturbation coil is 1.68~m away from the origin, which is at the
+center of the coil cube.
 
 The material of the magnetic shield was chosen to be linear with
 relative magnetic permeability $\mu_r=20,000$.  Some air volumes were
-also drawn near the shields to aid in meshing near the thin layers.
-
-The perturbation coil is 1.06~m away from the origin, which is at the
-center of the coil cube.
+also drawn near the shields to aid in meshing near the thin layers. A cubic mother volume with side length 4 times the side length of the
+coil cube was used.
 
 All the information has been written in the {\tt comi} format
 file which is the command language in OPERA. Another {\tt comi} file
@@ -999,8 +992,7 @@ fluxgate positions.  But in general both simulations outputted full
 field maps so that the fluxgate positions could be adjusted
 arbitrarily after the simulation was complete.
 
-A cubic mother volume with side length 4 times the side length of the
-coil cube was used.
+
 
 %{\bf consider a Table for the following paragraph.}
 
@@ -1045,6 +1037,8 @@ coordinates of the grid point ($x$,$y$,$z$) and the last 3 columns
 indicate the magnetic field ($B_x$,$B_y$,$B_z$) at that point.  In
 this way 6 field maps are stored in 6 {\tt csv} files, one for each of
 the 6 coils.
+
+\fig{Images/c3_map_all}{width =0.8\textwidth}{Field map of the cube when $C_y^-$ coil is supplied with 1~A current.\label{fig:field_map}}{Field map of the cube for $C_y^-$ coil }
 
 % The background region defines the sa 'comi' file is written where the magnetic field contribution due to environment is set to zero as  matrix elements $M_{sc}$ relate the coils current to the field produced by the coils current (see Eq.~(\ref{eq:B_coils})). Now as matrix elements $M_{sc}$ are in the unit of nT/A, in the same 'comi' file current for the all the six coils have set to 1A which makes the Eq.~(\ref{eq:B_coils}) as
 
@@ -1393,7 +1387,7 @@ apparatus.
 
 % \fig{Images/pi_sim}{width =\textwidth,height=12cm}{PI Active Magnetic Field Compensation Results in $x$, $y$ and $z$ axis by both Simulation. \label{fig:pi_sim}}
 
-\section{New Studies on the Regularization Parameter $r$}\label{sec:new_study_r}
+\section{Studies on the Regularization Parameter $r$}\label{sec:new_study_r}
 
 In Section~\ref{sec:inv}, the regularization parameter $r$ was introduced
 and then regularization by random field fluctuations was discussed in
@@ -2098,7 +2092,7 @@ matrix $\bm{\Sigma}$ is a diagonal matrix whose elements are the
 positive square roots of the singular values of $\bm{M^T}\bm{M}$,
 sorted from largest to smallest.
 
-\fig{Images/Diag_patch_6c}{width =0.9\textwidth}{
+\fig{Images/Diag_patch_6c_2}{width =0.9\textwidth}{
 Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
 $\bm{M}$ for 24 fluxgate axes and 6 coils. Coil dimensions and
 fluxgate positions are given in
@@ -2248,7 +2242,7 @@ the singular value decomposition, the differences become evident.
 
 
 
-\fig{Images/Diag_patch_5c}{width =0.9\textwidth}{
+\fig{Images/Diag_patch_5c_2}{width =0.9\textwidth}{
 Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of simulated
 $\bm{M}$ for 24 fluxgate axes and 5
 coils. \label{fig:diag_patch_5c}}{Diagonal Matrix for 5 coils.}
@@ -2407,7 +2401,7 @@ In Figs.~\ref{fig:matrix_patch_6c} and \ref{fig:matrix_patch_5c}, the ideal simu
 experimentally is similar in its structure to these simulation
 results.
 
-\fig{Images/diag_comb}{width=\textwidth,height=5.5cm}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
+\fig{Images/diag_comb_2}{width=0.95\textwidth}{Color map of diagonal matrix $\bm{\Sigma}$ found by SVD of experimentally measured
 $\bm{M}$ for the available 12 fluxgate axes and for (a) 5 coils,
 where the $C_x^\pm$ coils are required to carry the same current,
 and (b) 6 coils which, are permitted to carry any
@@ -2506,7 +2500,7 @@ Not surprisingly, the conclusions were the same.
 
 %\fig{Images/matrix_comb_shield}{width = \textwidth}{.. \label{fig:matrix_comb_shield}}{S}
 
-\fig{Images/diag_comb_shield}{width=\textwidth,height=5.5cm}{Color map of diagonal matrix
+\fig{Images/diag_comb_shield_2}{width=0.95\textwidth}{Color map of diagonal matrix
 $\bm{\Sigma}$ with the magnetic shield in place found by SVD of
 experimentally measured $\bm{M}$ for the available 12 fluxgate axes
 and for (a) 5 coils, where the $C_x^\pm$ coils are required to

@@ -407,7 +407,7 @@
   \thispagestyle{plain}
     \@mkboth{\abstractname}{\abstractname}
   \addcontentsline{toc}{section}{Abstract}
-    \vspace*{-0.8in}
+    \vspace*{-0.9in}
     \noindent Thesis Advisor and Co-advisor \hfill Author \\
     \noindent {\bf \@advisor} \hfill {\bf \@author}  \\[.5in]
     % \vspace*{0.3in}
